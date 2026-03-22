@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Zenny Studios services — social media management, content creation, branding, and digital presence. We do the work, you take the credit.">
+  <title>Services | Zenny Studios</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎬</text></svg>">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- AOS -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            gold: '#F5C518',
+            dark: '#0a0a0a',
+            card: '#111111',
+          },
+          fontFamily: {
+            display: ['Bebas Neue', 'cursive'],
+            body: ['Inter', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    .cursor-dot {
+      width: 8px;
+      height: 8px;
+      background: #F5C518;
+      border-radius: 50%;
+      position: fixed;
+      pointer-events: none;
+      z-index: 9999;
+    }
+    .cursor-ring {
+      width: 40px;
+      height: 40px;
+      border: 1px solid rgba(245, 197, 24, 0.5);
+      border-radius: 50%;
+      position: fixed;
+      pointer-events: none;
+      z-index: 9998;
+      transition: all 0.15s ease-out;
+    }
+    .cursor-ring.hover {
+      transform: scale(1.5);
+      border-color: #F5C518;
+      background: rgba(245, 197, 24, 0.1);
+    }
+
+    .text-gradient {
+      background: linear-gradient(135deg, #F5C518 0%, #fff 50%, #F5C518 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      background-size: 200% auto;
+      animation: textShine 3s ease-in-out infinite;
+    }
+    @keyframes textShine {
+      0%, 100% { background-position: 0% center; }
+      50% { background-position: 200% center; }
+    }
+
+    .scroll-progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 3px;
+      background: linear-gradient(90deg, #F5C518, #fff);
+      z-index: 9999;
+    }
+
+    .animated-underline {
+      position: relative;
+    }
+    .animated-underline::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: #F5C518;
+      transition: width 0.3s ease;
+    }
+    .animated-underline:hover::after {
+      width: 100%;
+    }
+
+    .magnetic-btn {
+      transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    .pulse-glow {
+      animation: pulseGlow 2s ease-in-out infinite;
+    }
+    @keyframes pulseGlow {
+      0%, 100% { box-shadow: 0 0 20px rgba(245, 197, 24, 0.3); }
+      50% { box-shadow: 0 0 40px rgba(245, 197, 24, 0.6); }
+    }
+
+    .service-block {
+      transition: all 0.5s ease;
+    }
+    .service-block:hover {
+      background: rgba(245, 197, 24, 0.03);
+    }
+    .service-block:hover .service-number {
+      transform: scale(1.1);
+      color: rgba(245, 197, 24, 0.3);
+    }
+
+    .float {
+      animation: float 6s ease-in-out infinite;
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-20px); }
+    }
+
+    .deliverable-item {
+      transition: all 0.3s ease;
+    }
+    .deliverable-item:hover {
+      transform: translateX(10px);
+      color: #F5C518;
+    }
+
+    @media (hover: none) {
+      .cursor-dot, .cursor-ring { display: none; }
+    }
+  </style>
+</head>
+<body class="bg-dark font-body text-white antialiased">
+
+  <!-- Custom Cursor -->
+  <div class="cursor-dot hidden md:block"></div>
+  <div class="cursor-ring hidden md:block"></div>
+
+  <!-- Scroll Progress -->
+  <div class="scroll-progress" id="scrollProgress"></div>
+
+  <!-- Navbar -->
+  <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 border-b border-white/10 transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-6 py-4">
+      <div class="flex items-center justify-between">
+        <a href="index.html" class="flex items-center gap-3 group">
+          <!-- Image logo - uncomment and add your logo file -->
+          <!-- <img src="assets/logo.png" alt="Zenny Studios" class="h-10 w-auto group-hover:scale-110 transition-transform duration-300"> -->
+          <!-- Fallback text logo -->
+          <div class="w-10 h-10 bg-white rounded-full flex items-center justify-center pulse-glow group-hover:scale-110 transition-transform duration-300">
+            <span class="font-display text-dark text-xl font-bold">Z</span>
+          </div>
+          <span class="font-body font-semibold text-white text-lg hidden sm:block group-hover:text-gold transition-colors duration-300">Zenny Studios</span>
+        </a>
+
+        <div class="hidden md:flex items-center gap-8">
+          <a href="index.html" class="text-white/70 hover:text-gold transition-all duration-300 animated-underline">Home</a>
+          <a href="work.html" class="text-white/70 hover:text-gold transition-all duration-300 animated-underline">Work</a>
+          <a href="services.html" class="text-gold transition-all duration-300 animated-underline">Services</a>
+          <a href="index.html#about" class="text-white/70 hover:text-gold transition-all duration-300 animated-underline">About</a>
+        </div>
+
+        <div class="hidden md:block">
+          <a href="contact.html" class="magnetic-btn border border-gold text-gold px-6 py-2 hover:bg-gold hover:text-dark transition-all duration-300 inline-block">Let's Talk</a>
+        </div>
+
+        <button id="hamburger" class="md:hidden flex flex-col gap-1.5 p-2">
+          <span class="w-6 h-0.5 bg-white transition-all duration-300"></span>
+          <span class="w-6 h-0.5 bg-white transition-all duration-300"></span>
+          <span class="w-6 h-0.5 bg-white transition-all duration-300"></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div id="mobile-menu" class="fixed inset-0 bg-dark z-40 flex flex-col items-center justify-center gap-8 opacity-0 pointer-events-none transition-all duration-300">
+    <a href="index.html" class="text-4xl font-display text-white hover:text-gold transition-all duration-300">Home</a>
+    <a href="work.html" class="text-4xl font-display text-white hover:text-gold transition-all duration-300">Work</a>
+    <a href="services.html" class="text-4xl font-display text-gold transition-all duration-300">Services</a>
+    <a href="index.html#about" class="text-4xl font-display text-white hover:text-gold transition-all duration-300">About</a>
+    <a href="contact.html" class="mt-8 border-2 border-gold text-gold px-8 py-3 text-xl hover:bg-gold hover:text-dark transition-all duration-300">Let's Talk</a>
+  </div>
+
+  <main>
+    <!-- Hero Section -->
+    <section class="pt-36 pb-20 md:pt-48 md:pb-28 bg-dark relative overflow-hidden">
+      <div class="absolute top-1/2 right-0 text-gold/5 font-display text-[400px] -translate-y-1/2 select-none leading-none">S</div>
+      <div class="max-w-7xl mx-auto px-6 relative z-10">
+        <p class="text-gold text-sm uppercase tracking-[0.3em] mb-6" data-aos="fade-up">Capabilities</p>
+        <h1 class="font-display text-6xl sm:text-7xl md:text-8xl lg:text-9xl text-white leading-[0.85] mb-8" data-aos="fade-up" data-aos-delay="100">
+          <span class="block">We Execute.</span>
+          <span class="block text-gradient">You Dominate.</span>
+        </h1>
+        <p class="text-white/60 text-xl md:text-2xl max-w-2xl tracking-wide" data-aos="fade-up" data-aos-delay="200">
+          From blueprint to breakthrough. Every capability engineered for market dominance.
+        </p>
+      </div>
+    </section>
+
+    <!-- Service 01 - Social Media Management -->
+    <section class="service-block bg-dark py-24 md:py-32 border-t border-white/5">
+      <div class="max-w-7xl mx-auto px-6">
+        <div class="grid md:grid-cols-2 gap-16 items-start">
+          <div data-aos="fade-right">
+            <span class="service-number font-display text-[10rem] md:text-[14rem] text-gold/10 leading-none block transition-all duration-500">01</span>
+          </div>
+          <div data-aos="fade-left">
+            <h2 class="font-display text-5xl md:text-6xl lg:text-7xl text-white mb-6">Social Media Command</h2>
+            <p class="text-white/60 text-xl mb-6 leading-relaxed">
+              Your social channels are territory. We occupy them strategically,
+              deploying content that captures attention and converts casual viewers
+              into committed followers.
+            </p>
+            <p class="text-white/40 text-lg mb-10">
+              Beyond posting schedules. We architect engagement ecosystems that
+              build communities with genuine investment in your brand's trajectory.
+            </p>
+            <div class="space-y-4">
+              <h4 class="text-gold text-sm uppercase tracking-[0.2em] mb-6">Deliverables</h4>
+              <p class="deliverable-item text-white/70 text-lg flex items-start gap-4 cursor-default">
+                <span class="text-gold">/</span>
+                Strategic content calendars with execution
+              </p>
+              <p class="deliverable-item text-white/70 text-lg flex items-start gap-4 cursor-default">
+                <span class="text-gold">/</span>
+                Platform-native strategy across Instagram, LinkedIn, X
+              </p>
+              <p class="deliverable-item text-white/70 text-lg flex items-start gap-4 cursor-default">
+                <span class="text-gold">/</span>
+                Community cultivation and engagement systems
+              </p>
+              <p class="deliverable-item text-white/70 text-lg flex items-start gap-4 cursor-default">
+                <span class="text-gold">/</span>
+                Performance analytics and growth intelligence
+              </p>
+              <p class="deliverable-item text-white/70 text-lg flex items-start gap-4 cursor-default">
+                <span class="text-gold">/</span>
+                Competitive landscape monitoring
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Service 02 - Content Creation -->
+    <section class="service-block bg-[#0d0d0d] py-24 md:py-32">
+      <div class="max-w-7xl mx-auto px-6">
+        <div class="grid md:grid-cols-2 gap-16 items-start">
+          <div class="md:order-2" data-aos="fade-left">
+            <span class="service-number font-display text-[10rem] md:text-[14rem] text-gold/10 leading-none block transition-all duration-500">02</span>
+          </div>
+          <div class="md:order-1" data-aos="fade-right">
+            <h2 class="font-display text-5xl md:text-6xl lg:text-7xl text-white mb-6">Visual Storytelling</h2>
+            <p class="text-white/60 text-xl mb-6 leading-relaxed">
+              Content engineered to arrest the scroll. Reels that demand attention.
+              Visuals that imprint on memory. Every frame calculated for maximum impact.
+            </p>
+            <p class="text-white/40 text-lg mb-10">
+              Concept through final cut, our production team delivers photography, motion,
+              and graphics that refuse templates and reject stock. Pure originality
+              that amplifies your brand signal.
+            </p>
+            <div class="space-y-4">
+              <h4 class="text-gold text-sm uppercase tracking-[0.2em] mb-6">Deliverables</h4>
+              <p class="deliverable-item text-white/70 text-lg flex items-start gap-4 cursor-default">
+                <span class="text-gold">/</span>
+                Professional photography and videography
+              </p>
+              <p class="deliverable-item text-white/70 text-lg flex items-start gap-4 cursor-default">
+                <span class="text-gold">/</span>
+                Short-form vertical content for Reels, TikTok, Shorts
+              </p>
+              <p class="deliverable-item text-white/70 text-lg flex items-start gap-4 cursor-default">
+                <span class="text-gold">/</span>
+                Motion graphics and kinetic typography
+              </p>
+              <p class="deliverable-item text-white/70 text-lg flex items-start gap-4 cursor-default">
+                <span class="text-gold">/</span>
+                Carousel narratives and static compositions
+              </p>
+              <p class="deliverable-item text-white/70 text-lg flex items-start gap-4 cursor-default">
+                <span class="text-gold">/</span>
+                Copy architecture and hashtag intelligence
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Service 03 - Branding & Identity -->
+    <section class="service-block bg-dark py-24 md:py-32 border-t border-white/5">
+      <div class="max-w-7xl mx-auto px-6">
+        <div class="grid md:grid-cols-2 gap-16 items-start">
+          <div data-aos="fade-right">
+            <span class="service-number font-display text-[10rem] md:text-[14rem] text-gold/10 leading-none block transition-all duration-500">03</span>
+          </div>
+          <div data-aos="fade-left">
+            <h2 class="font-display text-5xl md:text-6xl lg:text-7xl text-white mb-6">Brand Architecture</h2>
+            <p class="text-white/60 text-xl mb-6 leading-relaxed">
+              Identity systems that command instant recognition. We construct brands
+              with conviction, translating business essence into visual and verbal
+              languages that resonate and differentiate.
+            </p>
+            <p class="text-white/40 text-lg mb-10">
+              Deep strategic excavation uncovers what makes you singular,
+              then we codify it into an identity system that cuts through
+              market noise with surgical precision.
+            </p>
+            <div class="space-y-4">
+              <h4 class="text-gold text-sm uppercase tracking-[0.2em] mb-6">Deliverables</h4>
+              <p class="deliverable-item text-white/70 text-lg flex items-start gap-4 cursor-default">
+                <span class="text-gold">/</span>
+                Logo systems and brand mark variations
+              </p>
+              <p class="deliverable-item text-white/70 text-lg flex items-start gap-4 cursor-default">
+                <span class="text-gold">/</span>
+                Color architecture and typographic hierarchy
+              </p>
+              <p class="deliverable-item text-white/70 text-lg flex items-start gap-4 cursor-default">
+                <span class="text-gold">/</span>
+                Brand voice and messaging architecture
+              </p>
+              <p class="deliverable-item text-white/70 text-lg flex items-start gap-4 cursor-default">
+                <span class="text-gold">/</span>
+                Comprehensive brand guidelines
+              </p>
+              <p class="deliverable-item text-white/70 text-lg flex items-start gap-4 cursor-default">
+                <span class="text-gold">/</span>
+                Collateral design systems
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Service 04 - Digital Presence -->
+    <section class="service-block bg-[#0d0d0d] py-24 md:py-32">
+      <div class="max-w-7xl mx-auto px-6">
+        <div class="grid md:grid-cols-2 gap-16 items-start">
+          <div class="md:order-2" data-aos="fade-left">
+            <span class="service-number font-display text-[10rem] md:text-[14rem] text-gold/10 leading-none block transition-all duration-500">04</span>
+          </div>
+          <div class="md:order-1" data-aos="fade-right">
+            <h2 class="font-display text-5xl md:text-6xl lg:text-7xl text-white mb-6">Digital Omnipresence</h2>
+            <p class="text-white/60 text-xl mb-6 leading-relaxed">
+              Web, search, paid media. We position you where your audience lives,
+              making discovery inevitable and engagement unavoidable.
+            </p>
+            <p class="text-white/40 text-lg mb-10">
+              From high-converting web experiences to precision-targeted campaigns,
+              your digital footprint expands strategically. No algorithm obscurity.
+              Deliberate visibility.
+            </p>
+            <div class="space-y-4">
+              <h4 class="text-gold text-sm uppercase tracking-[0.2em] mb-6">Deliverables</h4>
+              <p class="deliverable-item text-white/70 text-lg flex items-start gap-4 cursor-default">
+                <span class="text-gold">/</span>
+                Web design and development
+              </p>
+              <p class="deliverable-item text-white/70 text-lg flex items-start gap-4 cursor-default">
+                <span class="text-gold">/</span>
+                Search visibility optimization
+              </p>
+              <p class="deliverable-item text-white/70 text-lg flex items-start gap-4 cursor-default">
+                <span class="text-gold">/</span>
+                Paid media campaigns across Meta, Google, LinkedIn
+              </p>
+              <p class="deliverable-item text-white/70 text-lg flex items-start gap-4 cursor-default">
+                <span class="text-gold">/</span>
+                Conversion-optimized landing pages
+              </p>
+              <p class="deliverable-item text-white/70 text-lg flex items-start gap-4 cursor-default">
+                <span class="text-gold">/</span>
+                Performance analytics and optimization
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Full Package Section -->
+    <section class="bg-dark py-24 md:py-32 border-t border-white/5">
+      <div class="max-w-7xl mx-auto px-6">
+        <div class="bg-card border border-white/10 border-l-4 border-l-gold p-10 md:p-16 hover:border-gold/30 transition-all duration-500" data-aos="fade-up">
+          <div class="grid md:grid-cols-2 gap-12 items-center">
+            <div>
+              <span class="text-gold text-sm uppercase tracking-[0.2em]">Total Integration</span>
+              <h3 class="font-display text-5xl md:text-6xl lg:text-7xl text-white mt-4 mb-6">The Complete Arsenal.</h3>
+              <p class="text-white/60 text-lg">
+                Most partners choose full integration. Social command, visual content,
+                brand architecture, digital omnipresence. One unified vision.
+                Zero coordination friction.
+              </p>
+            </div>
+            <div class="md:text-right">
+              <a href="contact.html" class="magnetic-btn inline-block bg-gold text-dark px-10 py-5 font-bold text-lg hover:bg-white transition-all duration-300 hover:scale-105 transform">
+                Request Custom Scope
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Process Section -->
+    <section class="bg-[#0d0d0d] py-32 md:py-40">
+      <div class="max-w-7xl mx-auto px-6">
+        <p class="text-gold text-sm uppercase tracking-[0.3em] mb-6" data-aos="fade-up">The Method</p>
+        <h2 class="font-display text-5xl sm:text-6xl md:text-7xl text-white mb-20" data-aos="fade-up" data-aos-delay="100">
+          How We Operate.
+        </h2>
+
+        <div class="grid md:grid-cols-4 gap-8">
+          <div class="relative group" data-aos="fade-up" data-aos-delay="100">
+            <div class="text-gold font-display text-7xl md:text-8xl mb-6 group-hover:scale-110 transition-transform duration-300">01</div>
+            <h4 class="font-display text-2xl md:text-3xl text-white mb-3">Discovery</h4>
+            <p class="text-white/50">We dive deep into your brand, audience, and goals. No assumptions.</p>
+            <div class="hidden md:block absolute top-12 left-full w-full h-px bg-gradient-to-r from-gold/40 to-transparent"></div>
+          </div>
+
+          <div class="relative group" data-aos="fade-up" data-aos-delay="200">
+            <div class="text-gold font-display text-7xl md:text-8xl mb-6 group-hover:scale-110 transition-transform duration-300">02</div>
+            <h4 class="font-display text-2xl md:text-3xl text-white mb-3">Strategy</h4>
+            <p class="text-white/50">We build a roadmap that actually makes sense for your business.</p>
+            <div class="hidden md:block absolute top-12 left-full w-full h-px bg-gradient-to-r from-gold/40 to-transparent"></div>
+          </div>
+
+          <div class="relative group" data-aos="fade-up" data-aos-delay="300">
+            <div class="text-gold font-display text-7xl md:text-8xl mb-6 group-hover:scale-110 transition-transform duration-300">03</div>
+            <h4 class="font-display text-2xl md:text-3xl text-white mb-3">Create</h4>
+            <p class="text-white/50">We execute with precision. Every pixel, every word, every detail.</p>
+            <div class="hidden md:block absolute top-12 left-full w-full h-px bg-gradient-to-r from-gold/40 to-transparent"></div>
+          </div>
+
+          <div class="group" data-aos="fade-up" data-aos-delay="400">
+            <div class="text-gold font-display text-7xl md:text-8xl mb-6 group-hover:scale-110 transition-transform duration-300">04</div>
+            <h4 class="font-display text-2xl md:text-3xl text-white mb-3">Optimize</h4>
+            <p class="text-white/50">We track, learn, and improve. Always three steps ahead.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="bg-dark py-32 md:py-40 relative overflow-hidden">
+      <div class="absolute inset-0">
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gold/5 rounded-full blur-3xl"></div>
+      </div>
+      <div class="max-w-5xl mx-auto px-6 text-center relative z-10">
+        <div class="w-32 h-px bg-gradient-to-r from-transparent via-gold to-transparent mx-auto mb-16" data-aos="fade-up"></div>
+        <h2 class="font-display text-5xl sm:text-6xl md:text-7xl lg:text-8xl text-white mb-8" data-aos="fade-up" data-aos-delay="100">
+          Want All of This?<br><span class="text-gradient">Let's Talk.</span>
+        </h2>
+        <p class="text-white/60 text-xl md:text-2xl mb-14" data-aos="fade-up" data-aos-delay="200">
+          Every brand is different. Let's figure out what you need.
+        </p>
+        <a href="contact.html" class="magnetic-btn inline-block bg-gold text-dark px-14 py-6 text-xl font-bold hover:bg-white transition-all duration-300 hover:scale-105 transform" data-aos="fade-up" data-aos-delay="300">
+          Start the Conversation →
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-[#050505] border-t border-white/10">
+    <div class="max-w-7xl mx-auto px-6 py-12">
+      <div class="flex flex-col md:flex-row items-center justify-between gap-8 mb-8">
+        <a href="index.html" class="flex items-center gap-3 group">
+          <div class="w-10 h-10 bg-white rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+            <span class="font-display text-dark text-xl font-bold">Z</span>
+          </div>
+          <span class="font-body font-semibold text-white text-lg group-hover:text-gold transition-colors duration-300">Zenny Studios</span>
+        </a>
+
+        <div class="flex items-center gap-8">
+          <a href="index.html" class="text-white/50 hover:text-gold transition-all duration-300 text-sm">Home</a>
+          <a href="work.html" class="text-white/50 hover:text-gold transition-all duration-300 text-sm">Work</a>
+          <a href="services.html" class="text-gold transition-all duration-300 text-sm">Services</a>
+          <a href="index.html#about" class="text-white/50 hover:text-gold transition-all duration-300 text-sm">About</a>
+        </div>
+
+        <a href="https://instagram.com/zennystudios" target="_blank" class="text-white/50 hover:text-gold transition-all duration-300 text-sm flex items-center gap-2">
+          <span>📸</span> @zennystudios
+        </a>
+      </div>
+
+      <p class="text-white/40 text-sm text-center mb-8">Bengaluru, Karnataka 🔴</p>
+      <div class="w-full h-px bg-white/10 mb-8"></div>
+
+      <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+        <p class="text-white/30 text-sm">© 2025 Zenny Studios. All rights reserved.</p>
+        <p class="text-white/30 text-sm">You made it to the bottom. Bold move.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Initialize AOS
+    AOS.init({
+      duration: 800,
+      once: true,
+      offset: 100
+    });
+
+    // Custom Cursor
+    const cursorDot = document.querySelector('.cursor-dot');
+    const cursorRing = document.querySelector('.cursor-ring');
+    let mouseX = 0, mouseY = 0, ringX = 0, ringY = 0;
+
+    document.addEventListener('mousemove', (e) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+      cursorDot.style.left = mouseX - 4 + 'px';
+      cursorDot.style.top = mouseY - 4 + 'px';
+    });
+
+    function animateRing() {
+      ringX += (mouseX - ringX) * 0.15;
+      ringY += (mouseY - ringY) * 0.15;
+      cursorRing.style.left = ringX - 20 + 'px';
+      cursorRing.style.top = ringY - 20 + 'px';
+      requestAnimationFrame(animateRing);
+    }
+    animateRing();
+
+    const interactiveElements = document.querySelectorAll('a, button, .service-block, .deliverable-item');
+    interactiveElements.forEach(el => {
+      el.addEventListener('mouseenter', () => cursorRing.classList.add('hover'));
+      el.addEventListener('mouseleave', () => cursorRing.classList.remove('hover'));
+    });
+
+    // Scroll Progress
+    const scrollProgress = document.getElementById('scrollProgress');
+    window.addEventListener('scroll', () => {
+      const scrollTop = window.scrollY;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      scrollProgress.style.width = (scrollTop / docHeight) * 100 + '%';
+    });
+
+    // Navbar scroll effect
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 50) {
+        navbar.classList.add('backdrop-blur-md', 'bg-dark/90');
+      } else {
+        navbar.classList.remove('backdrop-blur-md', 'bg-dark/90');
+      }
+    });
+
+    // Mobile menu
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const mobileLinks = document.querySelectorAll('#mobile-menu a');
+
+    hamburger.addEventListener('click', () => {
+      mobileMenu.classList.toggle('opacity-0');
+      mobileMenu.classList.toggle('pointer-events-none');
+    });
+
+    mobileLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.add('opacity-0', 'pointer-events-none');
+      });
+    });
+
+    // Magnetic buttons
+    const magneticBtns = document.querySelectorAll('.magnetic-btn');
+    magneticBtns.forEach(btn => {
+      btn.addEventListener('mousemove', (e) => {
+        const rect = btn.getBoundingClientRect();
+        const x = e.clientX - rect.left - rect.width / 2;
+        const y = e.clientY - rect.top - rect.height / 2;
+        btn.style.transform = `translate(${x * 0.3}px, ${y * 0.3}px)`;
+      });
+      btn.addEventListener('mouseleave', () => {
+        btn.style.transform = 'translate(0, 0)';
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,1056 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Zenny Studios — Bengaluru's boldest creative agency. Three steps ahead in social media, content creation, and branding.">
+  <title>Zenny Studios | Three Steps Ahead</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎬</text></svg>">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- AOS -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            gold: '#F5C518',
+            dark: '#0a0a0a',
+            card: '#111111',
+          },
+          fontFamily: {
+            display: ['Bebas Neue', 'cursive'],
+            body: ['Inter', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    @keyframes marquee {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+    .animate-marquee {
+      animation: marquee 20s linear infinite;
+    }
+
+    /* Custom Cursor */
+    .cursor-dot {
+      width: 8px;
+      height: 8px;
+      background: #F5C518;
+      border-radius: 50%;
+      position: fixed;
+      pointer-events: none;
+      z-index: 9999;
+      transition: transform 0.1s ease;
+    }
+    .cursor-ring {
+      width: 40px;
+      height: 40px;
+      border: 1px solid rgba(245, 197, 24, 0.5);
+      border-radius: 50%;
+      position: fixed;
+      pointer-events: none;
+      z-index: 9998;
+      transition: all 0.15s ease-out;
+    }
+    .cursor-ring.hover {
+      transform: scale(1.5);
+      border-color: #F5C518;
+      background: rgba(245, 197, 24, 0.1);
+    }
+
+    /* Text Gradient */
+    .text-gradient {
+      background: linear-gradient(135deg, #F5C518 0%, #fff 50%, #F5C518 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      background-size: 200% auto;
+      animation: textShine 3s ease-in-out infinite;
+    }
+    @keyframes textShine {
+      0%, 100% { background-position: 0% center; }
+      50% { background-position: 200% center; }
+    }
+
+    /* Magnetic Button */
+    .magnetic-btn {
+      transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    /* Glitch Effect */
+    .glitch-text {
+      position: relative;
+    }
+    .glitch-text:hover {
+      animation: glitch 0.3s ease-in-out;
+    }
+    @keyframes glitch {
+      0%, 100% { transform: translate(0); }
+      20% { transform: translate(-2px, 2px); }
+      40% { transform: translate(2px, -2px); }
+      60% { transform: translate(-2px, -2px); }
+      80% { transform: translate(2px, 2px); }
+    }
+
+    /* Reveal Animation */
+    .reveal-text {
+      overflow: hidden;
+    }
+    .reveal-text span {
+      display: inline-block;
+      transform: translateY(100%);
+      animation: revealText 0.8s ease forwards;
+    }
+    @keyframes revealText {
+      to { transform: translateY(0); }
+    }
+
+    /* Card Tilt Effect */
+    .tilt-card {
+      transform-style: preserve-3d;
+      transition: transform 0.5s ease;
+    }
+
+    /* Scroll Progress */
+    .scroll-progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 3px;
+      background: linear-gradient(90deg, #F5C518, #fff);
+      z-index: 9999;
+      transform-origin: left;
+    }
+
+    /* Floating Animation */
+    .float {
+      animation: float 6s ease-in-out infinite;
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-20px); }
+    }
+
+    /* Pulse Glow */
+    .pulse-glow {
+      animation: pulseGlow 2s ease-in-out infinite;
+    }
+    @keyframes pulseGlow {
+      0%, 100% { box-shadow: 0 0 20px rgba(245, 197, 24, 0.3); }
+      50% { box-shadow: 0 0 40px rgba(245, 197, 24, 0.6); }
+    }
+
+    /* Letter Spacing Animation */
+    .expand-text {
+      transition: letter-spacing 0.3s ease;
+    }
+    .expand-text:hover {
+      letter-spacing: 0.2em;
+    }
+
+    /* Underline Animation */
+    .animated-underline {
+      position: relative;
+    }
+    .animated-underline::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: #F5C518;
+      transition: width 0.3s ease;
+    }
+    .animated-underline:hover::after {
+      width: 100%;
+    }
+
+    /* Parallax Layer */
+    .parallax-layer {
+      will-change: transform;
+    }
+
+    /* Hide cursor on touch devices */
+    @media (hover: none) {
+      .cursor-dot, .cursor-ring { display: none; }
+    }
+
+    /* ========== ENHANCED HERO STYLES ========== */
+
+    /* Split Text Reveal */
+    .split-text {
+      overflow: hidden;
+      display: inline-block;
+    }
+    .split-text .char {
+      display: inline-block;
+      opacity: 0;
+      transform: translateY(100%) rotateX(-90deg);
+      animation: charReveal 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+    @keyframes charReveal {
+      to {
+        opacity: 1;
+        transform: translateY(0) rotateX(0);
+      }
+    }
+
+    /* Hero Line Slide */
+    .hero-line {
+      overflow: visible;
+    }
+    .hero-line-inner {
+      opacity: 0;
+      transform: translateY(30px);
+      animation: lineSlide 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+    @keyframes lineSlide {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Stroke Text */
+    .stroke-text {
+      -webkit-text-stroke: 4px #F5C518;
+      -webkit-text-fill-color: transparent;
+      color: #F5C518;
+      paint-order: stroke fill;
+      transition: all 0.4s ease;
+    }
+    .stroke-text:hover {
+      -webkit-text-fill-color: #F5C518;
+      color: #F5C518;
+    }
+    /* Fallback for browsers without text-stroke support */
+    @supports not (-webkit-text-stroke: 1px #F5C518) {
+      .stroke-text {
+        color: #F5C518;
+        opacity: 0.5;
+      }
+    }
+
+    /* Mouse Follow Gradient */
+    .hero-gradient {
+      position: absolute;
+      width: 800px;
+      height: 800px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(245, 197, 24, 0.15) 0%, transparent 70%);
+      pointer-events: none;
+      transition: transform 0.3s ease-out, opacity 0.3s ease;
+      transform: translate(-50%, -50%);
+    }
+
+    /* Animated Border */
+    .animated-border {
+      position: relative;
+    }
+    .animated-border::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border: 2px solid transparent;
+      background: linear-gradient(90deg, #F5C518, transparent, #F5C518) border-box;
+      -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+      mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      animation: borderRotate 4s linear infinite;
+    }
+    @keyframes borderRotate {
+      to { transform: rotate(360deg); }
+    }
+
+    /* Typewriter Effect */
+    .typewriter {
+      display: inline-block;
+      overflow: hidden;
+      border-right: 3px solid #F5C518;
+      white-space: nowrap;
+      animation: typing 3s steps(30) forwards, blink 0.8s step-end infinite;
+    }
+    @keyframes typing {
+      from { width: 0; }
+      to { width: 100%; }
+    }
+    @keyframes blink {
+      50% { border-color: transparent; }
+    }
+
+    /* Rotating Words */
+    .rotating-words {
+      display: inline-flex;
+      height: 1.2em;
+      overflow: hidden;
+      vertical-align: baseline;
+      align-items: baseline;
+    }
+    .rotating-words span {
+      display: block;
+      animation: rotateWords 8s infinite;
+      line-height: 1.2;
+    }
+    @keyframes rotateWords {
+      0%, 20% { transform: translateY(0); }
+      25%, 45% { transform: translateY(-100%); }
+      50%, 70% { transform: translateY(-200%); }
+      75%, 95% { transform: translateY(-300%); }
+      100% { transform: translateY(0); }
+    }
+
+    /* Hero Number */
+    .hero-number {
+      font-size: clamp(8rem, 22vw, 30rem);
+      line-height: 0.8;
+      position: absolute;
+      right: -2%;
+      top: 50%;
+      transform: translateY(-50%);
+      opacity: 0.03;
+      font-family: 'Bebas Neue', cursive;
+      color: white;
+      pointer-events: none;
+      letter-spacing: -0.02em;
+      z-index: 0;
+    }
+
+    /* Glow Pulse on Text */
+    .glow-text {
+      text-shadow: 0 0 20px rgba(245, 197, 24, 0.3);
+    }
+
+    /* Glowing Line */
+    .glow-line {
+      box-shadow: 0 0 10px rgba(245, 197, 24, 0.6), 0 0 20px rgba(245, 197, 24, 0.4), 0 0 30px rgba(245, 197, 24, 0.2);
+      animation: lineGlow 2s ease-in-out infinite;
+    }
+    @keyframes lineGlow {
+      0%, 100% { box-shadow: 0 0 10px rgba(245, 197, 24, 0.6), 0 0 20px rgba(245, 197, 24, 0.4), 0 0 30px rgba(245, 197, 24, 0.2); }
+      50% { box-shadow: 0 0 15px rgba(245, 197, 24, 0.8), 0 0 30px rgba(245, 197, 24, 0.6), 0 0 45px rgba(245, 197, 24, 0.4); }
+    }
+    @keyframes glowPulse {
+      0%, 100% { text-shadow: 0 0 20px rgba(245, 197, 24, 0); }
+      50% { text-shadow: 0 0 40px rgba(245, 197, 24, 0.5), 0 0 80px rgba(245, 197, 24, 0.3); }
+    }
+
+    /* Noise Overlay */
+    .noise-overlay {
+      position: absolute;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+      opacity: 0.03;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* Scroll CTA */
+    .scroll-cta {
+      position: absolute;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .scroll-line {
+      width: 1px;
+      height: 60px;
+      background: linear-gradient(to bottom, #F5C518 50%, transparent 100%);
+      animation: scrollLine 2s ease-in-out infinite;
+    }
+    @keyframes scrollLine {
+      0%, 100% { transform: scaleY(1); opacity: 1; }
+      50% { transform: scaleY(0.5); opacity: 0.5; }
+    }
+
+    /* Interactive Word */
+    .interactive-word {
+      display: inline-block;
+      transition: all 0.3s ease;
+      cursor: default;
+    }
+    .interactive-word:hover {
+      color: #F5C518;
+      transform: translateY(-5px) scale(1.05);
+    }
+
+    /* Decorative Line */
+    .deco-line {
+      width: 100px;
+      height: 1px;
+      background: linear-gradient(90deg, #F5C518, transparent);
+      animation: lineExpand 1.5s ease forwards;
+    }
+    @keyframes lineExpand {
+      from { width: 0; opacity: 0; }
+      to { width: 100px; opacity: 1; }
+    }
+
+    /* Additional Hero Animations */
+    @keyframes fadeSlideUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeSlideLeft {
+      to { opacity: 1; transform: translateX(0); }
+    }
+    @keyframes fadeIn {
+      to { opacity: 1; }
+    }
+  </style>
+</head>
+<body class="bg-dark font-body text-white antialiased">
+
+  <!-- Custom Cursor -->
+  <div class="cursor-dot hidden md:block"></div>
+  <div class="cursor-ring hidden md:block"></div>
+
+  <!-- Scroll Progress Bar -->
+  <div class="scroll-progress" id="scrollProgress"></div>
+
+  <!-- Navbar -->
+  <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 border-b border-white/10 transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-6 py-4">
+      <div class="flex items-center justify-between">
+        <!-- Logo -->
+        <a href="index.html" class="flex items-center gap-3 group">
+          <!-- Image logo - uncomment and add your logo file -->
+          <!-- <img src="assets/logo.png" alt="Zenny Studios" class="h-10 w-auto group-hover:scale-110 transition-transform duration-300"> -->
+          <!-- Fallback text logo -->
+          <div class="w-10 h-10 bg-white rounded-full flex items-center justify-center pulse-glow group-hover:scale-110 transition-transform duration-300">
+            <span class="font-display text-dark text-xl font-bold">Z</span>
+          </div>
+          <span class="font-body font-semibold text-white text-lg hidden sm:block group-hover:text-gold transition-colors duration-300">Zenny Studios</span>
+        </a>
+
+        <!-- Desktop Nav -->
+        <div class="hidden md:flex items-center gap-8">
+          <a href="index.html" class="text-gold transition-all duration-300 animated-underline">Home</a>
+          <a href="work.html" class="text-white/70 hover:text-gold transition-all duration-300 animated-underline">Work</a>
+          <a href="services.html" class="text-white/70 hover:text-gold transition-all duration-300 animated-underline">Services</a>
+          <a href="#about" class="text-white/70 hover:text-gold transition-all duration-300 animated-underline">About</a>
+        </div>
+
+        <!-- CTA Button -->
+        <div class="hidden md:block">
+          <a href="contact.html" class="magnetic-btn border border-gold text-gold px-6 py-2 hover:bg-gold hover:text-dark transition-all duration-300 inline-block">Let's Talk</a>
+        </div>
+
+        <!-- Mobile Hamburger -->
+        <button id="hamburger" class="md:hidden flex flex-col gap-1.5 p-2">
+          <span class="w-6 h-0.5 bg-white transition-all duration-300"></span>
+          <span class="w-6 h-0.5 bg-white transition-all duration-300"></span>
+          <span class="w-6 h-0.5 bg-white transition-all duration-300"></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Mobile Menu Overlay -->
+  <div id="mobile-menu" class="fixed inset-0 bg-dark z-40 flex flex-col items-center justify-center gap-8 opacity-0 pointer-events-none transition-all duration-300">
+    <a href="index.html" class="text-3xl font-display text-gold transition-all duration-300">Home</a>
+    <a href="work.html" class="text-3xl font-display text-white hover:text-gold transition-all duration-300">Work</a>
+    <a href="services.html" class="text-3xl font-display text-white hover:text-gold transition-all duration-300">Services</a>
+    <a href="#about" class="text-3xl font-display text-white hover:text-gold transition-all duration-300 mobile-link">About</a>
+    <a href="contact.html" class="mt-8 border border-gold text-gold px-8 py-3 text-xl hover:bg-gold hover:text-dark transition-all duration-300">Let's Talk</a>
+  </div>
+
+  <main>
+    <!-- Hero Section -->
+    <section id="hero" class="min-h-screen flex items-center relative overflow-hidden bg-dark">
+      <!-- Noise Overlay -->
+      <div class="noise-overlay"></div>
+
+      <!-- Mouse Follow Gradient -->
+      <div class="hero-gradient" id="heroGradient"></div>
+
+      <!-- Giant Background Letter -->
+      <div class="hero-number select-none" aria-hidden="true">ZENNY</div>
+
+      <!-- Floating Geometric Elements -->
+      <div class="absolute top-20 right-20 w-40 h-40 border border-gold/10 rotate-45 float parallax-layer hidden md:block" data-speed="0.03"></div>
+      <div class="absolute bottom-32 left-20 w-24 h-24 bg-gold/5 float parallax-layer hidden md:block" style="animation-delay: -3s;" data-speed="0.05"></div>
+      <div class="absolute top-1/2 right-1/4 w-2 h-2 bg-gold rounded-full float parallax-layer" style="animation-delay: -1s;" data-speed="0.08"></div>
+      <div class="absolute top-1/3 left-1/3 w-1 h-1 bg-white/50 rounded-full float parallax-layer" style="animation-delay: -2s;" data-speed="0.04"></div>
+
+      <!-- Decorative Lines -->
+      <div class="absolute top-1/4 left-0 w-32 h-px bg-gradient-to-r from-gold/50 to-transparent hidden lg:block"></div>
+      <div class="absolute bottom-1/3 right-0 w-48 h-px bg-gradient-to-l from-gold/30 to-transparent hidden lg:block"></div>
+
+      <!-- Main Content -->
+      <div class="max-w-[1600px] mx-auto px-6 md:px-12 py-32 pt-40 relative z-10 w-full">
+        <div class="grid lg:grid-cols-12 gap-8 items-center">
+
+          <!-- Left Content -->
+          <div class="lg:col-span-8">
+            <!-- Eyebrow -->
+            <div class="flex items-center gap-4 mb-10">
+              <div class="deco-line"></div>
+              <p class="text-gold text-xs md:text-sm uppercase tracking-[0.4em] font-medium hero-fade-in" style="animation: fadeSlideUp 0.8s ease 0.5s forwards; opacity: 0; transform: translateY(20px);">
+                Bengaluru's Boldest Creative Force
+              </p>
+            </div>
+
+            <!-- Main Headline -->
+            <h1 class="font-display text-white leading-[0.85] mb-10">
+              <!-- Line 1 -->
+              <div class="hero-line">
+                <span class="hero-line-inner block text-5xl sm:text-7xl md:text-8xl lg:text-9xl xl:text-[10rem]" style="animation-delay: 0.2s;">
+                  <span class="interactive-word">We</span>
+                  <span class="interactive-word">Are</span>
+                  <span class="interactive-word">The</span>
+                </span>
+              </div>
+
+              <!-- Line 2 - Featured -->
+              <div class="hero-line my-2 md:my-4">
+                <span class="hero-line-inner block text-6xl sm:text-8xl md:text-9xl lg:text-[10rem] xl:text-[12rem] glow-text" style="animation-delay: 0.4s;">
+                  <span class="text-gold">Last</span>
+                  <span class="text-gradient">Agency</span>
+                </span>
+              </div>
+
+              <!-- Line 3 -->
+              <div class="hero-line">
+                <span class="hero-line-inner block text-5xl sm:text-7xl md:text-8xl lg:text-9xl xl:text-[10rem]" style="animation-delay: 0.6s;">
+                  <span class="interactive-word">You'll</span>
+                  <span class="interactive-word">Ever</span>
+                  <span class="interactive-word text-gold">Need.</span>
+                </span>
+              </div>
+            </h1>
+
+            <!-- Subtext -->
+            <div class="mb-14" style="animation: fadeSlideUp 0.8s ease 1s forwards; opacity: 0; transform: translateY(20px);">
+              <p class="text-white/60 text-lg md:text-xl lg:text-2xl tracking-wide font-medium mb-4">
+                Three Steps Ahead.
+              </p>
+              <div class="glow-line w-32 h-0.5 bg-gold"></div>
+            </div>
+
+            <!-- CTAs -->
+            <div class="flex flex-col sm:flex-row gap-5" style="animation: fadeSlideUp 0.8s ease 1.2s forwards; opacity: 0; transform: translateY(20px);">
+              <a href="work.html" class="magnetic-btn group relative bg-gold text-dark px-10 md:px-14 py-5 md:py-6 font-semibold text-center text-lg overflow-hidden">
+                <span class="relative z-10 flex items-center justify-center gap-3">
+                  Explore Our Work
+                  <svg class="w-5 h-5 transform group-hover:translate-x-2 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                  </svg>
+                </span>
+                <div class="absolute inset-0 bg-white transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></div>
+              </a>
+              <a href="contact.html" class="magnetic-btn group relative border-2 border-gold text-gold px-10 md:px-14 py-5 md:py-6 font-semibold text-center text-lg overflow-hidden">
+                <span class="relative z-10 group-hover:text-dark transition-colors duration-300">Start a Project</span>
+                <div class="absolute inset-0 bg-gold transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></div>
+              </a>
+            </div>
+          </div>
+
+          <!-- Right Side - Stats/Info -->
+          <div class="lg:col-span-4 hidden lg:flex flex-col items-end justify-center gap-12" style="animation: fadeSlideLeft 0.8s ease 1.4s forwards; opacity: 0; transform: translateX(30px);">
+            <div class="text-right group cursor-default">
+              <p class="font-display text-7xl xl:text-8xl text-gold group-hover:scale-110 transition-transform duration-300">19+</p>
+              <p class="text-white/40 text-sm uppercase tracking-widest mt-2">Campaigns Launched</p>
+            </div>
+            <div class="text-right group cursor-default">
+              <p class="font-display text-7xl xl:text-8xl text-white/20 group-hover:text-gold/50 transition-colors duration-300">10+</p>
+              <p class="text-white/40 text-sm uppercase tracking-widest mt-2">Brands Transformed</p>
+            </div>
+            <div class="text-right group cursor-default">
+              <p class="font-display text-7xl xl:text-8xl text-gold/40 group-hover:text-gold transition-colors duration-300">100%</p>
+              <p class="text-white/40 text-sm uppercase tracking-widest mt-2">Conviction</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Scroll Indicator -->
+      <div class="scroll-cta">
+        <span class="text-white/30 text-[10px] uppercase tracking-[0.3em] font-medium">Scroll to Discover</span>
+        <div class="scroll-line"></div>
+      </div>
+
+      <!-- Bottom Gradient Fade -->
+      <div class="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-dark to-transparent pointer-events-none z-20"></div>
+    </section>
+
+    <!-- Marquee Strip -->
+    <section class="bg-[#1a1a1a] py-4 overflow-hidden">
+      <div class="animate-marquee whitespace-nowrap flex">
+        <span class="text-gold text-sm uppercase tracking-widest mx-8">Social Command</span>
+        <span class="text-gold/40">/</span>
+        <span class="text-gold text-sm uppercase tracking-widest mx-8">Visual Craft</span>
+        <span class="text-gold/40">/</span>
+        <span class="text-gold text-sm uppercase tracking-widest mx-8">Brand Architecture</span>
+        <span class="text-gold/40">/</span>
+        <span class="text-gold text-sm uppercase tracking-widest mx-8">Digital Presence</span>
+        <span class="text-gold/40">/</span>
+        <span class="text-gold text-sm uppercase tracking-widest mx-8">Content Mastery</span>
+        <span class="text-gold/40">/</span>
+        <span class="text-gold text-sm uppercase tracking-widest mx-8">Market Strategy</span>
+        <span class="text-gold/40">/</span>
+        <span class="text-gold text-sm uppercase tracking-widest mx-8">Social Command</span>
+        <span class="text-gold/40">/</span>
+        <span class="text-gold text-sm uppercase tracking-widest mx-8">Visual Craft</span>
+        <span class="text-gold/40">/</span>
+        <span class="text-gold text-sm uppercase tracking-widest mx-8">Branding</span>
+        <span class="text-gold/40">·</span>
+        <span class="text-gold text-sm uppercase tracking-widest mx-8">Digital Presence</span>
+        <span class="text-gold/40">·</span>
+        <span class="text-gold text-sm uppercase tracking-widest mx-8">Visual Storytelling</span>
+        <span class="text-gold/40">·</span>
+        <span class="text-gold text-sm uppercase tracking-widest mx-8">Brand Strategy</span>
+        <span class="text-gold/40">·</span>
+      </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="bg-dark py-32 md:py-40">
+      <div class="max-w-7xl mx-auto px-6">
+        <p class="text-gold text-sm uppercase tracking-[0.3em] mb-4" data-aos="fade-up">What We Offer</p>
+        <h2 class="font-display text-5xl sm:text-6xl md:text-8xl text-white mb-20" data-aos="fade-up" data-aos-delay="100">
+          Craft. Strategy. Dominance.
+        </h2>
+
+        <div class="grid md:grid-cols-2 gap-6">
+          <!-- Card 1 -->
+          <a href="services.html" class="tilt-card bg-card border border-white/10 border-t-2 border-t-gold p-10 hover:-translate-y-2 hover:shadow-[0_0_50px_rgba(245,197,24,0.15)] transition-all duration-500 group cursor-pointer block" data-aos="fade-up" data-aos-delay="100">
+            <div class="w-16 h-16 bg-gold/10 rounded-full flex items-center justify-center mb-8 group-hover:scale-110 group-hover:bg-gold/20 transition-all duration-300">
+              <span class="text-gold text-2xl font-display">01</span>
+            </div>
+            <h3 class="font-display text-3xl md:text-4xl text-white mb-4 group-hover:text-gold transition-colors duration-300">Social Media Command</h3>
+            <p class="text-white/60 text-lg">Your feeds become battlegrounds. We architect campaigns that capture attention and convert scrollers into loyalists.</p>
+          </a>
+
+          <!-- Card 2 -->
+          <a href="services.html" class="tilt-card bg-card border border-white/10 border-t-2 border-t-gold p-10 hover:-translate-y-2 hover:shadow-[0_0_50px_rgba(245,197,24,0.15)] transition-all duration-500 group cursor-pointer block" data-aos="fade-up" data-aos-delay="200">
+            <div class="w-16 h-16 bg-gold/10 rounded-full flex items-center justify-center mb-8 group-hover:scale-110 group-hover:bg-gold/20 transition-all duration-300">
+              <span class="text-gold text-2xl font-display">02</span>
+            </div>
+            <h3 class="font-display text-3xl md:text-4xl text-white mb-4 group-hover:text-gold transition-colors duration-300">Visual Storytelling</h3>
+            <p class="text-white/60 text-lg">Reels that stop thumbs. Shoots that spark desire. Every frame engineered to make your audience feel something real.</p>
+          </a>
+
+          <!-- Card 3 -->
+          <a href="services.html" class="tilt-card bg-card border border-white/10 border-t-2 border-t-gold p-10 hover:-translate-y-2 hover:shadow-[0_0_50px_rgba(245,197,24,0.15)] transition-all duration-500 group cursor-pointer block" data-aos="fade-up" data-aos-delay="300">
+            <div class="w-16 h-16 bg-gold/10 rounded-full flex items-center justify-center mb-8 group-hover:scale-110 group-hover:bg-gold/20 transition-all duration-300">
+              <span class="text-gold text-2xl font-display">03</span>
+            </div>
+            <h3 class="font-display text-3xl md:text-4xl text-white mb-4 group-hover:text-gold transition-colors duration-300">Brand Architecture</h3>
+            <p class="text-white/60 text-lg">Identity systems that command recognition. We forge brands with conviction, purpose, and unmistakable presence.</p>
+          </a>
+
+          <!-- Card 4 -->
+          <a href="services.html" class="tilt-card bg-card border border-white/10 border-t-2 border-t-gold p-10 hover:-translate-y-2 hover:shadow-[0_0_50px_rgba(245,197,24,0.15)] transition-all duration-500 group cursor-pointer block" data-aos="fade-up" data-aos-delay="400">
+            <div class="w-16 h-16 bg-gold/10 rounded-full flex items-center justify-center mb-8 group-hover:scale-110 group-hover:bg-gold/20 transition-all duration-300">
+              <span class="text-gold text-2xl font-display">04</span>
+            </div>
+            <h3 class="font-display text-3xl md:text-4xl text-white mb-4 group-hover:text-gold transition-colors duration-300">Digital Omnipresence</h3>
+            <p class="text-white/60 text-lg">Web, search, paid media. We position you where your audience already lives, making discovery inevitable.</p>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section id="work" class="bg-[#0d0d0d] py-32 md:py-40">
+      <div class="max-w-7xl mx-auto px-6">
+        <p class="text-gold text-sm uppercase tracking-[0.3em] mb-4" data-aos="fade-up">Selected Work</p>
+        <h2 class="font-display text-5xl sm:text-6xl md:text-8xl text-white mb-6" data-aos="fade-up" data-aos-delay="100">
+          Brands That Bet On Us.
+        </h2>
+        <h3 class="font-display text-4xl sm:text-5xl md:text-6xl text-white/40 mb-20" data-aos="fade-up" data-aos-delay="150">
+          Victories That Speak Louder.
+        </h3>
+
+        <div class="grid md:grid-cols-2 gap-6">
+          <!-- Card 1 - Tata Coffee -->
+          <a href="work.html" class="group relative h-80 md:h-96 overflow-hidden rounded-none cursor-pointer block" style="background: linear-gradient(135deg, #8B1A1A 0%, #C0392B 100%);" data-aos="fade-up" data-aos-delay="100">
+            <div class="absolute inset-0 flex flex-col justify-end p-8 z-10">
+              <span class="bg-gold text-dark text-xs px-4 py-1.5 w-fit mb-3 font-semibold tracking-wider uppercase">Social Media</span>
+              <h3 class="font-display text-4xl md:text-5xl text-white group-hover:text-gold transition-colors duration-300">Tata Coffee</h3>
+            </div>
+            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent group-hover:from-black/90 transition-all duration-500"></div>
+          </a>
+
+          <!-- Card 2 - Oreo -->
+          <a href="work.html" class="group relative h-80 md:h-96 overflow-hidden rounded-none cursor-pointer block" style="background: linear-gradient(135deg, #003087 0%, #0047CC 100%);" data-aos="fade-up" data-aos-delay="200">
+            <div class="absolute inset-0 flex flex-col justify-end p-8 z-10">
+              <span class="bg-gold text-dark text-xs px-4 py-1.5 w-fit mb-3 font-semibold tracking-wider uppercase">Visual Content</span>
+              <h3 class="font-display text-4xl md:text-5xl text-white group-hover:text-gold transition-colors duration-300">Oreo</h3>
+            </div>
+            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent group-hover:from-black/90 transition-all duration-500"></div>
+          </a>
+
+          <!-- Card 3 - Harley Davidson -->
+          <a href="work.html" class="group relative h-80 md:h-96 overflow-hidden rounded-none cursor-pointer block" style="background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 50%, rgba(245, 197, 24, 0.15) 100%);" data-aos="fade-up" data-aos-delay="300">
+            <div class="absolute inset-0 flex flex-col justify-end p-8 z-10">
+              <span class="bg-gold text-dark text-xs px-4 py-1.5 w-fit mb-3 font-semibold tracking-wider uppercase">Brand Identity</span>
+              <h3 class="font-display text-4xl md:text-5xl text-white group-hover:text-gold transition-colors duration-300">Harley Davidson</h3>
+            </div>
+            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent group-hover:from-black/90 transition-all duration-500"></div>
+          </a>
+
+          <!-- Card 4 - Tavisa Fashion -->
+          <a href="work.html" class="group relative h-80 md:h-96 overflow-hidden rounded-none cursor-pointer block" style="background: linear-gradient(135deg, #2C1810 0%, #4a2c1a 100%);" data-aos="fade-up" data-aos-delay="400">
+            <div class="absolute inset-0 flex flex-col justify-end p-8 z-10">
+              <span class="bg-gold text-dark text-xs px-4 py-1.5 w-fit mb-3 font-semibold tracking-wider uppercase">Full Spectrum</span>
+              <h3 class="font-display text-4xl md:text-5xl text-white group-hover:text-gold transition-colors duration-300">Tavisa Fashion</h3>
+            </div>
+            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent group-hover:from-black/90 transition-all duration-500"></div>
+          </a>
+        </div>
+
+        <!-- View All Button -->
+        <div class="text-center mt-16" data-aos="fade-up">
+          <a href="work.html" class="magnetic-btn inline-block border-2 border-white/20 text-white px-10 py-4 font-semibold hover:border-gold hover:text-gold transition-all duration-300">
+            Explore All Work
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Stats Strip -->
+    <section id="stats" class="bg-gold py-20 md:py-28 relative overflow-hidden">
+      <div class="absolute inset-0 opacity-10">
+        <div class="absolute top-0 left-1/4 font-display text-[400px] text-dark leading-none select-none">Z</div>
+      </div>
+      <div class="max-w-7xl mx-auto px-6 relative z-10">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-12 md:gap-6 text-center">
+          <div class="group cursor-default">
+            <p class="font-display text-6xl md:text-8xl text-dark group-hover:scale-110 transition-transform duration-300"><span class="stat-number" data-target="19">0</span>+</p>
+            <p class="text-dark/70 text-xs md:text-sm uppercase tracking-[0.2em] mt-3">Campaigns Launched</p>
+          </div>
+          <div class="group cursor-default">
+            <p class="font-display text-6xl md:text-8xl text-dark group-hover:scale-110 transition-transform duration-300"><span class="stat-number" data-target="10">0</span>+</p>
+            <p class="text-dark/70 text-xs md:text-sm uppercase tracking-[0.2em] mt-3">Brands Transformed</p>
+          </div>
+          <div class="group cursor-default">
+            <p class="font-display text-6xl md:text-8xl text-dark group-hover:scale-110 transition-transform duration-300"><span class="stat-number" data-target="4210">0</span></p>
+            <p class="text-dark/70 text-xs md:text-sm uppercase tracking-[0.2em] mt-3">Peak Reel Views</p>
+          </div>
+          <div class="group cursor-default">
+            <p class="font-display text-6xl md:text-8xl text-dark group-hover:scale-110 transition-transform duration-300"><span class="stat-number" data-target="100">0</span>%</p>
+            <p class="text-dark/70 text-xs md:text-sm uppercase tracking-[0.2em] mt-3">Client Retention</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="bg-dark py-32 md:py-40">
+      <div class="max-w-7xl mx-auto px-6">
+        <div class="grid md:grid-cols-2 gap-16 items-center">
+          <div data-aos="fade-right">
+            <p class="text-gold text-sm uppercase tracking-[0.3em] mb-4">The Zenny Manifesto</p>
+            <h2 class="font-display text-5xl sm:text-6xl md:text-7xl text-white mb-8 leading-[0.9]">
+              Built Different.
+              <span class="block text-white/40 mt-2">Wired Relentless.</span>
+            </h2>
+            <p class="text-white/60 text-lg mb-6">
+              Rooted in Bengaluru, engineered for ambition. Zenny Studios exists because mediocrity is a plague and your brand deserves immunity.
+            </p>
+            <p class="text-white/60 text-lg mb-10">
+              We're a compact battalion of strategists, visual architects, and narrative engineers who refuse to separate creativity from commerce. Partnership with us means gaining a growth-obsessed ally, not another vendor.
+            </p>
+            <div class="flex gap-10">
+              <div class="group cursor-default">
+                <p class="font-display text-5xl md:text-6xl text-gold group-hover:scale-110 transition-transform duration-300">2024</p>
+                <p class="text-white/40 text-sm mt-1">Origin</p>
+              </div>
+              <div class="group cursor-default">
+                <p class="font-display text-5xl md:text-6xl text-gold group-hover:scale-110 transition-transform duration-300">10+</p>
+                <p class="text-white/40 text-sm mt-1">Partners</p>
+              </div>
+              <div class="group cursor-default">
+                <p class="font-display text-5xl md:text-6xl text-gold group-hover:scale-110 transition-transform duration-300">Zero</p>
+                <p class="text-white/40 text-sm mt-1">Compromises</p>
+              </div>
+            </div>
+          </div>
+          <div class="relative" data-aos="fade-left">
+            <div class="aspect-square bg-gradient-to-br from-gold/20 to-transparent border border-white/10 flex items-center justify-center group hover:border-gold/50 transition-all duration-500">
+              <span class="font-display text-[250px] text-white/5 group-hover:text-gold/20 transition-colors duration-500 group-hover:scale-110 transform">Z</span>
+            </div>
+            <div class="absolute -bottom-6 -right-6 w-32 h-32 border-2 border-gold/30 float"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section id="cta" class="bg-dark py-32 md:py-40 relative overflow-hidden">
+      <div class="absolute inset-0">
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gold/5 rounded-full blur-3xl"></div>
+      </div>
+      <div class="max-w-5xl mx-auto px-6 text-center relative z-10">
+        <div class="w-32 h-px bg-gradient-to-r from-transparent via-gold to-transparent mx-auto mb-16" data-aos="fade-up"></div>
+        <h2 class="font-display text-6xl sm:text-7xl md:text-8xl lg:text-9xl text-white mb-8 glitch-text" data-aos="fade-up" data-aos-delay="100">
+          Ready To Lead<br><span class="text-gradient">Not Follow?</span>
+        </h2>
+        <p class="text-white/60 text-xl md:text-2xl mb-14" data-aos="fade-up" data-aos-delay="200">
+          Your competitors are watching. Make them nervous.
+        </p>
+        <a href="contact.html" class="magnetic-btn inline-block bg-gold text-dark px-14 py-6 text-xl font-bold hover:bg-white transition-all duration-300 hover:scale-105 transform" data-aos="fade-up" data-aos-delay="300">
+          Initiate Project
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-[#050505] border-t border-white/10">
+    <div class="max-w-7xl mx-auto px-6 py-12">
+      <!-- Top Row -->
+      <div class="flex flex-col md:flex-row items-center justify-between gap-8 mb-8">
+        <!-- Logo -->
+        <a href="index.html" class="flex items-center gap-3">
+          <div class="w-10 h-10 bg-white rounded-full flex items-center justify-center">
+            <span class="font-display text-dark text-xl font-bold">Z</span>
+          </div>
+          <span class="font-body font-semibold text-white text-lg">Zenny Studios</span>
+        </a>
+
+        <!-- Nav Links -->
+        <div class="flex items-center gap-8">
+          <a href="index.html" class="text-white/50 hover:text-gold transition-all duration-300 text-sm">Home</a>
+          <a href="work.html" class="text-white/50 hover:text-gold transition-all duration-300 text-sm">Work</a>
+          <a href="services.html" class="text-white/50 hover:text-gold transition-all duration-300 text-sm">Services</a>
+          <a href="#about" class="text-white/50 hover:text-gold transition-all duration-300 text-sm">About</a>
+        </div>
+
+        <!-- Instagram -->
+        <a href="https://instagram.com/zennystudios" target="_blank" class="text-white/50 hover:text-gold transition-all duration-300 text-sm flex items-center gap-2">
+          <span>📸</span> @zennystudios
+        </a>
+      </div>
+
+      <!-- Location -->
+      <p class="text-white/40 text-sm text-center mb-8">Bengaluru, Karnataka 🔴</p>
+
+      <!-- Divider -->
+      <div class="w-full h-px bg-white/10 mb-8"></div>
+
+      <!-- Bottom Row -->
+      <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+        <p class="text-white/30 text-sm">© 2025 Zenny Studios. All rights reserved.</p>
+        <p class="text-white/30 text-sm">You made it to the bottom. Bold move.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Initialize AOS
+    AOS.init({
+      duration: 800,
+      once: true,
+      offset: 100
+    });
+
+    // Hero Mouse-Following Gradient
+    const heroGradient = document.getElementById('heroGradient');
+    const heroSection = document.getElementById('hero');
+
+    if (heroGradient && heroSection) {
+      heroSection.addEventListener('mousemove', (e) => {
+        const rect = heroSection.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        heroGradient.style.left = x + 'px';
+        heroGradient.style.top = y + 'px';
+        heroGradient.style.opacity = '1';
+      });
+
+      heroSection.addEventListener('mouseleave', () => {
+        heroGradient.style.opacity = '0';
+      });
+    }
+
+    // Interactive Words - Add slight movement on hover
+    const interactiveWords = document.querySelectorAll('.interactive-word');
+    interactiveWords.forEach(word => {
+      word.addEventListener('mouseenter', () => {
+        word.style.transform = 'translateY(-8px) scale(1.02)';
+        word.style.color = '#F5C518';
+        word.style.transition = 'all 0.3s cubic-bezier(0.16, 1, 0.3, 1)';
+      });
+      word.addEventListener('mouseleave', () => {
+        word.style.transform = 'translateY(0) scale(1)';
+        word.style.color = '';
+      });
+    });
+
+    // Custom Cursor
+    const cursorDot = document.querySelector('.cursor-dot');
+    const cursorRing = document.querySelector('.cursor-ring');
+
+    let mouseX = 0, mouseY = 0;
+    let ringX = 0, ringY = 0;
+
+    document.addEventListener('mousemove', (e) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+      cursorDot.style.left = mouseX - 4 + 'px';
+      cursorDot.style.top = mouseY - 4 + 'px';
+    });
+
+    function animateRing() {
+      ringX += (mouseX - ringX) * 0.15;
+      ringY += (mouseY - ringY) * 0.15;
+      cursorRing.style.left = ringX - 20 + 'px';
+      cursorRing.style.top = ringY - 20 + 'px';
+      requestAnimationFrame(animateRing);
+    }
+    animateRing();
+
+    // Cursor hover effect on interactive elements
+    const interactiveElements = document.querySelectorAll('a, button, .tilt-card, .group');
+    interactiveElements.forEach(el => {
+      el.addEventListener('mouseenter', () => cursorRing.classList.add('hover'));
+      el.addEventListener('mouseleave', () => cursorRing.classList.remove('hover'));
+    });
+
+    // Scroll Progress Bar
+    const scrollProgress = document.getElementById('scrollProgress');
+    window.addEventListener('scroll', () => {
+      const scrollTop = window.scrollY;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const scrollPercent = (scrollTop / docHeight) * 100;
+      scrollProgress.style.width = scrollPercent + '%';
+    });
+
+    // Navbar scroll effect
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 50) {
+        navbar.classList.add('backdrop-blur-md', 'bg-dark/90');
+      } else {
+        navbar.classList.remove('backdrop-blur-md', 'bg-dark/90');
+      }
+    });
+
+    // Mobile menu toggle
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const mobileLinks = document.querySelectorAll('#mobile-menu a');
+
+    hamburger.addEventListener('click', () => {
+      mobileMenu.classList.toggle('opacity-0');
+      mobileMenu.classList.toggle('pointer-events-none');
+      hamburger.classList.toggle('active');
+    });
+
+    mobileLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.add('opacity-0', 'pointer-events-none');
+        hamburger.classList.remove('active');
+      });
+    });
+
+    // Magnetic Button Effect
+    const magneticBtns = document.querySelectorAll('.magnetic-btn');
+    magneticBtns.forEach(btn => {
+      btn.addEventListener('mousemove', (e) => {
+        const rect = btn.getBoundingClientRect();
+        const x = e.clientX - rect.left - rect.width / 2;
+        const y = e.clientY - rect.top - rect.height / 2;
+        btn.style.transform = `translate(${x * 0.3}px, ${y * 0.3}px)`;
+      });
+      btn.addEventListener('mouseleave', () => {
+        btn.style.transform = 'translate(0, 0)';
+      });
+    });
+
+    // Tilt Card Effect
+    const tiltCards = document.querySelectorAll('.tilt-card');
+    tiltCards.forEach(card => {
+      card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+        const rotateX = (y - centerY) / 20;
+        const rotateY = (centerX - x) / 20;
+        card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-8px)`;
+      });
+      card.addEventListener('mouseleave', () => {
+        card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateY(0)';
+      });
+    });
+
+    // Parallax Effect on Scroll
+    const parallaxLayers = document.querySelectorAll('.parallax-layer');
+    window.addEventListener('scroll', () => {
+      parallaxLayers.forEach(layer => {
+        const speed = layer.getAttribute('data-speed') || 0.1;
+        const y = window.scrollY * speed;
+        layer.style.transform = `translateY(${y}px)`;
+      });
+    });
+
+    // Stats count-up animation
+    const statsSection = document.getElementById('stats');
+    const statNumbers = document.querySelectorAll('.stat-number');
+    let hasAnimated = false;
+
+    const animateStats = () => {
+      statNumbers.forEach(stat => {
+        const target = parseInt(stat.getAttribute('data-target'));
+        const duration = 2000;
+        const increment = target / (duration / 16);
+        let current = 0;
+
+        const updateCount = () => {
+          current += increment;
+          if (current < target) {
+            stat.textContent = Math.floor(current).toLocaleString();
+            requestAnimationFrame(updateCount);
+          } else {
+            stat.textContent = target.toLocaleString();
+          }
+        };
+
+        updateCount();
+      });
+    };
+
+    const statsObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting && !hasAnimated) {
+          hasAnimated = true;
+          animateStats();
+        }
+      });
+    }, { threshold: 0.5 });
+
+    statsObserver.observe(statsSection);
+
+    // Smooth reveal on scroll for text
+    const revealElements = document.querySelectorAll('[data-aos]');
+    revealElements.forEach(el => {
+      el.style.willChange = 'transform, opacity';
+    });
+  </script>
+</body>
+</html>

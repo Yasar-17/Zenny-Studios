@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Contact Zenny Studios — let's create something unforgettable together. Get in touch for social media, content creation, and branding services.">
+  <title>Contact | Zenny Studios</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎬</text></svg>">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- AOS -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            gold: '#F5C518',
+            dark: '#0a0a0a',
+            card: '#111111',
+          },
+          fontFamily: {
+            display: ['Bebas Neue', 'cursive'],
+            body: ['Inter', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    .cursor-dot {
+      width: 8px;
+      height: 8px;
+      background: #F5C518;
+      border-radius: 50%;
+      position: fixed;
+      pointer-events: none;
+      z-index: 9999;
+    }
+    .cursor-ring {
+      width: 40px;
+      height: 40px;
+      border: 1px solid rgba(245, 197, 24, 0.5);
+      border-radius: 50%;
+      position: fixed;
+      pointer-events: none;
+      z-index: 9998;
+      transition: all 0.15s ease-out;
+    }
+    .cursor-ring.hover {
+      transform: scale(1.5);
+      border-color: #F5C518;
+      background: rgba(245, 197, 24, 0.1);
+    }
+
+    .text-gradient {
+      background: linear-gradient(135deg, #F5C518 0%, #fff 50%, #F5C518 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      background-size: 200% auto;
+      animation: textShine 3s ease-in-out infinite;
+    }
+    @keyframes textShine {
+      0%, 100% { background-position: 0% center; }
+      50% { background-position: 200% center; }
+    }
+
+    .scroll-progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 3px;
+      background: linear-gradient(90deg, #F5C518, #fff);
+      z-index: 9999;
+    }
+
+    .animated-underline {
+      position: relative;
+    }
+    .animated-underline::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: #F5C518;
+      transition: width 0.3s ease;
+    }
+    .animated-underline:hover::after {
+      width: 100%;
+    }
+
+    .magnetic-btn {
+      transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    .pulse-glow {
+      animation: pulseGlow 2s ease-in-out infinite;
+    }
+    @keyframes pulseGlow {
+      0%, 100% { box-shadow: 0 0 20px rgba(245, 197, 24, 0.3); }
+      50% { box-shadow: 0 0 40px rgba(245, 197, 24, 0.6); }
+    }
+
+    /* Form Input Animations */
+    .form-input {
+      transition: all 0.3s ease;
+    }
+    .form-input:focus {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    }
+
+    .info-card {
+      transition: all 0.3s ease;
+    }
+    .info-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(245, 197, 24, 0.3);
+    }
+
+    .faq-item {
+      transition: all 0.3s ease;
+    }
+    .faq-item:hover {
+      transform: translateX(8px);
+      border-left-color: #F5C518;
+    }
+
+    @media (hover: none) {
+      .cursor-dot, .cursor-ring { display: none; }
+    }
+  </style>
+</head>
+<body class="bg-dark font-body text-white antialiased">
+
+  <!-- Custom Cursor -->
+  <div class="cursor-dot hidden md:block"></div>
+  <div class="cursor-ring hidden md:block"></div>
+
+  <!-- Scroll Progress -->
+  <div class="scroll-progress" id="scrollProgress"></div>
+
+  <!-- Navbar -->
+  <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 border-b border-white/10 transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-6 py-4">
+      <div class="flex items-center justify-between">
+        <a href="index.html" class="flex items-center gap-3 group">
+          <!-- Image logo - uncomment and add your logo file -->
+          <!-- <img src="assets/logo.png" alt="Zenny Studios" class="h-10 w-auto group-hover:scale-110 transition-transform duration-300"> -->
+          <!-- Fallback text logo -->
+          <div class="w-10 h-10 bg-white rounded-full flex items-center justify-center pulse-glow group-hover:scale-110 transition-transform duration-300">
+            <span class="font-display text-dark text-xl font-bold">Z</span>
+          </div>
+          <span class="font-body font-semibold text-white text-lg hidden sm:block group-hover:text-gold transition-colors duration-300">Zenny Studios</span>
+        </a>
+
+        <div class="hidden md:flex items-center gap-8">
+          <a href="index.html" class="text-white/70 hover:text-gold transition-all duration-300 animated-underline">Home</a>
+          <a href="work.html" class="text-white/70 hover:text-gold transition-all duration-300 animated-underline">Work</a>
+          <a href="services.html" class="text-white/70 hover:text-gold transition-all duration-300 animated-underline">Services</a>
+          <a href="index.html#about" class="text-white/70 hover:text-gold transition-all duration-300 animated-underline">About</a>
+        </div>
+
+        <div class="hidden md:block">
+          <span class="bg-gold text-dark px-6 py-2 inline-block">Let's Talk</span>
+        </div>
+
+        <button id="hamburger" class="md:hidden flex flex-col gap-1.5 p-2">
+          <span class="w-6 h-0.5 bg-white transition-all duration-300"></span>
+          <span class="w-6 h-0.5 bg-white transition-all duration-300"></span>
+          <span class="w-6 h-0.5 bg-white transition-all duration-300"></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div id="mobile-menu" class="fixed inset-0 bg-dark z-40 flex flex-col items-center justify-center gap-8 opacity-0 pointer-events-none transition-all duration-300">
+    <a href="index.html" class="text-4xl font-display text-white hover:text-gold transition-all duration-300">Home</a>
+    <a href="work.html" class="text-4xl font-display text-white hover:text-gold transition-all duration-300">Work</a>
+    <a href="services.html" class="text-4xl font-display text-white hover:text-gold transition-all duration-300">Services</a>
+    <a href="index.html#about" class="text-4xl font-display text-white hover:text-gold transition-all duration-300">About</a>
+    <span class="mt-8 bg-gold text-dark px-8 py-3 text-xl">Let's Talk</span>
+  </div>
+
+  <main>
+    <!-- Hero Section -->
+    <section class="pt-36 pb-16 md:pt-48 md:pb-24 bg-dark relative overflow-hidden">
+      <div class="absolute top-1/2 right-0 text-gold/5 font-display text-[400px] -translate-y-1/2 select-none leading-none">C</div>
+      <div class="max-w-7xl mx-auto px-6 relative z-10">
+        <p class="text-gold text-sm uppercase tracking-[0.3em] mb-6" data-aos="fade-up">Get In Touch</p>
+        <h1 class="font-display text-6xl sm:text-7xl md:text-8xl lg:text-9xl text-white leading-[0.85] mb-8" data-aos="fade-up" data-aos-delay="100">
+          <span class="block">Let's Make</span>
+          <span class="block">Something</span>
+          <span class="block text-gradient">Unforgettable.</span>
+        </h1>
+        <p class="text-white/60 text-xl md:text-2xl max-w-2xl tracking-wide" data-aos="fade-up" data-aos-delay="200">
+          Tell us about your brand. We'll take it three steps ahead.
+        </p>
+      </div>
+    </section>
+
+    <!-- Contact Form Section -->
+    <section class="bg-dark py-16 md:py-24">
+      <div class="max-w-7xl mx-auto px-6">
+        <div class="grid lg:grid-cols-3 gap-16">
+
+          <!-- Form -->
+          <div class="lg:col-span-2" data-aos="fade-right">
+            <form action="https://formsubmit.co/mohammedyasar990@gmail.com" method="POST" class="space-y-8">
+
+              <!-- FormSubmit Hidden Fields -->
+              <input type="hidden" name="_subject" value="New Project Inquiry — Zenny Studios">
+              <input type="hidden" name="_captcha" value="false">
+              <input type="hidden" name="_next" value="https://zennystudios.com/thank-you.html">
+              <input type="hidden" name="_template" value="table">
+              <input type="text" name="_honey" style="display:none">
+
+              <!-- Name -->
+              <div class="group">
+                <label for="name" class="block text-white/70 text-sm mb-3 group-focus-within:text-gold transition-colors duration-300">Your Name *</label>
+                <input
+                  type="text"
+                  name="name"
+                  id="name"
+                  required
+                  placeholder="What should we call you?"
+                  class="form-input w-full bg-card border-2 border-white/10 text-white placeholder-white/30 p-5 text-lg focus:outline-none focus:border-gold transition-all duration-300 rounded-none"
+                >
+              </div>
+
+              <!-- Email -->
+              <div class="group">
+                <label for="email" class="block text-white/70 text-sm mb-3 group-focus-within:text-gold transition-colors duration-300">Email Address *</label>
+                <input
+                  type="email"
+                  name="email"
+                  id="email"
+                  required
+                  placeholder="Where can we reach you?"
+                  class="form-input w-full bg-card border-2 border-white/10 text-white placeholder-white/30 p-5 text-lg focus:outline-none focus:border-gold transition-all duration-300 rounded-none"
+                >
+              </div>
+
+              <!-- Company -->
+              <div class="group">
+                <label for="company" class="block text-white/70 text-sm mb-3 group-focus-within:text-gold transition-colors duration-300">Company Name</label>
+                <input
+                  type="text"
+                  name="company"
+                  id="company"
+                  placeholder="Your brand or business name"
+                  class="form-input w-full bg-card border-2 border-white/10 text-white placeholder-white/30 p-5 text-lg focus:outline-none focus:border-gold transition-all duration-300 rounded-none"
+                >
+              </div>
+
+              <!-- Service Needed -->
+              <div class="group">
+                <label for="service" class="block text-white/70 text-sm mb-3 group-focus-within:text-gold transition-colors duration-300">Service Needed</label>
+                <select
+                  name="service"
+                  id="service"
+                  class="form-input w-full bg-card border-2 border-white/10 text-white p-5 text-lg focus:outline-none focus:border-gold transition-all duration-300 rounded-none appearance-none cursor-pointer"
+                  style="background-image: url('data:image/svg+xml;utf8,<svg fill=\"%23F5C518\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M7 10l5 5 5-5z\"/></svg>'); background-repeat: no-repeat; background-position: right 1.5rem center; background-size: 1.5rem;"
+                >
+                  <option value="" class="bg-card">Select a service</option>
+                  <option value="Social Media Management" class="bg-card">Social Media Management</option>
+                  <option value="Content Creation" class="bg-card">Content Creation</option>
+                  <option value="Branding & Identity" class="bg-card">Branding & Identity</option>
+                  <option value="Digital Presence" class="bg-card">Digital Presence</option>
+                  <option value="Full Package" class="bg-card">Full Package (All Services)</option>
+                </select>
+              </div>
+
+              <!-- Message -->
+              <div class="group">
+                <label for="message" class="block text-white/70 text-sm mb-3 group-focus-within:text-gold transition-colors duration-300">Your Message *</label>
+                <textarea
+                  name="message"
+                  id="message"
+                  rows="6"
+                  required
+                  placeholder="Tell us about your project, goals, and timeline..."
+                  class="form-input w-full bg-card border-2 border-white/10 text-white placeholder-white/30 p-5 text-lg focus:outline-none focus:border-gold transition-all duration-300 rounded-none resize-none"
+                ></textarea>
+              </div>
+
+              <!-- Submit Button -->
+              <button
+                type="submit"
+                class="magnetic-btn w-full bg-gold text-dark font-display text-2xl py-5 hover:bg-white transition-all duration-300"
+              >
+                Send It →
+              </button>
+
+              <p class="text-white/30 text-sm text-center">
+                We typically respond within 24 hours. No spam, ever.
+              </p>
+            </form>
+          </div>
+
+          <!-- Contact Info Cards -->
+          <div class="space-y-6" data-aos="fade-left">
+            <!-- Location Card -->
+            <div class="info-card bg-card border-2 border-white/10 p-8">
+              <div class="flex items-start gap-5">
+                <span class="text-3xl">📍</span>
+                <div>
+                  <h4 class="text-white font-semibold text-lg mb-2">Location</h4>
+                  <p class="text-white/60">Bengaluru, Karnataka</p>
+                  <p class="text-white/40 text-sm mt-1">India's Silicon Valley</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Instagram Card -->
+            <div class="info-card bg-card border-2 border-white/10 p-8">
+              <div class="flex items-start gap-5">
+                <span class="text-3xl">📸</span>
+                <div>
+                  <h4 class="text-white font-semibold text-lg mb-2">Instagram</h4>
+                  <a href="https://instagram.com/zennystudios" target="_blank" class="text-gold hover:text-white transition-all duration-300 text-lg">@zennystudios</a>
+                  <p class="text-white/40 text-sm mt-1">Follow our work</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Email Card -->
+            <div class="info-card bg-card border-2 border-white/10 p-8">
+              <div class="flex items-start gap-5">
+                <span class="text-3xl">✉️</span>
+                <div>
+                  <h4 class="text-white font-semibold text-lg mb-2">Email</h4>
+                  <a href="mailto:hello@zennystudios.com" class="text-gold hover:text-white transition-all duration-300 text-lg">hello@zennystudios.com</a>
+                  <p class="text-white/40 text-sm mt-1">For general inquiries</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Response Time Card -->
+            <div class="info-card bg-card border-2 border-white/10 border-l-4 border-l-gold p-8">
+              <h4 class="text-gold text-sm uppercase tracking-[0.2em] mb-3">Quick Response</h4>
+              <p class="text-white/60">
+                We review every inquiry personally. Expect a response within 24 hours (usually faster).
+              </p>
+            </div>
+
+            <!-- Working Hours -->
+            <div class="info-card bg-card border-2 border-white/10 p-8">
+              <div class="flex items-start gap-5">
+                <span class="text-3xl">⏰</span>
+                <div>
+                  <h4 class="text-white font-semibold text-lg mb-2">Working Hours</h4>
+                  <p class="text-white/60">Mon - Fri: 10 AM - 7 PM IST</p>
+                  <p class="text-white/40 text-sm mt-1">Weekends for urgent matters</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="bg-[#0d0d0d] py-32 md:py-40">
+      <div class="max-w-4xl mx-auto px-6">
+        <p class="text-gold text-sm uppercase tracking-[0.3em] mb-6 text-center" data-aos="fade-up">FAQ</p>
+        <h2 class="font-display text-5xl sm:text-6xl md:text-7xl text-white mb-20 text-center" data-aos="fade-up" data-aos-delay="100">
+          Questions?<br><span class="text-white/40">We've Got Answers.</span>
+        </h2>
+
+        <div class="space-y-6">
+          <div class="faq-item bg-card border-2 border-white/10 border-l-4 border-l-white/20 p-8 cursor-default" data-aos="fade-up" data-aos-delay="100">
+            <h4 class="text-white font-semibold text-xl mb-3">How long does a typical project take?</h4>
+            <p class="text-white/60 text-lg">
+              It depends on the scope. Social media management is ongoing. Branding projects typically take 2-4 weeks. Content shoots can be turned around in 1-2 weeks. We'll give you a timeline during our first call.
+            </p>
+          </div>
+
+          <div class="faq-item bg-card border-2 border-white/10 border-l-4 border-l-white/20 p-8 cursor-default" data-aos="fade-up" data-aos-delay="200">
+            <h4 class="text-white font-semibold text-xl mb-3">What's your pricing like?</h4>
+            <p class="text-white/60 text-lg">
+              Every brand is different, so we customize our pricing based on your needs. We offer both project-based and retainer models. Fill out the form and we'll send you a proposal.
+            </p>
+          </div>
+
+          <div class="faq-item bg-card border-2 border-white/10 border-l-4 border-l-white/20 p-8 cursor-default" data-aos="fade-up" data-aos-delay="300">
+            <h4 class="text-white font-semibold text-xl mb-3">Do you work with startups?</h4>
+            <p class="text-white/60 text-lg">
+              Absolutely. Some of our best work has been with early-stage brands. We love helping businesses build their identity from scratch. Budget constraints? Let's talk — we might surprise you.
+            </p>
+          </div>
+
+          <div class="faq-item bg-card border-2 border-white/10 border-l-4 border-l-white/20 p-8 cursor-default" data-aos="fade-up" data-aos-delay="400">
+            <h4 class="text-white font-semibold text-xl mb-3">Can we just start with one service?</h4>
+            <p class="text-white/60 text-lg">
+              Of course. Many clients start with social media or content, then expand to branding and digital presence. We're flexible — start where it makes sense for you.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Location Section -->
+    <section class="bg-dark py-20">
+      <div class="max-w-7xl mx-auto px-6">
+        <div class="bg-card border-2 border-white/10 p-12 md:p-20 text-center hover:border-gold/30 transition-all duration-500" data-aos="fade-up">
+          <span class="text-8xl mb-8 block">🔴</span>
+          <h3 class="font-display text-5xl md:text-6xl text-white mb-6">Based in Bengaluru</h3>
+          <p class="text-white/60 text-xl max-w-xl mx-auto">
+            We work with brands across India and beyond. Remote-first, but always available for in-person meetings in the Garden City.
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-[#050505] border-t border-white/10">
+    <div class="max-w-7xl mx-auto px-6 py-12">
+      <div class="flex flex-col md:flex-row items-center justify-between gap-8 mb-8">
+        <a href="index.html" class="flex items-center gap-3 group">
+          <div class="w-10 h-10 bg-white rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+            <span class="font-display text-dark text-xl font-bold">Z</span>
+          </div>
+          <span class="font-body font-semibold text-white text-lg group-hover:text-gold transition-colors duration-300">Zenny Studios</span>
+        </a>
+
+        <div class="flex items-center gap-8">
+          <a href="index.html" class="text-white/50 hover:text-gold transition-all duration-300 text-sm">Home</a>
+          <a href="work.html" class="text-white/50 hover:text-gold transition-all duration-300 text-sm">Work</a>
+          <a href="services.html" class="text-white/50 hover:text-gold transition-all duration-300 text-sm">Services</a>
+          <a href="index.html#about" class="text-white/50 hover:text-gold transition-all duration-300 text-sm">About</a>
+        </div>
+
+        <a href="https://instagram.com/zennystudios" target="_blank" class="text-white/50 hover:text-gold transition-all duration-300 text-sm flex items-center gap-2">
+          <span>📸</span> @zennystudios
+        </a>
+      </div>
+
+      <p class="text-white/40 text-sm text-center mb-8">Bengaluru, Karnataka 🔴</p>
+      <div class="w-full h-px bg-white/10 mb-8"></div>
+
+      <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+        <p class="text-white/30 text-sm">© 2025 Zenny Studios. All rights reserved.</p>
+        <p class="text-white/30 text-sm">You made it to the bottom. Bold move.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Initialize AOS
+    AOS.init({
+      duration: 800,
+      once: true,
+      offset: 100
+    });
+
+    // Custom Cursor
+    const cursorDot = document.querySelector('.cursor-dot');
+    const cursorRing = document.querySelector('.cursor-ring');
+    let mouseX = 0, mouseY = 0, ringX = 0, ringY = 0;
+
+    document.addEventListener('mousemove', (e) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+      cursorDot.style.left = mouseX - 4 + 'px';
+      cursorDot.style.top = mouseY - 4 + 'px';
+    });
+
+    function animateRing() {
+      ringX += (mouseX - ringX) * 0.15;
+      ringY += (mouseY - ringY) * 0.15;
+      cursorRing.style.left = ringX - 20 + 'px';
+      cursorRing.style.top = ringY - 20 + 'px';
+      requestAnimationFrame(animateRing);
+    }
+    animateRing();
+
+    const interactiveElements = document.querySelectorAll('a, button, input, textarea, select, .info-card, .faq-item');
+    interactiveElements.forEach(el => {
+      el.addEventListener('mouseenter', () => cursorRing.classList.add('hover'));
+      el.addEventListener('mouseleave', () => cursorRing.classList.remove('hover'));
+    });
+
+    // Scroll Progress
+    const scrollProgress = document.getElementById('scrollProgress');
+    window.addEventListener('scroll', () => {
+      const scrollTop = window.scrollY;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      scrollProgress.style.width = (scrollTop / docHeight) * 100 + '%';
+    });
+
+    // Navbar scroll effect
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 50) {
+        navbar.classList.add('backdrop-blur-md', 'bg-dark/90');
+      } else {
+        navbar.classList.remove('backdrop-blur-md', 'bg-dark/90');
+      }
+    });
+
+    // Mobile menu
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const mobileLinks = document.querySelectorAll('#mobile-menu a');
+
+    hamburger.addEventListener('click', () => {
+      mobileMenu.classList.toggle('opacity-0');
+      mobileMenu.classList.toggle('pointer-events-none');
+    });
+
+    mobileLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.add('opacity-0', 'pointer-events-none');
+      });
+    });
+
+    // Magnetic buttons
+    const magneticBtns = document.querySelectorAll('.magnetic-btn');
+    magneticBtns.forEach(btn => {
+      btn.addEventListener('mousemove', (e) => {
+        const rect = btn.getBoundingClientRect();
+        const x = e.clientX - rect.left - rect.width / 2;
+        const y = e.clientY - rect.top - rect.height / 2;
+        btn.style.transform = `translate(${x * 0.2}px, ${y * 0.2}px)`;
+      });
+      btn.addEventListener('mouseleave', () => {
+        btn.style.transform = 'translate(0, 0)';
+      });
+    });
+
+    // Form input focus effects
+    const formInputs = document.querySelectorAll('.form-input');
+    formInputs.forEach(input => {
+      input.addEventListener('focus', () => {
+        input.parentElement.classList.add('focused');
+      });
+      input.addEventListener('blur', () => {
+        input.parentElement.classList.remove('focused');
+      });
+    });
+  </script>
+</body>
+</html>

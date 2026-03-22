@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Thank you for contacting Zenny Studios. We'll be in touch soon.">
+  <title>Message Received | Zenny Studios</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎬</text></svg>">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- AOS -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+  <!-- Confetti -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            gold: '#F5C518',
+            dark: '#0a0a0a',
+            card: '#111111',
+          },
+          fontFamily: {
+            display: ['Bebas Neue', 'cursive'],
+            body: ['Inter', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    .cursor-dot {
+      width: 8px;
+      height: 8px;
+      background: #F5C518;
+      border-radius: 50%;
+      position: fixed;
+      pointer-events: none;
+      z-index: 9999;
+    }
+    .cursor-ring {
+      width: 40px;
+      height: 40px;
+      border: 1px solid rgba(245, 197, 24, 0.5);
+      border-radius: 50%;
+      position: fixed;
+      pointer-events: none;
+      z-index: 9998;
+      transition: all 0.15s ease-out;
+    }
+    .cursor-ring.hover {
+      transform: scale(1.5);
+      border-color: #F5C518;
+      background: rgba(245, 197, 24, 0.1);
+    }
+
+    .text-gradient {
+      background: linear-gradient(135deg, #F5C518 0%, #fff 50%, #F5C518 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      background-size: 200% auto;
+      animation: textShine 3s ease-in-out infinite;
+    }
+    @keyframes textShine {
+      0%, 100% { background-position: 0% center; }
+      50% { background-position: 200% center; }
+    }
+
+    .animated-underline {
+      position: relative;
+    }
+    .animated-underline::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: #F5C518;
+      transition: width 0.3s ease;
+    }
+    .animated-underline:hover::after {
+      width: 100%;
+    }
+
+    .magnetic-btn {
+      transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    .pulse-glow {
+      animation: pulseGlow 2s ease-in-out infinite;
+    }
+    @keyframes pulseGlow {
+      0%, 100% { box-shadow: 0 0 20px rgba(245, 197, 24, 0.3); }
+      50% { box-shadow: 0 0 40px rgba(245, 197, 24, 0.6); }
+    }
+
+    .success-check {
+      animation: successPop 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+    }
+    @keyframes successPop {
+      0% { transform: scale(0); opacity: 0; }
+      50% { transform: scale(1.2); }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    .float {
+      animation: float 4s ease-in-out infinite;
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-15px); }
+    }
+
+    @media (hover: none) {
+      .cursor-dot, .cursor-ring { display: none; }
+    }
+  </style>
+</head>
+<body class="bg-dark font-body text-white antialiased">
+
+  <!-- Custom Cursor -->
+  <div class="cursor-dot hidden md:block"></div>
+  <div class="cursor-ring hidden md:block"></div>
+
+  <!-- Navbar -->
+  <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 border-b border-white/10 backdrop-blur-md bg-dark/90">
+    <div class="max-w-7xl mx-auto px-6 py-4">
+      <div class="flex items-center justify-between">
+        <a href="index.html" class="flex items-center gap-3 group">
+          <!-- Image logo - uncomment and add your logo file -->
+          <!-- <img src="assets/logo.png" alt="Zenny Studios" class="h-10 w-auto group-hover:scale-110 transition-transform duration-300"> -->
+          <!-- Fallback text logo -->
+          <div class="w-10 h-10 bg-white rounded-full flex items-center justify-center pulse-glow group-hover:scale-110 transition-transform duration-300">
+            <span class="font-display text-dark text-xl font-bold">Z</span>
+          </div>
+          <span class="font-body font-semibold text-white text-lg hidden sm:block group-hover:text-gold transition-colors duration-300">Zenny Studios</span>
+        </a>
+
+        <div class="hidden md:flex items-center gap-8">
+          <a href="index.html" class="text-white/70 hover:text-gold transition-all duration-300 animated-underline">Home</a>
+          <a href="work.html" class="text-white/70 hover:text-gold transition-all duration-300 animated-underline">Work</a>
+          <a href="services.html" class="text-white/70 hover:text-gold transition-all duration-300 animated-underline">Services</a>
+          <a href="index.html#about" class="text-white/70 hover:text-gold transition-all duration-300 animated-underline">About</a>
+        </div>
+
+        <div class="hidden md:block">
+          <a href="contact.html" class="magnetic-btn border border-gold text-gold px-6 py-2 hover:bg-gold hover:text-dark transition-all duration-300 inline-block">Let's Talk</a>
+        </div>
+
+        <button id="hamburger" class="md:hidden flex flex-col gap-1.5 p-2">
+          <span class="w-6 h-0.5 bg-white transition-all duration-300"></span>
+          <span class="w-6 h-0.5 bg-white transition-all duration-300"></span>
+          <span class="w-6 h-0.5 bg-white transition-all duration-300"></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div id="mobile-menu" class="fixed inset-0 bg-dark z-40 flex flex-col items-center justify-center gap-8 opacity-0 pointer-events-none transition-all duration-300">
+    <a href="index.html" class="text-4xl font-display text-white hover:text-gold transition-all duration-300">Home</a>
+    <a href="work.html" class="text-4xl font-display text-white hover:text-gold transition-all duration-300">Work</a>
+    <a href="services.html" class="text-4xl font-display text-white hover:text-gold transition-all duration-300">Services</a>
+    <a href="index.html#about" class="text-4xl font-display text-white hover:text-gold transition-all duration-300">About</a>
+    <a href="contact.html" class="mt-8 border-2 border-gold text-gold px-8 py-3 text-xl hover:bg-gold hover:text-dark transition-all duration-300">Let's Talk</a>
+  </div>
+
+  <main class="min-h-screen flex items-center justify-center relative overflow-hidden">
+    <!-- Background Elements -->
+    <div class="absolute top-1/4 left-10 w-32 h-32 border border-gold/20 float"></div>
+    <div class="absolute bottom-1/4 right-10 w-20 h-20 bg-gold/5 float" style="animation-delay: -2s;"></div>
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gold/5 rounded-full blur-3xl"></div>
+
+    <div class="max-w-3xl mx-auto px-6 py-32 text-center relative z-10">
+      <!-- Success Checkmark -->
+      <div class="mb-12 success-check" data-aos="zoom-in">
+        <div class="w-32 h-32 bg-gold/10 border-4 border-gold rounded-full flex items-center justify-center mx-auto pulse-glow">
+          <span class="font-display text-gold text-8xl">✓</span>
+        </div>
+      </div>
+
+      <!-- Headline -->
+      <h1 class="font-display text-6xl sm:text-7xl md:text-8xl lg:text-9xl text-white mb-8" data-aos="fade-up" data-aos-delay="200">
+        <span class="text-gradient">Message</span><br>Received.
+      </h1>
+
+      <!-- Subtext -->
+      <p class="text-white/60 text-xl md:text-2xl mb-4" data-aos="fade-up" data-aos-delay="300">
+        We'll be in touch. Don't blink.
+      </p>
+
+      <p class="text-white/40 text-lg mb-14" data-aos="fade-up" data-aos-delay="400">
+        (Okay, you can blink. We typically respond within 24 hours.)
+      </p>
+
+      <!-- CTA Buttons -->
+      <div class="flex flex-col sm:flex-row gap-5 justify-center" data-aos="fade-up" data-aos-delay="500">
+        <a href="index.html" class="magnetic-btn bg-gold text-dark px-10 py-5 font-semibold text-lg hover:bg-white transition-all duration-300 hover:scale-105 transform">
+          ← Back to Home
+        </a>
+        <a href="work.html" class="magnetic-btn border-2 border-white/20 text-white/70 px-10 py-5 font-semibold text-lg hover:border-gold hover:text-gold transition-all duration-300 hover:scale-105 transform">
+          Explore Our Work
+        </a>
+      </div>
+
+      <!-- Social -->
+      <div class="mt-20 pt-10 border-t border-white/10" data-aos="fade-up" data-aos-delay="600">
+        <p class="text-white/40 text-sm mb-5 tracking-widest uppercase">While you wait, follow us</p>
+        <a href="https://instagram.com/zennystudios" target="_blank" class="inline-flex items-center gap-3 text-gold hover:text-white transition-all duration-300 text-xl">
+          <span class="text-2xl">📸</span> @zennystudios
+        </a>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-[#050505] border-t border-white/10">
+    <div class="max-w-7xl mx-auto px-6 py-12">
+      <div class="flex flex-col md:flex-row items-center justify-between gap-8 mb-8">
+        <a href="index.html" class="flex items-center gap-3 group">
+          <div class="w-10 h-10 bg-white rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+            <span class="font-display text-dark text-xl font-bold">Z</span>
+          </div>
+          <span class="font-body font-semibold text-white text-lg group-hover:text-gold transition-colors duration-300">Zenny Studios</span>
+        </a>
+
+        <div class="flex items-center gap-8">
+          <a href="index.html" class="text-white/50 hover:text-gold transition-all duration-300 text-sm">Home</a>
+          <a href="work.html" class="text-white/50 hover:text-gold transition-all duration-300 text-sm">Work</a>
+          <a href="services.html" class="text-white/50 hover:text-gold transition-all duration-300 text-sm">Services</a>
+          <a href="index.html#about" class="text-white/50 hover:text-gold transition-all duration-300 text-sm">About</a>
+        </div>
+
+        <a href="https://instagram.com/zennystudios" target="_blank" class="text-white/50 hover:text-gold transition-all duration-300 text-sm flex items-center gap-2">
+          <span>📸</span> @zennystudios
+        </a>
+      </div>
+
+      <p class="text-white/40 text-sm text-center mb-8">Bengaluru, Karnataka 🔴</p>
+      <div class="w-full h-px bg-white/10 mb-8"></div>
+
+      <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+        <p class="text-white/30 text-sm">© 2025 Zenny Studios. All rights reserved.</p>
+        <p class="text-white/30 text-sm">You made it to the bottom. Bold move.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Initialize AOS
+    AOS.init({
+      duration: 800,
+      once: true,
+      offset: 100
+    });
+
+    // Fire confetti on load
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        confetti({
+          particleCount: 100,
+          spread: 70,
+          origin: { y: 0.6 },
+          colors: ['#F5C518', '#FFFFFF', '#FFD700']
+        });
+      }, 500);
+    });
+
+    // Custom Cursor
+    const cursorDot = document.querySelector('.cursor-dot');
+    const cursorRing = document.querySelector('.cursor-ring');
+    let mouseX = 0, mouseY = 0, ringX = 0, ringY = 0;
+
+    document.addEventListener('mousemove', (e) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+      cursorDot.style.left = mouseX - 4 + 'px';
+      cursorDot.style.top = mouseY - 4 + 'px';
+    });
+
+    function animateRing() {
+      ringX += (mouseX - ringX) * 0.15;
+      ringY += (mouseY - ringY) * 0.15;
+      cursorRing.style.left = ringX - 20 + 'px';
+      cursorRing.style.top = ringY - 20 + 'px';
+      requestAnimationFrame(animateRing);
+    }
+    animateRing();
+
+    const interactiveElements = document.querySelectorAll('a, button');
+    interactiveElements.forEach(el => {
+      el.addEventListener('mouseenter', () => cursorRing.classList.add('hover'));
+      el.addEventListener('mouseleave', () => cursorRing.classList.remove('hover'));
+    });
+
+    // Mobile menu
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const mobileLinks = document.querySelectorAll('#mobile-menu a');
+
+    hamburger.addEventListener('click', () => {
+      mobileMenu.classList.toggle('opacity-0');
+      mobileMenu.classList.toggle('pointer-events-none');
+    });
+
+    mobileLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.add('opacity-0', 'pointer-events-none');
+      });
+    });
+
+    // Magnetic buttons
+    const magneticBtns = document.querySelectorAll('.magnetic-btn');
+    magneticBtns.forEach(btn => {
+      btn.addEventListener('mousemove', (e) => {
+        const rect = btn.getBoundingClientRect();
+        const x = e.clientX - rect.left - rect.width / 2;
+        const y = e.clientY - rect.top - rect.height / 2;
+        btn.style.transform = `translate(${x * 0.3}px, ${y * 0.3}px) scale(1.05)`;
+      });
+      btn.addEventListener('mouseleave', () => {
+        btn.style.transform = 'translate(0, 0) scale(1)';
+      });
+    });
+  </script>
+</body>
+</html>
