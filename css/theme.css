@@ -113,9 +113,25 @@
   border-color: var(--color-border-strong) !important;
 }
 
+/* Restore golden top accent line on cards (overrides .border-white/10 !important) */
+[data-theme="light"] .border-t-gold {
+  border-top-color: #F5C518 !important;
+}
+
 /* Navbar scrolled state */
 [data-theme="light"] #navbar.bg-dark\/90 {
   background-color: var(--color-nav-scrolled) !important;
+}
+
+/* "What We Offer" — match dark-mode hover behaviour in light mode */
+/* Headings turn gold on hover (beats .text-white !important override) */
+[data-theme="light"] .group:hover .group-hover\:text-gold {
+  color: #F5C518 !important;
+}
+
+/* Golden side glow on hover — stronger so it reads against white cards */
+[data-theme="light"] #services .tilt-card:hover {
+  box-shadow: 0 0 60px rgba(245, 197, 24, 0.35), 0 0 25px rgba(245, 197, 24, 0.25) !important;
 }
 
 /* Logo circle */
