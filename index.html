@@ -19,6 +19,10 @@
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 
+  <!-- Theme -->
+  <link rel="stylesheet" href="css/theme.css">
+  <script src="js/theme.js"></script>
+
   <script>
     tailwind.config = {
       theme: {
@@ -433,13 +437,7 @@
       <div class="flex items-center justify-between">
         <!-- Logo -->
         <a href="index.html" class="flex items-center gap-3 group">
-          <!-- Image logo - uncomment and add your logo file -->
-          <!-- <img src="assets/logo.png" alt="Zenny Studios" class="h-10 w-auto group-hover:scale-110 transition-transform duration-300"> -->
-          <!-- Fallback text logo -->
-          <div class="w-10 h-10 bg-white rounded-full flex items-center justify-center pulse-glow group-hover:scale-110 transition-transform duration-300">
-            <span class="font-display text-dark text-xl font-bold">Z</span>
-          </div>
-          <span class="font-body font-semibold text-white text-lg hidden sm:block group-hover:text-gold transition-colors duration-300">Zenny Studios</span>
+          <img src="assets/images/Zenny_Studios_Logo/ZennyStudios_logo.png" alt="Zenny Studios" class="h-10 w-auto group-hover:scale-110 transition-transform duration-300">
         </a>
 
         <!-- Desktop Nav -->
@@ -450,17 +448,27 @@
           <a href="#about" class="text-white/70 hover:text-gold transition-all duration-300 animated-underline">About</a>
         </div>
 
-        <!-- CTA Button -->
-        <div class="hidden md:block">
+        <!-- Theme + CTA -->
+        <div class="hidden md:flex items-center gap-4">
+          <button type="button" data-theme-toggle class="theme-toggle" aria-label="Toggle light/dark mode">
+            <svg class="icon-sun" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
+            <svg class="icon-moon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg>
+          </button>
           <a href="contact.html" class="magnetic-btn border border-gold text-gold px-6 py-2 hover:bg-gold hover:text-dark transition-all duration-300 inline-block">Let's Talk</a>
         </div>
 
-        <!-- Mobile Hamburger -->
-        <button id="hamburger" class="md:hidden flex flex-col gap-1.5 p-2">
+        <!-- Mobile Theme + Hamburger -->
+        <div class="flex md:hidden items-center gap-3">
+          <button type="button" data-theme-toggle class="theme-toggle" aria-label="Toggle light/dark mode">
+            <svg class="icon-sun" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
+            <svg class="icon-moon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg>
+          </button>
+        <button id="hamburger" class="flex flex-col gap-1.5 p-2" aria-label="Menu">
           <span class="w-6 h-0.5 bg-white transition-all duration-300"></span>
           <span class="w-6 h-0.5 bg-white transition-all duration-300"></span>
           <span class="w-6 h-0.5 bg-white transition-all duration-300"></span>
         </button>
+        </div>
       </div>
     </div>
   </nav>
@@ -625,10 +633,10 @@
     </section>
 
     <!-- Services Section -->
-    <section id="services" class="bg-dark py-32 md:py-40">
+    <section id="services" class="bg-dark section-tight">
       <div class="max-w-7xl mx-auto px-6">
         <p class="text-gold text-sm uppercase tracking-[0.3em] mb-4" data-aos="fade-up">What We Offer</p>
-        <h2 class="font-display text-5xl sm:text-6xl md:text-8xl text-white mb-20" data-aos="fade-up" data-aos-delay="100">
+        <h2 class="font-display text-5xl sm:text-6xl md:text-8xl text-white mb-12" data-aos="fade-up" data-aos-delay="100">
           Craft. Strategy. Dominance.
         </h2>
 
@@ -638,8 +646,8 @@
             <div class="w-16 h-16 bg-gold/10 rounded-full flex items-center justify-center mb-8 group-hover:scale-110 group-hover:bg-gold/20 transition-all duration-300">
               <span class="text-gold text-2xl font-display">01</span>
             </div>
-            <h3 class="font-display text-3xl md:text-4xl text-white mb-4 group-hover:text-gold transition-colors duration-300">Social Media Command</h3>
-            <p class="text-white/60 text-lg">Your feeds become battlegrounds. We architect campaigns that capture attention and convert scrollers into loyalists.</p>
+            <h3 class="font-display text-3xl md:text-4xl text-white mb-4 group-hover:text-gold transition-colors duration-300">Media Production & Content Creation</h3>
+            <p class="text-white/60 text-lg">Reels, shoots, and motion content engineered to stop the scroll. From concept to final cut — every frame built to make your audience feel something real.</p>
           </a>
 
           <!-- Card 2 -->
@@ -647,8 +655,8 @@
             <div class="w-16 h-16 bg-gold/10 rounded-full flex items-center justify-center mb-8 group-hover:scale-110 group-hover:bg-gold/20 transition-all duration-300">
               <span class="text-gold text-2xl font-display">02</span>
             </div>
-            <h3 class="font-display text-3xl md:text-4xl text-white mb-4 group-hover:text-gold transition-colors duration-300">Visual Storytelling</h3>
-            <p class="text-white/60 text-lg">Reels that stop thumbs. Shoots that spark desire. Every frame engineered to make your audience feel something real.</p>
+            <h3 class="font-display text-3xl md:text-4xl text-white mb-4 group-hover:text-gold transition-colors duration-300">Data Analytics & Digital Strategy</h3>
+            <p class="text-white/60 text-lg">Insights that drive decisions. We decode audience behaviour, optimise campaigns, and build digital roadmaps that turn data into dominance.</p>
           </a>
 
           <!-- Card 3 -->
@@ -656,8 +664,8 @@
             <div class="w-16 h-16 bg-gold/10 rounded-full flex items-center justify-center mb-8 group-hover:scale-110 group-hover:bg-gold/20 transition-all duration-300">
               <span class="text-gold text-2xl font-display">03</span>
             </div>
-            <h3 class="font-display text-3xl md:text-4xl text-white mb-4 group-hover:text-gold transition-colors duration-300">Brand Architecture</h3>
-            <p class="text-white/60 text-lg">Identity systems that command recognition. We forge brands with conviction, purpose, and unmistakable presence.</p>
+            <h3 class="font-display text-3xl md:text-4xl text-white mb-4 group-hover:text-gold transition-colors duration-300">Branding & Marketing Communication</h3>
+            <p class="text-white/60 text-lg">Identity systems and messaging that command recognition. We forge brands with conviction, purpose, and unmistakable market presence.</p>
           </a>
 
           <!-- Card 4 -->
@@ -665,27 +673,27 @@
             <div class="w-16 h-16 bg-gold/10 rounded-full flex items-center justify-center mb-8 group-hover:scale-110 group-hover:bg-gold/20 transition-all duration-300">
               <span class="text-gold text-2xl font-display">04</span>
             </div>
-            <h3 class="font-display text-3xl md:text-4xl text-white mb-4 group-hover:text-gold transition-colors duration-300">Digital Omnipresence</h3>
-            <p class="text-white/60 text-lg">Web, search, paid media. We position you where your audience already lives, making discovery inevitable.</p>
+            <h3 class="font-display text-3xl md:text-4xl text-white mb-4 group-hover:text-gold transition-colors duration-300">Web Development</h3>
+            <p class="text-white/60 text-lg">High-performance websites and digital experiences. We build platforms that look stunning, load fast, and convert visitors into customers.</p>
           </a>
         </div>
       </div>
     </section>
 
     <!-- Portfolio Section -->
-    <section id="work" class="bg-[#0d0d0d] py-32 md:py-40">
+    <section id="work" class="bg-[#0d0d0d] section-tight">
       <div class="max-w-7xl mx-auto px-6">
         <p class="text-gold text-sm uppercase tracking-[0.3em] mb-4" data-aos="fade-up">Selected Work</p>
         <h2 class="font-display text-5xl sm:text-6xl md:text-8xl text-white mb-6" data-aos="fade-up" data-aos-delay="100">
           Brands That Bet On Us.
         </h2>
-        <h3 class="font-display text-4xl sm:text-5xl md:text-6xl text-white/40 mb-20" data-aos="fade-up" data-aos-delay="150">
+        <h3 class="font-display text-4xl sm:text-5xl md:text-6xl text-white/40 mb-12" data-aos="fade-up" data-aos-delay="150">
           Victories That Speak Louder.
         </h3>
 
         <div class="grid md:grid-cols-2 gap-6">
           <!-- Card 1 - Tata Coffee -->
-          <a href="work.html" class="group relative h-80 md:h-96 overflow-hidden rounded-none cursor-pointer block" style="background: linear-gradient(135deg, #8B1A1A 0%, #C0392B 100%);" data-aos="fade-up" data-aos-delay="100">
+          <a href="projects/tata-coffee.html" class="group relative h-80 md:h-96 overflow-hidden rounded-none cursor-pointer block" style="background: linear-gradient(135deg, #8B1A1A 0%, #C0392B 100%);" data-aos="fade-up" data-aos-delay="100">
             <div class="absolute inset-0 flex flex-col justify-end p-8 z-10">
               <span class="bg-gold text-dark text-xs px-4 py-1.5 w-fit mb-3 font-semibold tracking-wider uppercase">Social Media</span>
               <h3 class="font-display text-4xl md:text-5xl text-white group-hover:text-gold transition-colors duration-300">Tata Coffee</h3>
@@ -694,7 +702,7 @@
           </a>
 
           <!-- Card 2 - Oreo -->
-          <a href="work.html" class="group relative h-80 md:h-96 overflow-hidden rounded-none cursor-pointer block" style="background: linear-gradient(135deg, #003087 0%, #0047CC 100%);" data-aos="fade-up" data-aos-delay="200">
+          <a href="projects/oreo.html" class="group relative h-80 md:h-96 overflow-hidden rounded-none cursor-pointer block" style="background: linear-gradient(135deg, #003087 0%, #0047CC 100%);" data-aos="fade-up" data-aos-delay="200">
             <div class="absolute inset-0 flex flex-col justify-end p-8 z-10">
               <span class="bg-gold text-dark text-xs px-4 py-1.5 w-fit mb-3 font-semibold tracking-wider uppercase">Visual Content</span>
               <h3 class="font-display text-4xl md:text-5xl text-white group-hover:text-gold transition-colors duration-300">Oreo</h3>
@@ -703,7 +711,7 @@
           </a>
 
           <!-- Card 3 - Harley Davidson -->
-          <a href="work.html" class="group relative h-80 md:h-96 overflow-hidden rounded-none cursor-pointer block" style="background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 50%, rgba(245, 197, 24, 0.15) 100%);" data-aos="fade-up" data-aos-delay="300">
+          <a href="projects/harley-davidson.html" class="group relative h-80 md:h-96 overflow-hidden rounded-none cursor-pointer block" style="background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 50%, rgba(245, 197, 24, 0.15) 100%);" data-aos="fade-up" data-aos-delay="300">
             <div class="absolute inset-0 flex flex-col justify-end p-8 z-10">
               <span class="bg-gold text-dark text-xs px-4 py-1.5 w-fit mb-3 font-semibold tracking-wider uppercase">Brand Identity</span>
               <h3 class="font-display text-4xl md:text-5xl text-white group-hover:text-gold transition-colors duration-300">Harley Davidson</h3>
@@ -712,7 +720,7 @@
           </a>
 
           <!-- Card 4 - Tavisa Fashion -->
-          <a href="work.html" class="group relative h-80 md:h-96 overflow-hidden rounded-none cursor-pointer block" style="background: linear-gradient(135deg, #2C1810 0%, #4a2c1a 100%);" data-aos="fade-up" data-aos-delay="400">
+          <a href="projects/tavisa-fashion.html" class="group relative h-80 md:h-96 overflow-hidden rounded-none cursor-pointer block" style="background: linear-gradient(135deg, #2C1810 0%, #4a2c1a 100%);" data-aos="fade-up" data-aos-delay="400">
             <div class="absolute inset-0 flex flex-col justify-end p-8 z-10">
               <span class="bg-gold text-dark text-xs px-4 py-1.5 w-fit mb-3 font-semibold tracking-wider uppercase">Full Spectrum</span>
               <h3 class="font-display text-4xl md:text-5xl text-white group-hover:text-gold transition-colors duration-300">Tavisa Fashion</h3>
@@ -722,7 +730,7 @@
         </div>
 
         <!-- View All Button -->
-        <div class="text-center mt-16" data-aos="fade-up">
+        <div class="text-center mt-10" data-aos="fade-up">
           <a href="work.html" class="magnetic-btn inline-block border-2 border-white/20 text-white px-10 py-4 font-semibold hover:border-gold hover:text-gold transition-all duration-300">
             Explore All Work
           </a>
@@ -731,7 +739,7 @@
     </section>
 
     <!-- Stats Strip -->
-    <section id="stats" class="bg-gold py-20 md:py-28 relative overflow-hidden">
+    <section id="stats" class="bg-gold py-14 md:py-20 relative overflow-hidden">
       <div class="absolute inset-0 opacity-10">
         <div class="absolute top-0 left-1/4 font-display text-[400px] text-dark leading-none select-none">Z</div>
       </div>
@@ -757,20 +765,101 @@
       </div>
     </section>
 
+    <!-- Clients Marquee -->
+    <section id="clients" class="bg-[#0d0d0d] section-tight overflow-hidden border-y border-white/5">
+      <div class="max-w-7xl mx-auto px-6 mb-8 text-center">
+        <p class="text-gold text-sm uppercase tracking-[0.3em] mb-3">Trusted By</p>
+        <h2 class="font-display text-4xl sm:text-5xl md:text-6xl text-white">Our Clients</h2>
+      </div>
+      <div class="clients-marquee-viewport py-5" style="background: var(--color-client-track, rgba(255,255,255,0.05));">
+        <div class="clients-marquee-track">
+          <!-- Set 1 -->
+          <div class="client-logo-slot"><img src="assets/images/Clients_Logo/Client1.png" alt="Client 1"></div>
+          <div class="client-logo-slot"><img src="assets/images/Clients_Logo/Client2.jpeg" alt="Client 2"></div>
+          <div class="client-logo-slot"><img src="assets/images/Clients_Logo/Client3.png" alt="Client 3"></div>
+          <div class="client-logo-slot"><img src="assets/images/Clients_Logo/Client4.jpg" alt="Client 4"></div>
+          <div class="client-logo-slot"><img src="assets/images/Clients_Logo/Client5.jpg" alt="Client 5"></div>
+          <div class="client-logo-slot"><img src="assets/images/Clients_Logo/Client6.png" alt="Client 6"></div>
+          <div class="client-logo-slot"><img src="assets/images/Clients_Logo/Client7.png" alt="Client 7" onerror="this.style.visibility='hidden'"></div>
+          <div class="client-logo-slot"><img src="assets/images/Clients_Logo/Client8.png" alt="Client 8" onerror="this.style.visibility='hidden'"></div>
+          <div class="client-logo-slot"><img src="assets/images/Clients_Logo/Client9.png" alt="Client 9" onerror="this.style.visibility='hidden'"></div>
+          <div class="client-logo-slot"><img src="assets/images/Clients_Logo/Client10.png" alt="Client 10" onerror="this.style.visibility='hidden'"></div>
+          <div class="client-logo-slot"><img src="assets/images/Clients_Logo/Client11.png" alt="Client 11" onerror="this.style.visibility='hidden'"></div>
+          <div class="client-logo-slot"><img src="assets/images/Clients_Logo/Client12.png" alt="Client 12" onerror="this.style.visibility='hidden'"></div>
+          <!-- Set 2 (duplicate for seamless loop) -->
+          <div class="client-logo-slot"><img src="assets/images/Clients_Logo/Client1.png" alt="Client 1"></div>
+          <div class="client-logo-slot"><img src="assets/images/Clients_Logo/Client2.jpeg" alt="Client 2"></div>
+          <div class="client-logo-slot"><img src="assets/images/Clients_Logo/Client3.png" alt="Client 3"></div>
+          <div class="client-logo-slot"><img src="assets/images/Clients_Logo/Client4.jpg" alt="Client 4"></div>
+          <div class="client-logo-slot"><img src="assets/images/Clients_Logo/Client5.jpg" alt="Client 5"></div>
+          <div class="client-logo-slot"><img src="assets/images/Clients_Logo/Client6.png" alt="Client 6"></div>
+          <div class="client-logo-slot"><img src="assets/images/Clients_Logo/Client7.png" alt="Client 7" onerror="this.style.visibility='hidden'"></div>
+          <div class="client-logo-slot"><img src="assets/images/Clients_Logo/Client8.png" alt="Client 8" onerror="this.style.visibility='hidden'"></div>
+          <div class="client-logo-slot"><img src="assets/images/Clients_Logo/Client9.png" alt="Client 9" onerror="this.style.visibility='hidden'"></div>
+          <div class="client-logo-slot"><img src="assets/images/Clients_Logo/Client10.png" alt="Client 10" onerror="this.style.visibility='hidden'"></div>
+          <div class="client-logo-slot"><img src="assets/images/Clients_Logo/Client11.png" alt="Client 11" onerror="this.style.visibility='hidden'"></div>
+          <div class="client-logo-slot"><img src="assets/images/Clients_Logo/Client12.png" alt="Client 12" onerror="this.style.visibility='hidden'"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Team Section -->
+    <section id="team" class="bg-dark section-tight">
+      <div class="max-w-6xl mx-auto px-6 text-center">
+        <h2 class="font-display text-5xl sm:text-6xl md:text-7xl lg:text-8xl text-white mb-4 tracking-wide">Meet The Team</h2>
+        <p class="text-white/40 text-base md:text-lg mb-10 max-w-xl mx-auto">The strategists, creators, and builders behind every bold move.</p>
+
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-6">
+          <!-- Co-Founder 1 -->
+          <div class="team-card">
+            <div class="team-portrait">
+              <img src="assets/images/team/co-founder.png" alt="Co-Founder" onerror="this.remove(); this.parentElement.insertAdjacentHTML('beforeend','<span class=\'team-portrait-placeholder\'>Co-Founder</span>')">
+            </div>
+            <div class="team-card-label">
+              <p class="role-title">Co-Founder</p>
+              <p class="role-sub">Founder & Creative Director</p>
+            </div>
+          </div>
+
+          <!-- Co-Founder 2 -->
+          <div class="team-card">
+            <div class="team-portrait">
+              <img src="assets/images/team/co-founder-2.png" alt="Co-Founder" onerror="this.remove(); this.parentElement.insertAdjacentHTML('beforeend','<span class=\'team-portrait-placeholder\'>Co-Founder</span>')">
+            </div>
+            <div class="team-card-label">
+              <p class="role-title">Co-Founder</p>
+              <p class="role-sub">Founder & Strategy Lead</p>
+            </div>
+          </div>
+
+          <!-- Co-Founder 3 -->
+          <div class="team-card">
+            <div class="team-portrait">
+              <img src="assets/images/team/co-founder-3.png" alt="Co-Founder" onerror="this.remove(); this.parentElement.insertAdjacentHTML('beforeend','<span class=\'team-portrait-placeholder\'>Co-Founder</span>')">
+            </div>
+            <div class="team-card-label">
+              <p class="role-title">Co-Founder</p>
+              <p class="role-sub">Founder & Operations Lead</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- About Section -->
-    <section id="about" class="bg-dark py-32 md:py-40">
+    <section id="about" class="bg-dark section-tight">
       <div class="max-w-7xl mx-auto px-6">
-        <div class="grid md:grid-cols-2 gap-16 items-center">
+        <div class="grid md:grid-cols-2 gap-10 md:gap-12 items-center">
           <div data-aos="fade-right">
-            <p class="text-gold text-sm uppercase tracking-[0.3em] mb-4">The Zenny Manifesto</p>
-            <h2 class="font-display text-5xl sm:text-6xl md:text-7xl text-white mb-8 leading-[0.9]">
+            <p class="text-gold text-sm uppercase tracking-[0.3em] mb-3">The Zenny Manifesto</p>
+            <h2 class="font-display text-5xl sm:text-6xl md:text-7xl text-white mb-6 leading-[0.9]">
               Built Different.
               <span class="block text-white/40 mt-2">Wired Relentless.</span>
             </h2>
             <p class="text-white/60 text-lg mb-6">
               Rooted in Bengaluru, engineered for ambition. Zenny Studios exists because mediocrity is a plague and your brand deserves immunity.
             </p>
-            <p class="text-white/60 text-lg mb-10">
+            <p class="text-white/60 text-lg mb-8">
               We're a compact battalion of strategists, visual architects, and narrative engineers who refuse to separate creativity from commerce. Partnership with us means gaining a growth-obsessed ally, not another vendor.
             </p>
             <div class="flex gap-10">
@@ -799,16 +888,16 @@
     </section>
 
     <!-- CTA Section -->
-    <section id="cta" class="bg-dark py-32 md:py-40 relative overflow-hidden">
+    <section id="cta" class="bg-dark section-tight relative overflow-hidden">
       <div class="absolute inset-0">
         <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gold/5 rounded-full blur-3xl"></div>
       </div>
       <div class="max-w-5xl mx-auto px-6 text-center relative z-10">
-        <div class="w-32 h-px bg-gradient-to-r from-transparent via-gold to-transparent mx-auto mb-16" data-aos="fade-up"></div>
+        <div class="w-32 h-px bg-gradient-to-r from-transparent via-gold to-transparent mx-auto mb-10" data-aos="fade-up"></div>
         <h2 class="font-display text-6xl sm:text-7xl md:text-8xl lg:text-9xl text-white mb-8 glitch-text" data-aos="fade-up" data-aos-delay="100">
           Ready To Lead<br><span class="text-gradient">Not Follow?</span>
         </h2>
-        <p class="text-white/60 text-xl md:text-2xl mb-14" data-aos="fade-up" data-aos-delay="200">
+        <p class="text-white/60 text-xl md:text-2xl mb-10" data-aos="fade-up" data-aos-delay="200">
           Your competitors are watching. Make them nervous.
         </p>
         <a href="contact.html" class="magnetic-btn inline-block bg-gold text-dark px-14 py-6 text-xl font-bold hover:bg-white transition-all duration-300 hover:scale-105 transform" data-aos="fade-up" data-aos-delay="300">
@@ -825,9 +914,7 @@
       <div class="flex flex-col md:flex-row items-center justify-between gap-8 mb-8">
         <!-- Logo -->
         <a href="index.html" class="flex items-center gap-3">
-          <div class="w-10 h-10 bg-white rounded-full flex items-center justify-center">
-            <span class="font-display text-dark text-xl font-bold">Z</span>
-          </div>
+          <img src="assets/images/Zenny_Studios_Logo/ZennyStudios_logo.png" alt="Zenny Studios" class="h-10 w-auto">
           <span class="font-body font-semibold text-white text-lg">Zenny Studios</span>
         </a>
 
@@ -854,7 +941,7 @@
       <!-- Bottom Row -->
       <div class="flex flex-col md:flex-row items-center justify-between gap-4">
         <p class="text-white/30 text-sm">© 2025 Zenny Studios. All rights reserved.</p>
-        <p class="text-white/30 text-sm">You made it to the bottom. Bold move.</p>
+        <p class="font-body text-gold text-sm tracking-[0.05em]">You made it to the bottom. Bold move.</p>
       </div>
     </div>
   </footer>

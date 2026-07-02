@@ -19,6 +19,10 @@
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 
+  <!-- Theme -->
+  <link rel="stylesheet" href="css/theme.css">
+  <script src="js/theme.js"></script>
+
   <script>
     tailwind.config = {
       theme: {
@@ -158,13 +162,7 @@
     <div class="max-w-7xl mx-auto px-6 py-4">
       <div class="flex items-center justify-between">
         <a href="index.html" class="flex items-center gap-3 group">
-          <!-- Image logo - uncomment and add your logo file -->
-          <!-- <img src="assets/logo.png" alt="Zenny Studios" class="h-10 w-auto group-hover:scale-110 transition-transform duration-300"> -->
-          <!-- Fallback text logo -->
-          <div class="w-10 h-10 bg-white rounded-full flex items-center justify-center pulse-glow group-hover:scale-110 transition-transform duration-300">
-            <span class="font-display text-dark text-xl font-bold">Z</span>
-          </div>
-          <span class="font-body font-semibold text-white text-lg hidden sm:block group-hover:text-gold transition-colors duration-300">Zenny Studios</span>
+          <img src="assets/images/Zenny_Studios_Logo/ZennyStudios_logo.png" alt="Zenny Studios" class="h-10 w-auto group-hover:scale-110 transition-transform duration-300">
         </a>
 
         <div class="hidden md:flex items-center gap-8">
@@ -174,15 +172,25 @@
           <a href="index.html#about" class="text-white/70 hover:text-gold transition-all duration-300 animated-underline">About</a>
         </div>
 
-        <div class="hidden md:block">
+        <div class="hidden md:flex items-center gap-4">
+          <button type="button" data-theme-toggle class="theme-toggle" aria-label="Toggle light/dark mode">
+            <svg class="icon-sun" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
+            <svg class="icon-moon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg>
+          </button>
           <span class="bg-gold text-dark px-6 py-2 inline-block">Let's Talk</span>
         </div>
 
-        <button id="hamburger" class="md:hidden flex flex-col gap-1.5 p-2">
+        <div class="flex md:hidden items-center gap-3">
+          <button type="button" data-theme-toggle class="theme-toggle" aria-label="Toggle light/dark mode">
+            <svg class="icon-sun" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
+            <svg class="icon-moon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg>
+          </button>
+        <button id="hamburger" class="flex flex-col gap-1.5 p-2" aria-label="Menu">
           <span class="w-6 h-0.5 bg-white transition-all duration-300"></span>
           <span class="w-6 h-0.5 bg-white transition-all duration-300"></span>
           <span class="w-6 h-0.5 bg-white transition-all duration-300"></span>
         </button>
+        </div>
       </div>
     </div>
   </nav>
@@ -434,9 +442,7 @@
     <div class="max-w-7xl mx-auto px-6 py-12">
       <div class="flex flex-col md:flex-row items-center justify-between gap-8 mb-8">
         <a href="index.html" class="flex items-center gap-3 group">
-          <div class="w-10 h-10 bg-white rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-            <span class="font-display text-dark text-xl font-bold">Z</span>
-          </div>
+          <img src="assets/images/Zenny_Studios_Logo/ZennyStudios_logo.png" alt="Zenny Studios" class="h-10 w-auto group-hover:scale-110 transition-transform duration-300">
           <span class="font-body font-semibold text-white text-lg group-hover:text-gold transition-colors duration-300">Zenny Studios</span>
         </a>
 
@@ -457,7 +463,7 @@
 
       <div class="flex flex-col md:flex-row items-center justify-between gap-4">
         <p class="text-white/30 text-sm">© 2025 Zenny Studios. All rights reserved.</p>
-        <p class="text-white/30 text-sm">You made it to the bottom. Bold move.</p>
+        <p class="font-body text-gold text-sm tracking-[0.05em]">You made it to the bottom. Bold move.</p>
       </div>
     </div>
   </footer>

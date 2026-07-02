@@ -19,6 +19,10 @@
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 
+  <!-- Theme -->
+  <link rel="stylesheet" href="css/theme.css">
+  <script src="js/theme.js"></script>
+
   <script>
     tailwind.config = {
       theme: {
@@ -160,13 +164,7 @@
     <div class="max-w-7xl mx-auto px-6 py-4">
       <div class="flex items-center justify-between">
         <a href="index.html" class="flex items-center gap-3 group">
-          <!-- Image logo - uncomment and add your logo file -->
-          <!-- <img src="assets/logo.png" alt="Zenny Studios" class="h-10 w-auto group-hover:scale-110 transition-transform duration-300"> -->
-          <!-- Fallback text logo -->
-          <div class="w-10 h-10 bg-white rounded-full flex items-center justify-center pulse-glow group-hover:scale-110 transition-transform duration-300">
-            <span class="font-display text-dark text-xl font-bold">Z</span>
-          </div>
-          <span class="font-body font-semibold text-white text-lg hidden sm:block group-hover:text-gold transition-colors duration-300">Zenny Studios</span>
+          <img src="assets/images/Zenny_Studios_Logo/ZennyStudios_logo.png" alt="Zenny Studios" class="h-10 w-auto group-hover:scale-110 transition-transform duration-300">
         </a>
 
         <div class="hidden md:flex items-center gap-8">
@@ -176,15 +174,25 @@
           <a href="index.html#about" class="text-white/70 hover:text-gold transition-all duration-300 animated-underline">About</a>
         </div>
 
-        <div class="hidden md:block">
+        <div class="hidden md:flex items-center gap-4">
+          <button type="button" data-theme-toggle class="theme-toggle" aria-label="Toggle light/dark mode">
+            <svg class="icon-sun" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
+            <svg class="icon-moon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg>
+          </button>
           <a href="contact.html" class="magnetic-btn border border-gold text-gold px-6 py-2 hover:bg-gold hover:text-dark transition-all duration-300 inline-block">Let's Talk</a>
         </div>
 
-        <button id="hamburger" class="md:hidden flex flex-col gap-1.5 p-2">
+        <div class="flex md:hidden items-center gap-3">
+          <button type="button" data-theme-toggle class="theme-toggle" aria-label="Toggle light/dark mode">
+            <svg class="icon-sun" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
+            <svg class="icon-moon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg>
+          </button>
+        <button id="hamburger" class="flex flex-col gap-1.5 p-2" aria-label="Menu">
           <span class="w-6 h-0.5 bg-white transition-all duration-300"></span>
           <span class="w-6 h-0.5 bg-white transition-all duration-300"></span>
           <span class="w-6 h-0.5 bg-white transition-all duration-300"></span>
         </button>
+        </div>
       </div>
     </div>
   </nav>
@@ -214,7 +222,7 @@
       </div>
     </section>
 
-    <!-- Service 01 - Social Media Management -->
+    <!-- Service 01 - Media Production -->
     <section class="service-block bg-dark py-24 md:py-32 border-t border-white/5">
       <div class="max-w-7xl mx-auto px-6">
         <div class="grid md:grid-cols-2 gap-16 items-start">
@@ -222,61 +230,14 @@
             <span class="service-number font-display text-[10rem] md:text-[14rem] text-gold/10 leading-none block transition-all duration-500">01</span>
           </div>
           <div data-aos="fade-left">
-            <h2 class="font-display text-5xl md:text-6xl lg:text-7xl text-white mb-6">Social Media Command</h2>
+            <h2 class="font-display text-5xl md:text-6xl lg:text-7xl text-white mb-6">Media Production & Content Creation</h2>
             <p class="text-white/60 text-xl mb-6 leading-relaxed">
-              Your social channels are territory. We occupy them strategically,
-              deploying content that captures attention and converts casual viewers
-              into committed followers.
+              Content engineered to arrest the scroll. Reels, shoots, and motion pieces
+              that demand attention — from concept through final cut.
             </p>
             <p class="text-white/40 text-lg mb-10">
-              Beyond posting schedules. We architect engagement ecosystems that
-              build communities with genuine investment in your brand's trajectory.
-            </p>
-            <div class="space-y-4">
-              <h4 class="text-gold text-sm uppercase tracking-[0.2em] mb-6">Deliverables</h4>
-              <p class="deliverable-item text-white/70 text-lg flex items-start gap-4 cursor-default">
-                <span class="text-gold">/</span>
-                Strategic content calendars with execution
-              </p>
-              <p class="deliverable-item text-white/70 text-lg flex items-start gap-4 cursor-default">
-                <span class="text-gold">/</span>
-                Platform-native strategy across Instagram, LinkedIn, X
-              </p>
-              <p class="deliverable-item text-white/70 text-lg flex items-start gap-4 cursor-default">
-                <span class="text-gold">/</span>
-                Community cultivation and engagement systems
-              </p>
-              <p class="deliverable-item text-white/70 text-lg flex items-start gap-4 cursor-default">
-                <span class="text-gold">/</span>
-                Performance analytics and growth intelligence
-              </p>
-              <p class="deliverable-item text-white/70 text-lg flex items-start gap-4 cursor-default">
-                <span class="text-gold">/</span>
-                Competitive landscape monitoring
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Service 02 - Content Creation -->
-    <section class="service-block bg-[#0d0d0d] py-24 md:py-32">
-      <div class="max-w-7xl mx-auto px-6">
-        <div class="grid md:grid-cols-2 gap-16 items-start">
-          <div class="md:order-2" data-aos="fade-left">
-            <span class="service-number font-display text-[10rem] md:text-[14rem] text-gold/10 leading-none block transition-all duration-500">02</span>
-          </div>
-          <div class="md:order-1" data-aos="fade-right">
-            <h2 class="font-display text-5xl md:text-6xl lg:text-7xl text-white mb-6">Visual Storytelling</h2>
-            <p class="text-white/60 text-xl mb-6 leading-relaxed">
-              Content engineered to arrest the scroll. Reels that demand attention.
-              Visuals that imprint on memory. Every frame calculated for maximum impact.
-            </p>
-            <p class="text-white/40 text-lg mb-10">
-              Concept through final cut, our production team delivers photography, motion,
-              and graphics that refuse templates and reject stock. Pure originality
-              that amplifies your brand signal.
+              Our production team delivers photography, videography, and graphics
+              that refuse templates and reject stock. Pure originality that amplifies your brand signal.
             </p>
             <div class="space-y-4">
               <h4 class="text-gold text-sm uppercase tracking-[0.2em] mb-6">Deliverables</h4>
@@ -294,11 +255,11 @@
               </p>
               <p class="deliverable-item text-white/70 text-lg flex items-start gap-4 cursor-default">
                 <span class="text-gold">/</span>
-                Carousel narratives and static compositions
+                Product films and launch content
               </p>
               <p class="deliverable-item text-white/70 text-lg flex items-start gap-4 cursor-default">
                 <span class="text-gold">/</span>
-                Copy architecture and hashtag intelligence
+                Post-production, colour grading, and sound design
               </p>
             </div>
           </div>
@@ -306,7 +267,52 @@
       </div>
     </section>
 
-    <!-- Service 03 - Branding & Identity -->
+    <!-- Service 02 - Data Analytics -->
+    <section class="service-block bg-[#0d0d0d] py-24 md:py-32">
+      <div class="max-w-7xl mx-auto px-6">
+        <div class="grid md:grid-cols-2 gap-16 items-start">
+          <div class="md:order-2" data-aos="fade-left">
+            <span class="service-number font-display text-[10rem] md:text-[14rem] text-gold/10 leading-none block transition-all duration-500">02</span>
+          </div>
+          <div class="md:order-1" data-aos="fade-right">
+            <h2 class="font-display text-5xl md:text-6xl lg:text-7xl text-white mb-6">Data Analytics & Digital Strategy</h2>
+            <p class="text-white/60 text-xl mb-6 leading-relaxed">
+              Insights that drive decisions. We decode audience behaviour, optimise campaigns,
+              and build digital roadmaps that turn data into measurable dominance.
+            </p>
+            <p class="text-white/40 text-lg mb-10">
+              Beyond vanity metrics — we track what matters, report what moves the needle,
+              and refine strategy continuously so every rupee works harder.
+            </p>
+            <div class="space-y-4">
+              <h4 class="text-gold text-sm uppercase tracking-[0.2em] mb-6">Deliverables</h4>
+              <p class="deliverable-item text-white/70 text-lg flex items-start gap-4 cursor-default">
+                <span class="text-gold">/</span>
+                Audience research and competitive analysis
+              </p>
+              <p class="deliverable-item text-white/70 text-lg flex items-start gap-4 cursor-default">
+                <span class="text-gold">/</span>
+                Campaign performance dashboards and reporting
+              </p>
+              <p class="deliverable-item text-white/70 text-lg flex items-start gap-4 cursor-default">
+                <span class="text-gold">/</span>
+                Social and digital channel strategy
+              </p>
+              <p class="deliverable-item text-white/70 text-lg flex items-start gap-4 cursor-default">
+                <span class="text-gold">/</span>
+                Paid media planning across Meta, Google, LinkedIn
+              </p>
+              <p class="deliverable-item text-white/70 text-lg flex items-start gap-4 cursor-default">
+                <span class="text-gold">/</span>
+                Growth optimisation and A/B testing frameworks
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Service 03 - Branding -->
     <section class="service-block bg-dark py-24 md:py-32 border-t border-white/5">
       <div class="max-w-7xl mx-auto px-6">
         <div class="grid md:grid-cols-2 gap-16 items-start">
@@ -314,16 +320,14 @@
             <span class="service-number font-display text-[10rem] md:text-[14rem] text-gold/10 leading-none block transition-all duration-500">03</span>
           </div>
           <div data-aos="fade-left">
-            <h2 class="font-display text-5xl md:text-6xl lg:text-7xl text-white mb-6">Brand Architecture</h2>
+            <h2 class="font-display text-5xl md:text-6xl lg:text-7xl text-white mb-6">Branding & Marketing Communication</h2>
             <p class="text-white/60 text-xl mb-6 leading-relaxed">
-              Identity systems that command instant recognition. We construct brands
-              with conviction, translating business essence into visual and verbal
-              languages that resonate and differentiate.
+              Identity systems and messaging that command instant recognition. We construct brands
+              with conviction, translating business essence into visual and verbal languages.
             </p>
             <p class="text-white/40 text-lg mb-10">
               Deep strategic excavation uncovers what makes you singular,
-              then we codify it into an identity system that cuts through
-              market noise with surgical precision.
+              then we codify it into an identity that cuts through market noise with surgical precision.
             </p>
             <div class="space-y-4">
               <h4 class="text-gold text-sm uppercase tracking-[0.2em] mb-6">Deliverables</h4>
@@ -333,11 +337,11 @@
               </p>
               <p class="deliverable-item text-white/70 text-lg flex items-start gap-4 cursor-default">
                 <span class="text-gold">/</span>
-                Color architecture and typographic hierarchy
+                Brand voice and messaging architecture
               </p>
               <p class="deliverable-item text-white/70 text-lg flex items-start gap-4 cursor-default">
                 <span class="text-gold">/</span>
-                Brand voice and messaging architecture
+                Marketing collateral and campaign creative
               </p>
               <p class="deliverable-item text-white/70 text-lg flex items-start gap-4 cursor-default">
                 <span class="text-gold">/</span>
@@ -345,7 +349,7 @@
               </p>
               <p class="deliverable-item text-white/70 text-lg flex items-start gap-4 cursor-default">
                 <span class="text-gold">/</span>
-                Collateral design systems
+                Event identity and experiential branding
               </p>
             </div>
           </div>
@@ -353,7 +357,7 @@
       </div>
     </section>
 
-    <!-- Service 04 - Digital Presence -->
+    <!-- Service 04 - Web Development -->
     <section class="service-block bg-[#0d0d0d] py-24 md:py-32">
       <div class="max-w-7xl mx-auto px-6">
         <div class="grid md:grid-cols-2 gap-16 items-start">
@@ -361,37 +365,36 @@
             <span class="service-number font-display text-[10rem] md:text-[14rem] text-gold/10 leading-none block transition-all duration-500">04</span>
           </div>
           <div class="md:order-1" data-aos="fade-right">
-            <h2 class="font-display text-5xl md:text-6xl lg:text-7xl text-white mb-6">Digital Omnipresence</h2>
+            <h2 class="font-display text-5xl md:text-6xl lg:text-7xl text-white mb-6">Web Development</h2>
             <p class="text-white/60 text-xl mb-6 leading-relaxed">
-              Web, search, paid media. We position you where your audience lives,
-              making discovery inevitable and engagement unavoidable.
+              High-performance websites and digital experiences. We build platforms
+              that look stunning, load fast, and convert visitors into customers.
             </p>
             <p class="text-white/40 text-lg mb-10">
-              From high-converting web experiences to precision-targeted campaigns,
-              your digital footprint expands strategically. No algorithm obscurity.
-              Deliberate visibility.
+              From landing pages to full brand sites — responsive, accessible,
+              and engineered for search visibility and conversion.
             </p>
             <div class="space-y-4">
               <h4 class="text-gold text-sm uppercase tracking-[0.2em] mb-6">Deliverables</h4>
               <p class="deliverable-item text-white/70 text-lg flex items-start gap-4 cursor-default">
                 <span class="text-gold">/</span>
-                Web design and development
+                Custom website design and development
               </p>
               <p class="deliverable-item text-white/70 text-lg flex items-start gap-4 cursor-default">
                 <span class="text-gold">/</span>
-                Search visibility optimization
+                Landing pages and campaign microsites
               </p>
               <p class="deliverable-item text-white/70 text-lg flex items-start gap-4 cursor-default">
                 <span class="text-gold">/</span>
-                Paid media campaigns across Meta, Google, LinkedIn
+                SEO-ready structure and performance optimisation
               </p>
               <p class="deliverable-item text-white/70 text-lg flex items-start gap-4 cursor-default">
                 <span class="text-gold">/</span>
-                Conversion-optimized landing pages
+                CMS integration and content management
               </p>
               <p class="deliverable-item text-white/70 text-lg flex items-start gap-4 cursor-default">
                 <span class="text-gold">/</span>
-                Performance analytics and optimization
+                Ongoing maintenance and analytics setup
               </p>
             </div>
           </div>
@@ -408,9 +411,8 @@
               <span class="text-gold text-sm uppercase tracking-[0.2em]">Total Integration</span>
               <h3 class="font-display text-5xl md:text-6xl lg:text-7xl text-white mt-4 mb-6">The Complete Arsenal.</h3>
               <p class="text-white/60 text-lg">
-                Most partners choose full integration. Social command, visual content,
-                brand architecture, digital omnipresence. One unified vision.
-                Zero coordination friction.
+                Most partners choose full integration. Media production, digital strategy,
+                branding, and web development. One unified vision. Zero coordination friction.
               </p>
             </div>
             <div class="md:text-right">
@@ -487,9 +489,7 @@
     <div class="max-w-7xl mx-auto px-6 py-12">
       <div class="flex flex-col md:flex-row items-center justify-between gap-8 mb-8">
         <a href="index.html" class="flex items-center gap-3 group">
-          <div class="w-10 h-10 bg-white rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-            <span class="font-display text-dark text-xl font-bold">Z</span>
-          </div>
+          <img src="assets/images/Zenny_Studios_Logo/ZennyStudios_logo.png" alt="Zenny Studios" class="h-10 w-auto group-hover:scale-110 transition-transform duration-300">
           <span class="font-body font-semibold text-white text-lg group-hover:text-gold transition-colors duration-300">Zenny Studios</span>
         </a>
 
@@ -510,7 +510,7 @@
 
       <div class="flex flex-col md:flex-row items-center justify-between gap-4">
         <p class="text-white/30 text-sm">© 2025 Zenny Studios. All rights reserved.</p>
-        <p class="text-white/30 text-sm">You made it to the bottom. Bold move.</p>
+        <p class="font-body text-gold text-sm tracking-[0.05em]">You made it to the bottom. Bold move.</p>
       </div>
     </div>
   </footer>

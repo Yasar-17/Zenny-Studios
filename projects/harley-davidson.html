@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Harley Davidson � project by Zenny Studios.">
+  <title>Harley Davidson | Zenny Studios</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎬</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <link rel="stylesheet" href="../css/theme.css">
+  <script src="../js/theme.js"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: { gold: '#F5C518', dark: '#0a0a0a', card: '#111111' },
+          fontFamily: { display: ['Bebas Neue', 'cursive'], body: ['Inter', 'sans-serif'] }
+        }
+      }
+    }
+  </script>
+  <style>
+    .scroll-progress { position: fixed; top: 0; left: 0; height: 3px; background: linear-gradient(90deg, #F5C518, #fff); z-index: 9999; }
+    .animated-underline { position: relative; }
+    .animated-underline::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 2px; background: #F5C518; transition: width 0.3s ease; }
+    .animated-underline:hover::after { width: 100%; }
+    .text-gradient { background: linear-gradient(135deg, #F5C518 0%, #fff 50%, #F5C518 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; background-size: 200% auto; animation: textShine 3s ease-in-out infinite; }
+    @keyframes textShine { 0%, 100% { background-position: 0% center; } 50% { background-position: 200% center; } }
+  </style>
+</head>
+<body class="bg-dark font-body text-white antialiased">
+  <div class="scroll-progress" id="scrollProgress"></div>
+
+  <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 border-b border-white/10 transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-6 py-4">
+      <div class="flex items-center justify-between">
+        <a href="../index.html" class="flex items-center gap-3 group">
+          <div class="w-10 h-10 theme-logo-bg bg-white rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+            <span class="font-display theme-logo-text text-dark text-xl font-bold">Z</span>
+          </div>
+          <span class="font-body font-semibold text-white text-lg hidden sm:block group-hover:text-gold transition-colors duration-300">Zenny Studios</span>
+        </a>
+        
+        <div class="hidden md:flex items-center gap-8">
+          <a href="../index.html" class="text-white/70 hover:text-gold transition-all duration-300 animated-underline">Home</a>
+          <a href="../work.html" class="text-gold transition-all duration-300 animated-underline">Work</a>
+          <a href="../services.html" class="text-white/70 hover:text-gold transition-all duration-300 animated-underline">Services</a>
+          <a href="../index.html#about" class="text-white/70 hover:text-gold transition-all duration-300 animated-underline">About</a>
+        </div>
+        <div class="hidden md:flex items-center gap-4">
+          <button type="button" data-theme-toggle class="theme-toggle" aria-label="Toggle light/dark mode">
+            <svg class="icon-sun" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
+            <svg class="icon-moon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg>
+          </button>
+          <a href="../contact.html" class="border border-gold text-gold px-6 py-2 hover:bg-gold hover:text-dark transition-all duration-300 inline-block">Let's Talk</a>
+        </div>
+        <div class="flex md:hidden items-center gap-3">
+          <button type="button" data-theme-toggle class="theme-toggle" aria-label="Toggle light/dark mode">
+            <svg class="icon-sun" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
+            <svg class="icon-moon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg>
+          </button>
+          <button id="hamburger" class="flex flex-col gap-1.5 p-2" aria-label="Menu">
+            <span class="w-6 h-0.5 bg-white transition-all duration-300"></span>
+            <span class="w-6 h-0.5 bg-white transition-all duration-300"></span>
+            <span class="w-6 h-0.5 bg-white transition-all duration-300"></span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <div id="mobile-menu" class="fixed inset-0 bg-dark z-40 flex flex-col items-center justify-center gap-8 opacity-0 pointer-events-none transition-all duration-300">
+    <a href="../index.html" class="text-3xl font-display text-white hover:text-gold transition-all duration-300">Home</a>
+    <a href="../work.html" class="text-3xl font-display text-gold transition-all duration-300">Work</a>
+    <a href="../services.html" class="text-3xl font-display text-white hover:text-gold transition-all duration-300">Services</a>
+    <a href="../contact.html" class="mt-8 border border-gold text-gold px-8 py-3 text-xl hover:bg-gold hover:text-dark transition-all duration-300">Let's Talk</a>
+  </div>
+
+  <main>
+    <section class="pt-36 pb-12 md:pt-48 bg-dark relative overflow-hidden">
+      <div class="max-w-7xl mx-auto px-6 relative z-10">
+        <a href="../work.html" class="text-gold text-sm uppercase tracking-[0.2em] mb-6 inline-flex items-center gap-2 hover:gap-3 transition-all duration-300" data-aos="fade-up">
+          ← Back to Work
+        </a>
+        <span class="bg-gold text-dark text-xs px-4 py-1.5 font-bold tracking-wider uppercase inline-block mb-6" data-aos="fade-up">Production · Case Studies</span>
+        <h1 class="font-display text-6xl sm:text-7xl md:text-8xl text-white leading-[0.9] mb-8" data-aos="fade-up" data-aos-delay="100">Harley Davidson</h1>
+        <p class="text-white/60 text-xl md:text-2xl max-w-3xl" data-aos="fade-up" data-aos-delay="200">
+          Complete social takeover — strategic calendars, viral reels, and engagement architecture that brewed measurable growth.
+        </p>
+      </div>
+    </section>
+
+    <section class="bg-[#0d0d0d]">
+      <div class="aspect-video max-w-7xl mx-auto relative overflow-hidden bg-gradient-to-br from-[#1a1a1a] to-[#2d2d2d]" data-aos="fade-up">
+        <img src="../assets/projects/harley-davidson.jpg" alt="Harley Davidson campaign cover" class="w-full h-full object-cover" onerror="this.style.display='none'">
+      </div>
+    </section>
+
+    <section class="bg-dark py-24 md:py-32">
+      <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-3 gap-12">
+        <div data-aos="fade-up">
+          <h3 class="text-gold text-sm uppercase tracking-[0.2em] mb-3">Client</h3>
+          <p class="font-display text-3xl text-white">Harley Davidson</p>
+        </div>
+        <div data-aos="fade-up" data-aos-delay="100">
+          <h3 class="text-gold text-sm uppercase tracking-[0.2em] mb-3">Services</h3>
+          <p class="text-white/70 text-lg">Media Production, Content Creation, Social Strategy</p>
+        </div>
+        <div data-aos="fade-up" data-aos-delay="200">
+          <h3 class="text-gold text-sm uppercase tracking-[0.2em] mb-3">Year</h3>
+          <p class="text-white/70 text-lg">2024</p>
+        </div>
+      </div>
+      <div class="max-w-4xl mx-auto px-6 mt-16" data-aos="fade-up">
+        <h2 class="font-display text-4xl md:text-5xl text-white mb-6">The Brief</h2>
+        <p class="text-white/60 text-lg leading-relaxed mb-6">
+          Replace this section with your project story, objectives, and outcomes. Add gallery images to <code class="text-gold">assets/projects/harley-davidson/</code> when ready.
+        </p>
+        <p class="text-white/60 text-lg leading-relaxed">
+          Zenny Studios engineered a full-funnel social presence — from scroll-stopping reels to community-driven engagement that kept the brand top of mind.
+        </p>
+      </div>
+    </section>
+
+    <section class="bg-[#0d0d0d] py-24 text-center">
+      <h2 class="font-display text-5xl md:text-6xl text-white mb-8" data-aos="fade-up">Want Results Like This?</h2>
+      <a href="../contact.html" class="inline-block bg-gold text-dark px-12 py-5 font-bold text-lg hover:bg-white transition-all duration-300" data-aos="fade-up" data-aos-delay="100">Start a Project</a>
+    </section>
+  </main>
+
+  <footer class="bg-[#050505] border-t border-white/10 py-12">
+    <div class="max-w-7xl mx-auto px-6 text-center">
+      <a href="../index.html" class="inline-flex items-center gap-3 mb-4">
+        <img src="../assets/images/Zenny_Studios_Logo/ZennyStudios_logo.png" alt="Zenny Studios" class="h-10 w-auto">
+      </a>
+      <p class="text-white/30 text-sm">© 2025 Zenny Studios. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    AOS.init({ disable: true });
+    const scrollProgress = document.getElementById('scrollProgress');
+    window.addEventListener('scroll', () => {
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      scrollProgress.style.width = (window.scrollY / docHeight) * 100 + '%';
+    });
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('backdrop-blur-md', window.scrollY > 50);
+      navbar.classList.toggle('bg-dark/90', window.scrollY > 50);
+    });
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobile-menu');
+    hamburger.addEventListener('click', () => {
+      mobileMenu.classList.toggle('opacity-0');
+      mobileMenu.classList.toggle('pointer-events-none');
+    });
+  </script>
+</body>
+</html>
