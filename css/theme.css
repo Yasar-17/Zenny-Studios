@@ -124,9 +124,28 @@
 }
 
 /* "What We Offer" — match dark-mode hover behaviour in light mode */
-/* Headings turn gold on hover (beats .text-white !important override) */
-[data-theme="light"] .group:hover .group-hover\:text-gold {
+/* Restore gold accent on hover/focus where base !important overrides kill it */
+
+/* Text turns gold on hover (footer/nav links, buttons, etc.) */
+[data-theme="light"] .hover\:text-gold:hover,
+[data-theme="light"] .group:hover .group-hover\:text-gold,
+[data-theme="light"] .group:focus-within .group-focus-within\:text-gold {
   color: #F5C518 !important;
+}
+
+/* Gold-on-gold hover variants for decorative numbers/letters */
+[data-theme="light"] .group:hover .group-hover\:text-gold\/50,
+[data-theme="light"] .group:hover .group-hover\:text-gold\/20 {
+  color: rgba(245, 197, 24, 0.5) !important;
+}
+[data-theme="light"] .group:hover .group-hover\:text-gold\/20 {
+  color: rgba(245, 197, 24, 0.2) !important;
+}
+
+/* Borders turn gold on hover (filter buttons, outline CTAs) */
+[data-theme="light"] .hover\:border-gold:hover,
+[data-theme="light"] .group:hover .group-hover\:border-gold {
+  border-color: #F5C518 !important;
 }
 
 /* Golden side glow on hover — stronger so it reads against white cards */
@@ -391,4 +410,53 @@
     padding-top: 5rem;
     padding-bottom: 5rem;
   }
+}
+
+/* ─── Footer ─────────────────────────────────────────────── */
+
+/* Premium golden gradient top border */
+footer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 10%;
+  width: 80%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #F5C518 30%, #F5C518 70%, transparent);
+}
+
+footer {
+  position: relative;
+}
+
+/* Social icon rings in footer */
+.footer-social-icon {
+  width: 2.5rem;
+  height: 2.5rem;
+  border: 1px solid var(--color-border);
+  border-radius: 9999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  flex-shrink: 0;
+}
+
+.footer-social-icon:hover {
+  border-color: #F5C518;
+  background: rgba(245, 197, 24, 0.1);
+}
+
+/* Light mode footer overrides */
+[data-theme="light"] footer {
+  background-color: var(--color-bg-footer) !important;
+}
+
+[data-theme="light"] .footer-social-icon {
+  border-color: rgba(10, 10, 10, 0.15);
+}
+
+[data-theme="light"] .footer-social-icon:hover {
+  border-color: #F5C518;
+  background: rgba(245, 197, 24, 0.1);
 }
