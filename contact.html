@@ -3,6 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="dark light">
+  <meta name="theme-color" content="#0a0a0a">
   <meta name="description" content="Contact Zenny Studios — let's create something unforgettable together. Get in touch for social media, content creation, and branding services.">
   <title>Contact | Zenny Studios</title>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎬</text></svg>">
@@ -10,14 +12,10 @@
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
 
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
-
-  <!-- AOS -->
-  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 
   <!-- Theme -->
   <link rel="stylesheet" href="css/theme.css">
@@ -42,83 +40,8 @@
   </script>
 
   <style>
-    .cursor-dot {
-      width: 8px;
-      height: 8px;
-      background: #F5C518;
-      border-radius: 50%;
-      position: fixed;
-      pointer-events: none;
-      z-index: 9999;
-    }
-    .cursor-ring {
-      width: 40px;
-      height: 40px;
-      border: 1px solid rgba(245, 197, 24, 0.5);
-      border-radius: 50%;
-      position: fixed;
-      pointer-events: none;
-      z-index: 9998;
-      transition: all 0.15s ease-out;
-    }
-    .cursor-ring.hover {
-      transform: scale(1.5);
-      border-color: #F5C518;
-      background: rgba(245, 197, 24, 0.1);
-    }
+    /* ========== CONTACT PAGE SPECIFIC STYLES ========== */
 
-    .text-gradient {
-      background: linear-gradient(135deg, #F5C518 0%, #fff 50%, #F5C518 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      background-size: 200% auto;
-      animation: textShine 3s ease-in-out infinite;
-    }
-    @keyframes textShine {
-      0%, 100% { background-position: 0% center; }
-      50% { background-position: 200% center; }
-    }
-
-    .scroll-progress {
-      position: fixed;
-      top: 0;
-      left: 0;
-      height: 3px;
-      background: linear-gradient(90deg, #F5C518, #fff);
-      z-index: 9999;
-    }
-
-    .animated-underline {
-      position: relative;
-    }
-    .animated-underline::after {
-      content: '';
-      position: absolute;
-      bottom: -4px;
-      left: 0;
-      width: 0;
-      height: 2px;
-      background: #F5C518;
-      transition: width 0.3s ease;
-    }
-    .animated-underline:hover::after {
-      width: 100%;
-    }
-
-    .magnetic-btn {
-      transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    }
-
-    .pulse-glow {
-      animation: pulseGlow 2s ease-in-out infinite;
-    }
-    @keyframes pulseGlow {
-      0%, 100% { box-shadow: 0 0 20px rgba(245, 197, 24, 0.3); }
-      50% { box-shadow: 0 0 40px rgba(245, 197, 24, 0.6); }
-    }
-
-    /* Form Input Animations */
     .form-input {
       transition: all 0.3s ease;
     }
@@ -142,10 +65,6 @@
       transform: translateX(8px);
       border-left-color: #F5C518;
     }
-
-    @media (hover: none) {
-      .cursor-dot, .cursor-ring { display: none; }
-    }
   </style>
 </head>
 <body class="bg-dark font-body text-white antialiased">
@@ -166,18 +85,18 @@
         </a>
 
         <div class="hidden md:flex items-center gap-8">
-          <a href="index.html" class="text-white/70 hover:text-gold transition-all duration-300 animated-underline">Home</a>
-          <a href="work.html" class="text-white/70 hover:text-gold transition-all duration-300 animated-underline">Work</a>
-          <a href="services.html" class="text-white/70 hover:text-gold transition-all duration-300 animated-underline">Services</a>
-          <a href="index.html#about" class="text-white/70 hover:text-gold transition-all duration-300 animated-underline">About</a>
+          <a href="index.html" class="text-white/70 hover:text-gold transition-all duration-300 animated-underline leading-none py-2">Home</a>
+          <a href="work.html" class="text-white/70 hover:text-gold transition-all duration-300 animated-underline leading-none py-2">Work</a>
+          <a href="services.html" class="text-white/70 hover:text-gold transition-all duration-300 animated-underline leading-none py-2">Services</a>
+          <a href="index.html#about" class="text-white/70 hover:text-gold transition-all duration-300 animated-underline leading-none py-2">About</a>
         </div>
 
-        <div class="hidden md:flex items-center gap-4">
+        <div class="hidden md:flex items-center gap-3">
           <button type="button" data-theme-toggle class="theme-toggle" aria-label="Toggle light/dark mode">
             <svg class="icon-sun" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
             <svg class="icon-moon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg>
           </button>
-          <span class="bg-gold text-dark px-6 py-2 inline-block">Let's Talk</span>
+          <span class="bg-gold/60 text-dark px-6 py-[9px] inline-block opacity-60 cursor-default leading-none text-sm font-semibold">Let's Talk</span>
         </div>
 
         <div class="flex md:hidden items-center gap-3">
@@ -185,7 +104,7 @@
             <svg class="icon-sun" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
             <svg class="icon-moon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg>
           </button>
-        <button id="hamburger" class="flex flex-col gap-1.5 p-2" aria-label="Menu">
+        <button type="button" id="hamburger" class="flex flex-col gap-1.5 p-2" aria-label="Menu">
           <span class="w-6 h-0.5 bg-white transition-all duration-300"></span>
           <span class="w-6 h-0.5 bg-white transition-all duration-300"></span>
           <span class="w-6 h-0.5 bg-white transition-all duration-300"></span>
@@ -196,12 +115,12 @@
   </nav>
 
   <!-- Mobile Menu -->
-  <div id="mobile-menu" class="fixed inset-0 bg-dark z-40 flex flex-col items-center justify-center gap-8 opacity-0 pointer-events-none transition-all duration-300">
+  <div id="mobile-menu" role="dialog" aria-modal="true" aria-hidden="true" class="fixed inset-0 bg-dark z-40 flex flex-col items-center justify-center gap-8 opacity-0 pointer-events-none transition-all duration-300">
     <a href="index.html" class="text-4xl font-display text-white hover:text-gold transition-all duration-300">Home</a>
     <a href="work.html" class="text-4xl font-display text-white hover:text-gold transition-all duration-300">Work</a>
     <a href="services.html" class="text-4xl font-display text-white hover:text-gold transition-all duration-300">Services</a>
     <a href="index.html#about" class="text-4xl font-display text-white hover:text-gold transition-all duration-300">About</a>
-    <span class="mt-8 bg-gold text-dark px-8 py-3 text-xl">Let's Talk</span>
+    <span class="mt-8 bg-gold/60 text-dark px-8 py-3 text-xl opacity-60 cursor-default">Let's Talk</span>
   </div>
 
   <main>
@@ -228,7 +147,7 @@
 
           <!-- Form -->
           <div class="lg:col-span-2" data-aos="fade-right">
-            <form action="https://formsubmit.co/mohammedyasar990@gmail.com" method="POST" class="space-y-8">
+            <form action="https://formsubmit.co/mohammedyasar990@gmail.com" method="POST" class="space-y-8" id="contactForm" novalidate>
 
               <!-- FormSubmit Hidden Fields -->
               <input type="hidden" name="_subject" value="New Project Inquiry — Zenny Studios">
@@ -245,9 +164,12 @@
                   name="name"
                   id="name"
                   required
+                  autocomplete="name"
                   placeholder="What should we call you?"
+                  aria-required="true"
                   class="form-input w-full bg-card border-2 border-white/10 text-white placeholder-white/30 p-5 text-lg focus:outline-none focus:border-gold transition-all duration-300 rounded-none"
                 >
+                <p class="error-message" id="name-error" role="alert">Please enter your name</p>
               </div>
 
               <!-- Email -->
@@ -258,9 +180,13 @@
                   name="email"
                   id="email"
                   required
+                  autocomplete="email"
+                  inputmode="email"
                   placeholder="Where can we reach you?"
+                  aria-required="true"
                   class="form-input w-full bg-card border-2 border-white/10 text-white placeholder-white/30 p-5 text-lg focus:outline-none focus:border-gold transition-all duration-300 rounded-none"
                 >
+                <p class="error-message" id="email-error" role="alert">Please enter a valid email address</p>
               </div>
 
               <!-- Mobile Number -->
@@ -271,9 +197,13 @@
                   name="phone"
                   id="phone"
                   required
+                  autocomplete="tel"
+                  inputmode="tel"
                   placeholder="Preferably WhatsApp number"
+                  aria-required="true"
                   class="form-input w-full bg-card border-2 border-white/10 text-white placeholder-white/30 p-5 text-lg focus:outline-none focus:border-gold transition-all duration-300 rounded-none"
                 >
+                <p class="error-message" id="phone-error" role="alert">Please enter your phone number</p>
               </div>
 
               <!-- Company -->
@@ -283,6 +213,7 @@
                   type="text"
                   name="company"
                   id="company"
+                  autocomplete="organization"
                   placeholder="Your brand or business name"
                   class="form-input w-full bg-card border-2 border-white/10 text-white placeholder-white/30 p-5 text-lg focus:outline-none focus:border-gold transition-all duration-300 rounded-none"
                 >
@@ -295,7 +226,7 @@
                   name="service"
                   id="service"
                   class="form-input w-full bg-card border-2 border-white/10 text-white p-5 text-lg focus:outline-none focus:border-gold transition-all duration-300 rounded-none appearance-none cursor-pointer"
-                  style="background-image: url('data:image/svg+xml;utf8,<svg fill=\"%23F5C518\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M7 10l5 5 5-5z\"/></svg>'); background-repeat: no-repeat; background-position: right 1.5rem center; background-size: 1.5rem;"
+                  style="background-image: url('data:image/svg+xml;utf8,<svg fill='%23F5C518' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>'); background-repeat: no-repeat; background-position: right 1.5rem center; background-size: 1.5rem;"
                 >
                   <option value="" class="bg-card">Select a service</option>
                   <option value="Social Media Management" class="bg-card">Social Media Management</option>
@@ -314,20 +245,29 @@
                   id="message"
                   rows="6"
                   required
+                  aria-required="true"
                   placeholder="Tell us about your project, goals, and timeline..."
                   class="form-input w-full bg-card border-2 border-white/10 text-white placeholder-white/30 p-5 text-lg focus:outline-none focus:border-gold transition-all duration-300 rounded-none resize-none"
                 ></textarea>
+                <p class="error-message" id="message-error" role="alert">Please tell us about your project</p>
               </div>
 
               <!-- Submit Button -->
               <button
                 type="submit"
-                class="magnetic-btn w-full bg-gold text-dark font-display text-2xl py-5 hover:bg-white transition-all duration-300"
+                id="submitBtn"
+                class="magnetic-btn w-full bg-gold text-dark font-display text-2xl py-5 hover:bg-white transition-all duration-300 flex items-center justify-center gap-3"
               >
-                Send It →
+                <span id="submitText">Send It →</span>
+                <span id="submitSpinner" class="hidden">
+                  <svg class="animate-spin h-6 w-6 text-dark" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"></path>
+                  </svg>
+                </span>
               </button>
 
-              <p class="text-white/30 text-sm text-center">
+              <p class="text-white/30 text-sm text-center" id="formStatus">
                 We typically respond within 24 hours. No spam, ever.
               </p>
             </form>
@@ -480,11 +420,11 @@
         <div class="text-center md:text-left" data-aos="fade-up" data-aos-delay="200">
           <h4 class="font-display text-gold text-lg tracking-wider mb-6">Connect</h4>
           <div class="flex flex-col items-center md:items-start gap-4">
-            <a href="https://instagram.com/zennystudios" target="_blank" class="text-white/50 hover:text-gold transition-all duration-300 text-sm flex items-center gap-3 w-fit">
+            <a href="https://instagram.com/zennystudios" target="_blank" aria-label="Follow us on Instagram" class="text-white/50 hover:text-gold transition-all duration-300 text-sm flex items-center gap-3 w-fit">
               <span class="footer-social-icon text-base">📸</span>
               @zennystudios
             </a>
-            <a href="contact.html" class="text-white/50 hover:text-gold transition-all duration-300 text-sm flex items-center gap-3 w-fit">
+            <a href="contact.html" aria-label="Start a project" class="text-white/50 hover:text-gold transition-all duration-300 text-sm flex items-center gap-3 w-fit">
               <span class="footer-social-icon text-base">✉️</span>
               Start a Project
             </a>
@@ -503,13 +443,6 @@
   </footer>
 
   <script>
-    // Initialize AOS
-    AOS.init({
-      duration: 800,
-      once: true,
-      offset: 100
-    });
-
     // Custom Cursor
     const cursorDot = document.querySelector('.cursor-dot');
     const cursorRing = document.querySelector('.cursor-ring');
@@ -555,20 +488,49 @@
       }
     });
 
-    // Mobile menu
+    // Mobile menu with focus trap
     const hamburger = document.getElementById('hamburger');
     const mobileMenu = document.getElementById('mobile-menu');
-    const mobileLinks = document.querySelectorAll('#mobile-menu a');
+    const mobileLinks = document.querySelectorAll('#mobile-menu a, #mobile-menu button');
+
+    function openMobileMenu() {
+      mobileMenu.setAttribute('aria-hidden', 'false');
+      setTimeout(() => {
+        const first = mobileMenu.querySelector('a, button');
+        if (first) first.focus();
+      }, 100);
+    }
+
+    function closeMobileMenu() {
+      mobileMenu.setAttribute('aria-hidden', 'true');
+      hamburger.focus();
+    }
 
     hamburger.addEventListener('click', () => {
-      mobileMenu.classList.toggle('opacity-0');
-      mobileMenu.classList.toggle('pointer-events-none');
+      const isOpen = mobileMenu.getAttribute('aria-hidden') === 'false';
+      isOpen ? closeMobileMenu() : openMobileMenu();
     });
 
     mobileLinks.forEach(link => {
-      link.addEventListener('click', () => {
-        mobileMenu.classList.add('opacity-0', 'pointer-events-none');
-      });
+      link.addEventListener('click', closeMobileMenu);
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && mobileMenu.getAttribute('aria-hidden') === 'false') {
+        closeMobileMenu();
+      }
+      if (e.key === 'Tab' && mobileMenu.getAttribute('aria-hidden') === 'false') {
+        const focusable = mobileMenu.querySelectorAll('a, button');
+        const first = focusable[0];
+        const last = focusable[focusable.length - 1];
+        if (e.shiftKey && document.activeElement === first) {
+          e.preventDefault();
+          last.focus();
+        } else if (!e.shiftKey && document.activeElement === last) {
+          e.preventDefault();
+          first.focus();
+        }
+      }
     });
 
     // Magnetic buttons
@@ -585,15 +547,75 @@
       });
     });
 
-    // Form input focus effects
-    const formInputs = document.querySelectorAll('.form-input');
-    formInputs.forEach(input => {
-      input.addEventListener('focus', () => {
-        input.parentElement.classList.add('focused');
+    // Form validation and submission
+    const contactForm = document.getElementById('contactForm');
+    const submitBtn = document.getElementById('submitBtn');
+    const submitText = document.getElementById('submitText');
+    const submitSpinner = document.getElementById('submitSpinner');
+    const formStatus = document.getElementById('formStatus');
+
+    function validateField(input) {
+      const group = input.closest('.group');
+      const errorMsg = group.querySelector('.error-message');
+      const value = input.value.trim();
+
+      if (!input.required) return true;
+
+      let valid = true;
+      if (!value) {
+        valid = false;
+      } else if (input.type === 'email' && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
+        valid = false;
+      } else if (input.type === 'tel' && value.length < 6) {
+        valid = false;
+      }
+
+      input.setAttribute('aria-invalid', String(!valid));
+      if (errorMsg) {
+        if (valid) {
+          errorMsg.classList.remove('visible');
+          input.classList.remove('error');
+          input.setAttribute('aria-describedby', '');
+        } else {
+          errorMsg.classList.add('visible');
+          input.classList.add('error');
+          input.setAttribute('aria-describedby', errorMsg.id);
+        }
+      }
+      return valid;
+    }
+
+    document.querySelectorAll('#contactForm input[required], #contactForm textarea[required]').forEach(input => {
+      input.addEventListener('blur', function() { validateField(this); });
+      input.addEventListener('input', function() {
+        if (this.getAttribute('aria-invalid') === 'true') validateField(this);
       });
-      input.addEventListener('blur', () => {
-        input.parentElement.classList.remove('focused');
+    });
+
+    contactForm.addEventListener('submit', function(e) {
+      let allValid = true;
+      document.querySelectorAll('#contactForm input[required], #contactForm textarea[required]').forEach(input => {
+        if (!validateField(input)) allValid = false;
       });
+
+      if (!allValid) {
+        e.preventDefault();
+        const firstError = document.querySelector('[aria-invalid="true"]');
+        if (firstError) firstError.focus();
+        formStatus.textContent = 'Please fill in all required fields correctly.';
+        formStatus.className = 'text-red-400 text-sm text-center';
+        return;
+      }
+
+      // Loading state
+      submitBtn.disabled = true;
+      submitBtn.classList.add('opacity-80', 'cursor-not-allowed');
+      submitText.classList.add('hidden');
+      submitSpinner.classList.remove('hidden');
+      formStatus.textContent = 'Sending your message...';
+      formStatus.className = 'text-gold text-sm text-center';
+
+      // FormSubmit will handle the actual redirect
     });
   </script>
 </body>

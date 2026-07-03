@@ -3,6 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="dark light">
+  <meta name="theme-color" content="#0a0a0a">
   <meta name="description" content="Zenny Studios — Bengaluru's boldest creative agency. Three steps ahead in social media, content creation, and branding.">
   <title>Zenny Studios | Three Steps Ahead</title>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎬</text></svg>">
@@ -10,14 +12,10 @@
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
 
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
-
-  <!-- AOS -->
-  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 
   <!-- Theme -->
   <link rel="stylesheet" href="css/theme.css">
@@ -42,59 +40,7 @@
   </script>
 
   <style>
-    @keyframes marquee {
-      0% { transform: translateX(0); }
-      100% { transform: translateX(-50%); }
-    }
-    .animate-marquee {
-      animation: marquee 20s linear infinite;
-    }
-
-    /* Custom Cursor */
-    .cursor-dot {
-      width: 8px;
-      height: 8px;
-      background: #F5C518;
-      border-radius: 50%;
-      position: fixed;
-      pointer-events: none;
-      z-index: 9999;
-      transition: transform 0.1s ease;
-    }
-    .cursor-ring {
-      width: 40px;
-      height: 40px;
-      border: 1px solid rgba(245, 197, 24, 0.5);
-      border-radius: 50%;
-      position: fixed;
-      pointer-events: none;
-      z-index: 9998;
-      transition: all 0.15s ease-out;
-    }
-    .cursor-ring.hover {
-      transform: scale(1.5);
-      border-color: #F5C518;
-      background: rgba(245, 197, 24, 0.1);
-    }
-
-    /* Text Gradient */
-    .text-gradient {
-      background: linear-gradient(135deg, #F5C518 0%, #fff 50%, #F5C518 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      background-size: 200% auto;
-      animation: textShine 3s ease-in-out infinite;
-    }
-    @keyframes textShine {
-      0%, 100% { background-position: 0% center; }
-      50% { background-position: 200% center; }
-    }
-
-    /* Magnetic Button */
-    .magnetic-btn {
-      transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    }
+    /* ========== INDEX PAGE SPECIFIC STYLES ========== */
 
     /* Glitch Effect */
     .glitch-text {
@@ -124,41 +70,6 @@
       to { transform: translateY(0); }
     }
 
-    /* Card Tilt Effect */
-    .tilt-card {
-      transform-style: preserve-3d;
-      transition: transform 0.5s ease;
-    }
-
-    /* Scroll Progress */
-    .scroll-progress {
-      position: fixed;
-      top: 0;
-      left: 0;
-      height: 3px;
-      background: linear-gradient(90deg, #F5C518, #fff);
-      z-index: 9999;
-      transform-origin: left;
-    }
-
-    /* Floating Animation */
-    .float {
-      animation: float 6s ease-in-out infinite;
-    }
-    @keyframes float {
-      0%, 100% { transform: translateY(0px); }
-      50% { transform: translateY(-20px); }
-    }
-
-    /* Pulse Glow */
-    .pulse-glow {
-      animation: pulseGlow 2s ease-in-out infinite;
-    }
-    @keyframes pulseGlow {
-      0%, 100% { box-shadow: 0 0 20px rgba(245, 197, 24, 0.3); }
-      50% { box-shadow: 0 0 40px rgba(245, 197, 24, 0.6); }
-    }
-
     /* Letter Spacing Animation */
     .expand-text {
       transition: letter-spacing 0.3s ease;
@@ -167,35 +78,10 @@
       letter-spacing: 0.2em;
     }
 
-    /* Underline Animation */
-    .animated-underline {
-      position: relative;
-    }
-    .animated-underline::after {
-      content: '';
-      position: absolute;
-      bottom: -4px;
-      left: 0;
-      width: 0;
-      height: 2px;
-      background: #F5C518;
-      transition: width 0.3s ease;
-    }
-    .animated-underline:hover::after {
-      width: 100%;
-    }
-
     /* Parallax Layer */
     .parallax-layer {
       will-change: transform;
     }
-
-    /* Hide cursor on touch devices */
-    @media (hover: none) {
-      .cursor-dot, .cursor-ring { display: none; }
-    }
-
-    /* ========== ENHANCED HERO STYLES ========== */
 
     /* Split Text Reveal */
     .split-text {
@@ -243,7 +129,6 @@
       -webkit-text-fill-color: #F5C518;
       color: #F5C518;
     }
-    /* Fallback for browsers without text-stroke support */
     @supports not (-webkit-text-stroke: 1px #F5C518) {
       .stroke-text {
         color: #F5C518;
@@ -283,43 +168,6 @@
       to { transform: rotate(360deg); }
     }
 
-    /* Typewriter Effect */
-    .typewriter {
-      display: inline-block;
-      overflow: hidden;
-      border-right: 3px solid #F5C518;
-      white-space: nowrap;
-      animation: typing 3s steps(30) forwards, blink 0.8s step-end infinite;
-    }
-    @keyframes typing {
-      from { width: 0; }
-      to { width: 100%; }
-    }
-    @keyframes blink {
-      50% { border-color: transparent; }
-    }
-
-    /* Rotating Words */
-    .rotating-words {
-      display: inline-flex;
-      height: 1.2em;
-      overflow: hidden;
-      vertical-align: baseline;
-      align-items: baseline;
-    }
-    .rotating-words span {
-      display: block;
-      animation: rotateWords 8s infinite;
-      line-height: 1.2;
-    }
-    @keyframes rotateWords {
-      0%, 20% { transform: translateY(0); }
-      25%, 45% { transform: translateY(-100%); }
-      50%, 70% { transform: translateY(-200%); }
-      75%, 95% { transform: translateY(-300%); }
-      100% { transform: translateY(0); }
-    }
-
     /* Hero Number */
     .hero-number {
       font-size: clamp(8rem, 22vw, 30rem);
@@ -350,20 +198,6 @@
       0%, 100% { box-shadow: 0 0 10px rgba(245, 197, 24, 0.6), 0 0 20px rgba(245, 197, 24, 0.4), 0 0 30px rgba(245, 197, 24, 0.2); }
       50% { box-shadow: 0 0 15px rgba(245, 197, 24, 0.8), 0 0 30px rgba(245, 197, 24, 0.6), 0 0 45px rgba(245, 197, 24, 0.4); }
     }
-    @keyframes glowPulse {
-      0%, 100% { text-shadow: 0 0 20px rgba(245, 197, 24, 0); }
-      50% { text-shadow: 0 0 40px rgba(245, 197, 24, 0.5), 0 0 80px rgba(245, 197, 24, 0.3); }
-    }
-
-    /* Noise Overlay */
-    .noise-overlay {
-      position: absolute;
-      inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
-      opacity: 0.03;
-      pointer-events: none;
-      z-index: 1;
-    }
 
     /* Scroll CTA */
     .scroll-cta {
@@ -382,20 +216,12 @@
       background: linear-gradient(to bottom, #F5C518 50%, transparent 100%);
       animation: scrollLine 2s ease-in-out infinite;
     }
-    @keyframes scrollLine {
-      0%, 100% { transform: scaleY(1); opacity: 1; }
-      50% { transform: scaleY(0.5); opacity: 0.5; }
-    }
 
     /* Interactive Word */
     .interactive-word {
       display: inline-block;
       transition: all 0.3s ease;
       cursor: default;
-    }
-    .interactive-word:hover {
-      color: #F5C518;
-      transform: translateY(-5px) scale(1.05);
     }
 
     /* Decorative Line */
@@ -410,7 +236,7 @@
       to { width: 100px; opacity: 1; }
     }
 
-    /* Additional Hero Animations */
+    /* Hero Animations */
     @keyframes fadeSlideUp {
       to { opacity: 1; transform: translateY(0); }
     }
@@ -442,19 +268,19 @@
 
         <!-- Desktop Nav -->
         <div class="hidden md:flex items-center gap-8">
-          <a href="index.html" class="text-gold transition-all duration-300 animated-underline">Home</a>
-          <a href="work.html" class="text-white/70 hover:text-gold transition-all duration-300 animated-underline">Work</a>
-          <a href="services.html" class="text-white/70 hover:text-gold transition-all duration-300 animated-underline">Services</a>
-          <a href="#about" class="text-white/70 hover:text-gold transition-all duration-300 animated-underline">About</a>
+          <a href="index.html" class="text-gold transition-all duration-300 animated-underline leading-none py-2" aria-current="page">Home</a>
+          <a href="work.html" class="text-white/70 hover:text-gold transition-all duration-300 animated-underline leading-none py-2">Work</a>
+          <a href="services.html" class="text-white/70 hover:text-gold transition-all duration-300 animated-underline leading-none py-2">Services</a>
+          <a href="#about" class="text-white/70 hover:text-gold transition-all duration-300 animated-underline leading-none py-2">About</a>
         </div>
 
         <!-- Theme + CTA -->
-        <div class="hidden md:flex items-center gap-4">
+        <div class="hidden md:flex items-center gap-3">
           <button type="button" data-theme-toggle class="theme-toggle" aria-label="Toggle light/dark mode">
             <svg class="icon-sun" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
             <svg class="icon-moon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg>
           </button>
-          <a href="contact.html" class="magnetic-btn border border-gold text-gold px-6 py-2 hover:bg-gold hover:text-dark transition-all duration-300 inline-block">Let's Talk</a>
+          <a href="contact.html" class="magnetic-btn border border-gold text-gold px-6 py-[9px] hover:bg-gold hover:text-dark transition-all duration-300 inline-block leading-none text-sm font-semibold">Let's Talk</a>
         </div>
 
         <!-- Mobile Theme + Hamburger -->
@@ -463,7 +289,7 @@
             <svg class="icon-sun" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
             <svg class="icon-moon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg>
           </button>
-        <button id="hamburger" class="flex flex-col gap-1.5 p-2" aria-label="Menu">
+        <button type="button" id="hamburger" class="flex flex-col gap-1.5 p-2" aria-label="Menu">
           <span class="w-6 h-0.5 bg-white transition-all duration-300"></span>
           <span class="w-6 h-0.5 bg-white transition-all duration-300"></span>
           <span class="w-6 h-0.5 bg-white transition-all duration-300"></span>
@@ -474,7 +300,7 @@
   </nav>
 
   <!-- Mobile Menu Overlay -->
-  <div id="mobile-menu" class="fixed inset-0 bg-dark z-40 flex flex-col items-center justify-center gap-8 opacity-0 pointer-events-none transition-all duration-300">
+  <div id="mobile-menu" role="dialog" aria-modal="true" aria-hidden="true" class="fixed inset-0 bg-dark z-40 flex flex-col items-center justify-center gap-8 opacity-0 pointer-events-none transition-all duration-300">
     <a href="index.html" class="text-3xl font-display text-gold transition-all duration-300">Home</a>
     <a href="work.html" class="text-3xl font-display text-white hover:text-gold transition-all duration-300">Work</a>
     <a href="services.html" class="text-3xl font-display text-white hover:text-gold transition-all duration-300">Services</a>
@@ -655,7 +481,7 @@
             <div class="w-16 h-16 bg-gold/40 rounded-full flex items-center justify-center mb-8 group-hover:scale-110 group-hover:bg-gold/20 transition-all duration-300">
               <span class="text-gold text-2xl font-display">02</span>
             </div>
-            <h3 class="font-display text-3xl md:text-4xl text-whiteIn mb-4 group-hover:text-gold transition-colors duration-300">Data Analytics & Digital Strategy</h3>
+            <h3 class="font-display text-3xl md:text-4xl text-white mb-4 group-hover:text-gold transition-colors duration-300">Data Analytics & Digital Strategy</h3>
             <p class="text-white/60 text-lg">Insights that drive decisions. We decode audience behaviour, optimise campaigns, and build digital roadmaps that turn data into dominance.</p>
           </a>
 
@@ -774,31 +600,31 @@
       <div class="clients-marquee-viewport py-5" style="background: var(--color-client-track, rgba(255,255,255,0.1));">
         <div class="clients-marquee-track">
           <!-- Set 1 -->
-          <div class="client-logo-slot"><img src="assets/images/Clients_Logo/Client1.png" alt="Client 1"></div>
-          <div class="client-logo-slot"><img src="assets/images/Clients_Logo/Client2.jpeg" alt="Client 2"></div>
-          <div class="client-logo-slot"><img src="assets/images/Clients_Logo/Client3.png" alt="Client 3"></div>
-          <div class="client-logo-slot"><img src="assets/images/Clients_Logo/Client4.jpg" alt="Client 4"></div>
-          <div class="client-logo-slot"><img src="assets/images/Clients_Logo/Client5.jpg" alt="Client 5"></div>
-          <div class="client-logo-slot"><img src="assets/images/Clients_Logo/Client6.png" alt="Client 6"></div>
-          <div class="client-logo-slot"><img src="assets/images/Clients_Logo/Client7.png" alt="Client 7" onerror="this.style.visibility='hidden'"></div>
-          <div class="client-logo-slot"><img src="assets/images/Clients_Logo/Client8.png" alt="Client 8" onerror="this.style.visibility='hidden'"></div>
-          <div class="client-logo-slot"><img src="assets/images/Clients_Logo/Client9.png" alt="Client 9" onerror="this.style.visibility='hidden'"></div>
-          <div class="client-logo-slot"><img src="assets/images/Clients_Logo/Client10.png" alt="Client 10" onerror="this.style.visibility='hidden'"></div>
-          <div class="client-logo-slot"><img src="assets/images/Clients_Logo/Client11.png" alt="Client 11" onerror="this.style.visibility='hidden'"></div>
-          <div class="client-logo-slot"><img src="assets/images/Clients_Logo/Client12.png" alt="Client 12" onerror="this.style.visibility='hidden'"></div>
+          <div class="client-logo-slot"><img src="assets/images/Clients_Logo/Client1.png" alt="Client 1" loading="lazy"></div>
+          <div class="client-logo-slot"><img src="assets/images/Clients_Logo/Client2.jpeg" alt="Client 2" loading="lazy"></div>
+          <div class="client-logo-slot"><img src="assets/images/Clients_Logo/Client3.png" alt="Client 3" loading="lazy"></div>
+          <div class="client-logo-slot"><img src="assets/images/Clients_Logo/Client4.jpg" alt="Client 4" loading="lazy"></div>
+          <div class="client-logo-slot"><img src="assets/images/Clients_Logo/Client5.jpg" alt="Client 5" loading="lazy"></div>
+          <div class="client-logo-slot"><img src="assets/images/Clients_Logo/Client6.png" alt="Client 6" loading="lazy"></div>
+          <div class="client-logo-slot"><img src="assets/images/Clients_Logo/Client7.png" alt="Client 7" loading="lazy" onerror="this.style.visibility='hidden'"></div>
+          <div class="client-logo-slot"><img src="assets/images/Clients_Logo/Client8.png" alt="Client 8" loading="lazy" onerror="this.style.visibility='hidden'"></div>
+          <div class="client-logo-slot"><img src="assets/images/Clients_Logo/Client9.png" alt="Client 9" loading="lazy" onerror="this.style.visibility='hidden'"></div>
+          <div class="client-logo-slot"><img src="assets/images/Clients_Logo/Client10.png" alt="Client 10" loading="lazy" onerror="this.style.visibility='hidden'"></div>
+          <div class="client-logo-slot"><img src="assets/images/Clients_Logo/Client11.png" alt="Client 11" loading="lazy" onerror="this.style.visibility='hidden'"></div>
+          <div class="client-logo-slot"><img src="assets/images/Clients_Logo/Client12.png" alt="Client 12" loading="lazy" onerror="this.style.visibility='hidden'"></div>
           <!-- Set 2 (duplicate for seamless loop) -->
-          <div class="client-logo-slot"><img src="assets/images/Clients_Logo/Client1.png" alt="Client 1"></div>
-          <div class="client-logo-slot"><img src="assets/images/Clients_Logo/Client2.jpeg" alt="Client 2"></div>
-          <div class="client-logo-slot"><img src="assets/images/Clients_Logo/Client3.png" alt="Client 3"></div>
-          <div class="client-logo-slot"><img src="assets/images/Clients_Logo/Client4.jpg" alt="Client 4"></div>
-          <div class="client-logo-slot"><img src="assets/images/Clients_Logo/Client5.jpg" alt="Client 5"></div>
-          <div class="client-logo-slot"><img src="assets/images/Clients_Logo/Client6.png" alt="Client 6"></div>
-          <div class="client-logo-slot"><img src="assets/images/Clients_Logo/Client7.png" alt="Client 7" onerror="this.style.visibility='hidden'"></div>
-          <div class="client-logo-slot"><img src="assets/images/Clients_Logo/Client8.png" alt="Client 8" onerror="this.style.visibility='hidden'"></div>
-          <div class="client-logo-slot"><img src="assets/images/Clients_Logo/Client9.png" alt="Client 9" onerror="this.style.visibility='hidden'"></div>
-          <div class="client-logo-slot"><img src="assets/images/Clients_Logo/Client10.png" alt="Client 10" onerror="this.style.visibility='hidden'"></div>
-          <div class="client-logo-slot"><img src="assets/images/Clients_Logo/Client11.png" alt="Client 11" onerror="this.style.visibility='hidden'"></div>
-          <div class="client-logo-slot"><img src="assets/images/Clients_Logo/Client12.png" alt="Client 12" onerror="this.style.visibility='hidden'"></div>
+          <div class="client-logo-slot"><img src="assets/images/Clients_Logo/Client1.png" alt="Client 1" loading="lazy"></div>
+          <div class="client-logo-slot"><img src="assets/images/Clients_Logo/Client2.jpeg" alt="Client 2" loading="lazy"></div>
+          <div class="client-logo-slot"><img src="assets/images/Clients_Logo/Client3.png" alt="Client 3" loading="lazy"></div>
+          <div class="client-logo-slot"><img src="assets/images/Clients_Logo/Client4.jpg" alt="Client 4" loading="lazy"></div>
+          <div class="client-logo-slot"><img src="assets/images/Clients_Logo/Client5.jpg" alt="Client 5" loading="lazy"></div>
+          <div class="client-logo-slot"><img src="assets/images/Clients_Logo/Client6.png" alt="Client 6" loading="lazy"></div>
+          <div class="client-logo-slot"><img src="assets/images/Clients_Logo/Client7.png" alt="Client 7" loading="lazy" onerror="this.style.visibility='hidden'"></div>
+          <div class="client-logo-slot"><img src="assets/images/Clients_Logo/Client8.png" alt="Client 8" loading="lazy" onerror="this.style.visibility='hidden'"></div>
+          <div class="client-logo-slot"><img src="assets/images/Clients_Logo/Client9.png" alt="Client 9" loading="lazy" onerror="this.style.visibility='hidden'"></div>
+          <div class="client-logo-slot"><img src="assets/images/Clients_Logo/Client10.png" alt="Client 10" loading="lazy" onerror="this.style.visibility='hidden'"></div>
+          <div class="client-logo-slot"><img src="assets/images/Clients_Logo/Client11.png" alt="Client 11" loading="lazy" onerror="this.style.visibility='hidden'"></div>
+          <div class="client-logo-slot"><img src="assets/images/Clients_Logo/Client12.png" alt="Client 12" loading="lazy" onerror="this.style.visibility='hidden'"></div>
         </div>
       </div>
     </section>
@@ -813,7 +639,7 @@
           <!-- Co-Founder 1 -->
           <div class="team-card">
             <div class="team-portrait">
-              <img src="assets/images/team/co-founder.png" alt="Co-Founder" onerror="this.remove(); this.parentElement.insertAdjacentHTML('beforeend','<span class=\'team-portrait-placeholder\'>Co-Founder</span>')">
+              <img src="assets/images/team/co-founder.png" alt="Co-Founder" loading="lazy" onerror="this.remove(); this.parentElement.insertAdjacentHTML('beforeend','<span class=\'team-portrait-placeholder\'>Co-Founder</span>')">
             </div>
             <div class="team-card-label">
               <p class="role-title">Co-Founder</p>
@@ -824,7 +650,7 @@
           <!-- Co-Founder 2 -->
           <div class="team-card">
             <div class="team-portrait">
-              <img src="assets/images/team/co-founder-2.png" alt="Co-Founder" onerror="this.remove(); this.parentElement.insertAdjacentHTML('beforeend','<span class=\'team-portrait-placeholder\'>Co-Founder</span>')">
+              <img src="assets/images/team/co-founder-2.png" alt="Co-Founder" loading="lazy" onerror="this.remove(); this.parentElement.insertAdjacentHTML('beforeend','<span class=\'team-portrait-placeholder\'>Co-Founder</span>')">
             </div>
             <div class="team-card-label">
               <p class="role-title">Co-Founder</p>
@@ -835,7 +661,7 @@
           <!-- Co-Founder 3 -->
           <div class="team-card">
             <div class="team-portrait">
-              <img src="assets/images/team/co-founder-3.png" alt="Co-Founder" onerror="this.remove(); this.parentElement.insertAdjacentHTML('beforeend','<span class=\'team-portrait-placeholder\'>Co-Founder</span>')">
+              <img src="assets/images/team/co-founder-3.png" alt="Co-Founder" loading="lazy" onerror="this.remove(); this.parentElement.insertAdjacentHTML('beforeend','<span class=\'team-portrait-placeholder\'>Co-Founder</span>')">
             </div>
             <div class="team-card-label">
               <p class="role-title">Co-Founder</p>
@@ -937,11 +763,11 @@
         <div class="text-center md:text-left" data-aos="fade-up" data-aos-delay="200">
           <h4 class="font-display text-gold text-lg tracking-wider mb-6">Connect</h4>
           <div class="flex flex-col items-center md:items-start gap-4">
-            <a href="https://instagram.com/zennystudios" target="_blank" class="text-white/50 hover:text-gold transition-all duration-300 text-sm flex items-center gap-3 w-fit">
+            <a href="https://instagram.com/zennystudios" target="_blank" aria-label="Follow us on Instagram" class="text-white/50 hover:text-gold transition-all duration-300 text-sm flex items-center gap-3 w-fit">
               <span class="footer-social-icon text-base">📸</span>
               @zennystudios
             </a>
-            <a href="contact.html" class="text-white/50 hover:text-gold transition-all duration-300 text-sm flex items-center gap-3 w-fit">
+            <a href="contact.html" aria-label="Start a project" class="text-white/50 hover:text-gold transition-all duration-300 text-sm flex items-center gap-3 w-fit">
               <span class="footer-social-icon text-base">✉️</span>
               Start a Project
             </a>
@@ -962,13 +788,6 @@
   </footer>
 
   <script>
-    // Initialize AOS
-    AOS.init({
-      duration: 800,
-      once: true,
-      offset: 100
-    });
-
     // Hero Mouse-Following Gradient
     const heroGradient = document.getElementById('heroGradient');
     const heroSection = document.getElementById('hero');
@@ -1051,22 +870,51 @@
       }
     });
 
-    // Mobile menu toggle
+    // Mobile menu with focus trap
     const hamburger = document.getElementById('hamburger');
     const mobileMenu = document.getElementById('mobile-menu');
-    const mobileLinks = document.querySelectorAll('#mobile-menu a');
+    const mobileLinks = document.querySelectorAll('#mobile-menu a, #mobile-menu button');
+
+    function openMobileMenu() {
+      mobileMenu.setAttribute('aria-hidden', 'false');
+      hamburger.classList.add('active');
+      setTimeout(() => {
+        const first = mobileMenu.querySelector('a, button');
+        if (first) first.focus();
+      }, 100);
+    }
+
+    function closeMobileMenu() {
+      mobileMenu.setAttribute('aria-hidden', 'true');
+      hamburger.classList.remove('active');
+      hamburger.focus();
+    }
 
     hamburger.addEventListener('click', () => {
-      mobileMenu.classList.toggle('opacity-0');
-      mobileMenu.classList.toggle('pointer-events-none');
-      hamburger.classList.toggle('active');
+      const isOpen = mobileMenu.getAttribute('aria-hidden') === 'false';
+      isOpen ? closeMobileMenu() : openMobileMenu();
     });
 
     mobileLinks.forEach(link => {
-      link.addEventListener('click', () => {
-        mobileMenu.classList.add('opacity-0', 'pointer-events-none');
-        hamburger.classList.remove('active');
-      });
+      link.addEventListener('click', closeMobileMenu);
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && mobileMenu.getAttribute('aria-hidden') === 'false') {
+        closeMobileMenu();
+      }
+      if (e.key === 'Tab' && mobileMenu.getAttribute('aria-hidden') === 'false') {
+        const focusable = mobileMenu.querySelectorAll('a, button');
+        const first = focusable[0];
+        const last = focusable[focusable.length - 1];
+        if (e.shiftKey && document.activeElement === first) {
+          e.preventDefault();
+          last.focus();
+        } else if (!e.shiftKey && document.activeElement === last) {
+          e.preventDefault();
+          first.focus();
+        }
+      }
     });
 
     // Magnetic Button Effect

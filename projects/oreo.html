@@ -8,10 +8,9 @@
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎬</text></svg>">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
   <link rel="stylesheet" href="../css/theme.css">
   <script src="../js/theme.js"></script>
   <script>
@@ -26,11 +25,6 @@
   </script>
   <style>
     .scroll-progress { position: fixed; top: 0; left: 0; height: 3px; background: linear-gradient(90deg, #F5C518, #fff); z-index: 9999; }
-    .animated-underline { position: relative; }
-    .animated-underline::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 2px; background: #F5C518; transition: width 0.3s ease; }
-    .animated-underline:hover::after { width: 100%; }
-    .text-gradient { background: linear-gradient(135deg, #F5C518 0%, #fff 50%, #F5C518 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; background-size: 200% auto; animation: textShine 3s ease-in-out infinite; }
-    @keyframes textShine { 0%, 100% { background-position: 0% center; } 50% { background-position: 200% center; } }
   </style>
 </head>
 <body class="bg-dark font-body text-white antialiased">
@@ -47,24 +41,24 @@
         </a>
         
         <div class="hidden md:flex items-center gap-8">
-          <a href="../index.html" class="text-white/70 hover:text-gold transition-all duration-300 animated-underline">Home</a>
-          <a href="../work.html" class="text-gold transition-all duration-300 animated-underline">Work</a>
-          <a href="../services.html" class="text-white/70 hover:text-gold transition-all duration-300 animated-underline">Services</a>
-          <a href="../index.html#about" class="text-white/70 hover:text-gold transition-all duration-300 animated-underline">About</a>
+          <a href="../index.html" class="text-white/70 hover:text-gold transition-all duration-300 animated-underline leading-none py-2">Home</a>
+          <a href="../work.html" class="text-gold transition-all duration-300 animated-underline leading-none py-2">Work</a>
+          <a href="../services.html" class="text-white/70 hover:text-gold transition-all duration-300 animated-underline leading-none py-2">Services</a>
+          <a href="../index.html#about" class="text-white/70 hover:text-gold transition-all duration-300 animated-underline leading-none py-2">About</a>
         </div>
-        <div class="hidden md:flex items-center gap-4">
+        <div class="hidden md:flex items-center gap-3">
           <button type="button" data-theme-toggle class="theme-toggle" aria-label="Toggle light/dark mode">
             <svg class="icon-sun" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
             <svg class="icon-moon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg>
           </button>
-          <a href="../contact.html" class="border border-gold text-gold px-6 py-2 hover:bg-gold hover:text-dark transition-all duration-300 inline-block">Let's Talk</a>
+          <a href="../contact.html" class="border border-gold text-gold px-6 py-[9px] hover:bg-gold hover:text-dark transition-all duration-300 inline-block leading-none text-sm font-semibold">Let's Talk</a>
         </div>
         <div class="flex md:hidden items-center gap-3">
           <button type="button" data-theme-toggle class="theme-toggle" aria-label="Toggle light/dark mode">
             <svg class="icon-sun" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
             <svg class="icon-moon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg>
           </button>
-          <button id="hamburger" class="flex flex-col gap-1.5 p-2" aria-label="Menu">
+          <button type="button" id="hamburger" class="flex flex-col gap-1.5 p-2" aria-label="Menu">
             <span class="w-6 h-0.5 bg-white transition-all duration-300"></span>
             <span class="w-6 h-0.5 bg-white transition-all duration-300"></span>
             <span class="w-6 h-0.5 bg-white transition-all duration-300"></span>
@@ -74,10 +68,11 @@
     </div>
   </nav>
 
-  <div id="mobile-menu" class="fixed inset-0 bg-dark z-40 flex flex-col items-center justify-center gap-8 opacity-0 pointer-events-none transition-all duration-300">
+  <div id="mobile-menu" role="dialog" aria-modal="true" aria-hidden="true" class="fixed inset-0 bg-dark z-40 flex flex-col items-center justify-center gap-8 opacity-0 pointer-events-none transition-all duration-300">
     <a href="../index.html" class="text-3xl font-display text-white hover:text-gold transition-all duration-300">Home</a>
     <a href="../work.html" class="text-3xl font-display text-gold transition-all duration-300">Work</a>
     <a href="../services.html" class="text-3xl font-display text-white hover:text-gold transition-all duration-300">Services</a>
+    <a href="../index.html#about" class="text-3xl font-display text-white hover:text-gold transition-all duration-300">About</a>
     <a href="../contact.html" class="mt-8 border border-gold text-gold px-8 py-3 text-xl hover:bg-gold hover:text-dark transition-all duration-300">Let's Talk</a>
   </div>
 
@@ -97,7 +92,7 @@
 
     <section class="bg-[#0d0d0d]">
       <div class="aspect-video max-w-7xl mx-auto relative overflow-hidden bg-gradient-to-br from-[#003087] to-[#0047CC]" data-aos="fade-up">
-        <img src="../assets/projects/oreo.jpg" alt="Oreo campaign cover" class="w-full h-full object-cover" onerror="this.style.display='none'">
+        <img src="../assets/projects/oreo.jpg" alt="Oreo campaign cover" loading="lazy" class="w-full h-full object-cover" onerror="this.style.display='none'">
       </div>
     </section>
 
@@ -136,14 +131,13 @@
   <footer class="bg-[#050505] border-t border-white/10 py-12">
     <div class="max-w-7xl mx-auto px-6 text-center">
       <a href="../index.html" class="inline-flex items-center gap-3 mb-4">
-        <img src="../assets/images/Zenny_Studios_Logo/ZennyStudios_logo.png" alt="Zenny Studios" class="h-10 w-auto">
+        <img src="../assets/images/Zenny_Studios_Logo/ZennyStudios_logo.png" alt="Zenny Studios" loading="lazy" class="h-10 w-auto">
       </a>
       <p class="text-white/30 text-sm">© 2025 Zenny Studios. All rights reserved.</p>
     </div>
   </footer>
 
   <script>
-    AOS.init({ disable: true });
     const scrollProgress = document.getElementById('scrollProgress');
     window.addEventListener('scroll', () => {
       const docHeight = document.documentElement.scrollHeight - window.innerHeight;
@@ -156,9 +150,23 @@
     });
     const hamburger = document.getElementById('hamburger');
     const mobileMenu = document.getElementById('mobile-menu');
+    const mobileLinks = document.querySelectorAll('#mobile-menu a, #mobile-menu button');
+
+    function openMobileMenu() {
+      mobileMenu.setAttribute('aria-hidden', 'false');
+    }
+
+    function closeMobileMenu() {
+      mobileMenu.setAttribute('aria-hidden', 'true');
+    }
+
     hamburger.addEventListener('click', () => {
-      mobileMenu.classList.toggle('opacity-0');
-      mobileMenu.classList.toggle('pointer-events-none');
+      const isOpen = mobileMenu.getAttribute('aria-hidden') === 'false';
+      isOpen ? closeMobileMenu() : openMobileMenu();
+    });
+
+    mobileLinks.forEach(link => {
+      link.addEventListener('click', closeMobileMenu);
     });
   </script>
 </body>

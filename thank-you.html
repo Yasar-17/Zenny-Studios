@@ -3,28 +3,22 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="dark light">
+  <meta name="theme-color" content="#0a0a0a">
   <meta name="description" content="Thank you for contacting Zenny Studios. We'll be in touch soon.">
   <title>Message Received | Zenny Studios</title>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎬</text></svg>">
 
-  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
 
-  <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
 
-  <!-- AOS -->
-  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
-  <!-- Theme -->
   <link rel="stylesheet" href="css/theme.css">
   <script src="js/theme.js"></script>
-
-  <!-- Confetti -->
-  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
   <script>
     tailwind.config = {
@@ -45,100 +39,77 @@
   </script>
 
   <style>
-    .cursor-dot {
-      width: 8px;
-      height: 8px;
-      background: #F5C518;
-      border-radius: 50%;
-      position: fixed;
-      pointer-events: none;
-      z-index: 9999;
-    }
-    .cursor-ring {
-      width: 40px;
-      height: 40px;
-      border: 1px solid rgba(245, 197, 24, 0.5);
-      border-radius: 50%;
-      position: fixed;
-      pointer-events: none;
-      z-index: 9998;
-      transition: all 0.15s ease-out;
-    }
-    .cursor-ring.hover {
-      transform: scale(1.5);
-      border-color: #F5C518;
-      background: rgba(245, 197, 24, 0.1);
-    }
-
-    .text-gradient {
-      background: linear-gradient(135deg, #F5C518 0%, #fff 50%, #F5C518 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      background-size: 200% auto;
-      animation: textShine 3s ease-in-out infinite;
-    }
-    @keyframes textShine {
-      0%, 100% { background-position: 0% center; }
-      50% { background-position: 200% center; }
-    }
-
-    .animated-underline {
-      position: relative;
-    }
-    .animated-underline::after {
-      content: '';
-      position: absolute;
-      bottom: -4px;
-      left: 0;
-      width: 0;
-      height: 2px;
-      background: #F5C518;
-      transition: width 0.3s ease;
-    }
-    .animated-underline:hover::after {
-      width: 100%;
-    }
-
-    .magnetic-btn {
-      transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    }
-
-    .pulse-glow {
-      animation: pulseGlow 2s ease-in-out infinite;
-    }
-    @keyframes pulseGlow {
-      0%, 100% { box-shadow: 0 0 20px rgba(245, 197, 24, 0.3); }
-      50% { box-shadow: 0 0 40px rgba(245, 197, 24, 0.6); }
-    }
-
+    /* Success pop animation */
     .success-check {
-      animation: successPop 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+      animation: successPop 0.7s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+      opacity: 0;
+      transform: scale(0);
     }
     @keyframes successPop {
       0% { transform: scale(0); opacity: 0; }
-      50% { transform: scale(1.2); }
+      50% { transform: scale(1.12); opacity: 1; }
       100% { transform: scale(1); opacity: 1; }
     }
 
-    .float {
-      animation: float 4s ease-in-out infinite;
+    /* Staggered entrance */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(24px);
+      animation: fadeUp 0.6s ease forwards;
     }
-    @keyframes float {
-      0%, 100% { transform: translateY(0px); }
-      50% { transform: translateY(-15px); }
+    @keyframes fadeUp {
+      to { opacity: 1; transform: translateY(0); }
     }
 
-    @media (hover: none) {
-      .cursor-dot, .cursor-ring { display: none; }
+    /* Interactive stat hover */
+    .stat-item {
+      transition: all 0.3s ease;
+    }
+    .stat-item:hover {
+      transform: translateY(-4px);
+    }
+    .stat-item:hover .stat-value {
+      color: #F5C518;
+    }
+
+    /* Subtle floating decoration */
+    .deco-ring {
+      border: 1px solid rgba(245, 197, 24, 0.08);
+      border-radius: 50%;
+      position: absolute;
+      pointer-events: none;
+    }
+
+    /* Hero background ZENNY watermark */
+    .hero-number {
+      font-size: clamp(8rem, 22vw, 30rem);
+      line-height: 0.8;
+      position: absolute;
+      right: -2%;
+      top: 50%;
+      transform: translateY(-50%);
+      opacity: 0.03;
+      font-family: 'Bebas Neue', cursive;
+      color: white;
+      pointer-events: none;
+      letter-spacing: -0.02em;
+      z-index: 0;
+    }
+
+    /* Mouse-following gradient */
+    .hero-gradient {
+      position: absolute;
+      width: 800px;
+      height: 800px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(245, 197, 24, 0.15) 0%, transparent 70%);
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+      transform: translate(-50%, -50%);
     }
   </style>
 </head>
 <body class="bg-dark font-body text-white antialiased">
-
-  <!-- Custom Cursor -->
-  <div class="cursor-dot hidden md:block"></div>
-  <div class="cursor-ring hidden md:block"></div>
 
   <!-- Navbar -->
   <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 border-b border-white/10 backdrop-blur-md bg-dark/90">
@@ -149,18 +120,18 @@
         </a>
 
         <div class="hidden md:flex items-center gap-8">
-          <a href="index.html" class="text-white/70 hover:text-gold transition-all duration-300 animated-underline">Home</a>
-          <a href="work.html" class="text-white/70 hover:text-gold transition-all duration-300 animated-underline">Work</a>
-          <a href="services.html" class="text-white/70 hover:text-gold transition-all duration-300 animated-underline">Services</a>
-          <a href="index.html#about" class="text-white/70 hover:text-gold transition-all duration-300 animated-underline">About</a>
+          <a href="index.html" class="text-white/70 hover:text-gold transition-all duration-300 animated-underline leading-none py-2">Home</a>
+          <a href="work.html" class="text-white/70 hover:text-gold transition-all duration-300 animated-underline leading-none py-2">Work</a>
+          <a href="services.html" class="text-white/70 hover:text-gold transition-all duration-300 animated-underline leading-none py-2">Services</a>
+          <a href="index.html#about" class="text-white/70 hover:text-gold transition-all duration-300 animated-underline leading-none py-2">About</a>
         </div>
 
-        <div class="hidden md:flex items-center gap-4">
+        <div class="hidden md:flex items-center gap-3">
           <button type="button" data-theme-toggle class="theme-toggle" aria-label="Toggle light/dark mode">
             <svg class="icon-sun" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
             <svg class="icon-moon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg>
           </button>
-          <a href="contact.html" class="magnetic-btn border border-gold text-gold px-6 py-2 hover:bg-gold hover:text-dark transition-all duration-300 inline-block">Let's Talk</a>
+          <a href="contact.html" class="magnetic-btn border border-gold text-gold px-6 py-[9px] hover:bg-gold hover:text-dark transition-all duration-300 inline-block leading-none text-sm font-semibold">Let's Talk</a>
         </div>
 
         <div class="flex md:hidden items-center gap-3">
@@ -168,7 +139,7 @@
             <svg class="icon-sun" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
             <svg class="icon-moon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg>
           </button>
-        <button id="hamburger" class="flex flex-col gap-1.5 p-2" aria-label="Menu">
+        <button type="button" id="hamburger" class="flex flex-col gap-1.5 p-2" aria-label="Menu">
           <span class="w-6 h-0.5 bg-white transition-all duration-300"></span>
           <span class="w-6 h-0.5 bg-white transition-all duration-300"></span>
           <span class="w-6 h-0.5 bg-white transition-all duration-300"></span>
@@ -179,7 +150,7 @@
   </nav>
 
   <!-- Mobile Menu -->
-  <div id="mobile-menu" class="fixed inset-0 bg-dark z-40 flex flex-col items-center justify-center gap-8 opacity-0 pointer-events-none transition-all duration-300">
+  <div id="mobile-menu" role="dialog" aria-modal="true" aria-hidden="true" class="fixed inset-0 bg-dark z-40 flex flex-col items-center justify-center gap-8 opacity-0 pointer-events-none transition-all duration-300">
     <a href="index.html" class="text-4xl font-display text-white hover:text-gold transition-all duration-300">Home</a>
     <a href="work.html" class="text-4xl font-display text-white hover:text-gold transition-all duration-300">Work</a>
     <a href="services.html" class="text-4xl font-display text-white hover:text-gold transition-all duration-300">Services</a>
@@ -188,35 +159,39 @@
   </div>
 
   <main class="min-h-screen flex items-center justify-center relative overflow-hidden">
-    <!-- Background Elements -->
-    <div class="absolute top-1/4 left-10 w-32 h-32 border border-gold/20 float"></div>
-    <div class="absolute bottom-1/4 right-10 w-20 h-20 bg-gold/5 float" style="animation-delay: -2s;"></div>
+    <!-- Mouse-following gradient -->
+    <div class="hero-gradient" id="heroGradient"></div>
+
+    <!-- Giant ZENNY watermark -->
+    <div class="hero-number select-none" aria-hidden="true">ZENNY</div>
+
+    <!-- Ambient background glow -->
     <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gold/5 rounded-full blur-3xl"></div>
 
-    <div class="max-w-3xl mx-auto px-6 py-32 text-center relative z-10">
+    <!-- Decorative rings -->
+    <div class="deco-ring w-96 h-96 top-10 -left-20 hidden lg:block"></div>
+    <div class="deco-ring w-64 h-64 bottom-20 -right-16 hidden lg:block" style="border-color: rgba(245, 197, 24, 0.05);"></div>
+
+    <div class="max-w-2xl mx-auto px-6 py-28 md:py-32 text-center relative z-10">
+
       <!-- Success Checkmark -->
-      <div class="mb-12 success-check" data-aos="zoom-in">
-        <div class="w-32 h-32 bg-gold/10 border-4 border-gold rounded-full flex items-center justify-center mx-auto pulse-glow">
-          <span class="font-display text-gold text-8xl">✓</span>
+      <div class="mb-10 success-check">
+        <div class="w-28 h-28 md:w-36 md:h-36 mx-auto rounded-full bg-gold/10 border-2 border-gold/40 flex items-center justify-center" style="animation: pulseGlow 3s ease-in-out infinite;">
+          <span class="font-display text-gold text-6xl md:text-7xl">✓</span>
         </div>
       </div>
 
       <!-- Headline -->
-      <h1 class="font-display text-6xl sm:text-7xl md:text-8xl lg:text-9xl text-white mb-8" data-aos="fade-up" data-aos-delay="200">
-        <span class="text-gradient">Message</span><br>Received.
+      <h1 class="font-display text-6xl sm:text-7xl md:text-8xl text-white leading-[0.9] mb-4 fade-up" style="animation-delay: 0.4s;">
+        Message <span class="text-gradient">Received</span>
       </h1>
 
-      <!-- Subtext -->
-      <p class="text-white/60 text-xl md:text-2xl mb-4" data-aos="fade-up" data-aos-delay="300">
-        We'll be in touch. Don't blink.
-      </p>
-
-      <p class="text-white/40 text-lg mb-14" data-aos="fade-up" data-aos-delay="400">
-        (Okay, you can blink. We typically respond within 24 hours.)
+      <p class="text-white/50 text-lg md:text-xl mb-12 fade-up" style="animation-delay: 0.6s;">
+        We'll review your project and respond within 24 hours.
       </p>
 
       <!-- CTA Buttons -->
-      <div class="flex flex-col sm:flex-row gap-5 justify-center" data-aos="fade-up" data-aos-delay="500">
+      <div class="flex flex-col sm:flex-row gap-4 justify-center fade-up" style="animation-delay: 0.8s;">
         <a href="index.html" class="magnetic-btn bg-gold text-dark px-10 py-5 font-semibold text-lg hover:bg-white transition-all duration-300 hover:scale-105 transform">
           ← Back to Home
         </a>
@@ -225,13 +200,33 @@
         </a>
       </div>
 
+      <!-- Stats -->
+      <div class="mt-20 pt-12 border-t border-white/5 fade-up" style="animation-delay: 1s;">
+        <div class="grid grid-cols-3 gap-8 max-w-lg mx-auto">
+          <div class="stat-item cursor-default">
+            <p class="font-display text-3xl md:text-4xl text-white/40 stat-value transition-colors duration-300">19+</p>
+            <p class="text-white/30 text-xs uppercase tracking-[0.2em] mt-2">Campaigns</p>
+          </div>
+          <div class="stat-item cursor-default">
+            <p class="font-display text-3xl md:text-4xl text-white/40 stat-value transition-colors duration-300">10+</p>
+            <p class="text-white/30 text-xs uppercase tracking-[0.2em] mt-2">Brands</p>
+          </div>
+          <div class="stat-item cursor-default">
+            <p class="font-display text-3xl md:text-4xl text-white/40 stat-value transition-colors duration-300">24h</p>
+            <p class="text-white/30 text-xs uppercase tracking-[0.2em] mt-2">Response</p>
+          </div>
+        </div>
+      </div>
+
       <!-- Social -->
-      <div class="mt-20 pt-10 border-t border-white/10" data-aos="fade-up" data-aos-delay="600">
-        <p class="text-white/40 text-sm mb-5 tracking-widest uppercase">While you wait, follow us</p>
-        <a href="https://instagram.com/zennystudios" target="_blank" class="inline-flex items-center gap-3 text-gold hover:text-white transition-all duration-300 text-xl">
-          <span class="text-2xl">📸</span> @zennystudios
+      <div class="mt-8 fade-up" style="animation-delay: 1.2s;">
+        <p class="text-white/20 text-xs uppercase tracking-[0.3em] mb-4">Follow the work</p>
+        <a href="https://instagram.com/zennystudios" target="_blank" aria-label="Follow us on Instagram" class="inline-flex items-center gap-2 text-white/30 hover:text-gold transition-all duration-300 text-sm">
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+          @zennystudios
         </a>
       </div>
+
     </div>
   </main>
 
@@ -239,9 +234,7 @@
   <footer class="bg-[#050505] pt-16 pb-12">
     <div class="max-w-7xl mx-auto px-6">
       <div class="grid md:grid-cols-3 gap-12 md:gap-8 mb-12">
-
-        <!-- Brand Column -->
-        <div class="text-center md:text-left" data-aos="fade-up">
+        <div class="text-center md:text-left">
           <a href="index.html" class="inline-flex items-center gap-3 group mb-4">
             <img src="assets/images/Zenny_Studios_Logo/ZennyStudios_logo.png" alt="Zenny Studios" class="h-12 w-auto group-hover:scale-110 transition-transform duration-300">
             <span class="font-display text-2xl text-white group-hover:text-gold transition-colors duration-300">Zenny Studios</span>
@@ -249,9 +242,7 @@
           <p class="text-white/50 text-sm leading-relaxed max-w-xs mx-auto md:mx-0">We make brands unforgettable. Social media, content, branding — we do the work, you take the credit.</p>
           <p class="text-white/30 text-sm mt-3">Bengaluru, Karnataka</p>
         </div>
-
-        <!-- Quick Links -->
-        <div class="text-center md:text-left" data-aos="fade-up" data-aos-delay="100">
+        <div class="text-center md:text-left">
           <h4 class="font-display text-gold text-lg tracking-wider mb-6">Navigate</h4>
           <div class="flex flex-col items-center md:items-start gap-3">
             <a href="index.html" class="text-white/50 hover:text-gold transition-all duration-300 text-sm animated-underline w-fit">Home</a>
@@ -260,42 +251,30 @@
             <a href="index.html#about" class="text-white/50 hover:text-gold transition-all duration-300 text-sm animated-underline w-fit">About</a>
           </div>
         </div>
-
-        <!-- Connect Column -->
-        <div class="text-center md:text-left" data-aos="fade-up" data-aos-delay="200">
+        <div class="text-center md:text-left">
           <h4 class="font-display text-gold text-lg tracking-wider mb-6">Connect</h4>
           <div class="flex flex-col items-center md:items-start gap-4">
-            <a href="https://instagram.com/zennystudios" target="_blank" class="text-white/50 hover:text-gold transition-all duration-300 text-sm flex items-center gap-3 w-fit">
+            <a href="https://instagram.com/zennystudios" target="_blank" aria-label="Follow us on Instagram" class="text-white/50 hover:text-gold transition-all duration-300 text-sm flex items-center gap-3 w-fit">
               <span class="footer-social-icon text-base">📸</span>
               @zennystudios
             </a>
-            <a href="contact.html" class="text-white/50 hover:text-gold transition-all duration-300 text-sm flex items-center gap-3 w-fit">
+            <a href="contact.html" aria-label="Start a project" class="text-white/50 hover:text-gold transition-all duration-300 text-sm flex items-center gap-3 w-fit">
               <span class="footer-social-icon text-base">✉️</span>
               Start a Project
             </a>
           </div>
         </div>
-
       </div>
-
       <div class="w-full h-px bg-gradient-to-r from-transparent via-gold/40 to-transparent mb-8"></div>
-
       <div class="flex flex-col md:flex-row items-center justify-between gap-4">
         <p class="text-white/40 text-sm">© 2025 Zenny Studios. All rights reserved.</p>
-        <p class="font-display text-gold text-base tracking-[0.1em]">You made it to the bottom. Bold move.</p>
+        <p class="font-display text-gold text-base tracking-[0.1em]">You will be Three Steps Ahead soon....Alif</p>
       </div>
     </div>
   </footer>
 
   <script>
-    // Initialize AOS
-    AOS.init({
-      duration: 800,
-      once: true,
-      offset: 100
-    });
-
-    // Fire confetti on load
+    // Confetti
     window.addEventListener('load', () => {
       setTimeout(() => {
         confetti({
@@ -306,6 +285,25 @@
         });
       }, 500);
     });
+
+    // Hero mouse-following gradient
+    const heroGradient = document.getElementById('heroGradient');
+    const mainEl = document.querySelector('main');
+
+    if (heroGradient && mainEl) {
+      mainEl.addEventListener('mousemove', (e) => {
+        const rect = mainEl.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        heroGradient.style.left = x + 'px';
+        heroGradient.style.top = y + 'px';
+        heroGradient.style.opacity = '1';
+      });
+
+      mainEl.addEventListener('mouseleave', () => {
+        heroGradient.style.opacity = '0';
+      });
+    }
 
     // Custom Cursor
     const cursorDot = document.querySelector('.cursor-dot');
@@ -328,7 +326,7 @@
     }
     animateRing();
 
-    const interactiveElements = document.querySelectorAll('a, button');
+    const interactiveElements = document.querySelectorAll('a, button, .stat-item');
     interactiveElements.forEach(el => {
       el.addEventListener('mouseenter', () => cursorRing.classList.add('hover'));
       el.addEventListener('mouseleave', () => cursorRing.classList.remove('hover'));
@@ -337,17 +335,46 @@
     // Mobile menu
     const hamburger = document.getElementById('hamburger');
     const mobileMenu = document.getElementById('mobile-menu');
-    const mobileLinks = document.querySelectorAll('#mobile-menu a');
+    const mobileLinks = document.querySelectorAll('#mobile-menu a, #mobile-menu button');
+
+    function openMobileMenu() {
+      mobileMenu.setAttribute('aria-hidden', 'false');
+      setTimeout(() => {
+        const first = mobileMenu.querySelector('a, button');
+        if (first) first.focus();
+      }, 100);
+    }
+
+    function closeMobileMenu() {
+      mobileMenu.setAttribute('aria-hidden', 'true');
+      hamburger.focus();
+    }
 
     hamburger.addEventListener('click', () => {
-      mobileMenu.classList.toggle('opacity-0');
-      mobileMenu.classList.toggle('pointer-events-none');
+      const isOpen = mobileMenu.getAttribute('aria-hidden') === 'false';
+      isOpen ? closeMobileMenu() : openMobileMenu();
     });
 
     mobileLinks.forEach(link => {
-      link.addEventListener('click', () => {
-        mobileMenu.classList.add('opacity-0', 'pointer-events-none');
-      });
+      link.addEventListener('click', closeMobileMenu);
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && mobileMenu.getAttribute('aria-hidden') === 'false') {
+        closeMobileMenu();
+      }
+      if (e.key === 'Tab' && mobileMenu.getAttribute('aria-hidden') === 'false') {
+        const focusable = mobileMenu.querySelectorAll('a, button');
+        const first = focusable[0];
+        const last = focusable[focusable.length - 1];
+        if (e.shiftKey && document.activeElement === first) {
+          e.preventDefault();
+          last.focus();
+        } else if (!e.shiftKey && document.activeElement === last) {
+          e.preventDefault();
+          first.focus();
+        }
+      }
     });
 
     // Magnetic buttons
