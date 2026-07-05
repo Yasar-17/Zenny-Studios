@@ -607,15 +607,27 @@
         return;
       }
 
-      // Loading state
+      const enquiry = {
+        id: Date.now().toString(36) + Math.random().toString(36).slice(2, 7),
+        name: document.getElementById('name').value.trim(),
+        email: document.getElementById('email').value.trim(),
+        phone: document.getElementById('phone').value.trim(),
+        company: document.getElementById('company').value.trim(),
+        service: document.getElementById('service').value,
+        message: document.getElementById('message').value.trim(),
+        date: new Date().toISOString(),
+        read: false
+      };
+      const enquiries = JSON.parse(localStorage.getItem('zenny_enquiries') || '[]');
+      enquiries.unshift(enquiry);
+      localStorage.setItem('zenny_enquiries', JSON.stringify(enquiries));
+
       submitBtn.disabled = true;
       submitBtn.classList.add('opacity-80', 'cursor-not-allowed');
       submitText.classList.add('hidden');
       submitSpinner.classList.remove('hidden');
       formStatus.textContent = 'Sending your message...';
       formStatus.className = 'text-gold text-sm text-center';
-
-      // FormSubmit will handle the actual redirect
     });
   </script>
 </body>

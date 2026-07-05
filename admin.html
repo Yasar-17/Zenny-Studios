@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="dark light">
+  <meta name="theme-color" content="#0a0a0a">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Admin | Zenny Studios</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎬</text></svg>">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <link rel="stylesheet" href="css/theme.css">
+  <script src="js/theme.js"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            gold: '#F5C518',
+            dark: '#0a0a0a',
+            card: '#111111',
+          },
+          fontFamily: {
+            display: ['Bebas Neue', 'cursive'],
+            body: ['Inter', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    .view { display: none; }
+    .view.active { display: block; }
+
+    .login-card {
+      transition: all 0.3s ease;
+    }
+    .login-card:focus-within {
+      border-color: rgba(245, 197, 24, 0.4);
+    }
+
+    .enquiry-row {
+      transition: all 0.2s ease;
+    }
+    .enquiry-row:hover {
+      background: rgba(245, 197, 24, 0.04);
+    }
+
+    .detail-card {
+      animation: fadeSlideIn 0.3s ease forwards;
+    }
+    @keyframes fadeSlideIn {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .badge-new {
+      animation: pulseBadge 2s ease-in-out infinite;
+    }
+    @keyframes pulseBadge {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.6; }
+    }
+
+    .stat-card {
+      transition: all 0.3s ease;
+    }
+    .stat-card:hover {
+      transform: translateY(-2px);
+      border-color: rgba(245, 197, 24, 0.3);
+    }
+
+    .fade-in {
+      animation: fadeIn 0.4s ease forwards;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .toast {
+      animation: toastIn 0.3s ease forwards;
+    }
+    @keyframes toastIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .toast-out {
+      animation: toastOut 0.3s ease forwards;
+    }
+    @keyframes toastOut {
+      from { opacity: 1; transform: translateY(0); }
+      to { opacity: 0; transform: translateY(20px); }
+    }
+  </style>
+</head>
+<body class="bg-dark font-body text-white antialiased">
+
+  <div id="loginView" class="view active">
+    <div class="min-h-screen flex items-center justify-center relative overflow-hidden px-6">
+      <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gold/5 rounded-full blur-3xl pointer-events-none"></div>
+      <div class="absolute top-1/2 right-0 text-gold/5 font-display text-[300px] -translate-y-1/2 select-none leading-none hidden lg:block">A</div>
+
+      <div class="w-full max-w-md relative z-10">
+        <div class="text-center mb-10">
+          <a href="index.html" class="inline-flex items-center gap-3 group mb-6">
+            <img src="assets/images/Zenny_Studios_Logo/ZennyStudios_logo.png" alt="Zenny Studios" class="h-12 w-auto group-hover:scale-110 transition-transform duration-300">
+            <span class="font-display text-2xl text-white group-hover:text-gold transition-colors duration-300">Zenny Studios</span>
+          </a>
+          <p class="text-gold text-sm uppercase tracking-[0.3em]">Admin Panel</p>
+        </div>
+
+        <div class="login-card bg-card border-2 border-white/10 p-8 md:p-10">
+          <h1 class="font-display text-4xl md:text-5xl text-white mb-2 text-center">Sign In</h1>
+          <p class="text-white/40 text-sm mb-8 text-center">Access your enquiry dashboard</p>
+
+          <form id="loginForm" class="space-y-6" novalidate>
+            <div>
+              <label for="loginEmail" class="block text-white/70 text-sm mb-3">Email Address</label>
+              <input
+                type="email"
+                id="loginEmail"
+                required
+                autocomplete="email"
+                placeholder="admin@zennystudios.com"
+                class="w-full bg-dark border-2 border-white/10 text-white placeholder-white/30 p-4 text-base focus:outline-none focus:border-gold transition-all duration-300"
+              >
+            </div>
+
+            <div>
+              <label for="loginPassword" class="block text-white/70 text-sm mb-3">Password</label>
+              <div class="relative">
+                <input
+                  type="password"
+                  id="loginPassword"
+                  required
+                  autocomplete="current-password"
+                  placeholder="Enter your password"
+                  class="w-full bg-dark border-2 border-white/10 text-white placeholder-white/30 p-4 pr-12 text-base focus:outline-none focus:border-gold transition-all duration-300"
+                >
+                <button type="button" id="togglePassword" class="absolute right-4 top-1/2 -translate-y-1/2 text-white/30 hover:text-gold transition-colors duration-300" aria-label="Toggle password visibility">
+                  <svg id="eyeIcon" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+                  <svg id="eyeOffIcon" class="w-5 h-5 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.542-7a9.97 9.97 0 011.563-3.029m5.858 9.029a3 3 0 11-6 0 3 3 0 016 0zm3.086-9.029A9.97 9.97 0 0112 5c4.478 0 8.268 2.943 9.542 7a9.97 9.97 0 01-4.071 5.596M3 3l18 18"/></svg>
+                </button>
+              </div>
+            </div>
+
+            <p id="loginError" class="text-red-400 text-sm hidden text-center"></p>
+
+            <button type="submit" class="w-full bg-gold text-dark font-display text-xl py-4 hover:bg-white transition-all duration-300">
+              Access Dashboard
+            </button>
+          </form>
+        </div>
+
+        <p class="text-white/20 text-xs text-center mt-6">Restricted access. Authorized personnel only.</p>
+      </div>
+    </div>
+  </div>
+
+  <div id="dashboardView" class="view">
+    <nav class="fixed top-0 left-0 right-0 z-50 border-b border-white/10 backdrop-blur-md bg-dark/90">
+      <div class="max-w-7xl mx-auto px-6 py-4">
+        <div class="flex items-center justify-between">
+          <a href="index.html" class="flex items-center gap-3 group">
+            <img src="assets/images/Zenny_Studios_Logo/ZennyStudios_logo.png" alt="Zenny Studios" class="h-10 w-auto group-hover:scale-110 transition-transform duration-300">
+            <span class="font-display text-xl text-white group-hover:text-gold transition-colors duration-300 hidden sm:inline">Admin</span>
+          </a>
+
+          <div class="flex items-center gap-4">
+            <span id="adminEmail" class="text-white/40 text-sm hidden sm:inline"></span>
+            <button type="button" data-theme-toggle class="theme-toggle" aria-label="Toggle light/dark mode">
+              <svg class="icon-sun" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
+              <svg class="icon-moon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg>
+            </button>
+            <button id="logoutBtn" class="border border-white/20 text-white/70 px-4 py-2 text-sm hover:border-gold hover:text-gold transition-all duration-300">
+              Logout
+            </button>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <main class="pt-24 pb-16 px-6">
+      <div class="max-w-7xl mx-auto">
+        <div class="mb-10">
+          <p class="text-gold text-sm uppercase tracking-[0.3em] mb-3">Dashboard</p>
+          <h1 class="font-display text-5xl sm:text-6xl md:text-7xl text-white leading-[0.9]">
+            Enquiry <span class="text-gradient">Inbox</span>
+          </h1>
+        </div>
+
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10">
+          <div class="stat-card bg-card border border-white/10 p-5">
+            <p id="statTotal" class="font-display text-4xl text-white">0</p>
+            <p class="text-white/40 text-xs uppercase tracking-[0.15em] mt-1">Total</p>
+          </div>
+          <div class="stat-card bg-card border border-white/10 p-5">
+            <p id="statNew" class="font-display text-4xl text-gold">0</p>
+            <p class="text-white/40 text-xs uppercase tracking-[0.15em] mt-1">New</p>
+          </div>
+          <div class="stat-card bg-card border border-white/10 p-5">
+            <p id="statRead" class="font-display text-4xl text-white/50">0</p>
+            <p class="text-white/40 text-xs uppercase tracking-[0.15em] mt-1">Read</p>
+          </div>
+          <div class="stat-card bg-card border border-white/10 p-5">
+            <p id="statToday" class="font-display text-4xl text-white">0</p>
+            <p class="text-white/40 text-xs uppercase tracking-[0.15em] mt-1">Today</p>
+          </div>
+        </div>
+
+        <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-6">
+          <div class="flex items-center gap-3">
+            <button data-filter="all" class="filter-btn active px-4 py-2 text-sm border border-white/10 text-white/70 hover:border-gold hover:text-gold transition-all duration-300">All</button>
+            <button data-filter="unread" class="filter-btn px-4 py-2 text-sm border border-white/10 text-white/70 hover:border-gold hover:text-gold transition-all duration-300">Unread</button>
+            <button data-filter="read" class="filter-btn px-4 py-2 text-sm border border-white/10 text-white/70 hover:border-gold hover:text-gold transition-all duration-300">Read</button>
+          </div>
+          <div class="relative w-full sm:w-auto">
+            <input type="text" id="searchInput" placeholder="Search enquiries..." class="w-full sm:w-72 bg-card border border-white/10 text-white placeholder-white/30 px-4 py-2 pr-10 text-sm focus:outline-none focus:border-gold transition-all duration-300">
+            <svg class="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-white/30" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+          </div>
+        </div>
+
+        <div id="enquiriesList" class="space-y-3"></div>
+
+        <div id="emptyState" class="hidden text-center py-20">
+          <span class="text-6xl block mb-6">📭</span>
+          <h3 class="font-display text-3xl text-white/40 mb-2">No Enquiries Yet</h3>
+          <p class="text-white/30 text-sm">When someone submits the Let's Talk form, it will appear here.</p>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <div id="detailView" class="view">
+    <nav class="fixed top-0 left-0 right-0 z-50 border-b border-white/10 backdrop-blur-md bg-dark/90">
+      <div class="max-w-7xl mx-auto px-6 py-4">
+        <div class="flex items-center justify-between">
+          <button id="backToDashboard" class="flex items-center gap-3 text-white/70 hover:text-gold transition-all duration-300 group">
+            <svg class="w-5 h-5 group-hover:-translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
+            <span class="text-sm font-medium">Back to Inbox</span>
+          </button>
+
+          <div class="flex items-center gap-3">
+            <button type="button" data-theme-toggle class="theme-toggle" aria-label="Toggle light/dark mode">
+              <svg class="icon-sun" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
+              <svg class="icon-moon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg>
+            </button>
+            <button id="deleteEnquiryBtn" class="border border-red-500/30 text-red-400 px-4 py-2 text-sm hover:bg-red-500/10 hover:border-red-500 transition-all duration-300">
+              Delete
+            </button>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <main class="pt-24 pb-16 px-6">
+      <div class="max-w-3xl mx-auto">
+        <div id="detailContent" class="detail-card"></div>
+      </div>
+    </main>
+  </div>
+
+  <div id="toast" class="fixed bottom-6 right-6 z-[100] hidden"></div>
+
+  <script>
+    const ADMIN_CREDENTIALS = {
+      email: 'admin@zennystudios.com',
+      password: 'zenny2025'
+    };
+
+    const STORAGE_KEY = 'zenny_enquiries';
+    const SESSION_KEY = 'zenny_admin_session';
+
+    let currentFilter = 'all';
+    let currentSearch = '';
+    let currentEnquiryId = null;
+
+    function getEnquiries() {
+      return JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+    }
+
+    function saveEnquiries(enquiries) {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(enquiries));
+    }
+
+    function showToast(message, type) {
+      const toast = document.getElementById('toast');
+      const colors = {
+        success: 'bg-green-500/20 border-green-500/40 text-green-400',
+        error: 'bg-red-500/20 border-red-500/40 text-red-400',
+        info: 'bg-gold/20 border-gold/40 text-gold'
+      };
+      toast.className = `fixed bottom-6 right-6 z-[100] px-5 py-3 border text-sm rounded-none ${colors[type] || colors.info} toast`;
+      toast.textContent = message;
+      toast.classList.remove('hidden');
+      setTimeout(() => {
+        toast.classList.add('toast-out');
+        setTimeout(() => toast.classList.add('hidden'), 300);
+      }, 3000);
+    }
+
+    function showView(viewId) {
+      document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+      document.getElementById(viewId).classList.add('active');
+    }
+
+    function formatDate(isoString) {
+      const d = new Date(isoString);
+      const now = new Date();
+      const diff = now - d;
+      const mins = Math.floor(diff / 60000);
+      const hours = Math.floor(diff / 3600000);
+      const days = Math.floor(diff / 86400000);
+
+      if (mins < 1) return 'Just now';
+      if (mins < 60) return `${mins}m ago`;
+      if (hours < 24) return `${hours}h ago`;
+      if (days < 7) return `${days}d ago`;
+      return d.toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: d.getFullYear() !== now.getFullYear() ? 'numeric' : undefined });
+    }
+
+    function formatFullDate(isoString) {
+      return new Date(isoString).toLocaleString('en-IN', {
+        weekday: 'long',
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit'
+      });
+    }
+
+    function isToday(isoString) {
+      const d = new Date(isoString);
+      const now = new Date();
+      return d.toDateString() === now.toDateString();
+    }
+
+    function updateStats() {
+      const enquiries = getEnquiries();
+      const total = enquiries.length;
+      const unread = enquiries.filter(e => !e.read).length;
+      const read = total - unread;
+      const today = enquiries.filter(e => isToday(e.date)).length;
+
+      document.getElementById('statTotal').textContent = total;
+      document.getElementById('statNew').textContent = unread;
+      document.getElementById('statRead').textContent = read;
+      document.getElementById('statToday').textContent = today;
+    }
+
+    function renderEnquiries() {
+      const enquiries = getEnquiries();
+      const container = document.getElementById('enquiriesList');
+      const emptyState = document.getElementById('emptyState');
+
+      let filtered = enquiries;
+
+      if (currentFilter === 'unread') filtered = filtered.filter(e => !e.read);
+      else if (currentFilter === 'read') filtered = filtered.filter(e => e.read);
+
+      if (currentSearch) {
+        const q = currentSearch.toLowerCase();
+        filtered = filtered.filter(e =>
+          e.name.toLowerCase().includes(q) ||
+          e.email.toLowerCase().includes(q) ||
+          e.phone.includes(q) ||
+          (e.company && e.company.toLowerCase().includes(q)) ||
+          (e.service && e.service.toLowerCase().includes(q)) ||
+          e.message.toLowerCase().includes(q)
+        );
+      }
+
+      if (filtered.length === 0) {
+        container.innerHTML = '';
+        emptyState.classList.remove('hidden');
+        return;
+      }
+
+      emptyState.classList.add('hidden');
+
+      container.innerHTML = filtered.map(e => `
+        <div class="enquiry-row bg-card border ${e.read ? 'border-white/10' : 'border-gold/30'} p-5 cursor-pointer group" onclick="viewEnquiry('${e.id}')">
+          <div class="flex items-start justify-between gap-4">
+            <div class="flex items-start gap-4 min-w-0 flex-1">
+              <div class="w-10 h-10 bg-gold/10 border border-gold/20 flex items-center justify-center flex-shrink-0 mt-0.5">
+                <span class="font-display text-gold text-lg">${e.name.charAt(0).toUpperCase()}</span>
+              </div>
+              <div class="min-w-0 flex-1">
+                <div class="flex items-center gap-3 mb-1">
+                  <h3 class="text-white font-semibold text-base truncate ${e.read ? '' : 'text-white'}">${escapeHtml(e.name)}</h3>
+                  ${!e.read ? '<span class="badge-new w-2 h-2 bg-gold rounded-full flex-shrink-0"></span>' : ''}
+                </div>
+                <p class="text-white/40 text-sm truncate">${escapeHtml(e.email)}</p>
+                <p class="text-white/50 text-sm mt-2 line-clamp-1">${escapeHtml(e.message)}</p>
+                <div class="flex items-center gap-3 mt-3">
+                  ${e.service ? `<span class="text-gold/70 text-xs border border-gold/20 px-2 py-0.5">${escapeHtml(e.service)}</span>` : ''}
+                  ${e.company ? `<span class="text-white/30 text-xs">${escapeHtml(e.company)}</span>` : ''}
+                </div>
+              </div>
+            </div>
+            <div class="text-right flex-shrink-0">
+              <p class="text-white/30 text-xs">${formatDate(e.date)}</p>
+              <svg class="w-4 h-4 text-white/20 group-hover:text-gold transition-colors duration-300 mt-2 ml-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+            </div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function escapeHtml(str) {
+      if (!str) return '';
+      const div = document.createElement('div');
+      div.textContent = str;
+      return div.innerHTML;
+    }
+
+    function viewEnquiry(id) {
+      const enquiries = getEnquiries();
+      const enquiry = enquiries.find(e => e.id === id);
+      if (!enquiry) return;
+
+      currentEnquiryId = id;
+
+      if (!enquiry.read) {
+        enquiry.read = true;
+        saveEnquiries(enquiries);
+        updateStats();
+      }
+
+      const detailContent = document.getElementById('detailContent');
+      detailContent.innerHTML = `
+        <div class="mb-8">
+          <p class="text-gold text-sm uppercase tracking-[0.3em] mb-3">Enquiry Details</p>
+          <h1 class="font-display text-4xl sm:text-5xl md:text-6xl text-white leading-[0.9]">
+            ${escapeHtml(enquiry.name)}
+          </h1>
+          <p class="text-white/40 text-sm mt-3">${formatFullDate(enquiry.date)}</p>
+        </div>
+
+        <div class="space-y-6">
+          <div class="bg-card border border-white/10 p-6">
+            <h3 class="text-gold text-xs uppercase tracking-[0.2em] mb-4">Contact Information</h3>
+            <div class="grid sm:grid-cols-2 gap-6">
+              <div>
+                <p class="text-white/40 text-xs uppercase tracking-wider mb-1">Name</p>
+                <p class="text-white text-base">${escapeHtml(enquiry.name)}</p>
+              </div>
+              <div>
+                <p class="text-white/40 text-xs uppercase tracking-wider mb-1">Email</p>
+                <a href="mailto:${escapeHtml(enquiry.email)}" class="text-gold hover:text-white transition-colors duration-300 text-base">${escapeHtml(enquiry.email)}</a>
+              </div>
+              <div>
+                <p class="text-white/40 text-xs uppercase tracking-wider mb-1">Phone</p>
+                <a href="tel:${escapeHtml(enquiry.phone)}" class="text-gold hover:text-white transition-colors duration-300 text-base">${escapeHtml(enquiry.phone)}</a>
+              </div>
+              ${enquiry.company ? `
+              <div>
+                <p class="text-white/40 text-xs uppercase tracking-wider mb-1">Company</p>
+                <p class="text-white text-base">${escapeHtml(enquiry.company)}</p>
+              </div>` : ''}
+            </div>
+          </div>
+
+          ${enquiry.service ? `
+          <div class="bg-card border border-white/10 p-6">
+            <h3 class="text-gold text-xs uppercase tracking-[0.2em] mb-4">Service Interested In</h3>
+            <span class="inline-block bg-gold/10 border border-gold/20 text-gold px-4 py-2 text-sm">${escapeHtml(enquiry.service)}</span>
+          </div>` : ''}
+
+          <div class="bg-card border border-white/10 p-6">
+            <h3 class="text-gold text-xs uppercase tracking-[0.2em] mb-4">Message</h3>
+            <p class="text-white/80 text-base leading-relaxed whitespace-pre-wrap">${escapeHtml(enquiry.message)}</p>
+          </div>
+
+          <div class="flex flex-col sm:flex-row gap-3 pt-4">
+            <a href="mailto:${escapeHtml(enquiry.email)}?subject=Re: Your enquiry at Zenny Studios" class="bg-gold text-dark font-display text-lg px-8 py-3 text-center hover:bg-white transition-all duration-300">
+              Reply via Email
+            </a>
+            <a href="tel:${escapeHtml(enquiry.phone)}" class="border border-white/20 text-white/70 font-display text-lg px-8 py-3 text-center hover:border-gold hover:text-gold transition-all duration-300">
+              Call / WhatsApp
+            </a>
+          </div>
+        </div>
+      `;
+
+      showView('detailView');
+      window.scrollTo(0, 0);
+    }
+
+    function deleteEnquiry(id) {
+      if (!confirm('Are you sure you want to delete this enquiry? This cannot be undone.')) return;
+      let enquiries = getEnquiries();
+      enquiries = enquiries.filter(e => e.id !== id);
+      saveEnquiries(enquiries);
+      showToast('Enquiry deleted', 'success');
+      updateStats();
+      renderEnquiries();
+      showView('dashboardView');
+    }
+
+    function markAllRead() {
+      const enquiries = getEnquiries();
+      enquiries.forEach(e => e.read = true);
+      saveEnquiries(enquiries);
+      updateStats();
+      renderEnquiries();
+    }
+
+    document.getElementById('loginForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const email = document.getElementById('loginEmail').value.trim();
+      const password = document.getElementById('loginPassword').value;
+      const errorEl = document.getElementById('loginError');
+
+      if (email === ADMIN_CREDENTIALS.email && password === ADMIN_CREDENTIALS.password) {
+        sessionStorage.setItem(SESSION_KEY, 'true');
+        sessionStorage.setItem(SESSION_KEY + '_email', email);
+        errorEl.classList.add('hidden');
+        document.getElementById('adminEmail').textContent = email;
+        updateStats();
+        renderEnquiries();
+        showView('dashboardView');
+        showToast('Welcome back!', 'success');
+      } else {
+        errorEl.textContent = 'Invalid email or password. Please try again.';
+        errorEl.classList.remove('hidden');
+      }
+    });
+
+    document.getElementById('togglePassword').addEventListener('click', function() {
+      const input = document.getElementById('loginPassword');
+      const eyeIcon = document.getElementById('eyeIcon');
+      const eyeOffIcon = document.getElementById('eyeOffIcon');
+      if (input.type === 'password') {
+        input.type = 'text';
+        eyeIcon.classList.add('hidden');
+        eyeOffIcon.classList.remove('hidden');
+      } else {
+        input.type = 'password';
+        eyeIcon.classList.remove('hidden');
+        eyeOffIcon.classList.add('hidden');
+      }
+    });
+
+    document.getElementById('logoutBtn').addEventListener('click', function() {
+      sessionStorage.removeItem(SESSION_KEY);
+      sessionStorage.removeItem(SESSION_KEY + '_email');
+      document.getElementById('loginForm').reset();
+      showView('loginView');
+      showToast('Logged out successfully', 'info');
+    });
+
+    document.getElementById('backToDashboard').addEventListener('click', function() {
+      updateStats();
+      renderEnquiries();
+      showView('dashboardView');
+    });
+
+    document.getElementById('deleteEnquiryBtn').addEventListener('click', function() {
+      if (currentEnquiryId) deleteEnquiry(currentEnquiryId);
+    });
+
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.addEventListener('click', function() {
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+        currentFilter = this.dataset.filter;
+        renderEnquiries();
+      });
+    });
+
+    document.getElementById('searchInput').addEventListener('input', function() {
+      currentSearch = this.value.trim();
+      renderEnquiries();
+    });
+
+    if (sessionStorage.getItem(SESSION_KEY) === 'true') {
+      document.getElementById('adminEmail').textContent = sessionStorage.getItem(SESSION_KEY + '_email') || '';
+      updateStats();
+      renderEnquiries();
+      showView('dashboardView');
+    }
+  </script>
+</body>
+</html>
