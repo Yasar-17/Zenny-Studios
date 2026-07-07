@@ -1,7 +1,13 @@
 const express = require('express');
 const { getDb } = require('../db');
+const { authMiddleware } = require('../middleware/auth');
 
 const router = express.Router();
+
+router.use((req, res, next) => {
+  if (req.method === 'POST') return next();
+  authMiddleware(req, res, next);
+});
 
 router.get('/', (req, res) => {
   try {
@@ -24,7 +30,7 @@ router.post('/', (req, res) => {
   try {
     const db = getDb();
     db.prepare(`
-      INSERT INTO enquiries (id, name, email, phone, company, service, message, date, read)
+      INSERT OR REPLACE INTO enquiries (id, name, email, phone, company, service, message, date, read)
       VALUES (?, ?, ?, ?, ?, ?, ?, ?, 0)
     `).run(id, name, email, phone, company || '', service || '', message, date);
 
