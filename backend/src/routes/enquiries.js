@@ -1,6 +1,7 @@
 const express = require('express');
 const { getDb } = require('../db');
 const { authMiddleware } = require('../middleware/auth');
+const { sendEnquiryNotification } = require('../email');
 
 const router = express.Router();
 
@@ -33,6 +34,9 @@ router.post('/', (req, res) => {
       INSERT OR REPLACE INTO enquiries (id, name, email, phone, company, service, message, date, read)
       VALUES (?, ?, ?, ?, ?, ?, ?, ?, 0)
     `).run(id, name, email, phone, company || '', service || '', message, date);
+
+    sendEnquiryNotification({ name, email, phone, company, service, message })
+      .catch(err => console.error('Email notification failed:', err.message));
 
     res.status(201).json({ success: true });
   } catch (err) {
