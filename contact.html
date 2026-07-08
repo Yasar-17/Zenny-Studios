@@ -147,14 +147,8 @@
 
           <!-- Form -->
           <div class="lg:col-span-2" data-aos="fade-right">
-            <form action="https://formsubmit.co/mohammedyasar990@gmail.com" method="POST" class="space-y-8" id="contactForm" novalidate>
+            <form method="POST" class="space-y-8" id="contactForm" novalidate>
 
-              <!-- FormSubmit Hidden Fields -->
-              <input type="hidden" name="_subject" value="New Project Inquiry — Zenny Studios">
-              <input type="hidden" name="_captcha" value="false">
-              <input type="hidden" name="_next" value="https://zennystudios.com/thank-you.html">
-              <input type="hidden" name="_template" value="table">
-              <input type="text" name="_honey" style="display:none">
 
               <!-- Name -->
               <div class="group">
@@ -592,20 +586,28 @@
       });
     });
 
-    contactForm.addEventListener('submit', function(e) {
+    contactForm.addEventListener('submit', async function(e) {
+      e.preventDefault();
+
       let allValid = true;
       document.querySelectorAll('#contactForm input[required], #contactForm textarea[required]').forEach(input => {
         if (!validateField(input)) allValid = false;
       });
 
       if (!allValid) {
-        e.preventDefault();
         const firstError = document.querySelector('[aria-invalid="true"]');
         if (firstError) firstError.focus();
         formStatus.textContent = 'Please fill in all required fields correctly.';
         formStatus.className = 'text-red-400 text-sm text-center';
         return;
       }
+
+      submitBtn.disabled = true;
+      submitBtn.classList.add('opacity-80', 'cursor-not-allowed');
+      submitText.classList.add('hidden');
+      submitSpinner.classList.remove('hidden');
+      formStatus.textContent = 'Sending your message...';
+      formStatus.className = 'text-gold text-sm text-center';
 
       const enquiry = {
         id: Date.now().toString(36) + Math.random().toString(36).slice(2, 7),
@@ -618,16 +620,27 @@
         date: new Date().toISOString(),
         read: false
       };
-      const enquiries = JSON.parse(localStorage.getItem('zenny_enquiries') || '[]');
-      enquiries.unshift(enquiry);
-      localStorage.setItem('zenny_enquiries', JSON.stringify(enquiries));
 
-      submitBtn.disabled = true;
-      submitBtn.classList.add('opacity-80', 'cursor-not-allowed');
-      submitText.classList.add('hidden');
-      submitSpinner.classList.remove('hidden');
-      formStatus.textContent = 'Sending your message...';
-      formStatus.className = 'text-gold text-sm text-center';
+      const API_BASE = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
+        ? 'http://localhost:3000/api'
+        : '/api';
+
+      try {
+        await fetch(API_BASE + '/enquiries', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(enquiry)
+        });
+
+        window.location.href = 'thank-you.html';
+      } catch (err) {
+        formStatus.textContent = 'Something went wrong. Please try again.';
+        formStatus.className = 'text-red-400 text-sm text-center';
+        submitBtn.disabled = false;
+        submitBtn.classList.remove('opacity-80', 'cursor-not-allowed');
+        submitText.classList.remove('hidden');
+        submitSpinner.classList.add('hidden');
+      }
     });
   </script>
 </body>

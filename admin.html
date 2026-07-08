@@ -272,24 +272,38 @@
   <div id="toast" class="fixed bottom-6 right-6 z-[100] hidden"></div>
 
   <script>
-    const ADMIN_CREDENTIALS = {
-      email: 'admin@zennystudios.com',
-      password: 'zenny2025'
-    };
+    const API_BASE = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
+      ? 'http://localhost:3000/api'
+      : '/api';
 
-    const STORAGE_KEY = 'zenny_enquiries';
     const SESSION_KEY = 'zenny_admin_session';
 
+    let enquiriesCache = [];
     let currentFilter = 'all';
     let currentSearch = '';
     let currentEnquiryId = null;
 
-    function getEnquiries() {
-      return JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+    function getToken() {
+      return sessionStorage.getItem(SESSION_KEY);
     }
 
-    function saveEnquiries(enquiries) {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(enquiries));
+    function apiHeaders() {
+      const token = getToken();
+      return {
+        'Content-Type': 'application/json',
+        ...(token ? { 'Authorization': 'Bearer ' + token } : {})
+      };
+    }
+
+    async function fetchEnquiries() {
+      const res = await fetch(API_BASE + '/enquiries', { headers: apiHeaders() });
+      if (!res.ok) throw new Error('Failed to fetch enquiries');
+      enquiriesCache = await res.json();
+      return enquiriesCache;
+    }
+
+    function getEnquiries() {
+      return enquiriesCache;
     }
 
     function showToast(message, type) {
@@ -432,9 +446,14 @@
       currentEnquiryId = id;
 
       if (!enquiry.read) {
-        enquiry.read = true;
-        saveEnquiries(enquiries);
-        updateStats();
+        fetch(API_BASE + '/enquiries/' + encodeURIComponent(id) + '/read', {
+          method: 'PATCH',
+          headers: apiHeaders()
+        }).then(() => {
+          enquiry.read = true;
+          updateStats();
+          renderEnquiries();
+        }).catch(() => {});
       }
 
       const detailContent = document.getElementById('detailContent');
@@ -497,43 +516,77 @@
       window.scrollTo(0, 0);
     }
 
-    function deleteEnquiry(id) {
+    async function deleteEnquiry(id) {
       if (!confirm('Are you sure you want to delete this enquiry? This cannot be undone.')) return;
-      let enquiries = getEnquiries();
-      enquiries = enquiries.filter(e => e.id !== id);
-      saveEnquiries(enquiries);
-      showToast('Enquiry deleted', 'success');
-      updateStats();
-      renderEnquiries();
-      showView('dashboardView');
+      try {
+        const res = await fetch(API_BASE + '/enquiries/' + encodeURIComponent(id), {
+          method: 'DELETE',
+          headers: apiHeaders()
+        });
+        if (res.ok) {
+          enquiriesCache = enquiriesCache.filter(e => e.id !== id);
+          showToast('Enquiry deleted', 'success');
+          updateStats();
+          renderEnquiries();
+          showView('dashboardView');
+        } else {
+          showToast('Failed to delete enquiry', 'error');
+        }
+      } catch (err) {
+        showToast('Failed to delete enquiry', 'error');
+      }
     }
 
     function markAllRead() {
-      const enquiries = getEnquiries();
-      enquiries.forEach(e => e.read = true);
-      saveEnquiries(enquiries);
-      updateStats();
-      renderEnquiries();
+      fetch(API_BASE + '/enquiries/read-all', {
+        method: 'PATCH',
+        headers: apiHeaders()
+      }).then(() => {
+        enquiriesCache.forEach(e => e.read = true);
+        updateStats();
+        renderEnquiries();
+      }).catch(() => {});
     }
 
-    document.getElementById('loginForm').addEventListener('submit', function(e) {
+    document.getElementById('loginForm').addEventListener('submit', async function(e) {
       e.preventDefault();
       const email = document.getElementById('loginEmail').value.trim();
       const password = document.getElementById('loginPassword').value;
       const errorEl = document.getElementById('loginError');
+      const submitBtn = this.querySelector('button[type="submit"]');
 
-      if (email === ADMIN_CREDENTIALS.email && password === ADMIN_CREDENTIALS.password) {
-        sessionStorage.setItem(SESSION_KEY, 'true');
-        sessionStorage.setItem(SESSION_KEY + '_email', email);
-        errorEl.classList.add('hidden');
-        document.getElementById('adminEmail').textContent = email;
-        updateStats();
-        renderEnquiries();
-        showView('dashboardView');
-        showToast('Welcome back!', 'success');
-      } else {
-        errorEl.textContent = 'Invalid email or password. Please try again.';
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Signing in...';
+
+      try {
+        const res = await fetch(API_BASE + '/auth/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, password })
+        });
+
+        const data = await res.json();
+
+        if (res.ok) {
+          sessionStorage.setItem(SESSION_KEY, data.token);
+          sessionStorage.setItem(SESSION_KEY + '_email', data.email);
+          errorEl.classList.add('hidden');
+          document.getElementById('adminEmail').textContent = data.email;
+          await fetchEnquiries();
+          updateStats();
+          renderEnquiries();
+          showView('dashboardView');
+          showToast('Welcome back!', 'success');
+        } else {
+          errorEl.textContent = data.error || 'Invalid email or password.';
+          errorEl.classList.remove('hidden');
+        }
+      } catch (err) {
+        errorEl.textContent = 'Unable to connect to server. Please try again.';
         errorEl.classList.remove('hidden');
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Access Dashboard';
       }
     });
 
@@ -584,11 +637,16 @@
       renderEnquiries();
     });
 
-    if (sessionStorage.getItem(SESSION_KEY) === 'true') {
+    if (getToken()) {
       document.getElementById('adminEmail').textContent = sessionStorage.getItem(SESSION_KEY + '_email') || '';
-      updateStats();
-      renderEnquiries();
-      showView('dashboardView');
+      fetchEnquiries().then(() => {
+        updateStats();
+        renderEnquiries();
+        showView('dashboardView');
+      }).catch(() => {
+        sessionStorage.removeItem(SESSION_KEY);
+        sessionStorage.removeItem(SESSION_KEY + '_email');
+      });
     }
   </script>
 </body>

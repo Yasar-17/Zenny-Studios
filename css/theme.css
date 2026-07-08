@@ -141,6 +141,75 @@
   color: rgba(10, 10, 10, 0.05);
 }
 
+[data-theme="light"] .text-white\/10 {
+  color: rgba(10, 10, 10, 0.1);
+}
+
+[data-theme="light"] .text-white\/80 {
+  color: rgba(10, 10, 10, 0.85);
+}
+
+[data-theme="light"] .text-white\/90 {
+  color: rgba(10, 10, 10, 0.92);
+}
+
+/* Placeholder text fix — invisible white placeholder on light bg */
+[data-theme="light"] .placeholder-white\/30::placeholder {
+  color: rgba(10, 10, 10, 0.4);
+}
+
+[data-theme="light"] .placeholder-white\/40::placeholder {
+  color: rgba(10, 10, 10, 0.5);
+}
+
+[data-theme="light"] .placeholder-white\/50::placeholder {
+  color: rgba(10, 10, 10, 0.6);
+}
+
+/* Gold background and its alpha variants */
+[data-theme="light"] .bg-gold {
+  background-color: var(--color-gold);
+}
+
+[data-theme="light"] .bg-gold\/5 {
+  background-color: rgba(200, 160, 0, 0.05);
+}
+
+[data-theme="light"] .bg-gold\/10 {
+  background-color: rgba(200, 160, 0, 0.1);
+}
+
+[data-theme="light"] .bg-gold\/20 {
+  background-color: rgba(200, 160, 0, 0.2);
+}
+
+[data-theme="light"] .bg-gold\/30 {
+  background-color: rgba(200, 160, 0, 0.3);
+}
+
+[data-theme="light"] .text-dark {
+  color: var(--color-text-primary);
+}
+
+/* Button hover — bg-gold → white on hover */
+[data-theme="light"] .hover\:bg-white:hover {
+  background-color: var(--color-text-primary);
+  color: var(--color-text-inverse);
+}
+
+/* Toast notifications — better contrast in light mode */
+[data-theme="light"] .text-gold\/70 {
+  color: rgba(200, 160, 0, 0.7);
+}
+
+[data-theme="light"] .text-green-400 {
+  color: #16a34a;
+}
+
+[data-theme="light"] .text-red-400 {
+  color: #dc2626;
+}
+
 /* Gold color light mode override */
 [data-theme="light"] .text-gold {
   color: var(--color-gold);
@@ -189,6 +258,23 @@
 /* Golden side glow on hover */
 [data-theme="light"] #services .tilt-card:hover {
   box-shadow: 0 0 60px rgba(200, 160, 0, 0.35), 0 0 25px rgba(200, 160, 0, 0.25);
+}
+
+/* Gold border opacity variants for light mode */
+[data-theme="light"] .border-gold\/10 {
+  border-color: rgba(200, 160, 0, 0.1);
+}
+
+[data-theme="light"] .border-gold\/20 {
+  border-color: rgba(200, 160, 0, 0.2);
+}
+
+[data-theme="light"] .border-gold\/30 {
+  border-color: rgba(200, 160, 0, 0.3);
+}
+
+[data-theme="light"] .border-gold\/40 {
+  border-color: rgba(200, 160, 0, 0.4);
 }
 
 /* Logo circle */
