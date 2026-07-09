@@ -1,22 +1,37 @@
 require('dotenv').config();
 const bcrypt = require('bcryptjs');
-const { getDb, closeDb } = require('./db');
+const { execute, queryOne, initTables } = require('./db');
 
-const email = process.env.ADMIN_EMAIL || 'admin@zennystudios.com';
-const password = process.env.ADMIN_PASSWORD || 'zenny2025';
+async function seed() {
+  await initTables();
 
-const db = getDb();
+  const email = process.env.ADMIN_EMAIL;
+  const password = process.env.ADMIN_PASSWORD;
 
-const existing = db.prepare('SELECT id FROM admins WHERE email = ?').get(email);
+  if (!email || !password) {
+    console.error('Error: ADMIN_EMAIL and ADMIN_PASSWORD must be set in .env');
+    process.exit(1);
+  }
 
-if (existing) {
+  if (password.length < 8) {
+    console.error('Error: ADMIN_PASSWORD must be at least 8 characters long');
+    process.exit(1);
+  }
+
+  const existing = await queryOne('SELECT id FROM admins WHERE email = ?', [email]);
+
   const hash = bcrypt.hashSync(password, 12);
-  db.prepare('UPDATE admins SET password_hash = ? WHERE email = ?').run(hash, email);
-  console.log(`Admin user "${email}" updated.`);
-} else {
-  const hash = bcrypt.hashSync(password, 12);
-  db.prepare('INSERT INTO admins (email, password_hash) VALUES (?, ?)').run(email, hash);
-  console.log(`Admin user "${email}" created.`);
+
+  if (existing) {
+    await execute('UPDATE admins SET password_hash = ? WHERE email = ?', [hash, email]);
+    console.log(`Admin user "${email}" updated.`);
+  } else {
+    await execute('INSERT INTO admins (email, password_hash) VALUES (?, ?)', [email, hash]);
+    console.log(`Admin user "${email}" created.`);
+  }
 }
 
-closeDb();
+seed().catch(err => {
+  console.error('Seed error:', err);
+  process.exit(1);
+});

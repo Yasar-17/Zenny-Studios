@@ -1,9 +1,15 @@
 const { Resend } = require('resend');
+const { escapeHtml } = require('./utils/validation');
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 function sendEnquiryNotification(enquiry) {
-  const { name, email, phone, company, service, message } = enquiry;
+  const name = escapeHtml(enquiry.name || '');
+  const email = escapeHtml(enquiry.email || '');
+  const phone = escapeHtml(enquiry.phone || '');
+  const company = escapeHtml(enquiry.company || '');
+  const service = escapeHtml(enquiry.service || '');
+  const message = escapeHtml(enquiry.message || '');
 
   const html = `
     <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">

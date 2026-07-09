@@ -276,29 +276,77 @@
       ? 'http://localhost:3000/api'
       : '/api';
 
-    const SESSION_KEY = 'zenny_admin_session';
-
     let enquiriesCache = [];
     let currentFilter = 'all';
     let currentSearch = '';
     let currentEnquiryId = null;
-
-    function getToken() {
-      return sessionStorage.getItem(SESSION_KEY);
-    }
+    let currentAdminEmail = '';
 
     function apiHeaders() {
-      const token = getToken();
-      return {
-        'Content-Type': 'application/json',
-        ...(token ? { 'Authorization': 'Bearer ' + token } : {})
-      };
+      return { 'Content-Type': 'application/json' };
+    }
+
+    async function apiFetch(url, options = {}) {
+      const res = await fetch(API_BASE + url, {
+        ...options,
+        credentials: 'include',
+        headers: { ...apiHeaders(), ...options.headers },
+      });
+
+      if (res.status === 401) {
+        const data = await res.json().catch(() => ({}));
+        if (data.code === 'TOKEN_EXPIRED') {
+          const refreshed = await refreshSession();
+          if (refreshed) return apiFetch(url, options);
+        }
+        clearSession();
+        showView('loginView');
+        showToast('Session expired. Please sign in again.', 'info');
+        throw new Error('Not authenticated');
+      }
+
+      if (!res.ok) {
+        const error = await res.json().catch(() => ({ error: 'Request failed' }));
+        throw new Error(error.error || 'Request failed');
+      }
+
+      return res.json();
+    }
+
+    async function refreshSession() {
+      try {
+        const data = await fetch(API_BASE + '/auth/refresh', {
+          method: 'POST',
+          credentials: 'include',
+        }).then(r => r.ok ? r.json() : null);
+
+        if (data) {
+          currentAdminEmail = data.email;
+          return true;
+        }
+      } catch (err) {
+        // silent fail, will fall back to login
+      }
+      return false;
+    }
+
+    function clearSession() {
+      currentAdminEmail = '';
+      fetch(API_BASE + '/auth/logout', { method: 'POST', credentials: 'include' }).catch(() => {});
+    }
+
+    async function validateSession() {
+      try {
+        const data = await apiFetch('/auth/me');
+        currentAdminEmail = data.email;
+        return true;
+      } catch (err) {
+        return false;
+      }
     }
 
     async function fetchEnquiries() {
-      const res = await fetch(API_BASE + '/enquiries', { headers: apiHeaders() });
-      if (!res.ok) throw new Error('Failed to fetch enquiries');
-      enquiriesCache = await res.json();
+      enquiriesCache = await apiFetch('/enquiries');
       return enquiriesCache;
     }
 
@@ -362,7 +410,7 @@
     function updateStats() {
       const enquiries = getEnquiries();
       const total = enquiries.length;
-      const unread = enquiries.filter(e => !e.read).length;
+      const unread = enquiries.filter(e => !e.is_read).length;
       const read = total - unread;
       const today = enquiries.filter(e => isToday(e.date)).length;
 
@@ -379,8 +427,8 @@
 
       let filtered = enquiries;
 
-      if (currentFilter === 'unread') filtered = filtered.filter(e => !e.read);
-      else if (currentFilter === 'read') filtered = filtered.filter(e => e.read);
+      if (currentFilter === 'unread') filtered = filtered.filter(e => !e.is_read);
+      else if (currentFilter === 'read') filtered = filtered.filter(e => e.is_read);
 
       if (currentSearch) {
         const q = currentSearch.toLowerCase();
@@ -403,16 +451,16 @@
       emptyState.classList.add('hidden');
 
       container.innerHTML = filtered.map(e => `
-        <div class="enquiry-row bg-card border ${e.read ? 'border-white/10' : 'border-gold/30'} p-5 cursor-pointer group" onclick="viewEnquiry('${e.id}')">
+        <div class="enquiry-row bg-card border ${e.is_read ? 'border-white/10' : 'border-gold/30'} p-5 cursor-pointer group" onclick="viewEnquiry('${e.id}')">
           <div class="flex items-start justify-between gap-4">
             <div class="flex items-start gap-4 min-w-0 flex-1">
               <div class="w-10 h-10 bg-gold/10 border border-gold/20 flex items-center justify-center flex-shrink-0 mt-0.5">
-                <span class="font-display text-gold text-lg">${e.name.charAt(0).toUpperCase()}</span>
+                <span class="font-display text-gold text-lg">${escapeHtml(e.name.charAt(0).toUpperCase())}</span>
               </div>
               <div class="min-w-0 flex-1">
                 <div class="flex items-center gap-3 mb-1">
-                  <h3 class="text-white font-semibold text-base truncate ${e.read ? '' : 'text-white'}">${escapeHtml(e.name)}</h3>
-                  ${!e.read ? '<span class="badge-new w-2 h-2 bg-gold rounded-full flex-shrink-0"></span>' : ''}
+                  <h3 class="text-white font-semibold text-base truncate ${e.is_read ? '' : 'text-white'}">${escapeHtml(e.name)}</h3>
+                  ${!e.is_read ? '<span class="badge-new w-2 h-2 bg-gold rounded-full flex-shrink-0"></span>' : ''}
                 </div>
                 <p class="text-white/40 text-sm truncate">${escapeHtml(e.email)}</p>
                 <p class="text-white/50 text-sm mt-2 line-clamp-1">${escapeHtml(e.message)}</p>
@@ -445,12 +493,11 @@
 
       currentEnquiryId = id;
 
-      if (!enquiry.read) {
-        fetch(API_BASE + '/enquiries/' + encodeURIComponent(id) + '/read', {
-          method: 'PATCH',
-          headers: apiHeaders()
+      if (!enquiry.is_read) {
+        apiFetch('/enquiries/' + encodeURIComponent(id) + '/read', {
+          method: 'PATCH'
         }).then(() => {
-          enquiry.read = true;
+          enquiry.is_read = true;
           updateStats();
           renderEnquiries();
         }).catch(() => {});
@@ -519,30 +566,20 @@
     async function deleteEnquiry(id) {
       if (!confirm('Are you sure you want to delete this enquiry? This cannot be undone.')) return;
       try {
-        const res = await fetch(API_BASE + '/enquiries/' + encodeURIComponent(id), {
-          method: 'DELETE',
-          headers: apiHeaders()
-        });
-        if (res.ok) {
-          enquiriesCache = enquiriesCache.filter(e => e.id !== id);
-          showToast('Enquiry deleted', 'success');
-          updateStats();
-          renderEnquiries();
-          showView('dashboardView');
-        } else {
-          showToast('Failed to delete enquiry', 'error');
-        }
+        await apiFetch('/enquiries/' + encodeURIComponent(id), { method: 'DELETE' });
+        enquiriesCache = enquiriesCache.filter(e => e.id !== id);
+        showToast('Enquiry deleted', 'success');
+        updateStats();
+        renderEnquiries();
+        showView('dashboardView');
       } catch (err) {
-        showToast('Failed to delete enquiry', 'error');
+        showToast(err.message || 'Failed to delete enquiry', 'error');
       }
     }
 
     function markAllRead() {
-      fetch(API_BASE + '/enquiries/read-all', {
-        method: 'PATCH',
-        headers: apiHeaders()
-      }).then(() => {
-        enquiriesCache.forEach(e => e.read = true);
+      apiFetch('/enquiries/read-all', { method: 'PATCH' }).then(() => {
+        enquiriesCache.forEach(e => e.is_read = true);
         updateStats();
         renderEnquiries();
       }).catch(() => {});
@@ -561,6 +598,7 @@
       try {
         const res = await fetch(API_BASE + '/auth/login', {
           method: 'POST',
+          credentials: 'include',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ email, password })
         });
@@ -568,8 +606,7 @@
         const data = await res.json();
 
         if (res.ok) {
-          sessionStorage.setItem(SESSION_KEY, data.token);
-          sessionStorage.setItem(SESSION_KEY + '_email', data.email);
+          currentAdminEmail = data.email;
           errorEl.classList.add('hidden');
           document.getElementById('adminEmail').textContent = data.email;
           await fetchEnquiries();
@@ -605,9 +642,8 @@
       }
     });
 
-    document.getElementById('logoutBtn').addEventListener('click', function() {
-      sessionStorage.removeItem(SESSION_KEY);
-      sessionStorage.removeItem(SESSION_KEY + '_email');
+    document.getElementById('logoutBtn').addEventListener('click', async function() {
+      clearSession();
       document.getElementById('loginForm').reset();
       showView('loginView');
       showToast('Logged out successfully', 'info');
@@ -637,17 +673,22 @@
       renderEnquiries();
     });
 
-    if (getToken()) {
-      document.getElementById('adminEmail').textContent = sessionStorage.getItem(SESSION_KEY + '_email') || '';
-      fetchEnquiries().then(() => {
-        updateStats();
-        renderEnquiries();
-        showView('dashboardView');
-      }).catch(() => {
-        sessionStorage.removeItem(SESSION_KEY);
-        sessionStorage.removeItem(SESSION_KEY + '_email');
-      });
-    }
+    (async function init() {
+      const authenticated = await validateSession();
+      if (authenticated) {
+        document.getElementById('adminEmail').textContent = currentAdminEmail;
+        try {
+          await fetchEnquiries();
+          updateStats();
+          renderEnquiries();
+          showView('dashboardView');
+        } catch (err) {
+          showView('loginView');
+        }
+      } else {
+        showView('loginView');
+      }
+    })();
   </script>
 </body>
 </html>

@@ -1,29 +1,36 @@
-const Database = require('better-sqlite3');
-const path = require('path');
+const { createClient } = require('@libsql/client');
 
-const DB_PATH = path.join(__dirname, '..', 'zenny.db');
+const client = createClient({
+  url: process.env.TURSO_DATABASE_URL || 'file:local.db',
+  authToken: process.env.TURSO_AUTH_TOKEN,
+});
 
-let db;
-
-function getDb() {
-  if (!db) {
-    db = new Database(DB_PATH);
-    db.pragma('journal_mode = WAL');
-    db.pragma('foreign_keys = ON');
-    initTables();
-  }
-  return db;
+async function execute(sql, params = []) {
+  const result = await client.execute({ sql, args: params });
+  return result;
 }
 
-function initTables() {
-  db.exec(`
+async function query(sql, params = []) {
+  const result = await client.execute({ sql, args: params });
+  return result.rows;
+}
+
+async function queryOne(sql, params = []) {
+  const rows = await query(sql, params);
+  return rows.length > 0 ? rows[0] : null;
+}
+
+async function initTables() {
+  await execute(`
     CREATE TABLE IF NOT EXISTS admins (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
       email TEXT UNIQUE NOT NULL,
       password_hash TEXT NOT NULL,
       created_at TEXT DEFAULT (datetime('now'))
-    );
+    )
+  `);
 
+  await execute(`
     CREATE TABLE IF NOT EXISTS enquiries (
       id TEXT PRIMARY KEY,
       name TEXT NOT NULL,
@@ -33,17 +40,10 @@ function initTables() {
       service TEXT DEFAULT '',
       message TEXT NOT NULL,
       date TEXT NOT NULL,
-      read INTEGER DEFAULT 0,
+      is_read INTEGER DEFAULT 0,
       created_at TEXT DEFAULT (datetime('now'))
-    );
+    )
   `);
 }
 
-function closeDb() {
-  if (db) {
-    db.close();
-    db = null;
-  }
-}
-
-module.exports = { getDb, closeDb };
+module.exports = { execute, query, queryOne, initTables };

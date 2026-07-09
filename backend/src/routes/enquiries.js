@@ -1,7 +1,9 @@
 const express = require('express');
-const { getDb } = require('../db');
+const crypto = require('crypto');
+const { query, execute, queryOne } = require('../db');
 const { authMiddleware } = require('../middleware/auth');
 const { sendEnquiryNotification } = require('../email');
+const { sanitizeInput, validateEnquiry } = require('../utils/validation');
 
 const router = express.Router();
 
@@ -10,10 +12,9 @@ router.use((req, res, next) => {
   authMiddleware(req, res, next);
 });
 
-router.get('/', (req, res) => {
+router.get('/', async (req, res) => {
   try {
-    const db = getDb();
-    const enquiries = db.prepare('SELECT * FROM enquiries ORDER BY date DESC').all();
+    const enquiries = await query('SELECT * FROM enquiries ORDER BY date DESC');
     res.json(enquiries);
   } catch (err) {
     console.error('Get enquiries error:', err);
@@ -21,21 +22,26 @@ router.get('/', (req, res) => {
   }
 });
 
-router.post('/', (req, res) => {
-  const { id, name, email, phone, company, service, message, date } = req.body;
+router.post('/', async (req, res) => {
+  const { name, email, phone, company, service, message, date } = req.body;
 
-  if (!id || !name || !email || !phone || !message || !date) {
-    return res.status(400).json({ error: 'Missing required fields' });
+  const validation = validateEnquiry({ name, email, phone, company, service, message, date });
+  if (!validation.valid) {
+    return res.status(400).json({ error: validation.errors.join(', ') });
   }
 
-  try {
-    const db = getDb();
-    db.prepare(`
-      INSERT OR REPLACE INTO enquiries (id, name, email, phone, company, service, message, date, read)
-      VALUES (?, ?, ?, ?, ?, ?, ?, ?, 0)
-    `).run(id, name, email, phone, company || '', service || '', message, date);
+  const sanitized = sanitizeInput({ name, email, phone, company, service, message, date });
 
-    sendEnquiryNotification({ name, email, phone, company, service, message })
+  try {
+    const id = crypto.randomUUID();
+
+    await execute(
+      `INSERT INTO enquiries (id, name, email, phone, company, service, message, date, is_read)
+       VALUES (?, ?, ?, ?, ?, ?, ?, ?, 0)`,
+      [id, sanitized.name, sanitized.email, sanitized.phone, sanitized.company, sanitized.service, sanitized.message, sanitized.date]
+    );
+
+    sendEnquiryNotification({ name: sanitized.name, email: sanitized.email, phone: sanitized.phone, company: sanitized.company, service: sanitized.service, message: sanitized.message })
       .catch(err => console.error('Email notification failed:', err.message));
 
     res.status(201).json({ success: true });
@@ -45,14 +51,17 @@ router.post('/', (req, res) => {
   }
 });
 
-router.patch('/:id/read', (req, res) => {
+router.patch('/:id/read', async (req, res) => {
   const { id } = req.params;
 
-  try {
-    const db = getDb();
-    const result = db.prepare('UPDATE enquiries SET read = 1 WHERE id = ?').run(id);
+  if (!/^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(id)) {
+    return res.status(400).json({ error: 'Invalid enquiry ID format' });
+  }
 
-    if (result.changes === 0) {
+  try {
+    const result = await execute('UPDATE enquiries SET is_read = 1 WHERE id = ?', [id]);
+
+    if (result.rowsAffected === 0) {
       return res.status(404).json({ error: 'Enquiry not found' });
     }
 
@@ -63,10 +72,9 @@ router.patch('/:id/read', (req, res) => {
   }
 });
 
-router.patch('/read-all', (req, res) => {
+router.patch('/read-all', async (req, res) => {
   try {
-    const db = getDb();
-    db.prepare('UPDATE enquiries SET read = 1 WHERE read = 0').run();
+    await execute('UPDATE enquiries SET is_read = 1 WHERE is_read = 0');
     res.json({ success: true });
   } catch (err) {
     console.error('Mark all read error:', err);
@@ -74,14 +82,17 @@ router.patch('/read-all', (req, res) => {
   }
 });
 
-router.delete('/:id', (req, res) => {
+router.delete('/:id', async (req, res) => {
   const { id } = req.params;
 
-  try {
-    const db = getDb();
-    const result = db.prepare('DELETE FROM enquiries WHERE id = ?').run(id);
+  if (!/^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(id)) {
+    return res.status(400).json({ error: 'Invalid enquiry ID format' });
+  }
 
-    if (result.changes === 0) {
+  try {
+    const result = await execute('DELETE FROM enquiries WHERE id = ?', [id]);
+
+    if (result.rowsAffected === 0) {
       return res.status(404).json({ error: 'Enquiry not found' });
     }
 
