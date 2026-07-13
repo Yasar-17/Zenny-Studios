@@ -5,8 +5,8 @@ const { execute, queryOne, initTables } = require('./db');
 async function seed() {
   await initTables();
 
-  const email = process.env.ADMIN_EMAIL;
-  const password = process.env.ADMIN_PASSWORD;
+  const email = (process.env.ADMIN_EMAIL || '').trim();
+  const password = (process.env.ADMIN_PASSWORD || '').trim();
 
   if (!email || !password) {
     console.error('Error: ADMIN_EMAIL and ADMIN_PASSWORD must be set in .env');
