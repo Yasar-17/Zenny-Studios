@@ -195,7 +195,7 @@
             </div>
           </a>
 
-          <a href="projects/tavisa-fashion.html" class="work-card" data-category="creative-hub" style="background: linear-gradient(135deg, #2C1810 0%, #4a2c1a 100%);">
+          <a href="projects/tavisa-fashion.html" class="work-card" data-category="creative-hub" data-modal-open="tavisa-modal" role="button" tabindex="0" aria-haspopup="dialog" aria-controls="tavisa-modal" style="background: linear-gradient(135deg, #2C1810 0%, #4a2c1a 100%);">
             <img src="assets/projects/tavisa-fashion.jpg" alt="Tavisa Fashion" onerror="this.style.opacity='0'">
             <div class="work-card-overlay">
               <span class="text-gold text-xs uppercase tracking-wider mb-2 font-semibold">Creative Hub</span>
@@ -230,9 +230,59 @@
           </a>
 
         </div>
-        <p class="text-white/30 text-sm mt-12 text-center">Add cover images to <span class="text-gold/60">assets/projects/</span> — one JPG per project slug.</p>
       </div>
     </section>
+
+    <!-- Tavisa Fashion Project Modal -->
+    <div id="tavisa-modal" role="dialog" aria-modal="true" aria-labelledby="tavisa-modal-title" aria-hidden="true" class="fixed inset-0 z-[60] flex items-center justify-center p-4 md:p-8 opacity-0 pointer-events-none transition-all duration-300">
+      <div class="absolute inset-0 bg-black/80 backdrop-blur-sm" data-modal-close></div>
+      <div class="relative z-10 w-full max-w-5xl max-h-[90vh] overflow-y-auto bg-[#0d0d0d] border border-white/10" role="document">
+        <button type="button" class="absolute top-4 right-4 z-20 w-10 h-10 flex items-center justify-center text-white/70 hover:text-gold transition-colors duration-300 bg-black/40 hover:bg-black/60" aria-label="Close project details" data-modal-close>
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" class="w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+        </button>
+
+        <div class="relative aspect-video w-full overflow-hidden bg-gradient-to-br from-[#2C1810] to-[#4a2c1a]">
+          <img src="assets/projects/tavisa-fashion.jpg" alt="Tavisa Fashion campaign cover" class="w-full h-full object-cover" onerror="this.style.display='none'">
+        </div>
+
+        <div class="p-6 md:p-10">
+          <span class="bg-gold text-dark text-xs px-4 py-1.5 font-bold tracking-wider uppercase inline-block mb-4">Creative Hub</span>
+          <h2 id="tavisa-modal-title" class="font-display text-5xl md:text-6xl text-white mb-4 leading-[0.9]">Tavisa Fashion</h2>
+          <p class="text-white/60 text-lg max-w-3xl mb-8">Complete social takeover — strategic calendars, viral reels, and engagement architecture that brewed measurable growth.</p>
+
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-10">
+            <div>
+              <h3 class="text-gold text-xs uppercase tracking-[0.2em] mb-2">Client</h3>
+              <p class="font-display text-2xl text-white">Tavisa Fashion</p>
+            </div>
+            <div>
+              <h3 class="text-gold text-xs uppercase tracking-[0.2em] mb-2">Services</h3>
+              <p class="text-white/70 text-sm leading-relaxed">Media Production, Content Creation, Social Strategy</p>
+            </div>
+            <div>
+              <h3 class="text-gold text-xs uppercase tracking-[0.2em] mb-2">Year</h3>
+              <p class="text-white/70 text-sm">2024</p>
+            </div>
+          </div>
+
+          <h3 class="font-display text-2xl text-white mb-4">Gallery</h3>
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+            <figure class="relative overflow-hidden group">
+              <img src="assets/projects/tavisa-fashion/1.jpg" alt="Tavisa Fashion gallery image 1" loading="lazy" class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-105" onerror="this.parentElement.style.display='none'">
+              <figcaption class="absolute top-2 left-2 font-display text-2xl text-gold leading-none">01</figcaption>
+            </figure>
+            <figure class="relative overflow-hidden group">
+              <img src="assets/projects/tavisa-fashion/2.jpg" alt="Tavisa Fashion gallery image 2" loading="lazy" class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-105" onerror="this.parentElement.style.display='none'">
+              <figcaption class="absolute top-2 left-2 font-display text-2xl text-gold leading-none">02</figcaption>
+            </figure>
+            <figure class="relative overflow-hidden group">
+              <img src="assets/projects/tavisa-fashion/3.jpg" alt="Tavisa Fashion gallery image 3" loading="lazy" class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-105" onerror="this.parentElement.style.display='none'">
+              <figcaption class="absolute top-2 left-2 font-display text-2xl text-gold leading-none">03</figcaption>
+            </figure>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <!-- CTA Section -->
     <section class="bg-[#0d0d0d] py-32 md:py-40 relative overflow-hidden">
@@ -446,6 +496,67 @@
           }
         });
       });
+    });
+
+    // Project modal (Tavisa Fashion)
+    const tavisaModal = document.getElementById('tavisa-modal');
+    const tavisaTriggers = document.querySelectorAll('[data-modal-open="tavisa-modal"]');
+    let lastFocused = null;
+
+    function getFocusable(container) {
+      return container.querySelectorAll('a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])');
+    }
+
+    function openTavisaModal() {
+      lastFocused = document.activeElement;
+      tavisaModal.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+      setTimeout(() => {
+        const focusable = getFocusable(tavisaModal);
+        if (focusable.length) focusable[0].focus();
+      }, 100);
+    }
+
+    function closeTavisaModal() {
+      tavisaModal.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+      if (lastFocused) lastFocused.focus();
+    }
+
+    tavisaTriggers.forEach(el => {
+      el.addEventListener('click', (e) => {
+        e.preventDefault();
+        openTavisaModal();
+      });
+      el.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          openTavisaModal();
+        }
+      });
+    });
+
+    tavisaModal.querySelectorAll('[data-modal-close]').forEach(el => {
+      el.addEventListener('click', closeTavisaModal);
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (tavisaModal.getAttribute('aria-hidden') !== 'false') return;
+      if (e.key === 'Escape') {
+        closeTavisaModal();
+      } else if (e.key === 'Tab') {
+        const focusable = getFocusable(tavisaModal);
+        if (!focusable.length) return;
+        const first = focusable[0];
+        const last = focusable[focusable.length - 1];
+        if (e.shiftKey && document.activeElement === first) {
+          e.preventDefault();
+          last.focus();
+        } else if (!e.shiftKey && document.activeElement === last) {
+          e.preventDefault();
+          first.focus();
+        }
+      }
     });
   </script>
 </body>
