@@ -1,0 +1,137 @@
+[
+  {
+    "input": "assets\\projects\\brand-identity-system.jpg",
+    "output": "assets\\projects\\brand-identity-system.webp",
+    "originalWidth": 3464,
+    "originalHeight": 3464,
+    "outWidth": 1600,
+    "outHeight": 1600,
+    "resized": true
+  },
+  {
+    "input": "assets\\projects\\harley-davidson.jpg",
+    "output": "assets\\projects\\harley-davidson.webp",
+    "originalWidth": 5400,
+    "originalHeight": 7200,
+    "outWidth": 1600,
+    "outHeight": 2133,
+    "resized": true
+  },
+  {
+    "input": "assets\\projects\\oreo.jpg",
+    "output": "assets\\projects\\oreo.webp",
+    "originalWidth": 5400,
+    "originalHeight": 7200,
+    "outWidth": 1600,
+    "outHeight": 2133,
+    "resized": true
+  },
+  {
+    "input": "assets\\projects\\tata-coffee.jpg",
+    "output": "assets\\projects\\tata-coffee.webp",
+    "originalWidth": 7200,
+    "originalHeight": 5400,
+    "outWidth": 1600,
+    "outHeight": 1200,
+    "resized": true
+  },
+  {
+    "input": "assets\\projects\\tavisa-fashion\\1.jpg",
+    "output": "assets\\projects\\tavisa-fashion\\1.webp",
+    "originalWidth": 1080,
+    "originalHeight": 1350,
+    "outWidth": 1080,
+    "outHeight": 1350,
+    "resized": false
+  },
+  {
+    "input": "assets\\projects\\tavisa-fashion\\2.jpg",
+    "output": "assets\\projects\\tavisa-fashion\\2.webp",
+    "originalWidth": 1080,
+    "originalHeight": 1350,
+    "outWidth": 1080,
+    "outHeight": 1350,
+    "resized": false
+  },
+  {
+    "input": "assets\\projects\\tavisa-fashion\\3.jpg",
+    "output": "assets\\projects\\tavisa-fashion\\3.webp",
+    "originalWidth": 1080,
+    "originalHeight": 1350,
+    "outWidth": 1080,
+    "outHeight": 1350,
+    "resized": false
+  },
+  {
+    "input": "assets\\projects\\tavisa-fashion.jpg",
+    "output": "assets\\projects\\tavisa-fashion.webp",
+    "originalWidth": 1080,
+    "originalHeight": 1350,
+    "outWidth": 1080,
+    "outHeight": 1350,
+    "resized": false
+  },
+  {
+    "input": "assets\\images\\Clients_Logo\\Client1.png",
+    "output": "assets\\images\\Clients_Logo\\Client1.webp",
+    "originalWidth": 614,
+    "originalHeight": 407,
+    "outWidth": 614,
+    "outHeight": 407,
+    "resized": false
+  },
+  {
+    "input": "assets\\images\\Clients_Logo\\Client2.jpeg",
+    "output": "assets\\images\\Clients_Logo\\Client2.webp",
+    "originalWidth": 557,
+    "originalHeight": 550,
+    "outWidth": 557,
+    "outHeight": 550,
+    "resized": false
+  },
+  {
+    "input": "assets\\images\\Clients_Logo\\Client3.png",
+    "output": "assets\\images\\Clients_Logo\\Client3.webp",
+    "originalWidth": 554,
+    "originalHeight": 554,
+    "outWidth": 554,
+    "outHeight": 554,
+    "resized": false
+  },
+  {
+    "input": "assets\\images\\Clients_Logo\\Client4.jpg",
+    "output": "assets\\images\\Clients_Logo\\Client4.webp",
+    "originalWidth": 710,
+    "originalHeight": 704,
+    "outWidth": 710,
+    "outHeight": 704,
+    "resized": false
+  },
+  {
+    "input": "assets\\images\\Clients_Logo\\Client5.jpg",
+    "output": "assets\\images\\Clients_Logo\\Client5.webp",
+    "originalWidth": 219,
+    "originalHeight": 218,
+    "outWidth": 219,
+    "outHeight": 218,
+    "resized": false
+  },
+  {
+    "input": "assets\\images\\Clients_Logo\\Client6.png",
+    "output": "assets\\images\\Clients_Logo\\Client6.webp",
+    "originalWidth": 195,
+    "originalHeight": 195,
+    "outWidth": 195,
+    "outHeight": 195,
+    "resized": false
+  },
+  {
+    "input": "assets\\images\\Zenny_Studios_Logo\\ZennyStudios_logo.png",
+    "output": "assets\\images\\Zenny_Studios_Logo\\ZennyStudios_logo.webp",
+    "originalWidth": 738,
+    "originalHeight": 708,
+    "outWidth": 738,
+    "outHeight": 708,
+    "resized": false
+  }
+]

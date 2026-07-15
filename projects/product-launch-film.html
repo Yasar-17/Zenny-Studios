@@ -92,7 +92,7 @@
 
     <section class="bg-[#0d0d0d]">
       <div class="aspect-video max-w-7xl mx-auto relative overflow-hidden bg-gradient-to-br from-[#2d1b4e] to-[#5c3d7a]" data-aos="fade-up">
-        <img src="../assets/projects/product-launch-film.jpg" alt="Product Launch Film campaign cover" loading="lazy" class="w-full h-full object-cover" onerror="this.style.display='none'">
+        <img src="../assets/projects/product-launch-film.jpg" alt="Product Launch Film campaign cover" loading="eager" class="w-full h-full object-cover" onerror="this.style.display='none'" fetchpriority="high" width="1280" height="720" decoding="async">
       </div>
     </section>
 
@@ -135,7 +135,10 @@
         <!-- Brand Column -->
         <div class="text-center md:text-left">
           <a href="../index.html" class="inline-flex items-center gap-3 group mb-4">
-            <img src="../assets/images/Zenny_Studios_Logo/ZennyStudios_logo.png" alt="Zenny Studios" class="h-12 w-auto group-hover:scale-110 transition-transform duration-300">
+            <picture>
+        <source srcset="../assets/images/Zenny_Studios_Logo/ZennyStudios_logo.webp" type="image/webp">
+        <img src="../assets/images/Zenny_Studios_Logo/ZennyStudios_logo.png" alt="Zenny Studios" class="h-12 w-auto group-hover:scale-110 transition-transform duration-300" loading="lazy" width="738" height="708" decoding="async">
+      </picture>
             <span class="font-display text-2xl text-white group-hover:text-gold transition-colors duration-300">Zenny Studios</span>
           </a>
           <p class="text-white/50 text-sm leading-relaxed max-w-xs mx-auto md:mx-0">We make brands unforgettable. Social media, content, branding — we do the work, you take the credit.</p>

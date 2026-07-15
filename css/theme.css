@@ -525,6 +525,7 @@
 }
 
 /* ─── Work grid ──────────────────────────────────────── */
+picture { display: contents; }
 .work-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
