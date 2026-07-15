@@ -573,6 +573,10 @@
 .work-card.hidden-filter {
   display: none;
 }
+.work-card {
+  content-visibility: auto;
+  contain-intrinsic-size: 400px;
+}
 
 /* ─── Team section ───────────────────────────────────── */
 .team-portrait {
