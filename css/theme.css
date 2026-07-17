@@ -610,6 +610,31 @@ picture { display: contents; }
   }
 }
 
+/* ─── Featured grid (index page) ──────────────────────────── */
+.featured-grid {
+  grid-auto-flow: dense;
+}
+.featured-grid > a[data-orientation="landscape"] {
+  grid-column: span 2;
+  aspect-ratio: 16 / 9;
+}
+.featured-grid > a[data-orientation="portrait"] {
+  aspect-ratio: 3 / 4;
+}
+.featured-grid > a[data-orientation="square"] {
+  aspect-ratio: 1 / 1;
+}
+@media (max-width: 768px) {
+  .featured-grid > a {
+    aspect-ratio: 16 / 9 !important;
+  }
+  .featured-grid > a[data-orientation="landscape"],
+  .featured-grid > a[data-orientation="portrait"],
+  .featured-grid > a[data-orientation="square"] {
+    grid-column: span 1;
+  }
+}
+
 /* ─── Team section ───────────────────────────────────── */
 .team-portrait {
   aspect-ratio: 3 / 4;
