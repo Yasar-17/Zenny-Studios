@@ -1,4 +1,5 @@
 require('dotenv').config();
+const path = require('path');
 const express = require('express');
 const cors = require('cors');
 const helmet = require('helmet');
@@ -19,7 +20,7 @@ app.use(helmet({
       styleSrc: ["'self'", "'unsafe-inline'", 'https://fonts.googleapis.com'],
       fontSrc: ["'self'", 'https://fonts.gstatic.com'],
       imgSrc: ["'self'", 'data:', 'https:'],
-      connectSrc: ["'self'", 'http://localhost:3000'],
+      connectSrc: ["'self'", 'http://localhost:3000', 'https://zennystudios.com'],
       frameSrc: ["'none'"],
       objectSrc: ["'none'"],
     },
@@ -33,11 +34,10 @@ const allowedOrigins = process.env.ALLOWED_ORIGINS
 
 app.use(cors({
   origin: (origin, callback) => {
-    if (!origin || allowedOrigins.includes(origin)) {
-      callback(null, true);
-    } else {
-      callback(new Error('Not allowed by CORS'));
-    }
+    if (!origin) return callback(null, true);
+    if (allowedOrigins.includes(origin)) return callback(null, true);
+    if (process.env.NODE_ENV === 'development' && origin.startsWith('http://localhost')) return callback(null, true);
+    callback(new Error('Not allowed by CORS'));
   },
   credentials: true,
 }));
@@ -51,6 +51,8 @@ app.use((req, res, next) => {
   }
   next();
 });
+
+app.use(express.static(path.join(__dirname, '../..')));
 
 const loginLimiter = rateLimit({
   windowMs: 15 * 60 * 1000,

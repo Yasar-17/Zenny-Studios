@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
 <head>
   <meta charset="UTF-8">
@@ -6,8 +6,18 @@
   <meta name="color-scheme" content="dark light">
   <meta name="theme-color" content="#0a0a0a">
   <meta name="robots" content="noindex, nofollow">
+  <meta property="og:title" content="Admin | Zenny Studios">
+  <meta property="og:description" content="Zenny Studios Admin Panel">
+  <meta property="og:url" content="https://zennystudios.com/admin.html">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://zennystudios.com/assets/images/Zenny_Studios_Logo/ZennyStudios_logo.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Admin | Zenny Studios">
+  <meta name="twitter:description" content="Zenny Studios Admin Panel">
+  <meta name="twitter:image" content="https://zennystudios.com/assets/images/Zenny_Studios_Logo/ZennyStudios_logo.png">
+  <link rel="apple-touch-icon" href="assets/images/Zenny_Studios_Logo/ZennyStudios_logo.png">
   <title>Admin | Zenny Studios</title>
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎬</text></svg>">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>ðŸŽ¬</text></svg>">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -232,7 +242,7 @@
         <div id="enquiriesList" class="space-y-3"></div>
 
         <div id="emptyState" class="hidden text-center py-20">
-          <span class="text-6xl block mb-6">📭</span>
+          <span class="text-6xl block mb-6">ðŸ“­</span>
           <h3 class="font-display text-3xl text-white/40 mb-2">No Enquiries Yet</h3>
           <p class="text-white/30 text-sm">When someone submits the Let's Talk form, it will appear here.</p>
         </div>
@@ -272,7 +282,7 @@
   <div id="toast" class="fixed bottom-6 right-6 z-[100] hidden"></div>
 
   <script>
-    const API_BASE = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
+    const API_BASE = (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' || window.location.protocol === 'file:')
       ? 'http://localhost:3000/api'
       : '/api';
 
@@ -298,10 +308,10 @@
         if (data.code === 'TOKEN_EXPIRED') {
           const refreshed = await refreshSession();
           if (refreshed) return apiFetch(url, options);
+          showToast('Session expired. Please sign in again.', 'info');
         }
         clearSession();
         showView('loginView');
-        showToast('Session expired. Please sign in again.', 'info');
         throw new Error('Not authenticated');
       }
 

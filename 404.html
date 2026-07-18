@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, follow">
+  <title>404 | Zenny Studios</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎬</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: { gold: '#F5C518', dark: '#0a0a0a', card: '#111111' },
+          fontFamily: { display: ['Bebas Neue', 'cursive'], body: ['Inter', 'sans-serif'] }
+        }
+      }
+    }
+  </script>
+  <style>
+    .glitch-text:hover { animation: glitch 0.3s ease-in-out; }
+    @keyframes glitch {
+      0%, 100% { transform: translate(0); }
+      20% { transform: translate(-2px, 2px); }
+      40% { transform: translate(2px, -2px); }
+      60% { transform: translate(-2px, -2px); }
+      80% { transform: translate(2px, 2px); }
+    }
+  </style>
+</head>
+<body class="bg-dark font-body text-white antialiased min-h-screen flex items-center justify-center">
+  <div class="text-center px-6">
+    <p class="font-display text-[12rem] sm:text-[16rem] text-gold/10 leading-none select-none">404</p>
+    <h1 class="font-display text-5xl sm:text-6xl md:text-7xl text-white mt-[-2rem] mb-6 glitch-text">Page Not Found</h1>
+    <p class="text-white/50 text-lg md:text-xl mb-10 max-w-md mx-auto">This page doesn't exist. But your next big idea could start right here.</p>
+    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+      <a href="index.html" class="bg-gold text-dark px-10 py-4 font-semibold text-lg hover:bg-white transition-all duration-300 inline-block">Back to Home</a>
+      <a href="work.html" class="border-2 border-white/20 text-white/70 px-10 py-4 font-semibold text-lg hover:border-gold hover:text-gold transition-all duration-300 inline-block">See Our Work</a>
+    </div>
+  </div>
+</body>
+</html>

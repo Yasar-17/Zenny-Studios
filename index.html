@@ -1,23 +1,33 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="color-scheme" content="dark light">
   <meta name="theme-color" content="#0a0a0a">
-  <meta name="description" content="Zenny Studios — Bengaluru's boldest creative agency. Three steps ahead in social media, content creation, and branding.">
+  <meta name="description" content="Zenny Studios â€” Bengaluru's boldest creative agency. Three steps ahead in social media, content creation, and branding.">
+  <meta property="og:title" content="Zenny Studios | Three Steps Ahead">
+  <meta property="og:description" content="Zenny Studios â€” Bengaluru's boldest creative agency. Three steps ahead in social media, content creation, and branding.">
+  <meta property="og:url" content="https://zennystudios.com/">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://zennystudios.com/assets/images/Zenny_Studios_Logo/ZennyStudios_logo.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Zenny Studios | Three Steps Ahead">
+  <meta name="twitter:description" content="Zenny Studios â€” Bengaluru's boldest creative agency. Three steps ahead in social media, content creation, and branding.">
+  <meta name="twitter:image" content="https://zennystudios.com/assets/images/Zenny_Studios_Logo/ZennyStudios_logo.png">
+  <link rel="apple-touch-icon" href="assets/images/Zenny_Studios_Logo/ZennyStudios_logo.png">
   <title>Zenny Studios | Three Steps Ahead</title>
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎬</text></svg>">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>ðŸŽ¬</text></svg>">
 
-  <!-- Google Fonts -->
+  
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
 
-  <!-- Tailwind CSS -->
+  
   <script src="https://cdn.tailwindcss.com"></script>
 
-  <!-- Theme -->
+  
   <link rel="stylesheet" href="css/theme.css">
   <script src="js/theme.js"></script>
 
@@ -250,18 +260,18 @@
 </head>
 <body class="bg-dark font-body text-white antialiased">
 
-  <!-- Custom Cursor -->
+  
   <div class="cursor-dot hidden md:block"></div>
   <div class="cursor-ring hidden md:block"></div>
 
-  <!-- Scroll Progress Bar -->
+  
   <div class="scroll-progress" id="scrollProgress"></div>
 
-  <!-- Navbar -->
+  
   <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 border-b border-white/10 transition-all duration-300">
     <div class="max-w-7xl mx-auto px-6 py-4">
       <div class="flex items-center justify-between">
-        <!-- Logo -->
+        
         <a href="index.html" class="flex items-center gap-3 group">
           <picture>
         <source srcset="assets/images/Zenny_Studios_Logo/ZennyStudios_logo.webp" type="image/webp">
@@ -269,7 +279,7 @@
       </picture>
         </a>
 
-        <!-- Desktop Nav -->
+        
         <div class="hidden md:flex items-center gap-8">
           <a href="index.html" class="text-gold transition-all duration-300 animated-underline leading-none py-2" aria-current="page">Home</a>
           <a href="work.html" class="text-white/70 hover:text-gold transition-all duration-300 animated-underline leading-none py-2">Work</a>
@@ -277,7 +287,7 @@
           <a href="#about" class="text-white/70 hover:text-gold transition-all duration-300 animated-underline leading-none py-2">About</a>
         </div>
 
-        <!-- Theme + CTA -->
+        
         <div class="hidden md:flex items-center gap-3">
           <button type="button" data-theme-toggle class="theme-toggle" aria-label="Toggle light/dark mode">
             <svg class="icon-sun" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
@@ -286,7 +296,7 @@
           <a href="contact.html" class="magnetic-btn border border-gold text-gold px-6 py-[9px] hover:bg-gold hover:text-dark transition-all duration-300 inline-block leading-none text-sm font-semibold">Let's Talk</a>
         </div>
 
-        <!-- Mobile Theme + Hamburger -->
+        
         <div class="flex md:hidden items-center gap-3">
           <button type="button" data-theme-toggle class="theme-toggle" aria-label="Toggle light/dark mode">
             <svg class="icon-sun" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
@@ -302,7 +312,7 @@
     </div>
   </nav>
 
-  <!-- Mobile Menu Overlay -->
+  
   <div id="mobile-menu" role="dialog" aria-modal="true" aria-hidden="true" class="fixed inset-0 bg-dark z-40 flex flex-col items-center justify-center gap-8 opacity-0 pointer-events-none transition-all duration-300">
     <a href="index.html" class="text-3xl font-display text-gold transition-all duration-300">Home</a>
     <a href="work.html" class="text-3xl font-display text-white hover:text-gold transition-all duration-300">Work</a>
@@ -312,34 +322,34 @@
   </div>
 
   <main>
-    <!-- Hero Section -->
+    
     <section id="hero" class="min-h-screen flex items-center relative overflow-hidden bg-dark">
-      <!-- Noise Overlay -->
+      
       <div class="noise-overlay"></div>
 
-      <!-- Mouse Follow Gradient -->
+      
       <div class="hero-gradient" id="heroGradient"></div>
 
-      <!-- Giant Background Letter -->
+      
       <div class="hero-number select-none" aria-hidden="true">ZENNY</div>
 
-      <!-- Floating Geometric Elements -->
+      
       <div class="absolute top-20 right-20 w-40 h-40 border border-gold/10 rotate-45 float parallax-layer hidden md:block" data-speed="0.03"></div>
       <div class="absolute bottom-32 left-20 w-24 h-24 bg-gold/5 float parallax-layer hidden md:block" style="animation-delay: -3s;" data-speed="0.05"></div>
       <div class="absolute top-1/2 right-1/4 w-2 h-2 bg-gold rounded-full float parallax-layer" style="animation-delay: -1s;" data-speed="0.08"></div>
       <div class="absolute top-1/3 left-1/3 w-1 h-1 bg-white/50 rounded-full float parallax-layer" style="animation-delay: -2s;" data-speed="0.04"></div>
 
-      <!-- Decorative Lines -->
+      
       <div class="absolute top-1/4 left-0 w-32 h-px bg-gradient-to-r from-gold/50 to-transparent hidden lg:block"></div>
       <div class="absolute bottom-1/3 right-0 w-48 h-px bg-gradient-to-l from-gold/30 to-transparent hidden lg:block"></div>
 
-      <!-- Main Content -->
+      
       <div class="max-w-[1600px] mx-auto px-6 md:px-12 py-32 pt-40 relative z-10 w-full">
         <div class="grid lg:grid-cols-12 gap-8 items-center">
 
-          <!-- Left Content -->
+          
           <div class="lg:col-span-8">
-            <!-- Eyebrow -->
+            
             <div class="flex items-center gap-4 mb-10">
               <div class="deco-line"></div>
               <p class="text-gold text-xs md:text-sm uppercase tracking-[0.4em] font-medium hero-fade-in" style="animation: fadeSlideUp 0.8s ease 0.5s forwards; opacity: 0; transform: translateY(20px);">
@@ -347,9 +357,9 @@
               </p>
             </div>
 
-            <!-- Main Headline -->
+            
             <h1 class="font-display text-white leading-[0.85] mb-10">
-              <!-- Line 1 -->
+              
               <div class="hero-line">
                 <span class="hero-line-inner block text-5xl sm:text-7xl md:text-8xl lg:text-9xl xl:text-[10rem]" style="animation-delay: 0.2s;">
                   <span class="interactive-word">We</span>
@@ -358,7 +368,7 @@
                 </span>
               </div>
 
-              <!-- Line 2 - Featured -->
+              
               <div class="hero-line my-2 md:my-4">
                 <span class="hero-line-inner block text-6xl sm:text-8xl md:text-9xl lg:text-[10rem] xl:text-[12rem] glow-text" style="animation-delay: 0.4s;">
                   <span class="text-gold">Last</span>
@@ -366,7 +376,7 @@
                 </span>
               </div>
 
-              <!-- Line 3 -->
+              
               <div class="hero-line">
                 <span class="hero-line-inner block text-5xl sm:text-7xl md:text-8xl lg:text-9xl xl:text-[10rem]" style="animation-delay: 0.6s;">
                   <span class="interactive-word">You'll</span>
@@ -376,7 +386,7 @@
               </div>
             </h1>
 
-            <!-- Subtext -->
+            
             <div class="mb-14" style="animation: fadeSlideUp 0.8s ease 1s forwards; opacity: 0; transform: translateY(20px);">
               <p class="text-white/60 text-lg md:text-xl lg:text-2xl tracking-wide font-medium mb-4">
                 Three Steps Ahead.
@@ -384,7 +394,7 @@
               <div class="glow-line w-32 h-0.5 bg-gold"></div>
             </div>
 
-            <!-- CTAs -->
+            
             <div class="flex flex-col sm:flex-row gap-5" style="animation: fadeSlideUp 0.8s ease 1.2s forwards; opacity: 0; transform: translateY(20px);">
               <a href="work.html" class="magnetic-btn group relative bg-gold text-dark px-10 md:px-14 py-5 md:py-6 font-semibold text-center text-lg overflow-hidden">
                 <span class="relative z-10 flex items-center justify-center gap-3">
@@ -402,7 +412,7 @@
             </div>
           </div>
 
-          <!-- Right Side - Stats/Info -->
+          
           <div class="lg:col-span-4 hidden lg:flex flex-col items-end justify-center gap-12" style="animation: fadeSlideLeft 0.8s ease 1.4s forwards; opacity: 0; transform: translateX(30px);">
             <div class="text-right group cursor-default">
               <p class="font-display text-7xl xl:text-8xl text-gold group-hover:scale-110 transition-transform duration-300">19+</p>
@@ -421,17 +431,17 @@
         </div>
       </div>
 
-      <!-- Scroll Indicator -->
+      
       <div class="scroll-cta">
         <span class="text-white/30 text-[10px] uppercase tracking-[0.3em] font-medium">Scroll to Discover</span>
         <div class="scroll-line"></div>
       </div>
 
-      <!-- Bottom Gradient Fade -->
+      
       <div class="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-dark to-transparent pointer-events-none z-20"></div>
     </section>
 
-    <!-- Marquee Strip -->
+    
     <section class="bg-[#1a1a1a] py-4 overflow-hidden">
       <div class="animate-marquee whitespace-nowrap flex">
         <span class="text-gold text-sm uppercase tracking-widest mx-8">Social Command</span>
@@ -451,17 +461,17 @@
         <span class="text-gold text-sm uppercase tracking-widest mx-8">Visual Craft</span>
         <span class="text-gold/40">/</span>
         <span class="text-gold text-sm uppercase tracking-widest mx-8">Branding</span>
-        <span class="text-gold/40">·</span>
+        <span class="text-gold/40">Â·</span>
         <span class="text-gold text-sm uppercase tracking-widest mx-8">Digital Presence</span>
-        <span class="text-gold/40">·</span>
+        <span class="text-gold/40">Â·</span>
         <span class="text-gold text-sm uppercase tracking-widest mx-8">Visual Storytelling</span>
-        <span class="text-gold/40">·</span>
+        <span class="text-gold/40">Â·</span>
         <span class="text-gold text-sm uppercase tracking-widest mx-8">Brand Strategy</span>
-        <span class="text-gold/40">·</span>
+        <span class="text-gold/40">Â·</span>
       </div>
     </section>
 
-    <!-- Services Section -->
+    
     <section id="services" class="bg-dark section-tight">
       <div class="max-w-7xl mx-auto px-6">
         <p class="text-gold text-sm uppercase tracking-[0.3em] mb-4" data-aos="fade-up">What We Offer</p>
@@ -470,16 +480,16 @@
         </h2>
 
         <div class="grid md:grid-cols-2 gap-6">
-          <!-- Card 1 -->
+          
           <a href="services.html" class="tilt-card bg-card border border-white/10 border-t-2 border-t-gold p-10 hover:-translate-y-2 hover:shadow-[0_0_50px_rgba(245,197,24,0.15)] transition-all duration-500 group cursor-pointer block" data-aos="fade-up" data-aos-delay="100">
             <div class="w-16 h-16 bg-gold/40 rounded-full flex items-center justify-center mb-8 group-hover:scale-110 group-hover:bg-gold/20 transition-all duration-300">
               <span class="text-gold text-2xl font-display">01</span>
             </div>
             <h3 class="font-display text-3xl md:text-4xl text-white mb-4 group-hover:text-gold transition-colors duration-300">Media Production & Content Creation</h3>
-            <p class="text-white/60 text-lg">Reels, shoots, and motion content engineered to stop the scroll. From concept to final cut — every frame built to make your audience feel something real.</p>
+            <p class="text-white/60 text-lg">Reels, shoots, and motion content engineered to stop the scroll. From concept to final cut â€” every frame built to make your audience feel something real.</p>
           </a>
 
-          <!-- Card 2 -->
+          
           <a href="services.html" class="tilt-card bg-card border border-white/10 border-t-2 border-t-gold p-10 hover:-translate-y-2 hover:shadow-[0_0_50px_rgba(245,197,24,0.15)] transition-all duration-500 group cursor-pointer block" data-aos="fade-up" data-aos-delay="200">
             <div class="w-16 h-16 bg-gold/40 rounded-full flex items-center justify-center mb-8 group-hover:scale-110 group-hover:bg-gold/20 transition-all duration-300">
               <span class="text-gold text-2xl font-display">02</span>
@@ -488,7 +498,7 @@
             <p class="text-white/60 text-lg">Insights that drive decisions. We decode audience behaviour, optimise campaigns, and build digital roadmaps that turn data into dominance.</p>
           </a>
 
-          <!-- Card 3 -->
+          
           <a href="services.html" class="tilt-card bg-card border border-white/10 border-t-2 border-t-gold p-10 hover:-translate-y-2 hover:shadow-[0_0_50px_rgba(245,197,24,0.15)] transition-all duration-500 group cursor-pointer block" data-aos="fade-up" data-aos-delay="300">
             <div class="w-16 h-16 bg-gold/40 rounded-full flex items-center justify-center mb-8 group-hover:scale-110 group-hover:bg-gold/20 transition-all duration-300">
               <span class="text-gold text-2xl font-display">03</span>
@@ -497,7 +507,7 @@
             <p class="text-white/60 text-lg">Identity systems and messaging that command recognition. We forge brands with conviction, purpose, and unmistakable market presence.</p>
           </a>
 
-          <!-- Card 4 -->
+          
           <a href="services.html" class="tilt-card bg-card border border-white/10 border-t-2 border-t-gold p-10 hover:-translate-y-2 hover:shadow-[0_0_50px_rgba(245,197,24,0.15)] transition-all duration-500 group cursor-pointer block" data-aos="fade-up" data-aos-delay="400">
             <div class="w-16 h-16 bg-gold/40 rounded-full flex items-center justify-center mb-8 group-hover:scale-110 group-hover:bg-gold/20 transition-all duration-300">
               <span class="text-gold text-2xl font-display">04</span>
@@ -509,7 +519,7 @@
       </div>
     </section>
 
-    <!-- Portfolio Section -->
+    
     <section id="work" class="bg-[#0d0d0d] section-tight">
       <div class="max-w-7xl mx-auto px-6">
         <p class="text-gold text-sm uppercase tracking-[0.3em] mb-4" data-aos="fade-up">Selected Work</p>
@@ -521,7 +531,7 @@
         </h3>
 
         <div class="featured-grid grid md:grid-cols-2 gap-6">
-          <!-- Card 1 - Tata Coffee -->
+          
           <a href="projects/tata-coffee.html" class="group relative overflow-hidden rounded-none cursor-pointer block" style="background: linear-gradient(135deg, #8B1A1A 0%, #C0392B 100%);" data-aos="fade-up" data-aos-delay="100" data-orientation="landscape">
             <picture>
               <source srcset="assets/projects/tata-coffee.webp" type="image/webp">
@@ -534,7 +544,7 @@
             </div>
           </a>
 
-          <!-- Card 2 - Oreo -->
+          
           <a href="projects/oreo.html" class="group relative overflow-hidden rounded-none cursor-pointer block" style="background: linear-gradient(135deg, #003087 0%, #0047CC 100%);" data-aos="fade-up" data-aos-delay="200" data-orientation="portrait">
             <picture>
               <source srcset="assets/projects/oreo.webp" type="image/webp">
@@ -547,7 +557,7 @@
             </div>
           </a>
 
-          <!-- Card 3 - Harley Davidson -->
+          
           <a href="projects/harley-davidson.html" class="group relative overflow-hidden rounded-none cursor-pointer block" style="background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 50%, rgba(245, 197, 24, 0.15) 100%);" data-aos="fade-up" data-aos-delay="300" data-orientation="portrait">
             <picture>
               <source srcset="assets/projects/harley-davidson.webp" type="image/webp">
@@ -560,7 +570,7 @@
             </div>
           </a>
 
-          <!-- Card 4 - Tavisa Fashion -->
+          
           <a href="projects/tavisa-fashion.html" class="group relative overflow-hidden rounded-none cursor-pointer block" style="background: linear-gradient(135deg, #2C1810 0%, #4a2c1a 100%);" data-aos="fade-up" data-aos-delay="400" data-orientation="portrait">
             <picture>
               <source srcset="assets/projects/tavisa-fashion.webp" type="image/webp">
@@ -574,7 +584,7 @@
           </a>
         </div>
 
-        <!-- View All Button -->
+        
         <div class="text-center mt-10" data-aos="fade-up">
           <a href="work.html" class="magnetic-btn inline-block border-2 border-white/20 text-white px-10 py-4 font-semibold hover:border-gold hover:text-gold transition-all duration-300">
             Explore All Work
@@ -583,7 +593,7 @@
       </div>
     </section>
 
-    <!-- Stats Strip -->
+    
     <section id="stats" class="bg-gold py-14 md:py-20 relative overflow-hidden">
       <div class="absolute inset-0 opacity-10">
         <div class="absolute top-0 left-1/4 font-display text-[400px] text-dark leading-none select-none">Z</div>
@@ -610,7 +620,7 @@
       </div>
     </section>
 
-    <!-- Clients Marquee -->
+    
     <section id="clients" class="bg-[#0d0d0d] section-tight overflow-hidden border-y border-white/5">
       <div class="max-w-7xl mx-auto px-6 mb-8 text-center">
         <p class="text-gold text-sm uppercase tracking-[0.3em] mb-3">Trusted By</p>
@@ -618,7 +628,7 @@
       </div>
       <div class="clients-marquee-viewport py-5" style="background: var(--color-client-track, rgba(255,255,255,0.1));">
         <div class="clients-marquee-track">
-          <!-- Set 1 -->
+          
           <div class="client-logo-slot"><picture>
         <source srcset="assets/images/Clients_Logo/Client1.webp" type="image/webp">
         <img src="assets/images/Clients_Logo/Client1.png" alt="Client 1" loading="lazy" width="614" height="407" decoding="async">
@@ -643,13 +653,13 @@
         <source srcset="assets/images/Clients_Logo/Client6.webp" type="image/webp">
         <img src="assets/images/Clients_Logo/Client6.png" alt="Client 6" loading="lazy" width="195" height="195" decoding="async">
       </picture></div>
-          <div class="client-logo-slot"><img src="assets/images/Clients_Logo/Client7.png" alt="Client 7" loading="lazy" onerror="this.style.visibility='hidden'" decoding="async"></div>
-          <div class="client-logo-slot"><img src="assets/images/Clients_Logo/Client8.png" alt="Client 8" loading="lazy" onerror="this.style.visibility='hidden'" decoding="async"></div>
-          <div class="client-logo-slot"><img src="assets/images/Clients_Logo/Client9.png" alt="Client 9" loading="lazy" onerror="this.style.visibility='hidden'" decoding="async"></div>
-          <div class="client-logo-slot"><img src="assets/images/Clients_Logo/Client10.png" alt="Client 10" loading="lazy" onerror="this.style.visibility='hidden'" decoding="async"></div>
-          <div class="client-logo-slot"><img src="assets/images/Clients_Logo/Client11.png" alt="Client 11" loading="lazy" onerror="this.style.visibility='hidden'" decoding="async"></div>
-          <div class="client-logo-slot"><img src="assets/images/Clients_Logo/Client12.png" alt="Client 12" loading="lazy" onerror="this.style.visibility='hidden'" decoding="async"></div>
-          <!-- Set 2 (duplicate for seamless loop) -->
+          <div class="client-logo-slot"><img src="assets/images/Clients_Logo/Client7.png" alt="Client 7" loading="lazy" onerror="this.style.visibility='hidden'" decoding="async" width="200" height="200"></div>
+          <div class="client-logo-slot"><img src="assets/images/Clients_Logo/Client8.png" alt="Client 8" loading="lazy" onerror="this.style.visibility='hidden'" decoding="async" width="200" height="200"></div>
+          <div class="client-logo-slot"><img src="assets/images/Clients_Logo/Client9.png" alt="Client 9" loading="lazy" onerror="this.style.visibility='hidden'" decoding="async" width="200" height="200"></div>
+          <div class="client-logo-slot"><img src="assets/images/Clients_Logo/Client10.png" alt="Client 10" loading="lazy" onerror="this.style.visibility='hidden'" decoding="async" width="200" height="200"></div>
+          <div class="client-logo-slot"><img src="assets/images/Clients_Logo/Client11.png" alt="Client 11" loading="lazy" onerror="this.style.visibility='hidden'" decoding="async" width="200" height="200"></div>
+          <div class="client-logo-slot"><img src="assets/images/Clients_Logo/Client12.png" alt="Client 12" loading="lazy" onerror="this.style.visibility='hidden'" decoding="async" width="200" height="200"></div>
+          
           <div class="client-logo-slot"><picture>
         <source srcset="assets/images/Clients_Logo/Client1.webp" type="image/webp">
         <img src="assets/images/Clients_Logo/Client1.png" alt="Client 1" loading="lazy" width="614" height="407" decoding="async">
@@ -674,27 +684,27 @@
         <source srcset="assets/images/Clients_Logo/Client6.webp" type="image/webp">
         <img src="assets/images/Clients_Logo/Client6.png" alt="Client 6" loading="lazy" width="195" height="195" decoding="async">
       </picture></div>
-          <div class="client-logo-slot"><img src="assets/images/Clients_Logo/Client7.png" alt="Client 7" loading="lazy" onerror="this.style.visibility='hidden'" decoding="async"></div>
-          <div class="client-logo-slot"><img src="assets/images/Clients_Logo/Client8.png" alt="Client 8" loading="lazy" onerror="this.style.visibility='hidden'" decoding="async"></div>
-          <div class="client-logo-slot"><img src="assets/images/Clients_Logo/Client9.png" alt="Client 9" loading="lazy" onerror="this.style.visibility='hidden'" decoding="async"></div>
-          <div class="client-logo-slot"><img src="assets/images/Clients_Logo/Client10.png" alt="Client 10" loading="lazy" onerror="this.style.visibility='hidden'" decoding="async"></div>
-          <div class="client-logo-slot"><img src="assets/images/Clients_Logo/Client11.png" alt="Client 11" loading="lazy" onerror="this.style.visibility='hidden'" decoding="async"></div>
-          <div class="client-logo-slot"><img src="assets/images/Clients_Logo/Client12.png" alt="Client 12" loading="lazy" onerror="this.style.visibility='hidden'" decoding="async"></div>
+          <div class="client-logo-slot"><img src="assets/images/Clients_Logo/Client7.png" alt="Client 7" loading="lazy" onerror="this.style.visibility='hidden'" decoding="async" width="200" height="200"></div>
+          <div class="client-logo-slot"><img src="assets/images/Clients_Logo/Client8.png" alt="Client 8" loading="lazy" onerror="this.style.visibility='hidden'" decoding="async" width="200" height="200"></div>
+          <div class="client-logo-slot"><img src="assets/images/Clients_Logo/Client9.png" alt="Client 9" loading="lazy" onerror="this.style.visibility='hidden'" decoding="async" width="200" height="200"></div>
+          <div class="client-logo-slot"><img src="assets/images/Clients_Logo/Client10.png" alt="Client 10" loading="lazy" onerror="this.style.visibility='hidden'" decoding="async" width="200" height="200"></div>
+          <div class="client-logo-slot"><img src="assets/images/Clients_Logo/Client11.png" alt="Client 11" loading="lazy" onerror="this.style.visibility='hidden'" decoding="async" width="200" height="200"></div>
+          <div class="client-logo-slot"><img src="assets/images/Clients_Logo/Client12.png" alt="Client 12" loading="lazy" onerror="this.style.visibility='hidden'" decoding="async" width="200" height="200"></div>
         </div>
       </div>
     </section>
 
-    <!-- Team Section -->
+    
     <section id="team" class="bg-dark section-tight">
       <div class="max-w-6xl mx-auto px-6 text-center">
         <h2 class="font-display text-5xl sm:text-6xl md:text-7xl lg:text-8xl text-white mb-4 tracking-wide">Meet The Team</h2>
         <p class="text-white/40 text-base md:text-lg mb-10 max-w-xl mx-auto">The strategists, creators, and builders behind every bold move.</p>
 
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-6">
-          <!-- Co-Founder 1 -->
+          
           <div class="team-card">
             <div class="team-portrait">
-              <img src="assets/images/team/co-founder.png" alt="Co-Founder" loading="lazy" decoding="async">
+              <img src="assets/images/team/co-founder.png" alt="Co-Founder" loading="lazy" decoding="async" width="600" height="800" onerror="this.style.visibility='hidden'">
             </div>
             <div class="team-card-label">
               <p class="role-title">Co-Founder</p>
@@ -702,10 +712,10 @@
             </div>
           </div>
 
-          <!-- Co-Founder 2 -->
+          
           <div class="team-card">
             <div class="team-portrait">
-              <img src="assets/images/team/co-founder-2.png" alt="Co-Founder" loading="lazy" decoding="async">
+              <img src="assets/images/team/co-founder-2.png" alt="Co-Founder" loading="lazy" decoding="async" width="600" height="800" onerror="this.style.visibility='hidden'">
             </div>
             <div class="team-card-label">
               <p class="role-title">Co-Founder</p>
@@ -713,10 +723,10 @@
             </div>
           </div>
 
-          <!-- Co-Founder 3 -->
+          
           <div class="team-card">
             <div class="team-portrait">
-              <img src="assets/images/team/co-founder-3.png" alt="Co-Founder" loading="lazy" decoding="async">
+              <img src="assets/images/team/co-founder-3.png" alt="Co-Founder" loading="lazy" decoding="async" width="600" height="800" onerror="this.style.visibility='hidden'">
             </div>
             <div class="team-card-label">
               <p class="role-title">Co-Founder</p>
@@ -727,7 +737,7 @@
       </div>
     </section>
 
-    <!-- About Section -->
+    
     <section id="about" class="bg-dark section-tight">
       <div class="max-w-7xl mx-auto px-6">
         <div class="grid md:grid-cols-2 gap-10 md:gap-12 items-center">
@@ -768,7 +778,7 @@
       </div>
     </section>
 
-    <!-- CTA Section -->
+    
     <section id="cta" class="bg-dark section-tight relative overflow-hidden">
       <div class="absolute inset-0">
         <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gold/5 rounded-full blur-3xl"></div>
@@ -788,12 +798,12 @@
     </section>
   </main>
 
-  <!-- Footer -->
+  
   <footer class="bg-[#050505] pt-16 pb-12">
     <div class="max-w-7xl mx-auto px-6">
       <div class="grid md:grid-cols-4 gap-12 md:gap-8 mb-12">
 
-        <!-- Brand Column -->
+        
         <div class="text-center md:text-left" data-aos="fade-up">
           <a href="index.html" class="inline-flex items-center gap-3 group mb-4">
             <picture>
@@ -802,11 +812,11 @@
       </picture>
             <span class="font-display text-2xl text-white group-hover:text-gold transition-colors duration-300">Zenny Studios</span>
           </a>
-          <p class="text-white/50 text-sm leading-relaxed max-w-xs mx-auto md:mx-0">We make brands unforgettable. Social media, content, branding — we do the work, you take the credit.</p>
+          <p class="text-white/50 text-sm leading-relaxed max-w-xs mx-auto md:mx-0">We make brands unforgettable. Social media, content, branding â€” we do the work, you take the credit.</p>
           <p class="text-white/30 text-sm mt-3">Bengaluru, Karnataka</p>
         </div>
 
-        <!-- Quick Links -->
+        
         <div class="text-center md:text-left" data-aos="fade-up" data-aos-delay="100">
           <h4 class="font-display text-gold text-lg tracking-wider mb-6">Navigate</h4>
           <div class="flex flex-col items-center md:items-start gap-3">
@@ -817,7 +827,7 @@
           </div>
         </div>
 
-        <!-- Legal -->
+        
         <div class="text-center md:text-left" data-aos="fade-up" data-aos-delay="150">
           <h4 class="font-display text-gold text-lg tracking-wider mb-6">Legal</h4>
           <div class="flex flex-col items-center md:items-start gap-3">
@@ -826,16 +836,16 @@
           </div>
         </div>
 
-        <!-- Connect Column -->
+        
         <div class="text-center md:text-left" data-aos="fade-up" data-aos-delay="200">
           <h4 class="font-display text-gold text-lg tracking-wider mb-6">Connect</h4>
           <div class="flex flex-col items-center md:items-start gap-4">
             <a href="https://instagram.com/zennystudios" target="_blank" aria-label="Follow us on Instagram" class="text-white/50 hover:text-gold transition-all duration-300 text-sm flex items-center gap-3 w-fit">
-              <span class="footer-social-icon text-base">📸</span>
+              <span class="footer-social-icon text-base">ðŸ“¸</span>
               @zennystudios
             </a>
             <a href="contact.html" aria-label="Start a project" class="text-white/50 hover:text-gold transition-all duration-300 text-sm flex items-center gap-3 w-fit">
-              <span class="footer-social-icon text-base">✉️</span>
+              <span class="footer-social-icon text-base">âœ‰ï¸</span>
               Start a Project
             </a>
           </div>
@@ -843,12 +853,12 @@
 
       </div>
 
-      <!-- Gold Gradient Divider -->
+      
       <div class="w-full h-px bg-gradient-to-r from-transparent via-gold/100 to-transparent mb-8"></div>
 
-      <!-- Bottom Row -->
+      
       <div class="flex flex-col md:flex-row items-center justify-between gap-4">
-        <p class="text-white/40 text-sm">© 2026 Zenny Studios. All rights reserved.</p>
+        <p class="text-white/40 text-sm">Â© 2026 Zenny Studios. All rights reserved.</p>
         <p class="font-display text-gold text-base tracking-[0.1em]">You made it to the bottom. Bold move.</p>
       </div>
     </div>
