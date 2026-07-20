@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Apple Design concept by Zenny Studios — minimalist product-inspired design exploration showcasing clean aesthetics and premium visual language.">
+  <meta property="og:title" content="Apple Design | Zenny Studios">
+  <meta property="og:description" content="Apple Design concept by Zenny Studios — minimalist product-inspired design exploration showcasing clean aesthetics.">
+  <meta property="og:url" content="https://zennystudios.com/projects/apple-design.html">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://zennystudios.com/assets/images/Zenny_Studios_Logo/ZennyStudios_logo.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Apple Design | Zenny Studios">
+  <meta name="twitter:description" content="Apple Design concept by Zenny Studios.">
+  <meta name="twitter:image" content="https://zennystudios.com/assets/images/Zenny_Studios_Logo/ZennyStudios_logo.png">
+  <link rel="apple-touch-icon" href="../assets/images/Zenny_Studios_Logo/ZennyStudios_logo.png">
+  <title>Apple Design | Zenny Studios</title>
+  <link rel="icon" href="assets/images/Zenny_Studios_Logo/ZennyStudios_logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <link rel="stylesheet" href="../css/theme.css">
+  <script src="../js/theme.js"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: { gold: '#F5C518', dark: '#0a0a0a', card: '#111111' },
+          fontFamily: { display: ['Bebas Neue', 'cursive'], body: ['Inter', 'sans-serif'] }
+        }
+      }
+    }
+  </script>
+  <style>
+    .scroll-progress { position: fixed; top: 0; left: 0; height: 3px; background: linear-gradient(90deg, #F5C518, #fff); z-index: 9999; }
+  </style>
+</head>
+<body class="bg-dark font-body text-white antialiased">
+  <div class="scroll-progress" id="scrollProgress"></div>
+
+  <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 border-b border-white/10 transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-6 py-4">
+      <div class="flex items-center justify-between">
+        <a href="../index.html" class="flex items-center gap-3 group">
+          <div class="w-10 h-10 theme-logo-bg bg-white rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+            <span class="font-display theme-logo-text text-dark text-xl font-bold">Z</span>
+          </div>
+          <span class="font-body font-semibold text-white text-lg hidden sm:block group-hover:text-gold transition-colors duration-300">Zenny Studios</span>
+        </a>
+        
+        <div class="hidden md:flex items-center gap-8">
+          <a href="../index.html" class="text-white/70 hover:text-gold transition-all duration-300 animated-underline leading-none py-2">Home</a>
+          <a href="../work.html" class="text-gold transition-all duration-300 animated-underline leading-none py-2">Work</a>
+          <a href="../services.html" class="text-white/70 hover:text-gold transition-all duration-300 animated-underline leading-none py-2">Services</a>
+          <a href="../index.html#about" class="text-white/70 hover:text-gold transition-all duration-300 animated-underline leading-none py-2">About</a>
+        </div>
+        <div class="hidden md:flex items-center gap-3">
+          <button type="button" data-theme-toggle class="theme-toggle" aria-label="Toggle light/dark mode">
+            <svg class="icon-sun" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
+            <svg class="icon-moon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg>
+          </button>
+          <a href="../contact.html" class="border border-gold text-gold px-6 py-[9px] hover:bg-gold hover:text-dark transition-all duration-300 inline-block leading-none text-sm font-semibold">Let's Talk</a>
+        </div>
+        <div class="flex md:hidden items-center gap-3">
+          <button type="button" data-theme-toggle class="theme-toggle" aria-label="Toggle light/dark mode">
+            <svg class="icon-sun" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
+            <svg class="icon-moon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg>
+          </button>
+          <button type="button" id="hamburger" class="flex flex-col gap-1.5 p-2" aria-label="Menu">
+            <span class="w-6 h-0.5 bg-white transition-all duration-300"></span>
+            <span class="w-6 h-0.5 bg-white transition-all duration-300"></span>
+            <span class="w-6 h-0.5 bg-white transition-all duration-300"></span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <div id="mobile-menu" role="dialog" aria-modal="true" aria-hidden="true" class="fixed inset-0 bg-dark z-40 flex flex-col items-center justify-center gap-8 opacity-0 pointer-events-none transition-all duration-300">
+    <a href="../index.html" class="text-3xl font-display text-white hover:text-gold transition-all duration-300">Home</a>
+    <a href="../work.html" class="text-3xl font-display text-gold transition-all duration-300">Work</a>
+    <a href="../services.html" class="text-3xl font-display text-white hover:text-gold transition-all duration-300">Services</a>
+    <a href="../index.html#about" class="text-3xl font-display text-white hover:text-gold transition-all duration-300">About</a>
+    <a href="../contact.html" class="mt-8 border border-gold text-gold px-8 py-3 text-xl hover:bg-gold hover:text-dark transition-all duration-300">Let's Talk</a>
+  </div>
+
+  <main>
+    <section class="pt-36 pb-12 md:pt-48 bg-dark relative overflow-hidden">
+      <div class="max-w-7xl mx-auto px-6 relative z-10">
+        <a href="../work.html" class="text-gold text-sm uppercase tracking-[0.2em] mb-6 inline-flex items-center gap-2 hover:gap-3 transition-all duration-300" data-aos="fade-up">
+          ← Back to Work
+        </a>
+        <span class="bg-gold text-dark text-xs px-4 py-1.5 font-bold tracking-wider uppercase inline-block mb-6" data-aos="fade-up">Creative Hub</span>
+        <h1 class="font-display text-6xl sm:text-7xl md:text-8xl text-white leading-[0.9] mb-8" data-aos="fade-up" data-aos-delay="100">Apple Design</h1>
+        <p class="text-white/60 text-xl md:text-2xl max-w-3xl" data-aos="fade-up" data-aos-delay="200">
+          A minimalist design exploration — clean aesthetics, premium visual language, and precision-crafted product-inspired concepts.
+        </p>
+      </div>
+    </section>
+
+    <section class="bg-[#0d0d0d]">
+      <div class="max-w-7xl mx-auto relative overflow-hidden bg-gradient-to-br from-[#1a1a1a] to-[#333333] min-h-[50vh]" data-aos="fade-up">
+        <picture>
+        <source srcset="../assets/projects/apple-design.webp" type="image/webp">
+        <img src="../assets/projects/apple-design.jpg" alt="Apple Design cover" loading="eager" class="w-full h-full object-cover" onerror="this.style.display='none'" fetchpriority="high" width="1280" height="720" decoding="async">
+      </picture>
+      </div>
+    </section>
+
+    <section class="bg-dark py-24 md:py-32">
+      <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-3 gap-12">
+        <div data-aos="fade-up">
+          <h3 class="text-gold text-sm uppercase tracking-[0.2em] mb-3">Client</h3>
+          <p class="font-display text-3xl text-white">Internal Project</p>
+        </div>
+        <div data-aos="fade-up" data-aos-delay="100">
+          <h3 class="text-gold text-sm uppercase tracking-[0.2em] mb-3">Services</h3>
+          <p class="text-white/70 text-lg">UI Design, Visual Concept, Product Design Exploration</p>
+        </div>
+        <div data-aos="fade-up" data-aos-delay="200">
+          <h3 class="text-gold text-sm uppercase tracking-[0.2em] mb-3">Year</h3>
+          <p class="text-white/70 text-lg">2025</p>
+        </div>
+      </div>
+      <div class="max-w-4xl mx-auto px-6 mt-16" data-aos="fade-up">
+        <h2 class="font-display text-4xl md:text-5xl text-white mb-6">The Brief</h2>
+        <p class="text-white/60 text-lg leading-relaxed mb-6">
+          An internal design exploration inspired by Apple's design philosophy — minimalism, precision, and intuitive simplicity. This project was an exercise in applying premium visual language to product-centric design concepts.
+        </p>
+        <p class="text-white/60 text-lg leading-relaxed">
+          From clean typography to refined spacing and restrained colour palettes, every element was deliberately chosen to evoke the clarity and sophistication that defines world-class product design.
+        </p>
+      </div>
+    </section>
+
+    <section class="bg-[#0d0d0d] py-24 text-center">
+      <h2 class="font-display text-5xl md:text-6xl text-white mb-8" data-aos="fade-up">Want Results Like This?</h2>
+      <a href="../contact.html" class="inline-block bg-gold text-dark px-12 py-5 font-bold text-lg hover:bg-white transition-all duration-300" data-aos="fade-up" data-aos-delay="100">Start a Project</a>
+    </section>
+  </main>
+
+  <footer class="bg-[#050505] pt-16 pb-12">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="grid md:grid-cols-4 gap-12 md:gap-8 mb-12">
+        <div class="text-center md:text-left">
+          <a href="../index.html" class="inline-flex items-center gap-3 group mb-4">
+            <picture>
+        <source srcset="../assets/images/Zenny_Studios_Logo/ZennyStudios_logo.webp" type="image/webp">
+        <img src="../assets/images/Zenny_Studios_Logo/ZennyStudios_logo.png" alt="Zenny Studios" class="w-12 h-12 rounded-full object-cover group-hover:scale-110 transition-transform duration-300" loading="lazy" width="738" height="708" decoding="async">
+      </picture>
+            <span class="font-display text-2xl text-white group-hover:text-gold transition-colors duration-300">Zenny Studios</span>
+          </a>
+          <p class="text-white/50 text-sm leading-relaxed max-w-xs mx-auto md:mx-0">We make brands unforgettable. Social media, content, branding — we do the work, you take the credit.</p>
+          <p class="text-white/30 text-sm mt-3">Bengaluru, Karnataka</p>
+        </div>
+        <div class="text-center md:text-left">
+          <h4 class="font-display text-gold text-lg tracking-wider mb-6">Navigate</h4>
+          <div class="flex flex-col items-center md:items-start gap-3">
+            <a href="../index.html" class="text-white/50 hover:text-gold transition-all duration-300 text-sm animated-underline w-fit">Home</a>
+            <a href="../work.html" class="text-white/50 hover:text-gold transition-all duration-300 text-sm animated-underline w-fit">Work</a>
+            <a href="../services.html" class="text-white/50 hover:text-gold transition-all duration-300 text-sm animated-underline w-fit">Services</a>
+            <a href="../index.html#about" class="text-white/50 hover:text-gold transition-all duration-300 text-sm animated-underline w-fit">About</a>
+          </div>
+        </div>
+        <div class="text-center md:text-left">
+          <h4 class="font-display text-gold text-lg tracking-wider mb-6">Legal</h4>
+          <div class="flex flex-col items-center md:items-start gap-3">
+            <a href="../privacy-policy.html" class="text-white/50 hover:text-gold transition-all duration-300 text-sm animated-underline w-fit">Privacy Policy</a>
+            <a href="../terms-and-conditions.html" class="text-white/50 hover:text-gold transition-all duration-300 text-sm animated-underline w-fit">Terms &amp; Conditions</a>
+          </div>
+        </div>
+        <div class="text-center md:text-left">
+          <h4 class="font-display text-gold text-lg tracking-wider mb-6">Connect</h4>
+          <div class="flex flex-col items-center md:items-start gap-4">
+            <a href="https://instagram.com/zennystudios" target="_blank" aria-label="Follow us on Instagram" class="text-white/50 hover:text-gold transition-all duration-300 text-sm flex items-center gap-3 w-fit">
+              <span class="footer-social-icon text-base"><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></span>
+              @zennystudios
+            </a>
+            <a href="../contact.html" aria-label="Start a project" class="text-white/50 hover:text-gold transition-all duration-300 text-sm flex items-center gap-3 w-fit">
+              <span class="footer-social-icon text-base"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg></span>
+              Start a Project
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="w-full h-px bg-gradient-to-r from-transparent via-gold/40 to-transparent mb-8"></div>
+      <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+        <p class="text-white/40 text-sm">© 2026 Zenny Studios. All rights reserved.</p>
+        <p class="font-display text-gold text-base tracking-[0.1em]">You made it to the bottom. Bold move.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const scrollProgress = document.getElementById('scrollProgress');
+    window.addEventListener('scroll', () => {
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      scrollProgress.style.width = (window.scrollY / docHeight) * 100 + '%';
+    });
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('backdrop-blur-md', window.scrollY > 50);
+      navbar.classList.toggle('bg-dark/90', window.scrollY > 50);
+    });
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const mobileLinks = document.querySelectorAll('#mobile-menu a, #mobile-menu button');
+
+    function openMobileMenu() {
+      mobileMenu.setAttribute('aria-hidden', 'false');
+    }
+
+    function closeMobileMenu() {
+      mobileMenu.setAttribute('aria-hidden', 'true');
+    }
+
+    hamburger.addEventListener('click', () => {
+      const isOpen = mobileMenu.getAttribute('aria-hidden') === 'false';
+      isOpen ? closeMobileMenu() : openMobileMenu();
+    });
+
+    mobileLinks.forEach(link => {
+      link.addEventListener('click', closeMobileMenu);
+    });
+  </script>
+</body>
+</html>

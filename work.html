@@ -201,25 +201,25 @@
             </div>
           </a>
 
-          <a href="projects/ramadan-campaign.html" class="work-card" data-category="creative-hub" data-orientation="square" style="background: linear-gradient(135deg, #0D4D4D 0%, #1a7a7a 100%);">
+          <a href="projects/ismail-photoshoot.html" class="work-card" data-category="production" data-orientation="portrait" style="background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);">
             <picture>
-        <source srcset="assets/projects/ramadan-campaign.webp" type="image/webp">
-        <img src="assets/projects/ramadan-campaign.jpg" alt="Ramadan Campaign" width="1280" height="720" loading="lazy" decoding="async" onerror="this.style.opacity='0'">
+        <source srcset="assets/projects/ismail-photoshoot.webp" type="image/webp">
+        <img src="assets/projects/ismail-photoshoot.jpg" alt="Ismail Photoshoot" width="1280" height="720" loading="lazy" decoding="async" onerror="this.style.opacity='0'">
       </picture>
             <div class="work-card-overlay">
-              <span class="text-gold text-xs uppercase tracking-wider mb-2 font-semibold">Creative Hub</span>
-              <h3 class="font-display text-3xl md:text-4xl text-white">Ramadan Campaign</h3>
+              <span class="text-gold text-xs uppercase tracking-wider mb-2 font-semibold">Production</span>
+              <h3 class="font-display text-3xl md:text-4xl text-white">Ismail Photoshoot</h3>
             </div>
           </a>
 
-          <a href="projects/eid-campaign.html" class="work-card" data-category="creative-hub" data-orientation="square" style="background: linear-gradient(135deg, #4a1c6b 0%, #7b2d9e 100%);">
+          <a href="projects/apple-design.html" class="work-card" data-category="creative-hub" data-orientation="square" style="background: linear-gradient(135deg, #1a1a1a 0%, #333333 100%);">
             <picture>
-        <source srcset="assets/projects/eid-campaign.webp" type="image/webp">
-        <img src="assets/projects/eid-campaign.jpg" alt="Eid Campaign" width="1280" height="720" loading="lazy" decoding="async" onerror="this.style.opacity='0'">
+        <source srcset="assets/projects/apple-design.webp" type="image/webp">
+        <img src="assets/projects/apple-design.jpg" alt="Apple Design" width="1280" height="720" loading="lazy" decoding="async" onerror="this.style.opacity='0'">
       </picture>
             <div class="work-card-overlay">
               <span class="text-gold text-xs uppercase tracking-wider mb-2 font-semibold">Creative Hub</span>
-              <h3 class="font-display text-3xl md:text-4xl text-white">Eid Campaign</h3>
+              <h3 class="font-display text-3xl md:text-4xl text-white">Apple Design</h3>
             </div>
           </a>
 
@@ -258,14 +258,14 @@
           </a>
 
           
-          <a href="projects/digital-strategy.html" class="work-card" data-category="case-studies" data-orientation="square" style="background: linear-gradient(135deg, #0f3460 0%, #1a5276 100%);">
+          <a href="projects/antaranga.html" class="work-card" data-category="production" data-orientation="landscape" style="background: linear-gradient(135deg, #2d1b4e 0%, #5c3d7a 100%);">
             <picture>
-        <source srcset="assets/projects/digital-strategy.webp" type="image/webp">
-        <img src="assets/projects/digital-strategy.jpg" alt="Digital Strategy" width="1280" height="720" loading="lazy" decoding="async" onerror="this.style.opacity='0'">
+        <source srcset="assets/projects/antaranga.webp" type="image/webp">
+        <img src="assets/projects/antaranga.jpg" alt="Antaranga" width="1280" height="720" loading="lazy" decoding="async" onerror="this.style.opacity='0'">
       </picture>
             <div class="work-card-overlay">
-              <span class="text-gold text-xs uppercase tracking-wider mb-2 font-semibold">Case Studies</span>
-              <h3 class="font-display text-3xl md:text-4xl text-white">Digital Strategy</h3>
+              <span class="text-gold text-xs uppercase tracking-wider mb-2 font-semibold">Production</span>
+              <h3 class="font-display text-3xl md:text-4xl text-white">Antaranga</h3>
             </div>
           </a>
 
@@ -504,66 +504,7 @@
       });
     });
 
-    // Project modal (Tavisa Fashion)
-    const tavisaModal = document.getElementById('tavisa-modal');
-    const tavisaTriggers = document.querySelectorAll('[data-modal-open="tavisa-modal"]');
-    let lastFocused = null;
 
-    function getFocusable(container) {
-      return container.querySelectorAll('a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])');
-    }
-
-    function openTavisaModal() {
-      lastFocused = document.activeElement;
-      tavisaModal.setAttribute('aria-hidden', 'false');
-      document.body.style.overflow = 'hidden';
-      setTimeout(() => {
-        const focusable = getFocusable(tavisaModal);
-        if (focusable.length) focusable[0].focus();
-      }, 100);
-    }
-
-    function closeTavisaModal() {
-      tavisaModal.setAttribute('aria-hidden', 'true');
-      document.body.style.overflow = '';
-      if (lastFocused) lastFocused.focus();
-    }
-
-    tavisaTriggers.forEach(el => {
-      el.addEventListener('click', (e) => {
-        e.preventDefault();
-        openTavisaModal();
-      });
-      el.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter' || e.key === ' ') {
-          e.preventDefault();
-          openTavisaModal();
-        }
-      });
-    });
-
-    tavisaModal.querySelectorAll('[data-modal-close]').forEach(el => {
-      el.addEventListener('click', closeTavisaModal);
-    });
-
-    document.addEventListener('keydown', (e) => {
-      if (tavisaModal.getAttribute('aria-hidden') !== 'false') return;
-      if (e.key === 'Escape') {
-        closeTavisaModal();
-      } else if (e.key === 'Tab') {
-        const focusable = getFocusable(tavisaModal);
-        if (!focusable.length) return;
-        const first = focusable[0];
-        const last = focusable[focusable.length - 1];
-        if (e.shiftKey && document.activeElement === first) {
-          e.preventDefault();
-          last.focus();
-        } else if (!e.shiftKey && document.activeElement === last) {
-          e.preventDefault();
-          first.focus();
-        }
-      }
-    });
   </script>
 </body>
 </html>
