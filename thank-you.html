@@ -325,23 +325,23 @@
     // Custom Cursor
     const cursorDot = document.querySelector('.cursor-dot');
     const cursorRing = document.querySelector('.cursor-ring');
-    let mouseX = 0, mouseY = 0, ringX = 0, ringY = 0;
-
-    document.addEventListener('mousemove', (e) => {
-      mouseX = e.clientX;
-      mouseY = e.clientY;
-      cursorDot.style.left = mouseX - 4 + 'px';
-      cursorDot.style.top = mouseY - 4 + 'px';
-    });
-
-    function animateRing() {
-      ringX += (mouseX - ringX) * 0.15;
-      ringY += (mouseY - ringY) * 0.15;
-      cursorRing.style.left = ringX - 20 + 'px';
-      cursorRing.style.top = ringY - 20 + 'px';
-      requestAnimationFrame(animateRing);
+    if (cursorDot && cursorRing) {
+      let mouseX = 0, mouseY = 0, ringX = 0, ringY = 0;
+      document.addEventListener('mousemove', (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+        cursorDot.style.left = mouseX - 4 + 'px';
+        cursorDot.style.top = mouseY - 4 + 'px';
+      });
+      function animateRing() {
+        ringX += (mouseX - ringX) * 0.15;
+        ringY += (mouseY - ringY) * 0.15;
+        cursorRing.style.left = ringX - 20 + 'px';
+        cursorRing.style.top = ringY - 20 + 'px';
+        requestAnimationFrame(animateRing);
+      }
+      animateRing();
     }
-    animateRing();
 
     const interactiveElements = document.querySelectorAll('a, button, .stat-item');
     interactiveElements.forEach(el => {

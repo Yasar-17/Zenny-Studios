@@ -17,6 +17,10 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://zennystudios.com/404.html</loc>
+    <priority>0.3</priority>
+  </url>
+  <url>
     <loc>https://zennystudios.com/thank-you.html</loc>
     <priority>0.3</priority>
   </url>
@@ -29,11 +33,27 @@
     <priority>0.4</priority>
   </url>
   <url>
-    <loc>https://zennystudios.com/projects/tata-coffee.html</loc>
+    <loc>https://zennystudios.com/projects/antaranga.html</loc>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://zennystudios.com/projects/oreo.html</loc>
+    <loc>https://zennystudios.com/projects/apple-design.html</loc>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://zennystudios.com/projects/brand-identity-system.html</loc>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://zennystudios.com/projects/calesthenics-reel.html</loc>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://zennystudios.com/projects/carnivalesque-announcement.html</loc>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://zennystudios.com/projects/carnivalesque-tropy.html</loc>
     <priority>0.6</priority>
   </url>
   <url>
@@ -41,27 +61,39 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://zennystudios.com/projects/tavisa-fashion.html</loc>
+    <loc>https://zennystudios.com/projects/hayath-interiors.html</loc>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://zennystudios.com/projects/ramadan-campaign.html</loc>
-    <priority>0.5</priority>
+    <loc>https://zennystudios.com/projects/headline-adshoot.html</loc>
+    <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://zennystudios.com/projects/eid-campaign.html</loc>
-    <priority>0.5</priority>
+    <loc>https://zennystudios.com/projects/making-of-zenny-bts.html</loc>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://zennystudios.com/projects/model-photoshoot.html</loc>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://zennystudios.com/projects/oreo.html</loc>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://zennystudios.com/projects/political.html</loc>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://zennystudios.com/projects/product-launch-film.html</loc>
-    <priority>0.5</priority>
+    <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://zennystudios.com/projects/brand-identity-system.html</loc>
-    <priority>0.5</priority>
+    <loc>https://zennystudios.com/projects/tata-coffee.html</loc>
+    <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://zennystudios.com/projects/digital-strategy.html</loc>
-    <priority>0.5</priority>
+    <loc>https://zennystudios.com/projects/tavisa-fashion.html</loc>
+    <priority>0.6</priority>
   </url>
 </urlset>
