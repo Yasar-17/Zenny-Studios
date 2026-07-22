@@ -157,7 +157,10 @@
 
           
           <div class="lg:col-span-2" data-aos="fade-right">
-            <form method="POST" class="space-y-8" id="contactForm" novalidate>
+            <form action="https://formsubmit.co/zennysstudios@gmail.com" method="POST" class="space-y-8" id="contactForm" novalidate>
+              <input type="hidden" name="_next" id="_next" value="/thank-you.html">
+              <input type="hidden" name="_captcha" value="true">
+              <input type="hidden" name="_template" value="box">
 
 
               
@@ -564,7 +567,6 @@
     const contactForm = document.getElementById('contactForm');
     const submitBtn = document.getElementById('submitBtn');
     const submitText = document.getElementById('submitText');
-    const submitSpinner = document.getElementById('submitSpinner');
     const formStatus = document.getElementById('formStatus');
 
     function validateField(input) {
@@ -605,15 +607,14 @@
       });
     });
 
-    contactForm.addEventListener('submit', async function(e) {
-      e.preventDefault();
-
+    contactForm.addEventListener('submit', function(e) {
       let allValid = true;
       document.querySelectorAll('#contactForm input[required], #contactForm textarea[required]').forEach(input => {
         if (!validateField(input)) allValid = false;
       });
 
       if (!allValid) {
+        e.preventDefault();
         const firstError = document.querySelector('[aria-invalid="true"]');
         if (firstError) firstError.focus();
         formStatus.textContent = 'Please fill in all required fields correctly.';
@@ -621,43 +622,12 @@
         return;
       }
 
+      document.getElementById('_next').value = window.location.origin + '/thank-you.html';
       submitBtn.disabled = true;
       submitBtn.classList.add('opacity-80', 'cursor-not-allowed');
-      submitText.classList.add('hidden');
-      submitSpinner.classList.remove('hidden');
+      submitText.textContent = 'Sending...';
       formStatus.textContent = 'Sending your message...';
       formStatus.className = 'text-gold text-sm text-center';
-
-      const enquiry = {
-        name: document.getElementById('name').value.trim(),
-        email: document.getElementById('email').value.trim(),
-        phone: document.getElementById('phone').value.trim(),
-        company: document.getElementById('company').value.trim(),
-        service: document.getElementById('service').value,
-        message: document.getElementById('message').value.trim(),
-        date: new Date().toISOString()
-      };
-
-      const API_BASE = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
-        ? 'http://localhost:3000/api'
-        : '/api';
-
-      try {
-        await fetch(API_BASE + '/enquiries', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(enquiry)
-        });
-
-        window.location.href = 'thank-you.html';
-      } catch (err) {
-        formStatus.textContent = 'Something went wrong. Please try again.';
-        formStatus.className = 'text-red-400 text-sm text-center';
-        submitBtn.disabled = false;
-        submitBtn.classList.remove('opacity-80', 'cursor-not-allowed');
-        submitText.classList.remove('hidden');
-        submitSpinner.classList.add('hidden');
-      }
     });
   </script>
 </body>
