@@ -381,6 +381,16 @@
   .cursor-dot, .cursor-ring { display: none; }
 }
 
+/* ─── Scroll Progress Bar ───────────────────────────── */
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #F5C518, #fff);
+  z-index: 9999;
+}
+
 /* ─── Reduced motion ─────────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
   *,
