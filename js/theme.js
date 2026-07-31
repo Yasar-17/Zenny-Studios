@@ -8,9 +8,9 @@
     return 'dark';
   }
 
-  function applyTheme(theme) {
+  function applyTheme(theme, skipStorage) {
     root.setAttribute('data-theme', theme);
-    localStorage.setItem(STORAGE_KEY, theme);
+    if (!skipStorage) localStorage.setItem(STORAGE_KEY, theme);
   }
 
   applyTheme(getPreferredTheme());
@@ -22,5 +22,12 @@
         applyTheme(current === 'dark' ? 'light' : 'dark');
       });
     });
+  });
+
+  
+  window.addEventListener('storage', function (e) {
+    if (e.key === STORAGE_KEY && e.newValue) {
+      applyTheme(e.newValue, true);
+    }
   });
 })();
