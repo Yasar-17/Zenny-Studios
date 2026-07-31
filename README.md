@@ -42,14 +42,17 @@ The frontend is intentionally free of heavy build tooling. Pages are authored in
 
 - **Multi-page architecture** — separate, purpose-built pages for Home, Work, Services, Contact, and 19 individual project case studies.
 - **Bespoke design system** — a custom colour, type, and spacing token layer (`css/theme.css`) layered on top of Tailwind for consistent, on-brand styling across pages.
-- **Dark-first theme with light toggle** — a preference-aware theme switcher (`js/theme.js`) that remembers the visitor's choice and applies it before first paint to avoid a flash of incorrect theme.
+- **Dark-first theme with light toggle** — a preference-aware theme switcher (`js/theme.js`) that remembers the visitor's choice, applies it before first paint, and **syncs across all open browser tabs** in real time via the `storage` event.
 - **Motion and micro-interactions** — scroll-reveal animations, a custom cursor, scroll progress, stat count-ups, and parallax, all implemented with vanilla JS and `IntersectionObserver` / `requestAnimationFrame` for smooth, low-overhead effects.
 - **Project case studies** — each engagement has a dedicated `/projects/<slug>.html` page with its own cover, brief, deliverables, gallery, and navigation back to the work index.
-- **Lead capture** — a validated, accessible contact form with inline field validation and a branded thank-you page.
-- **Enquiry dashboard** — an admin inbox (`admin.html`) for staff to log in, review submissions, and manage enquiries. *(Connects to the API layer — see [Roadmap](#roadmap).)*
-- **SEO and social** — per-page meta descriptions, Open Graph and Twitter cards, a `sitemap.xml`, and a `robots.txt` that exposes the sitemap.
+- **Lead capture** — a validated, accessible contact form that submits to the `/api/enquiries` endpoint with honeypot spam protection and optional hCaptcha verification.
+- **Enquiry dashboard** — an admin inbox (`admin.html`) for staff to log in, review submissions, and manage enquiries via Supabase Auth + RLS.
+- **SEO and social** — per-page meta descriptions, Open Graph and Twitter cards, JSON-LD structured data (Organization, WebPage, CreativeWork, BreadcrumbList), a `sitemap.xml` with `lastmod` dates, and `robots.txt`.
+- **Analytics** — privacy-friendly visitor tracking via [Plausible](https://plausible.io) — no cookies, no consent banner needed.
+- **404 redirect strategy** — 15+ permanent redirects for common typos, shortened slugs, and extension-less URLs via `vercel.json`.
+- **Accessibility-first** — skip-to-content links on every page, `aria-live` regions for dynamic content, focus management, screen-reader announcements, and `prefers-reduced-motion` support.
 - **Legal pages** — Privacy Policy and Terms & Conditions pages, with linked PDF copies in the `legal/` directory.
-- **Custom 404** — a branded "not found" page that keeps visitors inside the site experience.
+- **Custom 404** — a branded "not found" page with escape-route navigation and a dead-route report link.
 
 ---
 
@@ -193,6 +196,7 @@ To customise the brand, edit the tokens at the top of `css/theme.css`. Every pag
 2. Fall back to the default dark theme if nothing is saved.
 3. Apply the theme by setting `data-theme` on the `<html>` element.
 4. Wire up any `[data-theme-toggle]` buttons to let visitors switch themes.
+5. **Listen for `storage` events** — when the theme changes in one tab, all other open tabs update instantly without a reload.
 
 ---
 
@@ -202,8 +206,11 @@ To customise the brand, edit the tokens at the top of `css/theme.css`. Every pag
 - **CDN-loaded Tailwind** — utility classes are generated in the browser via the Tailwind CDN, keeping the repository lean for a marketing site. For a production rebuild, Tailwind can be compiled to purge unused classes and ship a smaller CSS file.
 - **Lazy motion** — scroll reveals use `IntersectionObserver` and stat count-ups use `requestAnimationFrame`, so animations only run when elements are visible and stay smooth on low-end devices.
 - **Accessible forms** — required fields are marked, inline validation messages are shown with clear affordances, and errors are focused on submit.
-- **Semantic structure** — landmarks, headings, and alt text are used throughout to support keyboard navigation and assistive technology.
+- **Skip-to-content links** — every page has a keyboard-accessible "Skip to main content" link that becomes visible on focus.
+- **`aria-live` regions** — dynamic content (stats, filter results, form status, toast notifications) announces changes to screen readers.
+- **Semantic structure** — landmarks (`<main id="main-content">`), headings, and alt text are used throughout to support keyboard navigation and assistive technology.
 - **`prefers-reduced-motion`** — motion respects the visitor's OS-level reduced-motion preference where the custom JS handles it.
+- **Honeypot field** — invisible form field catches bot submissions without user friction.
 
 ---
 
@@ -213,9 +220,47 @@ Each page carries its own:
 
 - Unique `<title>` and `meta[name="description"]`.
 - Open Graph (`og:title`, `og:description`, `og:image`, `og:url`) and Twitter card tags.
-- A canonical-friendly structure backed by `sitemap.xml` and `robots.txt`.
+- JSON-LD structured data — `Organization` on the homepage, `WebPage` with `BreadcrumbList` on main pages, and `CreativeWork` with breadcrumbs on every project case study.
+- A canonical-friendly structure backed by `sitemap.xml` (with `lastmod` dates) and `robots.txt`.
 
 To update the indexed URLs, edit `sitemap.xml` and `robots.txt` at the project root. The site URL used in meta tags is `https://zennystudios.com`.
+
+---
+
+## Analytics
+
+Visitor tracking is handled by [Plausible Analytics](https://plausible.io) — a lightweight, privacy-first alternative to Google Analytics:
+
+- **No cookies** — no consent banner required under GDPR/ePrivacy.
+- **No PII collected** — no personal data is stored or shared.
+- **Script loaded defer** — does not block page rendering.
+- **Configured in `vercel.json`** — CSP headers allow `plausible.io` for script, image, and connection sources.
+
+To switch the tracking domain, update the `data-domain` attribute on the Plausible `<script>` tag in every HTML file, or use a shared include if you adopt a build step.
+
+---
+
+## 404 Redirect Strategy
+
+The `vercel.json` file defines two layers of URL handling:
+
+### Permanent Redirects (301)
+Common typos, shortened slugs, and legacy URLs are redirected to their canonical targets:
+
+| Source | Destination |
+|---|---|
+| `/projects/calisthenics-reel` | `/projects/calesthenics-reel.html` |
+| `/projects/headline-ad-shoot` | `/projects/headline-adshoot.html` |
+| `/projects/tavisa` | `/projects/tavisa-fashion.html` |
+| `/work` | `/work.html` |
+| `/services` | `/services.html` |
+| `/contact` | `/contact.html` |
+| `/about` | `/#about` |
+
+### Rewrite Rule
+`/projects/:slug` rewrites to `/projects/:slug.html` so clean URLs work without the `.html` extension.
+
+To add a new redirect, append an entry to the `redirects` array in `vercel.json`.
 
 ---
 
@@ -253,13 +298,13 @@ Defined in `package.json`:
 
 ## Roadmap
 
-The marketing frontend is feature-complete. Planned next steps focus on connecting the static pages to live data:
+The marketing frontend is feature-complete. Planned next steps:
 
-- **Enable the enquiry API** — wire the contact form to the `/api/enquiries` endpoints so submissions land directly in the admin inbox.
-- **Activate the admin dashboard** — connect `admin.html` to the auth and enquiries API so staff can log in and manage leads from the website itself.
-- **Persistent storage** — provision a MongoDB (or equivalent) database for production enquiries, configured via the `MONGODB_URI` environment variable.
-- **Email notifications** — send an email to the studio on each new enquiry so nothing is missed.
+- **Enable hCaptcha** — set `HCAPTCHA_SITEKEY` and `HCAPTCHA_SECRET_KEY` env vars to activate captcha verification on the contact form.
+- **Email notifications** — send an email to the studio on each new enquiry via Resend or the serverless API.
 - **Tailwind build step** — move from the CDN to a compiled, purged Tailwind CSS file for smaller production stylesheets.
+- **Blog / journal section** — content marketing pages for SEO and thought leadership.
+- **Testimonials section** — client quotes and case-study endorsements.
 
 ---
 
