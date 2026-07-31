@@ -80,6 +80,8 @@
 </head>
 <body class="bg-dark font-body text-white antialiased">
 
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
   
   <div class="cursor-dot hidden md:block"></div>
   <div class="cursor-ring hidden md:block"></div>
@@ -134,7 +136,7 @@
     <span class="mt-8 bg-gold/60 text-dark px-8 py-3 text-xl opacity-60 cursor-default">Let's Talk</span>
   </div>
 
-  <main>
+  <main id="main-content">
     
     <section class="pt-36 pb-16 md:pt-48 md:pb-24 bg-dark relative overflow-hidden">
       <div class="absolute top-1/2 right-0 text-gold/5 font-display text-[400px] -translate-y-1/2 select-none leading-none">C</div>
@@ -275,7 +277,7 @@
                 </span>
               </button>
 
-              <p class="text-white/30 text-sm text-center" id="formStatus">
+                <p class="text-white/30 text-sm text-center" id="formStatus" aria-live="polite">
                 We typically respond within 24 hours. No spam, ever.
               </p>
             </form>

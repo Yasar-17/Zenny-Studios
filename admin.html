@@ -1,4 +1,4 @@
-ï»¿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
 <head>
   <meta charset="UTF-8">
@@ -74,7 +74,7 @@
       50% { transform: translateY(-22px) rotate(8deg); }
     }
 
-    /* Giant ghost letter â€” gold stroke */
+    /* Giant ghost letter — gold stroke */
     .ghost-letter {
       font-family: 'Bebas Neue', cursive;
       color: transparent;
@@ -88,7 +88,7 @@
       -webkit-text-stroke-color: rgba(245, 197, 24, 0.6);
     }
 
-    /* Status log â€” typed terminal */
+    /* Status log — typed terminal */
     .status-log {
       font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
       font-size: 0.72rem;
@@ -188,6 +188,8 @@
 </head>
 <body class="bg-dark font-body text-white antialiased min-h-screen overflow-x-hidden">
 
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
   <div class="cursor-dot hidden md:block"></div>
   <div class="cursor-ring hidden md:block"></div>
   <div class="noise-admin"></div>
@@ -257,7 +259,7 @@
               </div>
             </div>
 
-            <p id="loginError" class="text-red-400 text-sm hidden text-center"></p>
+            <p id="loginError" class="text-red-400 text-sm hidden text-center" role="alert" aria-live="assertive"></p>
 
             <button type="submit" class="magnetic-btn w-full bg-gold text-dark font-display text-xl py-4 hover:bg-white transition-all duration-300">
               <span class="relative z-10">Access Dashboard</span>
@@ -293,7 +295,7 @@
       </div>
     </nav>
 
-    <main class="pt-24 pb-16 px-6">
+    <main id="main-content" class="pt-24 pb-16 px-6">
       <div class="max-w-7xl mx-auto">
         <div class="mb-10">
           <p class="text-gold text-sm uppercase tracking-[0.3em] mb-3">Dashboard</p>
@@ -388,14 +390,14 @@
       </div>
     </nav>
 
-    <main class="pt-24 pb-16 px-6">
+    <main id="main-content" class="pt-24 pb-16 px-6">
       <div class="max-w-3xl mx-auto">
         <div id="detailContent" class="detail-card"></div>
       </div>
     </main>
   </div>
 
-  <div id="toast" class="fixed bottom-6 right-6 z-[100] hidden"></div>
+  <div id="toast" class="fixed bottom-6 right-6 z-[100] hidden" role="status" aria-live="polite"></div>
 
   <script>
     const API_BASE = (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' || window.location.protocol === 'file:')
@@ -810,7 +812,7 @@
     document.getElementById('markAllReadBtn').addEventListener('click', function() {
       const unreadCount = enquiriesCache.filter(e => !e.is_read).length;
       if (unreadCount === 0) {
-        showToast('Nothing to mark â€” all caught up.', 'info');
+        showToast('Nothing to mark — all caught up.', 'info');
         return;
       }
       markAllRead();

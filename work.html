@@ -74,6 +74,8 @@
 </head>
 <body class="bg-dark font-body text-white antialiased">
 
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
   
   <div class="cursor-dot hidden md:block"></div>
   <div class="cursor-ring hidden md:block"></div>
@@ -133,7 +135,7 @@
     <a href="contact.html" class="mt-8 border-2 border-gold text-gold px-8 py-3 text-xl hover:bg-gold hover:text-dark transition-all duration-300">Let's Talk</a>
   </div>
 
-  <main>
+  <main id="main-content">
     
     <section class="pt-36 pb-20 md:pt-48 md:pb-28 bg-dark relative overflow-hidden">
       <div class="absolute top-1/2 right-0 text-gold/5 font-display text-[400px] -translate-y-1/2 select-none leading-none">W</div>
@@ -152,7 +154,7 @@
     
     <section class="bg-dark pb-12 border-b border-white/5">
       <div class="max-w-7xl mx-auto px-6 py-6">
-        <div class="flex flex-wrap gap-3 md:gap-4" data-aos="fade-up" data-aos-delay="300">
+        <div class="flex flex-wrap gap-3 md:gap-4" data-aos="fade-up" data-aos-delay="300" role="group" aria-label="Filter portfolio">
           <button class="filter-btn active bg-gold text-dark px-6 md:px-8 py-3 font-semibold tracking-wide transition-all duration-300 hover:scale-105" data-filter="all" aria-pressed="true">All</button>
           <button class="filter-btn border-2 border-white/20 text-white/70 px-6 md:px-8 py-3 font-semibold tracking-wide hover:border-gold hover:text-gold transition-all duration-300 hover:scale-105" data-filter="production" aria-pressed="false">Production</button>
           <button class="filter-btn border-2 border-white/20 text-white/70 px-6 md:px-8 py-3 font-semibold tracking-wide hover:border-gold hover:text-gold transition-all duration-300 hover:scale-105" data-filter="creative-hub" aria-pressed="false">Creative Hub</button>
@@ -160,6 +162,7 @@
           <button class="filter-btn border-2 border-white/20 text-white/70 px-6 md:px-8 py-3 font-semibold tracking-wide hover:border-gold hover:text-gold transition-all duration-300 hover:scale-105" data-filter="case-studies" aria-pressed="false">Case Studies</button>
           <button class="filter-btn border-2 border-white/20 text-white/70 px-6 md:px-8 py-3 font-semibold tracking-wide hover:border-gold hover:text-gold transition-all duration-300 hover:scale-105" data-filter="commercials" aria-pressed="false">Commercials</button>
         </div>
+        <div aria-live="polite" class="sr-only" id="filter-status"></div>
       </div>
     </section>
 
@@ -540,6 +543,7 @@
     // Portfolio filter
     const filterBtns = document.querySelectorAll('.filter-btn');
     const portfolioCards = document.querySelectorAll('.work-card');
+    const filterStatus = document.getElementById('filter-status');
 
     filterBtns.forEach(btn => {
       btn.addEventListener('click', () => {
@@ -553,15 +557,21 @@
         btn.setAttribute('aria-pressed', 'true');
 
         const filter = btn.getAttribute('data-filter');
+        let visibleCount = 0;
 
         portfolioCards.forEach(card => {
           const category = card.getAttribute('data-category') || '';
           if (filter === 'all' || category.includes(filter)) {
             card.classList.remove('hidden-filter');
+            visibleCount++;
           } else {
             card.classList.add('hidden-filter');
           }
         });
+
+        if (filterStatus) {
+          filterStatus.textContent = `Showing ${visibleCount} project${visibleCount !== 1 ? 's' : ''} in ${filter === 'all' ? 'all categories' : filter}`;
+        }
       });
     });
 
