@@ -2,6 +2,7 @@ import { anonClient, userClient } from '../_lib/supabase.js';
 import { requireAuth } from '../_lib/auth.js';
 import { rateLimit } from '../_lib/rate-limit.js';
 import { validateEnquiry, sanitizeInput } from '../_lib/validate.js';
+import { verifyHcaptcha } from '../_lib/hcaptcha.js';
 
 const MAX_BODY_BYTES = 16 * 1024; // generous cap; defends against oversized payloads.
 
@@ -49,6 +50,12 @@ export default async function handler(req, res) {
     const validation = validateEnquiry(req.body);
     if (!validation.valid) {
       return res.status(400).json({ error: validation.errors.join('. ') });
+    }
+
+    
+    const hcaptchaValid = await verifyHcaptcha(req.body.hcaptcha_token);
+    if (!hcaptchaValid) {
+      return res.status(400).json({ error: 'Captcha verification failed' });
     }
 
     const s = sanitizeInput(req.body);

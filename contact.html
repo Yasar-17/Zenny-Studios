@@ -182,6 +182,12 @@
               <input type="hidden" name="_captcha" value="true">
               <input type="hidden" name="_template" value="box">
 
+              
+              <div class="hidden" aria-hidden="true">
+                <label for="website">Do not fill this field</label>
+                <input type="text" name="website" id="website" tabindex="-1" autocomplete="off">
+              </div>
+
 
               
               <div class="group">
@@ -628,6 +634,13 @@
     });
 
     contactForm.addEventListener('submit', function(e) {
+      
+      const honeypot = document.getElementById('website');
+      if (honeypot && honeypot.value) {
+        e.preventDefault();
+        return;
+      }
+
       let allValid = true;
       document.querySelectorAll('#contactForm input[required], #contactForm textarea[required]').forEach(input => {
         if (!validateField(input)) allValid = false;
