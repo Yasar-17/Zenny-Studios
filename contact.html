@@ -177,10 +177,7 @@
 
           
           <div class="lg:col-span-2" data-aos="fade-right">
-            <form action="https://formsubmit.co/zennysstudios@gmail.com" method="POST" class="space-y-8" id="contactForm" novalidate>
-              <input type="hidden" name="_next" id="_next" value="https://zennystudios.com/thank-you.html">
-              <input type="hidden" name="_captcha" value="true">
-              <input type="hidden" name="_template" value="box">
+            <form class="space-y-8" id="contactForm" novalidate>
 
               
               <div class="hidden" aria-hidden="true">
@@ -633,11 +630,12 @@
       });
     });
 
-    contactForm.addEventListener('submit', function(e) {
+    contactForm.addEventListener('submit', async function(e) {
+      e.preventDefault();
+
       
       const honeypot = document.getElementById('website');
       if (honeypot && honeypot.value) {
-        e.preventDefault();
         return;
       }
 
@@ -647,7 +645,6 @@
       });
 
       if (!allValid) {
-        e.preventDefault();
         const firstError = document.querySelector('[aria-invalid="true"]');
         if (firstError) firstError.focus();
         formStatus.textContent = 'Please fill in all required fields correctly.';
@@ -655,12 +652,49 @@
         return;
       }
 
-      document.getElementById('_next').value = window.location.origin + '/thank-you.html';
       submitBtn.disabled = true;
       submitBtn.classList.add('opacity-80', 'cursor-not-allowed');
       submitText.textContent = 'Sending...';
       formStatus.textContent = 'Sending your message...';
       formStatus.className = 'text-gold text-sm text-center';
+
+      try {
+        const API_BASE = (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' || window.location.protocol === 'file:')
+          ? 'http://localhost:3000/api'
+          : '/api';
+
+        const formData = {
+          name: document.getElementById('name').value.trim(),
+          email: document.getElementById('email').value.trim(),
+          phone: document.getElementById('phone').value.trim(),
+          company: document.getElementById('company').value.trim() || null,
+          service: document.getElementById('service').value || null,
+          message: document.getElementById('message').value.trim(),
+        };
+
+        const res = await fetch(API_BASE + '/enquiries', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(formData),
+        });
+
+        if (res.ok) {
+          window.location.href = '/thank-you.html';
+        } else {
+          const data = await res.json().catch(() => ({ error: 'Submission failed' }));
+          formStatus.textContent = data.error || 'Something went wrong. Please try again.';
+          formStatus.className = 'text-red-400 text-sm text-center';
+          submitBtn.disabled = false;
+          submitBtn.classList.remove('opacity-80', 'cursor-not-allowed');
+          submitText.textContent = 'Send It \u2192';
+        }
+      } catch (err) {
+        formStatus.textContent = 'Unable to connect. Please try again or email us directly.';
+        formStatus.className = 'text-red-400 text-sm text-center';
+        submitBtn.disabled = false;
+        submitBtn.classList.remove('opacity-80', 'cursor-not-allowed');
+        submitText.textContent = 'Send It \u2192';
+      }
     });
   </script>
 </body>
