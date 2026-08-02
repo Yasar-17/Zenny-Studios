@@ -3,7 +3,6 @@
   "redirects": [
     { "source": "/projects/calisthenics-reel", "destination": "/projects/calesthenics-reel.html", "permanent": true },
     { "source": "/projects/calistenics-reel", "destination": "/projects/calesthenics-reel.html", "permanent": true },
-    { "source": "/projects/calisthenics-reel", "destination": "/projects/calesthenics-reel.html", "permanent": true },
     { "source": "/projects/headline-ad-shoot", "destination": "/projects/headline-adshoot.html", "permanent": true },
     { "source": "/projects/hayath-interior", "destination": "/projects/hayath-interiors.html", "permanent": true },
     { "source": "/projects/tavisa", "destination": "/projects/tavisa-fashion.html", "permanent": true },
