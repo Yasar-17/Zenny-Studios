@@ -285,6 +285,109 @@
     @keyframes fadeIn {
       to { opacity: 1; }
     }
+
+    /* Service Cards */
+    .service-card {
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.06);
+      transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .service-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 3px;
+      height: 0;
+      background: #F5C518;
+      transition: height 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      z-index: 2;
+    }
+    .service-card:hover::before {
+      height: 100%;
+    }
+    .service-card::after {
+      content: attr(data-number);
+      position: absolute;
+      right: -0.5rem;
+      bottom: -1.5rem;
+      font-family: 'Bebas Neue', cursive;
+      font-size: 10rem;
+      line-height: 1;
+      color: rgba(255,255,255,0.02);
+      pointer-events: none;
+      transition: color 0.5s ease;
+    }
+    .service-card:hover::after {
+      color: rgba(245,197,24,0.06);
+    }
+    .service-card:hover {
+      border-color: rgba(245,197,24,0.15);
+      transform: translateY(-4px);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.4), 0 0 40px rgba(245,197,24,0.08);
+    }
+    .service-card .card-separator {
+      width: 2rem;
+      height: 1px;
+      background: rgba(255,255,255,0.15);
+      transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .service-card:hover .card-separator {
+      width: 4rem;
+      background: #F5C518;
+    }
+    .service-card .card-icon {
+      width: 3rem;
+      height: 3rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid rgba(245,197,24,0.2);
+      color: #F5C518;
+      transition: all 0.4s ease;
+    }
+    .service-card:hover .card-icon {
+      background: rgba(245,197,24,0.1);
+      border-color: rgba(245,197,24,0.4);
+      box-shadow: 0 0 20px rgba(245,197,24,0.15);
+    }
+    .service-card .card-arrow {
+      opacity: 0;
+      transform: translateX(-8px);
+      transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .service-card:hover .card-arrow {
+      opacity: 1;
+      transform: translateX(0);
+    }
+    [data-theme="light"] .service-card {
+      border-color: rgba(10,10,10,0.08);
+    }
+    [data-theme="light"] .service-card::after {
+      color: rgba(10,10,10,0.03);
+    }
+    [data-theme="light"] .service-card:hover::after {
+      color: rgba(200,160,0,0.08);
+    }
+    [data-theme="light"] .service-card:hover {
+      border-color: rgba(200,160,0,0.25);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.08), 0 0 40px rgba(200,160,0,0.06);
+    }
+    [data-theme="light"] .service-card .card-separator {
+      background: rgba(10,10,10,0.15);
+    }
+    [data-theme="light"] .service-card:hover .card-separator {
+      background: var(--color-gold);
+    }
+    [data-theme="light"] .service-card .card-icon {
+      border-color: rgba(200,160,0,0.25);
+      color: var(--color-gold);
+    }
+    [data-theme="light"] .service-card:hover .card-icon {
+      background: rgba(200,160,0,0.08);
+      border-color: rgba(200,160,0,0.4);
+    }
   </style>
 </head>
 <body class="bg-dark font-body text-white antialiased">
@@ -510,41 +613,81 @@
           Craft. Strategy. Dominance.
         </h2>
 
-        <div class="grid md:grid-cols-2 gap-6">
+        <div class="grid md:grid-cols-2 gap-5">
           
-          <a href="services.html" class="tilt-card bg-card border border-white/10 border-t-2 border-t-gold p-10 hover:-translate-y-2 hover:shadow-[0_0_50px_rgba(245,197,24,0.15)] transition-all duration-500 group cursor-pointer block" data-aos="fade-up" data-aos-delay="100">
-            <div class="w-16 h-16 bg-gold/40 rounded-full flex items-center justify-center mb-8 group-hover:scale-110 group-hover:bg-gold/20 transition-all duration-300">
-              <span class="text-gold text-2xl font-display">01</span>
+          <a href="services.html" class="service-card tilt-card bg-card p-8 md:p-10 group cursor-pointer block" data-number="01" data-aos="fade-up" data-aos-delay="100">
+            <div class="relative z-10">
+              <div class="flex items-center justify-between mb-8">
+                <div class="card-icon">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="23 7 16 12 23 17 23 7"></polygon><rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect></svg>
+                </div>
+                <span class="font-display text-sm tracking-widest text-white/20">01</span>
+              </div>
+              <h3 class="font-display text-3xl md:text-4xl text-white mb-3 group-hover:text-gold transition-colors duration-300">Media Production & Content Creation</h3>
+              <div class="card-separator mb-4"></div>
+              <p class="text-white/50 text-base md:text-lg leading-relaxed">Reels, shoots, and motion content engineered to stop the scroll. From concept to final cut — every frame built to make your audience feel something real.</p>
+              <div class="card-arrow mt-6 flex items-center gap-2 text-gold text-sm font-semibold tracking-wider uppercase">
+                <span>Explore</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+              </div>
             </div>
-            <h3 class="font-display text-3xl md:text-4xl text-white mb-4 group-hover:text-gold transition-colors duration-300">Media Production & Content Creation</h3>
-            <p class="text-white/60 text-lg">Reels, shoots, and motion content engineered to stop the scroll. From concept to final cut — every frame built to make your audience feel something real.</p>
           </a>
 
           
-          <a href="services.html" class="tilt-card bg-card border border-white/10 border-t-2 border-t-gold p-10 hover:-translate-y-2 hover:shadow-[0_0_50px_rgba(245,197,24,0.15)] transition-all duration-500 group cursor-pointer block" data-aos="fade-up" data-aos-delay="200">
-            <div class="w-16 h-16 bg-gold/40 rounded-full flex items-center justify-center mb-8 group-hover:scale-110 group-hover:bg-gold/20 transition-all duration-300">
-              <span class="text-gold text-2xl font-display">02</span>
+          <a href="services.html" class="service-card tilt-card bg-card p-8 md:p-10 group cursor-pointer block" data-number="02" data-aos="fade-up" data-aos-delay="200">
+            <div class="relative z-10">
+              <div class="flex items-center justify-between mb-8">
+                <div class="card-icon">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line><line x1="2" y1="20" x2="22" y2="20"></line></svg>
+                </div>
+                <span class="font-display text-sm tracking-widest text-white/20">02</span>
+              </div>
+              <h3 class="font-display text-3xl md:text-4xl text-white mb-3 group-hover:text-gold transition-colors duration-300">Data Analytics & Digital Strategy</h3>
+              <div class="card-separator mb-4"></div>
+              <p class="text-white/50 text-base md:text-lg leading-relaxed">Insights that drive decisions. We decode audience behaviour, optimise campaigns, and build digital roadmaps that turn data into dominance.</p>
+              <div class="card-arrow mt-6 flex items-center gap-2 text-gold text-sm font-semibold tracking-wider uppercase">
+                <span>Explore</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+              </div>
             </div>
-            <h3 class="font-display text-3xl md:text-4xl text-white mb-4 group-hover:text-gold transition-colors duration-300">Data Analytics & Digital Strategy</h3>
-            <p class="text-white/60 text-lg">Insights that drive decisions. We decode audience behaviour, optimise campaigns, and build digital roadmaps that turn data into dominance.</p>
           </a>
 
           
-          <a href="services.html" class="tilt-card bg-card border border-white/10 border-t-2 border-t-gold p-10 hover:-translate-y-2 hover:shadow-[0_0_50px_rgba(245,197,24,0.15)] transition-all duration-500 group cursor-pointer block" data-aos="fade-up" data-aos-delay="300">
-            <div class="w-16 h-16 bg-gold/40 rounded-full flex items-center justify-center mb-8 group-hover:scale-110 group-hover:bg-gold/20 transition-all duration-300">
-              <span class="text-gold text-2xl font-display">03</span>
+          <a href="services.html" class="service-card tilt-card bg-card p-8 md:p-10 group cursor-pointer block" data-number="03" data-aos="fade-up" data-aos-delay="300">
+            <div class="relative z-10">
+              <div class="flex items-center justify-between mb-8">
+                <div class="card-icon">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"></path><path d="M2 17l10 5 10-5"></path><path d="M2 12l10 5 10-5"></path></svg>
+                </div>
+                <span class="font-display text-sm tracking-widest text-white/20">03</span>
+              </div>
+              <h3 class="font-display text-3xl md:text-4xl text-white mb-3 group-hover:text-gold transition-colors duration-300">Branding & Marketing Communication</h3>
+              <div class="card-separator mb-4"></div>
+              <p class="text-white/50 text-base md:text-lg leading-relaxed">Identity systems and messaging that command recognition. We forge brands with conviction, purpose, and unmistakable market presence.</p>
+              <div class="card-arrow mt-6 flex items-center gap-2 text-gold text-sm font-semibold tracking-wider uppercase">
+                <span>Explore</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+              </div>
             </div>
-            <h3 class="font-display text-3xl md:text-4xl text-white mb-4 group-hover:text-gold transition-colors duration-300">Branding & Marketing Communication</h3>
-            <p class="text-white/60 text-lg">Identity systems and messaging that command recognition. We forge brands with conviction, purpose, and unmistakable market presence.</p>
           </a>
 
           
-          <a href="services.html" class="tilt-card bg-card border border-white/10 border-t-2 border-t-gold p-10 hover:-translate-y-2 hover:shadow-[0_0_50px_rgba(245,197,24,0.15)] transition-all duration-500 group cursor-pointer block" data-aos="fade-up" data-aos-delay="400">
-            <div class="w-16 h-16 bg-gold/40 rounded-full flex items-center justify-center mb-8 group-hover:scale-110 group-hover:bg-gold/20 transition-all duration-300">
-              <span class="text-gold text-2xl font-display">04</span>
+          <a href="services.html" class="service-card tilt-card bg-card p-8 md:p-10 group cursor-pointer block" data-number="04" data-aos="fade-up" data-aos-delay="400">
+            <div class="relative z-10">
+              <div class="flex items-center justify-between mb-8">
+                <div class="card-icon">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline><line x1="14" y1="4" x2="10" y2="20"></line></svg>
+                </div>
+                <span class="font-display text-sm tracking-widest text-white/20">04</span>
+              </div>
+              <h3 class="font-display text-3xl md:text-4xl text-white mb-3 group-hover:text-gold transition-colors duration-300">Web Development</h3>
+              <div class="card-separator mb-4"></div>
+              <p class="text-white/50 text-base md:text-lg leading-relaxed">High-performance websites and digital experiences. We build platforms that look stunning, load fast, and convert visitors into customers.</p>
+              <div class="card-arrow mt-6 flex items-center gap-2 text-gold text-sm font-semibold tracking-wider uppercase">
+                <span>Explore</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+              </div>
             </div>
-            <h3 class="font-display text-3xl md:text-4xl text-white mb-4 group-hover:text-gold transition-colors duration-300">Web Development</h3>
-            <p class="text-white/60 text-lg">High-performance websites and digital experiences. We build platforms that look stunning, load fast, and convert visitors into customers.</p>
           </a>
         </div>
       </div>
