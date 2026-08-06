@@ -28,7 +28,11 @@ export function getCookies(req) {
 // - Secure: only sent over HTTPS. Vercel always terminates TLS; in local dev
 //   over http we drop Secure (and the __Host- prefix, which requires Secure).
 function isProd() {
-  return process.env.NODE_ENV === 'production' || process.env.VERCEL === '1';
+  // `VERCEL_ENV` is `production` on Vercel but `development` under `vercel dev`
+  // (which also sets `VERCEL=1`). Using `VERCEL` here would wrongly mark local
+  // dev as production, forcing Secure/__Host- cookies the browser rejects over
+  // http://localhost and breaking admin login.
+  return process.env.NODE_ENV === 'production' || process.env.VERCEL_ENV === 'production';
 }
 
 export function serializeCookie(name, value, maxAgeSeconds) {
