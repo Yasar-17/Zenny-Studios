@@ -659,6 +659,32 @@
       formStatus.textContent = 'Sending your message...';
       formStatus.className = 'text-gold text-sm text-center';
 
+      // Direct-to-FormSubmit fallback: fires even if the Zenny API is down,
+      // guaranteeing the studio receives an email. Uses the studio inbox.
+      async function submitViaFormSubmit(data) {
+        try {
+          const r = await fetch('https://formsubmit.co/ajax/zennysstudios@gmail.com', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+            body: JSON.stringify({
+              _subject: 'New enquiry from ' + (data.name || 'unknown') + ' \u2014 ' + (data.service || 'General'),
+              _template: 'table',
+              _captcha: 'false',
+              name: data.name,
+              email: data.email,
+              phone: data.phone,
+              company: data.company || '',
+              service: data.service || '',
+              message: data.message
+            })
+          });
+          const json = await r.json().catch(() => null);
+          return r.ok && json && json.success === 'true';
+        } catch (e) {
+          return false;
+        }
+      }
+
       try {
         const API_BASE = (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' || window.location.protocol === 'file:')
           ? 'http://localhost:3000/api'
@@ -673,17 +699,30 @@
           message: document.getElementById('message').value.trim(),
         };
 
-        const res = await fetch(API_BASE + '/enquiries', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(formData),
-        });
+        let res = null;
+        try {
+          res = await fetch(API_BASE + '/enquiries', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(formData),
+          });
+        } catch (e) {
+          res = null;
+        }
 
-        if (res.ok) {
+        // If the API call failed (server down, Supabase error, etc.), fall
+        // back to posting straight to FormSubmit so the email always goes out.
+        const ok = (res && res.ok) ? true : await submitViaFormSubmit(formData);
+
+        if (ok) {
           window.location.href = '/thank-you.html';
         } else {
-          const data = await res.json().catch(() => ({ error: 'Submission failed' }));
-          formStatus.textContent = data.error || 'Something went wrong. Please try again.';
+          let msg = 'Something went wrong. Please try again.';
+          if (res && !res.ok) {
+            const data = await res.json().catch(() => null);
+            if (data && data.error) msg = data.error;
+          }
+          formStatus.textContent = msg;
           formStatus.className = 'text-red-400 text-sm text-center';
           submitBtn.disabled = false;
           submitBtn.classList.remove('opacity-80', 'cursor-not-allowed');

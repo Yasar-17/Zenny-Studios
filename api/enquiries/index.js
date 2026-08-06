@@ -3,10 +3,15 @@ import { requireAuth } from '../_lib/auth.js';
 import { rateLimit } from '../_lib/rate-limit.js';
 import { validateEnquiry, sanitizeInput } from '../_lib/validate.js';
 import { verifyHcaptcha } from '../_lib/hcaptcha.js';
+import { sendFormSubmitNotification } from '../_lib/formsubmit.js';
+import { applyCors, handlePreflight } from '../_lib/cors.js';
 
 const MAX_BODY_BYTES = 16 * 1024; // generous cap; defends against oversized payloads.
 
 export default async function handler(req, res) {
+  applyCors(req, res);
+  if (handlePreflight(req, res)) return;
+
   // ===== GET: list all (admin only) =====
   if (req.method === 'GET') {
     const auth = await requireAuth(req, res);
@@ -60,6 +65,8 @@ export default async function handler(req, res) {
 
     const s = sanitizeInput(req.body);
 
+    // Supabase storage is best-effort — never let it block delivery.
+    let stored = false;
     try {
       // anon client → RLS `public_insert` policy allows anonymous INSERT.
       const supabase = anonClient();
@@ -72,10 +79,25 @@ export default async function handler(req, res) {
         message: s.message,
       });
       if (error) throw error;
-      return res.status(201).json({ success: true });
-    } catch {
-      return res.status(500).json({ error: 'Internal server error' });
+      stored = true;
+    } catch (err) {
+      console.error('Supabase insert failed (continuing to email):', err.message);
     }
+
+    // FormSubmit email is the guaranteed channel — fire it regardless.
+    let emailed = false;
+    try {
+      await sendFormSubmitNotification(req.body);
+      emailed = true;
+    } catch (err) {
+      console.error('FormSubmit notification failed:', err.message);
+    }
+
+    // Success if at least one channel delivered the enquiry.
+    if (stored || emailed) {
+      return res.status(201).json({ success: true, stored, emailed });
+    }
+    return res.status(500).json({ error: 'Could not deliver your enquiry. Please try again or email us directly.' });
   }
 
   return res.status(405).json({ error: 'Method not allowed' });
