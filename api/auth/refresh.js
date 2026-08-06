@@ -1,11 +1,15 @@
 import { anonClient } from '../_lib/supabase.js';
 import { serializeCookie, clearCookies, getCookies } from '../_lib/auth.js';
 import { rateLimit } from '../_lib/rate-limit.js';
+import { applyCors, handlePreflight } from '../_lib/cors.js';
 
 const ACCESS_TTL = 60 * 15;
 const REFRESH_TTL = 60 * 60 * 24 * 7;
 
 export default async function handler(req, res) {
+  applyCors(req, res);
+  if (handlePreflight(req, res)) return;
+
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
   }

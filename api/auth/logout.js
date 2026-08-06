@@ -1,6 +1,10 @@
 import { clearCookies } from '../_lib/auth.js';
+import { applyCors, handlePreflight } from '../_lib/cors.js';
 
 export default async function handler(req, res) {
+  applyCors(req, res);
+  if (handlePreflight(req, res)) return;
+
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
   }

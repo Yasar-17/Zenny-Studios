@@ -1,9 +1,13 @@
 import { userClient } from '../_lib/supabase.js';
 import { requireAuth } from '../_lib/auth.js';
+import { applyCors, handlePreflight } from '../_lib/cors.js';
 
 const UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
 
 export default async function handler(req, res) {
+  applyCors(req, res);
+  if (handlePreflight(req, res)) return;
+
   if (req.method !== 'DELETE') {
     return res.status(405).json({ error: 'Method not allowed' });
   }
