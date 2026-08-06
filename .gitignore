@@ -14,3 +14,10 @@ node_modules
 Thumbs.db
 .idea
 .vscode
+
+# ===== Local dev server logs =====
+dev-server*.log
+
+# ===== Raw, uncompressed shoot videos (use -compressed.mp4 versions) =====
+assets/Shoots/*.mp4
+!assets/Shoots/*-compressed.mp4
