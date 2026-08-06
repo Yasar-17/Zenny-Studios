@@ -97,18 +97,15 @@ zenny-studios/
 ├── robots.txt                  # Crawler directives
 ├── sitemap.xml                 # Search engine sitemap
 ├── package.json                # Project metadata and dev scripts
-├── scripts/
-│   └── hash-password.js        # Utility to generate a bcrypt hash for the admin
-├── api/                        # Serverless API layer (enquiries + auth)
-│   ├── _lib/                   # Shared helpers: db, auth, validate, rate-limit
+├── api/                        # Supabase-backed serverless API (enquiries + auth)
+│   ├── _lib/                   # Shared helpers: supabase, auth, validate, rate-limit
 │   ├── auth/                   # login, logout, me, refresh endpoints
 │   └── enquiries/              # CRUD endpoints for enquiries
-└── backend/                    # Standalone Express backend (optional)
-    ├── src/
-    └── SETUP.md                # Backend setup guide
+└── supabase/
+    └── migrations/             # SQL schema + Row-Level Security policies
 ```
 
-> The `api/` and `backend/` directories contain the enquiry/inbox API and are not required to run the marketing site. They are covered briefly above and documented separately in `backend/SETUP.md`.
+> The `api/` directory is the enquiry/inbox backend, powered entirely by Supabase (Postgres + Auth + RLS). The database schema lives in `supabase/migrations/0001_init.sql`.
 
 ---
 
@@ -136,10 +133,12 @@ Because the site is static, you can preview it with any static server. The recom
 
 ```bash
 npm install
-npm run dev
+npm run start
 ```
 
-This starts a local server (default: `http://localhost:3000`) and can also serve the API routes during development.
+> **Note:** the script is intentionally named `start`, not `dev` — Vercel CLI refuses a `dev` script that invokes `vercel dev` (it would recurse into itself).
+
+This starts a local server (default: `http://localhost:3000`) and also serves the API routes during development.
 
 ### Option 2 — Any static file server
 
@@ -157,6 +156,32 @@ Then open `http://localhost:5500` (or the port reported by your server).
 ### Opening files directly
 
 You can also double-click any `.html` file to open it in a browser. Note that some browsers restrict local file access for certain features, so a local server is preferred for an accurate preview.
+
+---
+
+## Supabase Backend
+
+The enquiry inbox (`admin.html`) and the contact form (`contact.html`) are backed by a Supabase project. Auth uses **Supabase Auth** (email + password); data lives in a Postgres `enquiries` table guarded by **Row-Level Security**. The serverless endpoints in `api/` talk to Supabase via `@supabase/supabase-js`.
+
+### One-time setup
+
+1. Create a project at [supabase.com](https://supabase.com).
+2. Open the **SQL editor** and run `supabase/migrations/0001_init.sql` (creates the table, index, and RLS policies).
+3. In **Authentication → Users → Add user**, create the admin account (email + password) that will sign in to `admin.html`.
+4. Copy `.env.example` to `.env` and fill in `SUPABASE_URL`, `SUPABASE_ANON_KEY`, and `SUPABASE_SERVICE_ROLE_KEY`. Locally, `vercel dev` reads `.env` at the project root.
+5. In Vercel, add the same three variables under Project Settings → Environment Variables.
+
+> **Security note:** `SUPABASE_SERVICE_ROLE_KEY` bypasses RLS. It is only used server-side in `api/_lib/supabase.js` and must never be exposed to the browser.
+
+### Env vars
+
+| Variable | Where used | Purpose |
+|---|---|---|
+| `SUPABASE_URL` | `api/_lib/supabase.js` | Supabase project URL |
+| `SUPABASE_ANON_KEY` | `api/_lib/supabase.js` | Public anon key (RLS still applies) |
+| `SUPABASE_SERVICE_ROLE_KEY` | `api/_lib/supabase.js` | Server-only admin key |
+| `HCAPTCHA_SECRET_KEY` | `api/_lib/hcaptcha.js` | Verifies contact-form captcha (skipped if unset) |
+| `FORM_SUBMIT_EMAIL` | `api/_lib/formsubmit.js` | Studio inbox that receives a FormSubmit email per enquiry (skipped if unset) |
 
 ---
 
@@ -272,8 +297,8 @@ The frontend is fully static and can be deployed to any static host.
 
 1. Push this repository to GitHub, GitLab, or Bitbucket.
 2. Import the project into [Vercel](https://vercel.com).
-3. No build command or output directory is required — Vercel serves the root folder as static files.
-4. *(Optional)* Add the same project's serverless API configuration if you want to enable the enquiry inbox.
+3. No build command or output directory is required — Vercel serves the root folder as static files and runs the `/api/*` serverless functions automatically.
+4. Add the Supabase environment variables (`SUPABASE_URL`, `SUPABASE_ANON_KEY`, `SUPABASE_SERVICE_ROLE_KEY`, and optionally `HCAPTCHA_SECRET_KEY`) under Project Settings → Environment Variables. See `.env.example`.
 
 ### Netlify / Cloudflare Pages / GitHub Pages
 
@@ -291,8 +316,7 @@ Defined in `package.json`:
 
 | Script | Command | What it does |
 |---|---|---|
-| `dev` | `npm run dev` | Starts the Vercel local dev server for the site (and API). |
-| `hash-password` | `npm run hash-password -- <password>` | Generates a bcrypt hash for the admin login. Output is placed in the `ADMIN_PASSWORD_HASH` environment variable. |
+| `start` | `npm run start` | Starts the Vercel local dev server for the site and the `/api/*` Supabase endpoints. |
 
 ---
 
@@ -301,7 +325,6 @@ Defined in `package.json`:
 The marketing frontend is feature-complete. Planned next steps:
 
 - **Enable hCaptcha** — set `HCAPTCHA_SITEKEY` and `HCAPTCHA_SECRET_KEY` env vars to activate captcha verification on the contact form.
-- **Email notifications** — send an email to the studio on each new enquiry via Resend or the serverless API.
 - **Tailwind build step** — move from the CDN to a compiled, purged Tailwind CSS file for smaller production stylesheets.
 - **Blog / journal section** — content marketing pages for SEO and thought leadership.
 - **Testimonials section** — client quotes and case-study endorsements.
