@@ -46,7 +46,7 @@ The frontend is intentionally free of heavy build tooling. Pages are authored in
 - **Motion and micro-interactions** — scroll-reveal animations, a custom cursor, scroll progress, stat count-ups, and parallax, all implemented with vanilla JS and `IntersectionObserver` / `requestAnimationFrame` for smooth, low-overhead effects.
 - **Project case studies** — each engagement has a dedicated `/projects/<slug>.html` page with its own cover, brief, deliverables, gallery, and navigation back to the work index.
 - **Lead capture** — a validated, accessible contact form that submits to the `/api/enquiries` endpoint with honeypot spam protection and optional hCaptcha verification.
-- **Enquiry dashboard** — an admin inbox (`admin.html`) for staff to log in, review submissions, and manage enquiries via Supabase Auth + RLS.
+- **Enquiry dashboard** — an admin inbox (`admin.html`) for staff to log in, review submissions, and manage enquiries via Supabase Auth + httpOnly session cookies.
 - **SEO and social** — per-page meta descriptions, Open Graph and Twitter cards, JSON-LD structured data (Organization, WebPage, CreativeWork, BreadcrumbList), a `sitemap.xml` with `lastmod` dates, and `robots.txt`.
 - **Analytics** — privacy-friendly visitor tracking via [Plausible](https://plausible.io) — no cookies, no consent banner needed.
 - **404 redirect strategy** — 15+ permanent redirects for common typos, shortened slugs, and extension-less URLs via `vercel.json`.
@@ -161,15 +161,15 @@ You can also double-click any `.html` file to open it in a browser. Note that so
 
 ## Supabase Backend
 
-The enquiry inbox (`admin.html`) and the contact form (`contact.html`) are backed by a Supabase project. Auth uses **Supabase Auth** (email + password); data lives in a Postgres `enquiries` table guarded by **Row-Level Security**. The serverless endpoints in `api/` talk to Supabase via `@supabase/supabase-js`.
+The enquiry inbox (`admin.html`) and the contact form (`contact.html`) are backed by a Supabase project. Auth uses **Supabase Auth** (email + password); data lives in a Postgres `enquiries` table. All reads/writes go through the **service-role key** (server-side only), gated by a session check in code; the anon key is denied by Row-Level Security (RLS enabled, no permissive policies). The serverless endpoints in `api/` talk to Supabase via `@supabase/supabase-js`.
 
 ### One-time setup
 
 1. Create a project at [supabase.com](https://supabase.com).
-2. Open the **SQL editor** and run `supabase/migrations/0001_init.sql` (creates the table, index, and RLS policies).
+2. Open the **SQL editor** and run `supabase/migrations/0001_init.sql`, then `supabase/migrations/0002_service_role_auth.sql` (creates the table/index and removes permissive RLS policies).
 3. In **Authentication → Users → Add user**, create the admin account (email + password) that will sign in to `admin.html`.
 4. Copy `.env.example` to `.env` and fill in `SUPABASE_URL`, `SUPABASE_ANON_KEY`, and `SUPABASE_SERVICE_ROLE_KEY`. Locally, `vercel dev` reads `.env` at the project root.
-5. In Vercel, add the same three variables under Project Settings → Environment Variables.
+5. In Vercel, add the same three variables under Project Settings → Environment Variables (for both Production and Preview) — without them every `/api/*` function fails to boot and the admin login shows a server connection error.
 
 > **Security note:** `SUPABASE_SERVICE_ROLE_KEY` bypasses RLS. It is only used server-side in `api/_lib/supabase.js` and must never be exposed to the browser.
 
@@ -179,9 +179,8 @@ The enquiry inbox (`admin.html`) and the contact form (`contact.html`) are backe
 |---|---|---|
 | `SUPABASE_URL` | `api/_lib/supabase.js` | Supabase project URL |
 | `SUPABASE_ANON_KEY` | `api/_lib/supabase.js` | Public anon key (RLS still applies) |
-| `SUPABASE_SERVICE_ROLE_KEY` | `api/_lib/supabase.js` | Server-only admin key |
-| `HCAPTCHA_SECRET_KEY` | `api/_lib/hcaptcha.js` | Verifies contact-form captcha (skipped if unset) |
-| `FORM_SUBMIT_EMAIL` | `api/_lib/formsubmit.js` | Studio inbox that receives a FormSubmit email per enquiry (skipped if unset) |
+| `SUPABASE_SERVICE_ROLE_KEY` | `api/_lib/supabase.js` | Server-only key; all enquiry reads/writes (bypasses RLS — never expose it) |
+| `HCAPTCHA_SECRET_KEY` | `api/_lib/hcaptcha.js` | Verifies captcha tokens (opt-in — only enforced when the form sends `hcaptcha_token`) |
 
 ---
 
@@ -298,7 +297,7 @@ The frontend is fully static and can be deployed to any static host.
 1. Push this repository to GitHub, GitLab, or Bitbucket.
 2. Import the project into [Vercel](https://vercel.com).
 3. No build command or output directory is required — Vercel serves the root folder as static files and runs the `/api/*` serverless functions automatically.
-4. Add the Supabase environment variables (`SUPABASE_URL`, `SUPABASE_ANON_KEY`, `SUPABASE_SERVICE_ROLE_KEY`, and optionally `HCAPTCHA_SECRET_KEY`) under Project Settings → Environment Variables. See `.env.example`.
+4. Add the Supabase environment variables (`SUPABASE_URL`, `SUPABASE_ANON_KEY`, `SUPABASE_SERVICE_ROLE_KEY`, and optionally `HCAPTCHA_SECRET_KEY`) under Project Settings → Environment Variables for both Production and Preview. See `.env.example`.
 
 ### Netlify / Cloudflare Pages / GitHub Pages
 
@@ -324,7 +323,7 @@ Defined in `package.json`:
 
 The marketing frontend is feature-complete. Planned next steps:
 
-- **Enable hCaptcha** — set `HCAPTCHA_SITEKEY` and `HCAPTCHA_SECRET_KEY` env vars to activate captcha verification on the contact form.
+- **Enable hCaptcha** — render the hCaptcha widget in `contact.html` and send `hcaptcha_token` with the POST; verification is already wired server-side (`api/_lib/hcaptcha.js`).
 - **Tailwind build step** — move from the CDN to a compiled, purged Tailwind CSS file for smaller production stylesheets.
 - **Blog / journal section** — content marketing pages for SEO and thought leadership.
 - **Testimonials section** — client quotes and case-study endorsements.
