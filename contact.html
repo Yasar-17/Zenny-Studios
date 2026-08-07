@@ -659,29 +659,29 @@
       formStatus.textContent = 'Sending your message...';
       formStatus.className = 'text-gold text-sm text-center';
 
-      // Direct-to-FormSubmit fallback: fires even if the Zenny API is down,
-      // guaranteeing the studio receives an email. Uses the studio inbox.
+      // Two independent delivery channels, fired in parallel:
+      //  1) FormSubmit email (browser → formsubmit.co/ajax/<studio inbox>)
+      //  2) DB save via the Zenny API (browser → /api/enquiries → Supabase)
+      // Promise.allSettled ensures a failing channel never blocks the other.
       async function submitViaFormSubmit(data) {
-        try {
-          const r = await fetch('https://formsubmit.co/ajax/zennysstudios@gmail.com', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-            body: JSON.stringify({
-              _subject: 'New enquiry from ' + (data.name || 'unknown') + ' \u2014 ' + (data.service || 'General'),
-              _template: 'table',
-              _captcha: 'false',
-              name: data.name,
-              email: data.email,
-              phone: data.phone,
-              company: data.company || '',
-              service: data.service || '',
-              message: data.message
-            })
-          });
-          const json = await r.json().catch(() => null);
-          return r.ok && json && json.success === 'true';
-        } catch (e) {
-          return false;
+        const r = await fetch('https://formsubmit.co/ajax/zennysstudios@gmail.com', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+          body: JSON.stringify({
+            _subject: 'New enquiry from ' + (data.name || 'unknown') + ' \u2014 ' + (data.service || 'General'),
+            _template: 'table',
+            _captcha: 'false',
+            name: data.name,
+            email: data.email,
+            phone: data.phone,
+            company: data.company || '',
+            service: data.service || '',
+            message: data.message
+          })
+        });
+        const json = await r.json().catch(() => null);
+        if (!r.ok || !json || json.success !== 'true') {
+          throw new Error('FormSubmit delivery failed');
         }
       }
 
@@ -699,30 +699,25 @@
           message: document.getElementById('message').value.trim(),
         };
 
-        let res = null;
-        try {
-          res = await fetch(API_BASE + '/enquiries', {
+        const results = await Promise.allSettled([
+          submitViaFormSubmit(formData),
+          fetch(API_BASE + '/enquiries', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(formData),
-          });
-        } catch (e) {
-          res = null;
-        }
+          }).then(res => {
+            if (!res.ok) throw new Error('Enquiry API rejected');
+          }),
+        ]);
 
-        // If the API call failed (server down, Supabase error, etc.), fall
-        // back to posting straight to FormSubmit so the email always goes out.
-        const ok = (res && res.ok) ? true : await submitViaFormSubmit(formData);
+        // Redirect as long as at least one channel delivered; show the error
+        // state only when both failed.
+        const anySucceeded = results.some(r => r.status === 'fulfilled');
 
-        if (ok) {
+        if (anySucceeded) {
           window.location.href = '/thank-you.html';
         } else {
-          let msg = 'Something went wrong. Please try again.';
-          if (res && !res.ok) {
-            const data = await res.json().catch(() => null);
-            if (data && data.error) msg = data.error;
-          }
-          formStatus.textContent = msg;
+          formStatus.textContent = 'Something went wrong. Please try again or email us directly.';
           formStatus.className = 'text-red-400 text-sm text-center';
           submitBtn.disabled = false;
           submitBtn.classList.remove('opacity-80', 'cursor-not-allowed');

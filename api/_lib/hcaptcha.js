@@ -1,10 +1,14 @@
 // Verify hCaptcha token with the hCaptcha API.
 // Returns true if valid, false otherwise.
-// If HCAPTCHA_SECRET_KEY is not set, verification is skipped (dev mode).
+//
+// Verification is OPT-IN: it only runs when the request carries a token.
+// The contact form currently renders no widget and sends no token, so
+// submissions must not be rejected just because the secret env var is set.
+// To enforce captcha, have the frontend send `hcaptcha_token` with its POST
+// (and add the widget to contact.html).
 export async function verifyHcaptcha(token) {
   const secret = process.env.HCAPTCHA_SECRET_KEY;
-  if (!secret) return true; // skip in dev if not configured
-  if (!token) return false;
+  if (!secret || !token) return true;
 
   try {
     const res = await fetch('https://api.hcaptcha.com/siteverify', {
