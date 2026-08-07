@@ -1,6 +1,10 @@
 -- ============================================================================
 -- 0001_init.sql — Zenny Studios enquiries table + Row-Level Security
 -- Run once via the Supabase SQL editor (or `supabase db push`).
+--
+-- NOTE: the permissive RLS policies below are superseded by
+-- 0002_service_role_auth.sql, which drops them (the API now uses the service
+-- role key, so anon/authenticated access is denied). Run 0002 after this.
 -- ============================================================================
 
 -- pgcrypto for gen_random_uuid() on older Postgres; built-in on PG13+.
@@ -68,8 +72,9 @@ create policy "admin_delete_enquiries"
 --    This user will be used by /api/auth/login to obtain a session.
 -- 2. The service_role key bypasses RLS entirely — never expose it to the
 --    browser. It is only used server-side in api/_lib/supabase.js.
--- 3. The POST endpoint (/api/enquiries) uses the anon key; only inserts are
---    allowed by the policy above.
--- 4. All admin GET / PATCH / DELETE endpoints send the caller's access token,
---    so RLS sees role = authenticated and the policies grant access.
+-- 3. The POST endpoint (/api/enquiries) and all admin endpoints use the
+--    service_role key. See 0002_service_role_auth.sql, which drops the
+--    permissive policies below so the anon key cannot touch the table.
+-- 4. Admin authorisation happens in code: /api/auth/login issues an httpOnly
+--    cookie and every admin endpoint runs requireAuth() before touching data.
 -- ============================================================================
