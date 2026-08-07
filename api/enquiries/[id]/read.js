@@ -1,4 +1,4 @@
-import { userClient } from '../../_lib/supabase.js';
+import { adminClient } from '../../_lib/supabase.js';
 import { requireAuth } from '../../_lib/auth.js';
 import { applyCors, handlePreflight } from '../../_lib/cors.js';
 
@@ -21,7 +21,8 @@ export default async function handler(req, res) {
   }
 
   try {
-    const supabase = userClient(auth.accessToken);
+    // Authorised by requireAuth; service-role key bypasses RLS.
+    const supabase = adminClient();
     const { data, error } = await supabase
       .from('enquiries')
       .update({ is_read: true })
