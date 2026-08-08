@@ -633,6 +633,9 @@
       }
 
       const detailContent = document.getElementById('detailContent');
+
+      const mailtoHref = 'mailto:' + enquiry.email + '?subject=' + encodeURIComponent('Re: Your enquiry at Zenny Studios');
+
       detailContent.innerHTML = `
         <div class="mb-8">
           <p class="text-gold text-sm uppercase tracking-[0.3em] mb-3">Enquiry Details</p>
