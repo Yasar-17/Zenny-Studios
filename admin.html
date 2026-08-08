@@ -635,6 +635,7 @@
       const detailContent = document.getElementById('detailContent');
 
       const mailtoHref = 'mailto:' + enquiry.email + '?subject=' + encodeURIComponent('Re: Your enquiry at Zenny Studios');
+      const phoneDigits = (enquiry.phone || '').replace(/[^\d]/g, '').replace(/^00/, '');
 
       detailContent.innerHTML = `
         <div class="mb-8">
