@@ -636,6 +636,7 @@
 
       const mailtoHref = 'mailto:' + enquiry.email + '?subject=' + encodeURIComponent('Re: Your enquiry at Zenny Studios');
       const phoneDigits = (enquiry.phone || '').replace(/[^\d]/g, '').replace(/^00/, '');
+      const contactHref = phoneDigits ? 'https://wa.me/' + phoneDigits : 'tel:' + (enquiry.phone || '');
 
       detailContent.innerHTML = `
         <div class="mb-8">
