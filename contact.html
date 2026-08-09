@@ -409,57 +409,49 @@
 
     
     <section class="bg-[#0d0d0d] py-24 md:py-32 relative overflow-hidden">
-      <div class="max-w-5xl mx-auto px-6 text-center mb-16">
-        <p class="text-gold text-sm uppercase tracking-[0.3em] mb-6" data-aos="fade-up">Based in Bengaluru</p>
-        <h2 class="font-display text-5xl sm:text-6xl md:text-7xl text-white mb-8" data-aos="fade-up" data-aos-delay="100">
-          Where in Bengaluru<br><span class="text-white/40">are you?</span>
-        </h2>
-        <p class="text-white/60 text-xl max-w-2xl mx-auto" data-aos="fade-up" data-aos-delay="200">
-          Tap a neighbourhood — we'll come to you. Local team, hands-on, face-to-face.
-        </p>
-      </div>
-
-      
-      <div class="max-w-md mx-auto px-6" data-aos="fade-up" data-aos-delay="300">
-        <div id="bengaluru-radar" class="relative aspect-square w-full mx-auto" role="application" aria-label="Interactive map of Bengaluru. Select a neighbourhood and the Zenny Studios pin travels to it.">
+      <div class="max-w-7xl mx-auto px-6">
+        <div class="grid lg:grid-cols-2 gap-16 items-center">
 
           
-          <div class="absolute inset-0 rounded-full border border-white/10"></div>
-          <div class="absolute inset-[15%] rounded-full border border-white/10"></div>
-          <div class="absolute inset-[30%] rounded-full border border-white/10"></div>
-          <div class="absolute inset-[45%] rounded-full border border-white/10"></div>
+          <div data-aos="fade-up">
+            <p class="text-gold text-sm uppercase tracking-[0.3em] mb-6">Based in Bengaluru</p>
+            <h2 class="font-display text-5xl sm:text-6xl md:text-7xl text-white leading-[0.9] mb-8">
+              Made in<br><span class="text-gradient">Bengaluru.</span>
+            </h2>
+            <p class="text-white/60 text-xl max-w-xl mb-10">
+              The Garden City is home. The energy, the culture, the craft — it's all Bengaluru, and it shows up in every brand we build.
+            </p>
 
-          
-          <div class="absolute left-0 right-0 top-1/2 h-px bg-white/5"></div>
-          <div class="absolute top-0 bottom-0 left-1/2 w-px bg-white/5"></div>
-
-          
-          <div class="radar-sweep absolute inset-0 rounded-full" aria-hidden="true"></div>
-
-          
-          <div id="studio-pin" class="radar-pin absolute z-10" style="left:50%;top:50%" aria-hidden="true">
-            <span class="radar-pin-pulse"></span>
-            <span class="radar-pin-dot"></span>
-            <span class="radar-pin-label">Zenny Studios</span>
+            <div class="bg-card border-2 border-white/10 p-8">
+              <div class="flex items-start gap-5">
+                <span class="text-3xl text-gold"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg></span>
+                <div>
+                  <h4 class="text-white font-semibold text-lg mb-2">Zenny Studios</h4>
+                  <p class="text-white/60">Bengaluru, Karnataka</p>
+                  <p class="text-white/40 text-sm mt-1">India's Silicon Valley</p>
+                </div>
+              </div>
+              <a href="https://www.google.com/maps/search/?api=1&query=Bengaluru%2C+Karnataka" target="_blank" rel="noopener noreferrer" class="magnetic-btn inline-block mt-8 border-2 border-gold text-gold px-8 py-4 font-semibold hover:bg-gold hover:text-dark transition-all duration-300">Get Directions &rarr;</a>
+            </div>
           </div>
 
           
-          <button type="button" class="radar-dot" style="left:76%;top:38%" data-name="Indiranagar"><span class="radar-dot-label">Indiranagar</span></button>
-          <button type="button" class="radar-dot" style="left:65%;top:60%" data-name="Koramangala"><span class="radar-dot-label">Koramangala</span></button>
-          <button type="button" class="radar-dot" style="left:60%;top:72%" data-name="HSR Layout"><span class="radar-dot-label">HSR Layout</span></button>
-          <button type="button" class="radar-dot" style="left:84%;top:44%" data-name="Whitefield"><span class="radar-dot-label">Whitefield</span></button>
-          <button type="button" class="radar-dot" style="left:60%;top:30%" data-name="MG Road"><span class="radar-dot-label">MG Road</span></button>
-          <button type="button" class="radar-dot" style="left:36%;top:68%" data-name="Jayanagar"><span class="radar-dot-label">Jayanagar</span></button>
-          <button type="button" class="radar-dot" style="left:48%;top:86%" data-name="Electronic City"><span class="radar-dot-label">Electronic City</span></button>
-          <button type="button" class="radar-dot" style="left:52%;top:16%" data-name="Frazer Town"><span class="radar-dot-label">Frazer Town</span></button>
-          <button type="button" class="radar-dot" style="left:28%;top:62%" data-name="JP Nagar"><span class="radar-dot-label">JP Nagar</span></button>
-          <button type="button" class="radar-dot" style="left:18%;top:50%" data-name="Rajajinagar"><span class="radar-dot-label">Rajajinagar</span></button>
+          <div class="relative" data-aos="fade-up" data-aos-delay="150">
+            <div class="border-2 border-white/10 p-3 bg-card">
+              <iframe
+                src="https://maps.google.com/maps?q=Bengaluru%2C%20Karnataka%2C%20India&z=11&output=embed"
+                class="bengaluru-map w-full"
+                style="height: 480px;"
+                title="Map of Bengaluru"
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"
+                allowfullscreen
+              ></iframe>
+            </div>
+            <div class="absolute -bottom-6 -left-6 w-32 h-32 border-2 border-gold/30 float" aria-hidden="true"></div>
+          </div>
 
         </div>
-
-        <p id="radar-status" class="mt-8 text-center text-white/60 text-lg" aria-live="polite">
-          Pick a neighbourhood — the pin will come to you.
-        </p>
       </div>
     </section>
   </main>
@@ -774,27 +766,6 @@
         submitText.textContent = 'Send It \u2192';
       }
     });
-
-    // Bengaluru radar — pin travels to the selected neighbourhood
-    const radar = document.getElementById('bengaluru-radar');
-    if (radar) {
-      const pin = document.getElementById('studio-pin');
-      const status = document.getElementById('radar-status');
-      const dots = radar.querySelectorAll('.radar-dot');
-
-      dots.forEach(dot => {
-        dot.addEventListener('click', () => {
-          const left = dot.style.left;
-          const top = dot.style.top;
-          pin.style.left = left;
-          pin.style.top = top;
-          dots.forEach(d => d.classList.remove('active'));
-          dot.classList.add('active');
-          status.textContent = "On our way to " + dot.dataset.name + " — see you soon.";
-          status.classList.add('text-gold');
-        });
-      });
-    }
   </script>
 </body>
 </html>
