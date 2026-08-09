@@ -409,52 +409,57 @@
 
     
     <section class="bg-[#0d0d0d] py-24 md:py-32 relative overflow-hidden">
-      <div class="max-w-4xl mx-auto px-6 text-center mb-16">
+      <div class="max-w-5xl mx-auto px-6 text-center mb-16">
         <p class="text-gold text-sm uppercase tracking-[0.3em] mb-6" data-aos="fade-up">Based in Bengaluru</p>
         <h2 class="font-display text-5xl sm:text-6xl md:text-7xl text-white mb-8" data-aos="fade-up" data-aos-delay="100">
-          One Studio.<br><span class="text-white/40">One City.</span>
+          Where in Bengaluru<br><span class="text-white/40">are you?</span>
         </h2>
         <p class="text-white/60 text-xl max-w-2xl mx-auto" data-aos="fade-up" data-aos-delay="200">
-          We're a local Bengaluru team — hands-on, face-to-face, and rooted in the Garden City. If your brand is here, we're right around the corner.
+          Tap a neighbourhood — we'll come to you. Local team, hands-on, face-to-face.
         </p>
       </div>
 
       
-      <div class="clients-marquee-viewport py-10 border-y border-white/5" data-aos="fade-up" data-aos-delay="300">
-        <div class="clients-marquee-track">
-
-          <div class="cities-slot">Indiranagar</div>
-          <div class="cities-slot">Koramangala</div>
-          <div class="cities-slot">HSR Layout</div>
-          <div class="cities-slot">Whitefield</div>
-          <div class="cities-slot">MG Road</div>
-          <div class="cities-slot">Jayanagar</div>
-          <div class="cities-slot">Electronic City</div>
-          <div class="cities-slot">Frazer Town</div>
-          <div class="cities-slot">JP Nagar</div>
-          <div class="cities-slot">Rajajinagar</div>
-          <div class="cities-slot">…and wherever you are in Bengaluru</div>
+      <div class="max-w-md mx-auto px-6" data-aos="fade-up" data-aos-delay="300">
+        <div id="bengaluru-radar" class="relative aspect-square w-full mx-auto" role="application" aria-label="Interactive map of Bengaluru. Select a neighbourhood and the Zenny Studios pin travels to it.">
 
           
-          <div class="cities-slot">Indiranagar</div>
-          <div class="cities-slot">Koramangala</div>
-          <div class="cities-slot">HSR Layout</div>
-          <div class="cities-slot">Whitefield</div>
-          <div class="cities-slot">MG Road</div>
-          <div class="cities-slot">Jayanagar</div>
-          <div class="cities-slot">Electronic City</div>
-          <div class="cities-slot">Frazer Town</div>
-          <div class="cities-slot">JP Nagar</div>
-          <div class="cities-slot">Rajajinagar</div>
-          <div class="cities-slot">…and wherever you are in Bengaluru</div>
+          <div class="absolute inset-0 rounded-full border border-white/10"></div>
+          <div class="absolute inset-[15%] rounded-full border border-white/10"></div>
+          <div class="absolute inset-[30%] rounded-full border border-white/10"></div>
+          <div class="absolute inset-[45%] rounded-full border border-white/10"></div>
+
+          
+          <div class="absolute left-0 right-0 top-1/2 h-px bg-white/5"></div>
+          <div class="absolute top-0 bottom-0 left-1/2 w-px bg-white/5"></div>
+
+          
+          <div class="radar-sweep absolute inset-0 rounded-full" aria-hidden="true"></div>
+
+          
+          <div id="studio-pin" class="radar-pin absolute z-10" style="left:50%;top:50%" aria-hidden="true">
+            <span class="radar-pin-pulse"></span>
+            <span class="radar-pin-dot"></span>
+            <span class="radar-pin-label">Zenny Studios</span>
+          </div>
+
+          
+          <button type="button" class="radar-dot" style="left:76%;top:38%" data-name="Indiranagar"><span class="radar-dot-label">Indiranagar</span></button>
+          <button type="button" class="radar-dot" style="left:65%;top:60%" data-name="Koramangala"><span class="radar-dot-label">Koramangala</span></button>
+          <button type="button" class="radar-dot" style="left:60%;top:72%" data-name="HSR Layout"><span class="radar-dot-label">HSR Layout</span></button>
+          <button type="button" class="radar-dot" style="left:84%;top:44%" data-name="Whitefield"><span class="radar-dot-label">Whitefield</span></button>
+          <button type="button" class="radar-dot" style="left:60%;top:30%" data-name="MG Road"><span class="radar-dot-label">MG Road</span></button>
+          <button type="button" class="radar-dot" style="left:36%;top:68%" data-name="Jayanagar"><span class="radar-dot-label">Jayanagar</span></button>
+          <button type="button" class="radar-dot" style="left:48%;top:86%" data-name="Electronic City"><span class="radar-dot-label">Electronic City</span></button>
+          <button type="button" class="radar-dot" style="left:52%;top:16%" data-name="Frazer Town"><span class="radar-dot-label">Frazer Town</span></button>
+          <button type="button" class="radar-dot" style="left:28%;top:62%" data-name="JP Nagar"><span class="radar-dot-label">JP Nagar</span></button>
+          <button type="button" class="radar-dot" style="left:18%;top:50%" data-name="Rajajinagar"><span class="radar-dot-label">Rajajinagar</span></button>
 
         </div>
-      </div>
 
-      <div class="max-w-4xl mx-auto px-6 text-center mt-16" data-aos="fade-up">
-        <a href="#contact" class="magnetic-btn inline-block bg-gold text-dark px-14 py-6 text-xl font-bold hover:bg-white transition-all duration-300 hover:scale-105 transform">
-          Send A Message &rarr;
-        </a>
+        <p id="radar-status" class="mt-8 text-center text-white/60 text-lg" aria-live="polite">
+          Pick a neighbourhood — the pin will come to you.
+        </p>
       </div>
     </section>
   </main>
@@ -769,6 +774,27 @@
         submitText.textContent = 'Send It \u2192';
       }
     });
+
+    // Bengaluru radar — pin travels to the selected neighbourhood
+    const radar = document.getElementById('bengaluru-radar');
+    if (radar) {
+      const pin = document.getElementById('studio-pin');
+      const status = document.getElementById('radar-status');
+      const dots = radar.querySelectorAll('.radar-dot');
+
+      dots.forEach(dot => {
+        dot.addEventListener('click', () => {
+          const left = dot.style.left;
+          const top = dot.style.top;
+          pin.style.left = left;
+          pin.style.top = top;
+          dots.forEach(d => d.classList.remove('active'));
+          dot.classList.add('active');
+          status.textContent = "On our way to " + dot.dataset.name + " — see you soon.";
+          status.classList.add('text-gold');
+        });
+      });
+    }
   </script>
 </body>
 </html>
