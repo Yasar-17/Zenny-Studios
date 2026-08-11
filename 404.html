@@ -6,8 +6,8 @@
   <meta name="color-scheme" content="dark light">
   <meta name="theme-color" content="#0a0a0a">
   <meta name="robots" content="noindex, follow">
-  <meta name="description" content="404 — page not found. Zenny Studios. You're off the map, not out of the game.">
-  <title>404 | Off The Map — Zenny Studios</title>
+  <meta name="description" content="404 ï¿½ page not found. Zenny Studios. You're off the map, not out of the game.">
+  <title>404 | Off The Map ï¿½ Zenny Studios</title>
   <link rel="apple-touch-icon" href="assets/images/Zenny_Studios_Logo/ZennyStudios_logo.png">
   <link rel="icon" href="assets/images/Zenny_Studios_Logo/ZennyStudios_logo.png">
 
@@ -55,7 +55,7 @@
       50% { transform: translateY(-22px) rotate(8deg); }
     }
 
-    /* Giant interactive 404 — parallax split digits */
+    /* Giant interactive 404 ï¿½ parallax split digits */
     .error-stack {
       display: flex;
       align-items: center;
@@ -97,7 +97,7 @@
       text-shadow: 0 0 40px rgba(245, 197, 24, 0.35);
     }
 
-    /* Status log — typed */
+    /* Status log ï¿½ typed */
     .status-log {
       font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
       font-size: 0.72rem;
@@ -131,9 +131,76 @@
     .route .arrow { transition: transform 0.3s ease; }
     .route:hover .arrow { transform: translateX(6px); }
 
+    /* Radar sweep behind digits */
+    .radar {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 92vmin;
+      height: 92vmin;
+      transform: translate(-50%, -50%);
+      border-radius: 50%;
+      z-index: -1;
+      background: conic-gradient(from 0deg, rgba(245,197,24,0.16) 0deg, rgba(245,197,24,0.05) 60deg, transparent 120deg);
+      -webkit-mask-image: radial-gradient(circle, rgba(0,0,0,1) 0%, rgba(0,0,0,0.35) 55%, transparent 70%);
+      mask-image: radial-gradient(circle, rgba(0,0,0,1) 0%, rgba(0,0,0,0.35) 55%, transparent 70%);
+      animation: radar-spin 6s linear infinite;
+      pointer-events: none;
+    }
+    .radar-ring {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 92vmin;
+      height: 92vmin;
+      transform: translate(-50%, -50%);
+      border: 1px solid rgba(245,197,24,0.12);
+      border-radius: 50%;
+      z-index: -1;
+      pointer-events: none;
+    }
+    .radar-ring::before {
+      content: '';
+      position: absolute;
+      inset: 25%;
+      border: 1px solid rgba(245,197,24,0.10);
+      border-radius: 50%;
+    }
+    .radar-ring::after {
+      content: '';
+      position: absolute;
+      inset: 50%;
+      border: 1px solid rgba(245,197,24,0.08);
+      border-radius: 50%;
+    }
+    @keyframes radar-spin { to { transform: translate(-50%, -50%) rotate(360deg); } }
+
+    /* Signal strength meter */
+    .signal-meter {
+      display: flex;
+      align-items: flex-end;
+      gap: 3px;
+      height: 1.5rem;
+      padding: 0 0.5rem;
+      cursor: pointer;
+    }
+    .signal-bar {
+      width: 4px;
+      height: 0.4rem;
+      background: rgba(245,197,24,0.2);
+      border-radius: 1px;
+      transition: height 0.15s ease, background 0.2s ease, box-shadow 0.2s ease;
+    }
+    .signal-bar.s1 { height: 0.6rem; }
+    .signal-bar.s2 { height: 0.8rem; }
+    .signal-bar.s3 { height: 1rem; }
+    .signal-bar.s4 { height: 1.2rem; }
+    .signal-bar.lit { background: #F5C518; box-shadow: 0 0 8px rgba(245,197,24,0.5); }
+    .signal-bar.boost { background: #00e0ff; box-shadow: 0 0 10px rgba(0,224,255,0.7); }
+
     /* Reduced motion */
     @media (prefers-reduced-motion: reduce) {
-      .shape, .status-log .caret { animation: none !important; }
+      .shape, .status-log .caret, .radar, .radar-ring { animation: none !important; }
       .error-digit, .route { transition: none !important; }
     }
   </style>
@@ -188,8 +255,12 @@
       <div class="relative z-10 max-w-5xl mx-auto px-6 text-center">
 
         <p class="text-gold text-xs md:text-sm uppercase tracking-[0.4em] font-medium mb-8" data-eyebrow>
-          Signal Lost · 0x404
+          Signal Lost ï¿½ 0x404
         </p>
+
+        <!-- radar sweep -->
+        <div class="radar" aria-hidden="true"></div>
+        <div class="radar-ring" aria-hidden="true"></div>
 
         <!-- interactive 404 stack -->
         <div class="error-stack" id="errorStack" aria-label="Error 404">
@@ -207,9 +278,22 @@
           <span data-typed></span><span class="caret">&nbsp;</span>
         </p>
 
+        <!-- live signal meter -->
+        <div class="flex items-center justify-center gap-3 mb-10" role="status" aria-label="Signal strength status">
+          <span class="text-[10px] uppercase tracking-[0.3em] text-white/40">Signal</span>
+          <div class="signal-meter" id="signalMeter" title="Click to boost signal">
+            <span class="signal-bar s0"></span>
+            <span class="signal-bar s1"></span>
+            <span class="signal-bar s2"></span>
+            <span class="signal-bar s3"></span>
+            <span class="signal-bar s4"></span>
+          </div>
+          <span class="status-log text-white/40" id="signalLabel">LOST</span>
+        </div>
+
         <p class="text-white/60 text-lg md:text-xl max-w-xl mx-auto mb-10">
           You're off the map. Most brands settle there. You won't. <br class="hidden sm:block">
-          Pick a route back — the work continues with or without this page.
+          Pick a route back ï¿½ the work continues with or without this page.
         </p>
 
         <div class="flex flex-col sm:flex-row gap-5 justify-center">
@@ -309,7 +393,7 @@
         <img src="assets/images/Zenny_Studios_Logo/ZennyStudios_logo.png" alt="Zenny Studios" class="w-8 h-8 rounded-full object-cover group-hover:scale-110 transition-transform duration-300" loading="lazy" width="738" height="708" decoding="async">
         <span class="font-display text-xl text-white group-hover:text-gold transition-colors duration-300">Zenny Studios</span>
       </a>
-      <p class="text-white/30 text-sm text-center">© 2026 Zenny Studios · Three Steps Ahead.</p>
+      <p class="text-white/30 text-sm text-center">ï¿½ 2026 Zenny Studios ï¿½ Three Steps Ahead.</p>
       <p class="font-display text-gold text-base tracking-[0.1em]">Even the dead ends lead somewhere.</p>
     </div>
   </footer>
@@ -403,6 +487,44 @@
           s.style.marginTop = (y * speed * 1200) + 'px';
         });
       }, { passive: true });
+    }
+
+    // ===== Radar + live signal meter =====
+    const meter = document.getElementById('signalMeter');
+    const signalLabel = document.getElementById('signalLabel');
+    const barEls = meter ? Array.from(meter.querySelectorAll('.signal-bar')) : [];
+    const signalStates = [
+      { label: 'LOST', level: 0 },
+      { label: 'FAINT', level: 1 },
+      { label: 'WEAK', level: 2 },
+      { label: 'OK', level: 3 },
+      { label: 'STRONG', level: 4 }
+    ];
+
+    function renderSignal(state) {
+      if (!meter) return;
+      barEls.forEach((b, i) => b.classList.toggle('lit', i < state.level));
+      signalLabel.textContent = state.label;
+    }
+
+    if (meter) {
+      meter.addEventListener('click', () => {
+        renderSignal({ label: 'BOOSTED', level: 5 });
+        barEls.forEach(b => b.classList.add('boost'));
+        setTimeout(() => {
+          barEls.forEach(b => b.classList.remove('boost'));
+          if (!reduceMotion) renderSignal(signalStates[Math.floor(Math.random() * signalStates.length)]);
+        }, 900);
+      });
+      if (!reduceMotion) {
+        let idx = 1;
+        setInterval(() => {
+          idx = Math.max(0, Math.min(signalStates.length - 1, idx + Math.floor(Math.random() * 3) - 1));
+          renderSignal(signalStates[idx]);
+        }, 1800);
+      } else {
+        renderSignal(signalStates[3]);
+      }
     }
 
     // ===== Typed status log =====
