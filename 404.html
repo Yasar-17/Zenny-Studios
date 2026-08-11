@@ -140,6 +140,46 @@
     .route .arrow { transition: transform 0.3s ease; }
     .route:hover .arrow { transform: translateX(6px); }
 
+    /* Escape route 3D tilt + teleport */
+    .route { transform-style: preserve-3d; will-change: transform; }
+    .route .route-content { transition: opacity 0.25s ease, filter 0.25s ease; }
+    .route-coord {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.16em;
+      color: rgba(245, 197, 24, 0.55);
+      text-transform: uppercase;
+    }
+    .route .teleport-tag {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 0.62rem;
+      letter-spacing: 0.22em;
+      color: #F5C518;
+      white-space: nowrap;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s ease;
+    }
+    .route .teleport-track {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 3px;
+      background: #F5C518;
+      box-shadow: 0 0 12px rgba(245, 197, 24, 0.6);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .route.teleporting .route-content { opacity: 0.2; filter: blur(2px); }
+    .route.teleporting .teleport-tag { opacity: 1; }
+    .route.teleporting .teleport-track { transform: scaleX(1); }
+
     /* Radar sweep behind digits */
     .radar {
       position: absolute;
@@ -344,39 +384,59 @@
 
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
           <a href="index.html" class="route bg-card border border-white/10 p-7 block group cursor-pointer">
-            <div class="flex items-center justify-between mb-6">
-              <span class="text-gold text-xs uppercase tracking-[0.2em]">01</span>
-              <svg class="arrow w-5 h-5 text-white/40 group-hover:text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+            <div class="route-content">
+              <div class="flex items-center justify-between mb-6">
+                <span class="text-gold text-xs uppercase tracking-[0.2em]">01</span>
+                <span class="route-coord">N 12.97 / E 77.59</span>
+                <svg class="arrow w-5 h-5 text-white/40 group-hover:text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+              </div>
+              <h3 class="font-display text-3xl md:text-4xl text-white group-hover:text-gold transition-colors duration-300">Home</h3>
+              <p class="text-white/40 text-sm mt-2">Where the manifesto lives.</p>
             </div>
-            <h3 class="font-display text-3xl md:text-4xl text-white group-hover:text-gold transition-colors duration-300">Home</h3>
-            <p class="text-white/40 text-sm mt-2">Where the manifesto lives.</p>
+            <span class="teleport-tag">CALIBRATING ROUTE</span>
+            <div class="teleport-track" aria-hidden="true"></div>
           </a>
 
           <a href="work.html" class="route bg-card border border-white/10 p-7 block group cursor-pointer">
-            <div class="flex items-center justify-between mb-6">
-              <span class="text-gold text-xs uppercase tracking-[0.2em]">02</span>
-              <svg class="arrow w-5 h-5 text-white/40 group-hover:text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+            <div class="route-content">
+              <div class="flex items-center justify-between mb-6">
+                <span class="text-gold text-xs uppercase tracking-[0.2em]">02</span>
+                <span class="route-coord">PORT // 007</span>
+                <svg class="arrow w-5 h-5 text-white/40 group-hover:text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+              </div>
+              <h3 class="font-display text-3xl md:text-4xl text-white group-hover:text-gold transition-colors duration-300">Work</h3>
+              <p class="text-white/40 text-sm mt-2">Proof over promises.</p>
             </div>
-            <h3 class="font-display text-3xl md:text-4xl text-white group-hover:text-gold transition-colors duration-300">Work</h3>
-            <p class="text-white/40 text-sm mt-2">Proof over promises.</p>
+            <span class="teleport-tag">CALIBRATING ROUTE</span>
+            <div class="teleport-track" aria-hidden="true"></div>
           </a>
 
           <a href="services.html" class="route bg-card border border-white/10 p-7 block group cursor-pointer">
-            <div class="flex items-center justify-between mb-6">
-              <span class="text-gold text-xs uppercase tracking-[0.2em]">03</span>
-              <svg class="arrow w-5 h-5 text-white/40 group-hover:text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+            <div class="route-content">
+              <div class="flex items-center justify-between mb-6">
+                <span class="text-gold text-xs uppercase tracking-[0.2em]">03</span>
+                <span class="route-coord">ARSENAL // 24/7</span>
+                <svg class="arrow w-5 h-5 text-white/40 group-hover:text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+              </div>
+              <h3 class="font-display text-3xl md:text-4xl text-white group-hover:text-gold transition-colors duration-300">Services</h3>
+              <p class="text-white/40 text-sm mt-2">The arsenal, unpacked.</p>
             </div>
-            <h3 class="font-display text-3xl md:text-4xl text-white group-hover:text-gold transition-colors duration-300">Services</h3>
-            <p class="text-white/40 text-sm mt-2">The arsenal, unpacked.</p>
+            <span class="teleport-tag">CALIBRATING ROUTE</span>
+            <div class="teleport-track" aria-hidden="true"></div>
           </a>
 
           <a href="contact.html" class="route bg-card border border-white/10 p-7 block group cursor-pointer">
-            <div class="flex items-center justify-between mb-6">
-              <span class="text-gold text-xs uppercase tracking-[0.2em]">04</span>
-              <svg class="arrow w-5 h-5 text-white/40 group-hover:text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+            <div class="route-content">
+              <div class="flex items-center justify-between mb-6">
+                <span class="text-gold text-xs uppercase tracking-[0.2em]">04</span>
+                <span class="route-coord">DIRECT // LINK_UP</span>
+                <svg class="arrow w-5 h-5 text-white/40 group-hover:text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+              </div>
+              <h3 class="font-display text-3xl md:text-4xl text-white group-hover:text-gold transition-colors duration-300">Contact</h3>
+              <p class="text-white/40 text-sm mt-2">Start something bold.</p>
             </div>
-            <h3 class="font-display text-3xl md:text-4xl text-white group-hover:text-gold transition-colors duration-300">Contact</h3>
-            <p class="text-white/40 text-sm mt-2">Start something bold.</p>
+            <span class="teleport-tag">CALIBRATING ROUTE</span>
+            <div class="teleport-track" aria-hidden="true"></div>
           </a>
         </div>
       </div>
@@ -605,6 +665,29 @@
         renderSignal(signalStates[3]);
       }
     }
+
+    // ===== Escape routes: 3D tilt + teleport on click =====
+    const routes = document.querySelectorAll('.route');
+    const hoverOK = window.matchMedia('(hover: hover)').matches;
+
+    routes.forEach(card => {
+      card.addEventListener('mousemove', (e) => {
+        if (!hoverOK || reduceMotion) return;
+        const r = card.getBoundingClientRect();
+        const rx = (e.clientX - r.left) / r.width - 0.5;
+        const ry = (e.clientY - r.top) / r.height - 0.5;
+        card.style.transform = `perspective(800px) rotateY(${rx * 8}deg) rotateX(${-ry * 8}deg) translateY(-4px)`;
+      });
+      card.addEventListener('mouseleave', () => {
+        card.style.transform = '';
+      });
+      card.addEventListener('click', (e) => {
+        if (card.classList.contains('teleporting')) { e.preventDefault(); return; }
+        e.preventDefault();
+        card.classList.add('teleporting');
+        setTimeout(() => { window.location.href = card.getAttribute('href'); }, 450);
+      });
+    });
 
     // ===== Typed status log =====
     const typedEl = document.querySelector('[data-typed]');
