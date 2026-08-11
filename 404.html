@@ -247,6 +247,43 @@
     .signal-bar.lit { background: #F5C518; box-shadow: 0 0 8px rgba(245,197,24,0.5); }
     .signal-bar.boost { background: #00e0ff; box-shadow: 0 0 10px rgba(0,224,255,0.7); }
 
+    /* Particle burst on digit click */
+    .particle {
+      position: fixed;
+      z-index: 9999;
+      pointer-events: none;
+      width: 8px;
+      height: 8px;
+      border-radius: 2px;
+      animation: particle-burst 0.8s ease-out forwards;
+    }
+    @keyframes particle-burst {
+      to {
+        transform: translate(var(--dx), var(--dy)) rotate(360deg) scale(0);
+        opacity: 0;
+      }
+    }
+
+    /* Konami recovery overlay */
+    .recovered-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 60;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(5, 5, 5, 0.92);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.35s ease;
+    }
+    .recovered-overlay.show { opacity: 1; pointer-events: auto; }
+    @keyframes recoveredPulse {
+      0%, 100% { text-shadow: 0 0 20px rgba(245, 197, 24, 0); }
+      50% { text-shadow: 0 0 40px rgba(245, 197, 24, 0.6), 0 0 80px rgba(245, 197, 24, 0.3); }
+    }
+    .recovered-overlay .recovered-pulse { animation: recoveredPulse 1.2s ease-in-out infinite; }
+
     /* Reduced motion */
     @media (prefers-reduced-motion: reduce) {
       .shape, .status-log .caret, .radar, .radar-ring { animation: none !important; }
@@ -467,6 +504,15 @@
     </div>
   </footer>
 
+  <!-- Konami recovery overlay -->
+  <div class="recovered-overlay" id="recoveredOverlay" role="dialog" aria-label="System recovered" aria-hidden="true">
+    <div class="text-center px-6">
+      <p class="font-display text-gold text-xl tracking-[0.3em] mb-3 recovered-pulse">SYSTEM RECOVERED</p>
+      <p class="status-log text-white/60 mb-10">ROUTE_REBUILT // welcome_back_operator</p>
+      <a href="index.html" class="magnetic-btn inline-block bg-gold text-dark px-10 py-4 font-semibold">Back to Home</a>
+    </div>
+  </div>
+
   <script>
     // ===== Custom cursor =====
     const cursorDot = document.querySelector('.cursor-dot');
@@ -570,7 +616,8 @@
       });
 
       // Glitch on click (easter egg)
-      stack.addEventListener('click', () => {
+      stack.addEventListener('click', (e) => {
+        burstAt(e.clientX, e.clientY);
         stack.classList.add('glitch');
         let n = 0;
         const tick = setInterval(() => {
@@ -611,6 +658,69 @@
           d.classList.add('wrong');
           setTimeout(() => d.classList.remove('wrong'), 220);
         });
+      }
+    });
+
+    // ===== Particle burst =====
+    function burstAt(x, y) {
+      if (reduceMotion) return;
+      const colors = ['#F5C518', '#ff3b3b', '#00e0ff', '#ffffff'];
+      const count = 20;
+      for (let i = 0; i < count; i++) {
+        const p = document.createElement('span');
+        p.className = 'particle';
+        const angle = (Math.PI * 2 * i) / count + Math.random() * 0.5;
+        const dist = 40 + Math.random() * 80;
+        const size = 4 + Math.random() * 6;
+        p.style.left = x + 'px';
+        p.style.top = y + 'px';
+        p.style.width = size + 'px';
+        p.style.height = size + 'px';
+        p.style.setProperty('--dx', Math.cos(angle) * dist + 'px');
+        p.style.setProperty('--dy', Math.sin(angle) * dist + 'px');
+        p.style.background = colors[i % colors.length];
+        document.body.appendChild(p);
+        p.addEventListener('animationend', () => p.remove());
+      }
+    }
+
+    // ===== Konami code: recover the route =====
+    const konamiSeq = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
+    let konamiPos = 0;
+    const recoveredOverlay = document.getElementById('recoveredOverlay');
+    let recovered = false;
+
+    function recoverSystem() {
+      if (recovered) return;
+      recovered = true;
+      digits.forEach((d, i) => {
+        d.classList.add('pressed');
+        d.style.setProperty('transition-delay', (i * 120) + 'ms');
+      });
+      setTimeout(() => digits.forEach(d => {
+        d.classList.remove('pressed');
+        d.style.transitionDelay = '';
+      }), 1400);
+      if (recoveredOverlay) {
+        recoveredOverlay.setAttribute('aria-hidden', 'false');
+        recoveredOverlay.classList.add('show');
+        setTimeout(() => {
+          recoveredOverlay.classList.remove('show');
+          recoveredOverlay.setAttribute('aria-hidden', 'true');
+        }, 4500);
+      }
+    }
+
+    document.addEventListener('keydown', (e) => {
+      const k = e.key.length === 1 ? e.key.toLowerCase() : e.key;
+      if (k === konamiSeq[konamiPos]) {
+        konamiPos++;
+        if (konamiPos === konamiSeq.length) {
+          konamiPos = 0;
+          recoverSystem();
+        }
+      } else {
+        konamiPos = (k === konamiSeq[0]) ? 1 : 0;
       }
     });
 
@@ -696,7 +806,8 @@
       'SRC // zenny_studio/routes.map',
       'TRACE // last_known_position: undefined',
       'REASON // this_path_was_never_built',
-      'NEXT // choose_an_escape_route'
+      'NEXT // choose_an_escape_route',
+      'HINT // ↑↑↓↓←→←→ba'
     ];
     if (typedEl && !reduceMotion) {
       let li = 0, ci = 0, deleting = false;
