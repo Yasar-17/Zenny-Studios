@@ -96,6 +96,15 @@
       -webkit-text-stroke-color: #F5C518;
       text-shadow: 0 0 40px rgba(245, 197, 24, 0.35);
     }
+    .error-digit.pressed {
+      color: #F5C518;
+      -webkit-text-stroke-color: #F5C518;
+      text-shadow: 0 0 60px rgba(245, 197, 24, 0.8);
+    }
+    .error-digit.wrong {
+      -webkit-text-stroke-color: #ff3b3b;
+      text-shadow: 0 0 40px rgba(255, 59, 59, 0.6);
+    }
 
     /* Status log � typed */
     .status-log {
@@ -311,7 +320,7 @@
         </div>
 
         <p class="text-white/30 text-xs mt-8">
-          Try clicking the digits. They bite back.
+          Try clicking the digits. Or type <span class="text-gold">404</span>.
         </p>
       </div>
 
@@ -443,6 +452,22 @@
     const hero = document.getElementById('hero');
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+    const digitState = Array.from(digits).map(() => ({
+      px: 0, py: 0,   // parallax offset
+      ry: 0, rx: 0,   // parallax rotation
+      tx: 0, ty: 0,   // per-digit hover tilt
+      gx: 0, gy: 0    // glitch jitter
+    }));
+
+    function renderDigits() {
+      digits.forEach((d, i) => {
+        const s = digitState[i];
+        d.style.transform =
+          `translate(${s.px + s.tx + s.gx}px, ${s.py + s.ty + s.gy}px)` +
+          ` rotateY(${s.ry}deg) rotateX(${s.rx}deg)`;
+      });
+    }
+
     if (stack && hero && !reduceMotion) {
       hero.addEventListener('mousemove', (e) => {
         const r = hero.getBoundingClientRect();
@@ -450,11 +475,38 @@
         const cy = (e.clientY - r.top - r.height / 2) / r.height;
         digits.forEach((d, i) => {
           const depth = (i - 1) * 24;
-          d.style.transform = `translate(${cx * depth}px, ${cy * depth}px) rotateY(${cx * 6}deg) rotateX(${-cy * 6}deg)`;
+          const s = digitState[i];
+          s.px = cx * depth;
+          s.py = cy * depth;
+          s.ry = cx * 6;
+          s.rx = -cy * 6;
         });
+        renderDigits();
       });
       hero.addEventListener('mouseleave', () => {
-        digits.forEach(d => d.style.transform = '');
+        digits.forEach((d, i) => {
+          const s = digitState[i];
+          s.px = 0; s.py = 0; s.ry = 0; s.rx = 0;
+        });
+        renderDigits();
+      });
+
+      // Per-digit hover tilt
+      digits.forEach((d, i) => {
+        d.addEventListener('mousemove', (e) => {
+          const r = d.getBoundingClientRect();
+          const dx = (e.clientX - r.left - r.width / 2) / (r.width / 2);
+          const dy = (e.clientY - r.top - r.height / 2) / (r.height / 2);
+          const s = digitState[i];
+          s.tx = dx * 12;
+          s.ty = dy * 12;
+          renderDigits();
+        });
+        d.addEventListener('mouseleave', () => {
+          const s = digitState[i];
+          s.tx = 0; s.ty = 0;
+          renderDigits();
+        });
       });
 
       // Glitch on click (easter egg)
@@ -462,18 +514,45 @@
         stack.classList.add('glitch');
         let n = 0;
         const tick = setInterval(() => {
-          digits.forEach(d => {
-            d.style.transform = `translate(${(Math.random()-0.5)*10}px, ${(Math.random()-0.5)*8}px)`;
+          digits.forEach((d, i) => {
+            const s = digitState[i];
+            s.gx = (Math.random() - 0.5) * 10;
+            s.gy = (Math.random() - 0.5) * 8;
           });
+          renderDigits();
           n++;
           if (n > 5) {
             clearInterval(tick);
             stack.classList.remove('glitch');
-            digits.forEach(d => d.style.transform = '');
+            digits.forEach((d, i) => { digitState[i].gx = 0; digitState[i].gy = 0; });
+            renderDigits();
           }
         }, 60);
       });
     }
+
+    // ===== Keyboard easter egg: type "404" =====
+    const keySeq = ['4', '0', '4'];
+    let keyPos = 0;
+    document.addEventListener('keydown', (e) => {
+      const k = e.key;
+      if (k === keySeq[keyPos]) {
+        const el = digits[keyPos];
+        if (el) { el.classList.add('pressed'); setTimeout(() => el.classList.remove('pressed'), 260); }
+        keyPos++;
+        if (keyPos === keySeq.length) {
+          keyPos = 0;
+          stack.classList.add('glitch');
+          setTimeout(() => stack.classList.remove('glitch'), 320);
+        }
+      } else if (/^[0-9]$/.test(k)) {
+        keyPos = 0;
+        digits.forEach(d => {
+          d.classList.add('wrong');
+          setTimeout(() => d.classList.remove('wrong'), 220);
+        });
+      }
+    });
 
     // ===== Parallax ambient shapes (mouse) =====
     if (!reduceMotion) {
