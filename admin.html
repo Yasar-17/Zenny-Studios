@@ -75,7 +75,7 @@
       50% { transform: translateY(-22px) rotate(8deg); }
     }
 
-    /* Giant ghost letter � gold stroke */
+    /* Giant ghost letter — gold stroke */
     .ghost-letter {
       font-family: 'Bebas Neue', cursive;
       color: transparent;
@@ -89,7 +89,7 @@
       -webkit-text-stroke-color: rgba(245, 197, 24, 0.6);
     }
 
-    /* Status log � typed terminal */
+    /* Status log — typed terminal */
     .status-log {
       font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
       font-size: 0.72rem;
@@ -818,7 +818,7 @@
     document.getElementById('markAllReadBtn').addEventListener('click', function() {
       const unreadCount = enquiriesCache.filter(e => !e.is_read).length;
       if (unreadCount === 0) {
-        showToast('Nothing to mark � all caught up.', 'info');
+        showToast('Nothing to mark — all caught up.', 'info');
         return;
       }
       markAllRead();
