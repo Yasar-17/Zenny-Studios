@@ -483,7 +483,7 @@
     function onScroll() {
       const scrollTop = window.scrollY;
       const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-      scrollProgress.style.width = (scrollTop / docHeight) * 100 + '%';
+      scrollProgress.style.width = (docHeight > 0 ? (scrollTop / docHeight) * 100 : 0) + '%';
       if (scrollTop > 50) {
         navbar.classList.add('backdrop-blur-md', 'bg-dark/90');
       } else {

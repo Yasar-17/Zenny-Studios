@@ -833,7 +833,7 @@
     const sp = document.getElementById('scrollProgress');
     window.addEventListener('scroll', () => {
       const d = document.documentElement.scrollHeight - window.innerHeight;
-      sp.style.width = ((window.scrollY / d) * 100) + '%';
+      sp.style.width = ((d > 0 ? window.scrollY / d : 0) * 100) + '%';
     }, { passive: true });
   </script>
 </body>

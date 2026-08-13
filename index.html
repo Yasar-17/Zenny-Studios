@@ -1089,7 +1089,7 @@
     window.addEventListener('scroll', () => {
       const scrollTop = window.scrollY;
       const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-      const scrollPercent = (scrollTop / docHeight) * 100;
+      const scrollPercent = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
       scrollProgress.style.width = scrollPercent + '%';
     });
 
@@ -1197,37 +1197,43 @@
     const statNumbers = document.querySelectorAll('.stat-number');
     let hasAnimated = false;
 
-    const animateStats = () => {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
       statNumbers.forEach(stat => {
-        const target = parseInt(stat.getAttribute('data-target'));
-        const duration = 2000;
-        const increment = target / (duration / 16);
-        let current = 0;
+        stat.textContent = parseInt(stat.getAttribute('data-target'), 10).toLocaleString();
+      });
+    } else {
+      const animateStats = () => {
+        statNumbers.forEach(stat => {
+          const target = parseInt(stat.getAttribute('data-target'));
+          const duration = 2000;
+          const increment = target / (duration / 16);
+          let current = 0;
 
-        const updateCount = () => {
-          current += increment;
-          if (current < target) {
-            stat.textContent = Math.floor(current).toLocaleString();
-            requestAnimationFrame(updateCount);
-          } else {
-            stat.textContent = target.toLocaleString();
+          const updateCount = () => {
+            current += increment;
+            if (current < target) {
+              stat.textContent = Math.floor(current).toLocaleString();
+              requestAnimationFrame(updateCount);
+            } else {
+              stat.textContent = target.toLocaleString();
+            }
+          };
+
+          updateCount();
+        });
+      };
+
+      const statsObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting && !hasAnimated) {
+            hasAnimated = true;
+            animateStats();
           }
-        };
+        });
+      }, { threshold: 0.5 });
 
-        updateCount();
-      });
-    };
-
-    const statsObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting && !hasAnimated) {
-          hasAnimated = true;
-          animateStats();
-        }
-      });
-    }, { threshold: 0.5 });
-
-    statsObserver.observe(statsSection);
+      statsObserver.observe(statsSection);
+    }
 
     // Smooth reveal on scroll for text
     const revealElements = document.querySelectorAll('[data-aos]');
