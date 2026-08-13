@@ -700,7 +700,7 @@
     window.addEventListener('scroll', () => {
       const scrollTop = window.scrollY;
       const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-      scrollProgress.style.width = (scrollTop / docHeight) * 100 + '%';
+      scrollProgress.style.width = (docHeight > 0 ? (scrollTop / docHeight) * 100 : 0) + '%';
     });
 
     // Navbar scroll effect
@@ -777,9 +777,16 @@
       const statusEl = document.getElementById('hoursStatus');
       const statusText = document.getElementById('hoursStatusText');
       if (!statusEl || !statusText) return;
-      const now = new Date(new Date().toLocaleString('en-US', { timeZone: 'Asia/Kolkata' }));
-      const day = now.getDay();
-      const hour = now.getHours() + now.getMinutes() / 60;
+      const parts = new Intl.DateTimeFormat('en-US', {
+        timeZone: 'Asia/Kolkata',
+        weekday: 'short',
+        hour: '2-digit',
+        minute: '2-digit',
+        hourCycle: 'h23'
+      }).formatToParts(new Date());
+      const value = (t) => (parts.find(p => p.type === t) || {}).value;
+      const day = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].indexOf(value('weekday'));
+      const hour = Number(value('hour')) + Number(value('minute')) / 60;
       const isOpen = day >= 1 && day <= 5 && hour >= 10 && hour < 19;
       statusText.textContent = isOpen ? 'Open now' : 'Closed now';
       statusEl.classList.toggle('is-open', isOpen);
