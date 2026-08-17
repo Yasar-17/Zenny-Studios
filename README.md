@@ -170,6 +170,7 @@ The enquiry inbox (`admin.html`) and the contact form (`contact.html`) are backe
 3. In **Authentication → Users → Add user**, create the admin account (email + password) that will sign in to `admin.html`.
 4. Copy `.env.example` to `.env` and fill in `SUPABASE_URL`, `SUPABASE_ANON_KEY`, and `SUPABASE_SERVICE_ROLE_KEY`. Locally, `vercel dev` reads `.env` at the project root.
 5. In Vercel, add the same three variables under Project Settings → Environment Variables (for both Production and Preview) — without them every `/api/*` function fails to boot and the admin login shows a server connection error.
+6. *(Recommended)* Add `ADMIN_EMAIL` to the same environment variables so only that account can access the admin inbox endpoints.
 
 > **Security note:** `SUPABASE_SERVICE_ROLE_KEY` bypasses RLS. It is only used server-side in `api/_lib/supabase.js` and must never be exposed to the browser.
 
@@ -180,6 +181,7 @@ The enquiry inbox (`admin.html`) and the contact form (`contact.html`) are backe
 | `SUPABASE_URL` | `api/_lib/supabase.js` | Supabase project URL |
 | `SUPABASE_ANON_KEY` | `api/_lib/supabase.js` | Public anon key (RLS still applies) |
 | `SUPABASE_SERVICE_ROLE_KEY` | `api/_lib/supabase.js` | Server-only key; all enquiry reads/writes (bypasses RLS — never expose it) |
+| `ADMIN_EMAIL` | `api/_lib/auth.js` | Admin allowlist — only this account may access the admin inbox endpoints when set |
 | `HCAPTCHA_SECRET_KEY` | `api/_lib/hcaptcha.js` | Verifies captcha tokens (opt-in — only enforced when the form sends `hcaptcha_token`) |
 
 ---

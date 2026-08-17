@@ -67,6 +67,14 @@ export async function requireAuth(req, res) {
       res.status(401).json({ error: 'Token expired', code: 'TOKEN_EXPIRED' });
       return null;
     }
+    // Defence-in-depth: if ADMIN_EMAIL is configured, only that account may
+    // reach admin endpoints. When unset, the previous behaviour (any valid
+    // Supabase user) is preserved so existing deployments keep working.
+    const adminEmail = process.env.ADMIN_EMAIL;
+    if (adminEmail && data.user.email && data.user.email.toLowerCase() !== adminEmail.toLowerCase()) {
+      res.status(403).json({ error: 'Forbidden', code: 'FORBIDDEN' });
+      return null;
+    }
     return { user: data.user, accessToken };
   } catch {
     res.status(401).json({ error: 'Invalid token', code: 'TOKEN_EXPIRED' });
