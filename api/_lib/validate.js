@@ -1,21 +1,15 @@
 // ===== Input hardening =====
-// Defence in depth: strip HTML tags, then HTML-escape, then enforce field
-// length caps. Also strips C1 / control chars (including NUL) so embedded
-// control bytes cannot confuse downstream consumers or DB drivers.
+// Defence in depth: strip HTML tags, then enforce field length caps. Also
+// strips C1 / control chars (including NUL) so embedded control bytes cannot
+// confuse downstream consumers or DB drivers.
+//
+// NOTE: input is stored as plain text — escaping is the renderer's job
+// (admin.html escapes every field before injecting into the DOM), so storing
+// HTML-escaped values would double-encode text such as "<b>hello</b>".
 
 function stripHtml(str) {
   if (typeof str !== 'string') return '';
   return str.replace(/<[^>]*>/g, '');
-}
-
-function escapeHtml(str) {
-  if (typeof str !== 'string') return '';
-  return str
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;')
-    .replace(/'/g, '&#x27;');
 }
 
 // Remove control chars (0x00-0x1F, 0x7F, and the C1 range 0x80-0x9F),
@@ -28,12 +22,12 @@ function stripControl(str) {
 export function sanitizeInput(data) {
   data = data || {};
   return {
-    name: escapeHtml(stripHtml(stripControl(String(data.name || '')))).trim().slice(0, 100),
-    email: escapeHtml(stripHtml(stripControl(String(data.email || '')))).trim().toLowerCase().slice(0, 254),
-    phone: escapeHtml(stripControl(String(data.phone || ''))).trim().replace(/[^\d+\-\s()]/g, '').slice(0, 20),
-    company: escapeHtml(stripHtml(stripControl(String(data.company || '')))).trim().slice(0, 100),
-    service: escapeHtml(stripHtml(stripControl(String(data.service || '')))).trim().slice(0, 100),
-    message: escapeHtml(stripHtml(stripControl(String(data.message || '')))).trim().slice(0, 5000),
+    name: stripHtml(stripControl(String(data.name || ''))).trim().slice(0, 100),
+    email: stripHtml(stripControl(String(data.email || ''))).trim().toLowerCase().slice(0, 254),
+    phone: stripControl(String(data.phone || '')).trim().replace(/[^\d+\-\s()]/g, '').slice(0, 20),
+    company: stripHtml(stripControl(String(data.company || ''))).trim().slice(0, 100),
+    service: stripHtml(stripControl(String(data.service || ''))).trim().slice(0, 100),
+    message: stripHtml(stripControl(String(data.message || ''))).trim().slice(0, 5000),
   };
 }
 
