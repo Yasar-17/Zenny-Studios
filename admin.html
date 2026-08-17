@@ -132,6 +132,10 @@
     .route:hover { transform: translateY(-2px); border-color: rgba(245, 197, 24, 0.5) !important; }
     .route .arrow { transition: transform 0.3s ease; }
     .route:hover .arrow { transform: translateX(6px); }
+    .route:focus-visible {
+      outline: 2px solid var(--color-gold);
+      outline-offset: 2px;
+    }
 
     .detail-card {
       animation: fadeSlideIn 0.3s ease forwards;
@@ -580,7 +584,7 @@
       emptyState.classList.add('hidden');
 
       container.innerHTML = filtered.map(e => `
-        <div class="route bg-card border ${e.is_read ? 'border-white/10' : 'border-gold/30'} p-5 cursor-pointer group" onclick="viewEnquiry('${e.id}')">
+        <div class="route bg-card border ${e.is_read ? 'border-white/10' : 'border-gold/30'} p-5 cursor-pointer group" role="button" tabindex="0" data-enquiry="${e.id}" aria-label="View enquiry from ${escapeHtml(e.name)}" onclick="viewEnquiry('${e.id}')">
           <div class="flex items-start justify-between gap-4">
             <div class="flex items-start gap-4 min-w-0 flex-1">
               <div class="w-10 h-10 bg-gold/10 border border-gold/20 flex items-center justify-center flex-shrink-0 mt-0.5">
@@ -813,6 +817,15 @@
     document.getElementById('searchInput').addEventListener('input', function() {
       currentSearch = this.value.trim();
       renderEnquiries();
+    });
+
+    document.getElementById('enquiriesList').addEventListener('keydown', function(e) {
+      const row = e.target.closest('[data-enquiry]');
+      if (!row) return;
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        viewEnquiry(row.dataset.enquiry);
+      }
     });
 
     document.getElementById('markAllReadBtn').addEventListener('click', function() {
