@@ -17,7 +17,8 @@
     { "source": "/about", "destination": "/#about", "permanent": true }
   ],
   "rewrites": [
-    { "source": "/projects/:slug", "has": [{ "type": "host", "value": "zennystudios.com" }], "destination": "/projects/:slug.html" }
+    { "source": "/projects/:slug", "has": [{ "type": "host", "value": "zennystudios.com" }], "destination": "/projects/:slug.html" },
+    { "source": "/projects/:slug", "has": [{ "type": "host", "value": "www.zennystudios.com" }], "destination": "/projects/:slug.html" }
   ],
   "headers": [
     {
