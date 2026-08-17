@@ -27,13 +27,3 @@ export function adminClient() {
   }
   return createClient(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY, COMMON_OPTS);
 }
-
-// User-scoped client — binds the caller's access token so RLS authorises per
-// authenticated user. Use for all admin CRUD on the enquiries table.
-export function userClient(accessToken) {
-  if (!accessToken) throw new Error('userClient requires an access token');
-  return createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
-    ...COMMON_OPTS,
-    global: { headers: { Authorization: `Bearer ${accessToken}` } },
-  });
-}
