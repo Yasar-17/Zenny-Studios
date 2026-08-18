@@ -15,24 +15,26 @@
 - **X-Frame-Options: DENY** — prevents clickjacking
 - **Referrer-Policy: strict-origin-when-cross-origin** — limits referrer leakage
 - **Permissions-Policy** — disables camera, microphone, geolocation, and interest-cohort
-- **Content-Security-Policy** — restricts script, style, font, image, and connection sources
+- **Content-Security-Policy** — restricts script, style, font, image, and connection sources; `script-src` allows only same-origin and vetted CDN scripts (no `'unsafe-inline'`, no inline event handlers), `frame-ancestors 'none'` blocks clickjacking
+- **Compiled CSS** — Tailwind is prebuilt to a static stylesheet; the runtime `cdn.tailwindcss.com` script (a script-execution / XSS vector) is removed from the page and the CSP
 
 ### Form Protection
 - **Honeypot field** — invisible field that bots fill but humans don't; submissions with this field populated are silently dropped
 - **Client-side validation** — required fields, email format, phone length checks
-- **Server-side rate limiting** — 5 submissions per IP per 15 minutes on the `/api/enquiries` endpoint
+- **Server-side rate limiting** — 5 submissions per IP per 15 minutes on the `/api/enquiries` endpoint, stored in Supabase so it survives serverless cold boots and spans all instances
 - **Input sanitization** — HTML entities escaped on both client and server
 
 ### Authentication (Admin Panel)
 - **Supabase Auth** — email/password with secure session management
 - **HTTP-only cookies** — access and refresh tokens stored in httpOnly, secure, sameSite=strict cookies
 - **Token rotation** — automatic refresh token rotation on expiry
-- **Rate-limited login** — 5 attempts per IP per 15 minutes
+- **Rate-limited login** — 5 attempts per IP per 15 minutes, stored in Supabase
+- **Server-side logout revocation** — logout revokes the user's sessions via the service role so the access token dies immediately, not after its 15-minute lifetime
 - **Generic error messages** — no email enumeration possible
 
 ### API Protection
-- **Rate limiting** — per-IP limits on all public endpoints
-- **RLS (Row Level Security)** — Supabase policies restrict data access by role
+- **Rate limiting** — per-IP limits on all public endpoints, persisted in Supabase (`rate_limits` table) with an in-memory fallback
+- **RLS (Row Level Security)** — Supabase policies restrict data access by role; `rate_limits` is service-role-only
 - **Service role key isolation** — never exposed to the browser; used only in server-side functions
 - **Payload size limits** — oversized request bodies rejected early
 
