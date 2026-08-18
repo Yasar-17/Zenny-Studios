@@ -18,7 +18,7 @@ export default async function handler(req, res) {
   // Rate limit by IP (namespaced so other endpoints are unaffected).
   const ip = (req.headers['x-forwarded-for'] || '')
     .split(',')[0].trim() || req.socket?.remoteAddress || 'unknown';
-  const limit = rateLimit(`login:${ip}`, 5, 15 * 60 * 1000);
+  const limit = await rateLimit(`login:${ip}`, 5, 15 * 60 * 1000);
   if (!limit.allowed) {
     res.setHeader('Retry-After', String(limit.retryAfter));
     return res.status(429).json({
