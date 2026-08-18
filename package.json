@@ -10,9 +10,11 @@
     "@supabase/supabase-js": "^2.45.0"
   },
   "devDependencies": {
+    "tailwindcss": "^3.4.19",
     "vercel": "^58.7.1"
   },
   "scripts": {
-    "start": "vercel dev"
+    "start": "vercel dev",
+    "build:css": "tailwindcss -c tailwind.config.cjs -i css/tailwind.src.css -o css/tailwind.css --minify"
   }
 }
