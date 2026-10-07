@@ -25,3 +25,9 @@ alter table public.rate_limits enable row level security;
 
 -- No policies: anon and authenticated are denied. Only the service-role key
 -- (used server-side) can touch this table.
+ hCaptcha — needs your site + secret keys from hcaptcha.com (add widget to contact.html, set HCAPTCHA_SECRET_KEY).
+- FormSubmit decision — keep the browser-direct email relay (contact.html:872, exposes the inbox, _captcha:'false') or drop it.
+- ADMIN_EMAIL — set it in Vercel env (Production + Preview) so only your account can reach admin endpoints.
+- WhatsApp placeholder — thank-you.html still uses 919000000000.
+- Orphaned pages — digital-strategy, eid-campaign, ramadan-campaign in sitemap but linked nowhere.
+- 2FA on admin login — enable TOTP for the admin user in Supabase (needs dashboard config).
